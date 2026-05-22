@@ -11,12 +11,14 @@ interface ArticleProps {
   imgSrc?: string;
 }
 
+const parsedArticles = Object.values(parseArticles(articles));
+
 function Article() {
   const { articleLink } = useParams();
   const [content, setContent] = useState<ArticleProps>();
 
   useEffect(() => {
-    setContent(parseArticles(articles)[articleLink!]);
+    setContent(parsedArticles.find((article) => article.link === articleLink));
   }, [articleLink]);
 
   return (
@@ -39,6 +41,13 @@ function Article() {
           </section>
 
         </>
+      }
+      {
+        !content && (
+          <section>
+            <div>Event details not found.</div>
+          </section>
+        )
       }
     </div>
   );

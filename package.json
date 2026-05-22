@@ -27,7 +27,7 @@
     "react-router-dom": "^6.21.1",
     "react-slick": "^0.30.2",
     "tailwind-merge": "^2.4.0",
-    "zod": "^4.3.5"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@html-eslint/eslint-plugin": "^0.22.0",
