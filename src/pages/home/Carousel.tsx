@@ -37,7 +37,8 @@ function Carousel() {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
-    centerMode: true,
+    centerMode: false,
+    initialSlide: 0,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
@@ -46,7 +47,7 @@ function Carousel() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1,
+          initialSlide: 0,
           centerMode: true,
           arrows: false,
         },
@@ -56,7 +57,7 @@ function Carousel() {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 1,
+          initialSlide: 0,
           arrows: false,
         },
       },

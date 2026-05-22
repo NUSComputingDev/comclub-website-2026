@@ -19,9 +19,9 @@ import articles from './articles.json';
 import SearchResult from './SearchResult';
 import { Article, parseArticles } from './zod';
 
-// Parse and sort articles by startDatetime
-const articlesData: Article[] = Object.keys(parseArticles(articles)).map(key => parseArticles(articles)[key as keyof typeof articles]).sort((a, b) =>
-  parseISO(a.startDatetime).getTime() - parseISO(b.startDatetime).getTime()
+const parsedArticles = parseArticles(articles);
+const articlesData: Article[] = Object.values(parsedArticles).sort((a, b) =>
+  parseISO(a.startDatetime).getTime() - parseISO(b.startDatetime).getTime(),
 );
 
 function classNames(...classes: (string | boolean | null)[]) {
@@ -60,8 +60,6 @@ export default function Calendar() {
       }),
     )
     : articlesData;
-
-  console.log(displayedArticles)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

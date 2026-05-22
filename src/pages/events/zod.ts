@@ -1,22 +1,53 @@
-import { z } from "zod";
+export interface Article {
+  department: 'IR' | 'SD/SL';
+  title: string;
+  body: string;
+  link: string;
+  imgSrc: string;
+  startDatetime: string;
+  endDatetime: string;
+}
 
-// Define schema for an Article
-const ArticleSchema = z.object({
-  department: z.union([z.literal("IR"), z.literal("SD/SL")]),
-  title: z.string(),
-  body: z.string(),
-  link: z.string(),
-  imgSrc: z.string(),
-  startDatetime: z.iso.datetime({ offset: true }),
-  endDatetime: z.iso.datetime({ offset: true }),
-});
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
 
-export const ArticleMapSchema = z.record(z.string(), ArticleSchema);
+function isValidDateTime(value: string) {
+  return !Number.isNaN(Date.parse(value));
+}
 
-// Function to parse articles using the defined schema
+function isArticle(value: unknown): value is Article {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    (value.department === 'IR' || value.department === 'SD/SL') &&
+    typeof value.title === 'string' &&
+    typeof value.body === 'string' &&
+    typeof value.link === 'string' &&
+    typeof value.imgSrc === 'string' &&
+    typeof value.startDatetime === 'string' &&
+    typeof value.endDatetime === 'string' &&
+    isValidDateTime(value.startDatetime) &&
+    isValidDateTime(value.endDatetime)
+  );
+}
+
 export const parseArticles = (data: unknown): Record<string, Article> => {
-  return ArticleMapSchema.parse(data);
-};
+  if (!isRecord(data)) {
+    throw new Error('Invalid articles data.');
+  }
 
-// Export the Article type inferred from the schema
-export type Article = z.infer<typeof ArticleSchema>;
+  const parsedArticles: Record<string, Article> = {};
+
+  for (const [key, value] of Object.entries(data)) {
+    if (!isArticle(value)) {
+      throw new Error(`Invalid article data for "${key}".`);
+    }
+
+    parsedArticles[key] = value;
+  }
+
+  return parsedArticles;
+};
