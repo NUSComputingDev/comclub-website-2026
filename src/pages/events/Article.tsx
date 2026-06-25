@@ -4,6 +4,7 @@ import articles from './articles.json';
 import WindowCard from '../../layout/WindowCard';
 import './Article.css';
 import { parseArticles } from './zod';
+import Linkify from '../../components/Linkify';
 
 interface ArticleProps {
   title: string;
@@ -37,7 +38,7 @@ function Article() {
           }
 
           <section>
-            <div className='whitespace-pre-wrap'>{content.body}</div>
+            <div className='whitespace-pre-wrap'><Linkify>{content.body}</Linkify></div>
           </section>
 
         </>
