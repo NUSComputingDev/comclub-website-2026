@@ -83,10 +83,8 @@
   "lifehack": {
     "department": "SD/SL",
     "title": "LifeHack 2026",
-    "body": "LifeHack 2026 is a practical student prep series packed with useful tips, resources, and hacks to help you settle into SoC and university life.",
+    "body": "Date: To be confirmed.\n\nLifeHack 2026 is a practical student prep series packed with useful tips, resources, and hacks to help you settle into SoC and university life.",
     "link": "lifehack-2026",
-    "imgSrc": "/announcements/life_hack_26.png",
-    "startDatetime": "2026-08-11T00:00:00+08:00",
-    "endDatetime": "2026-08-14T23:59:59+08:00"
+    "imgSrc": "/announcements/life_hack_26.png"
   }
 }

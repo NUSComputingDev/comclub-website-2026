@@ -20,9 +20,11 @@ import SearchResult from './SearchResult';
 import { Article, parseArticles } from './zod';
 
 const parsedArticles = parseArticles(articles);
-const articlesData: Article[] = Object.values(parsedArticles).sort((a, b) =>
-  parseISO(a.startDatetime).getTime() - parseISO(b.startDatetime).getTime(),
-);
+const articlesData: Article[] = Object.values(parsedArticles).sort((a, b) => {
+  if (!a.startDatetime) return 1;
+  if (!b.startDatetime) return -1;
+  return parseISO(a.startDatetime).getTime() - parseISO(b.startDatetime).getTime();
+});
 
 function classNames(...classes: (string | boolean | null)[]) {
   return classes.filter(Boolean).join(' ');
@@ -53,12 +55,14 @@ export default function Calendar() {
   }
 
   const displayedArticles = selectedDay
-    ? articlesData.filter((article) =>
-      isWithinInterval(startOfDay(selectedDay), {
+    ? articlesData.filter((article) => {
+      if (!article.startDatetime || !article.endDatetime) return false;
+
+      return isWithinInterval(startOfDay(selectedDay), {
         start: startOfDay(parseISO(article.startDatetime)),
         end: startOfDay(parseISO(article.endDatetime)),
-      }),
-    )
+      });
+    })
     : articlesData;
 
   useEffect(() => {
@@ -159,12 +163,14 @@ export default function Calendar() {
                   </button>
 
                   <div className='w-1 h-1 mx-auto mt-1'>
-                    {articlesData.some((article) =>
-                      isWithinInterval(startOfDay(day), {
+                    {articlesData.some((article) => {
+                      if (!article.startDatetime || !article.endDatetime) return false;
+
+                      return isWithinInterval(startOfDay(day), {
                         start: startOfDay(parseISO(article.startDatetime)),
                         end: startOfDay(parseISO(article.endDatetime)),
-                      }),
-                    ) && (
+                      });
+                    }) && (
                       <div className='w-1 h-1 rounded-full bg-sky-500'/>
                     )}
                   </div>
