@@ -10,7 +10,7 @@ import ElectionProcess from './Process';
 function Elections() {
   return (
     <section className='elections h-full gap-4'>
-      <h1 className='title'>Elections</h1>
+      <h1 className='title'>29th Management Committee Elections</h1>
       <p className='text-neutral-500 text-xl text-center'>
         Find out how <span className='text-[#e58e26] font-semibold'>you</span>{' '}
         can play a part in the NUS Students&apos; Computing Club Elections

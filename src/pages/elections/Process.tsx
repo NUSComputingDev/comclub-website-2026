@@ -16,7 +16,7 @@ function ElectionsProcess() {
         <div className='ml-4'>
           <ol className='list-decimal space-y-4'>
             <li>
-              Nomination period: <b><u>18 - 24 August 2025 (1200H)</u></b>
+              Nomination period: <b><u>17 August 2026, 0900H - 23 August 2026, 1200H</u></b>
             </li>
             <li>
               Only a Club Member<strong className='text-red-600'>*</strong> shall be eligible to be nominated for an election.
@@ -58,14 +58,14 @@ function ElectionsProcess() {
         <div className='ml-4'>
           <ol className='list-decimal space-y-4'>
             <li>
-              Candidates are required to submit the following documents to <a href='mailto:elections@nuscomputing.com' className='text-[#e58e26]'><strong>elections@nuscomputing.com</strong></a> by <b><u>24 August 2025, 1200H</u></b>:
+              Candidates are required to submit the following documents to <a href='mailto:elections@nuscomputing.com' className='text-[#e58e26]'><strong>elections@nuscomputing.com</strong></a> by <b><u>23 August 2026, 1200H</u></b>:
               <ol type='a' className='list-inside ml-8 mt-2 space-y-2' style={{ listStyle: 'lower-alpha' }}>
-                <li><a href='/elections/28th Management Committee Nominee Application FormA.docx' target='_blank' className='text-red-600'><strong>Nominee Agreement Form (Form A)</strong></a></li>
-                <li><a href='/elections/28th Management Committee Nominee Application FormB.docx' target='_blank' className='text-red-600'><strong>Nominee Agreement Form (Form B)</strong></a></li>
+                <li><a href='/elections/29th Management Committee Nominee Application FormA.docx' target='_blank' className='text-red-600'><strong>Nominee Agreement Form (Form A)</strong></a></li>
+                <li><a href='/elections/29th Management Committee Nominee Application FormB.docx' target='_blank' className='text-red-600'><strong>Nominee Agreement Form (Form B)</strong></a></li>
               </ol>
             </li>
             <li>
-              Candidates must declare the primary position they are contesting for. Declaring a secondary position will be optional. A Nominee will not be allowed to change their primary position after the end of the nomination period. A Nominee can change their secondary position up till the Internal Elections.
+              Candidates must declare the primary position they are contesting for. Declaring a secondary position is optional. A Nominee may not change their primary position after the end of the nomination period, but may change it during the Internal Elections.
             </li>
           </ol>
         </div>
@@ -79,9 +79,9 @@ function ElectionsProcess() {
         <div className='ml-4'>
           <ol className='list-decimal space-y-3'>
             <li>
-              Candidates are required to submit the following documents to <a href='mailto:elections@nuscomputing.com' className='text-[#e58e26]'><strong>elections@nuscomputing.com</strong></a> by <b><u>24 August 2025, 1200H</u></b>:
+              Candidates are required to submit the following documents to <a href='mailto:elections@nuscomputing.com' className='text-[#e58e26]'><strong>elections@nuscomputing.com</strong></a> by <b><u>23 August 2026, 1200H</u></b>:
               <ol type='a' className='list-inside ml-8 mt-2 space-y-1' style={{ listStyle: 'lower-alpha' }}>
-                <li><a href='/elections/47th EXCO REPRESENTATIVE NOMINATION FORM.docx' target='_blank' className='text-red-600'><strong>47th EXCO Representative Nomination</strong></a></li>
+                <li><a href='/elections/48th NUSSU EXCO Representative Nomination Form.pdf' target='_blank' className='text-red-600'><strong>48th NUSSU EXCO Representative Nomination Form</strong></a></li>
               </ol>
             </li>
             <li>
@@ -91,7 +91,7 @@ function ElectionsProcess() {
               Consultation will be on the expected roles and duties to be undertaken as a NUSSU Executive Committee Representative. In order to provide a more holistic view of the expected roles and duties, the consultation will be limited to elected members of the Presidential Wing<strong className='text-red-600'>***</strong>
             </li>
           </ol>
-          <p className='text-red-600 mt-4'><strong>***</strong> The full list of members can be found in the AY 2025/2026 NUSSU Students' Computing Club Election Standing Orders under the <a href='#documents-section' className='text-blue-600 underline'>documents</a>.</p>
+          <p className='text-red-600 mt-4'><strong>***</strong> The full list of members can be found in the AY 2026/2027 NUS Students' Computing Club Election Standing Orders under the <a href='#documents-section' className='text-blue-600 underline'>documents</a>.</p>
         </div>
       </div>
 
@@ -102,9 +102,9 @@ function ElectionsProcess() {
         <p className='text-2xl font-bold mb-4 text-primary'>Campaign Process</p>
         <div className='ml-4'>
           <ol className='list-decimal space-y-4'>
-            <li>Campaign period: <b><u>26 August - 1 September 2025</u></b></li>
+            <li>Campaign period: <b><u>25 August 2026, 1200H - 30 August 2026, 2359H</u></b></li>
             <li>Nominees are to abide by the rules and regulations laid out in the <a href='#documents-section' className='text-blue-600 underline'>Computing Club Election Standing Orders.</a></li>
-            <li>A live-broadcasted physical campaign speech + Q&A will be held on <b><u>3 - 5 September 2025</u></b>.</li>
+            <li>The External General Meeting, including candidate speeches and Q&amp;A, will be held on <b><u>27 - 29 August 2026</u></b>.</li>
             <li>All Nominees are required to prepare a set of slides based on the following statements:
               <ol className='list-decimal list-inside ml-6 mt-2 space-y-3'>
                 <li>A general introduction about yourself</li>
