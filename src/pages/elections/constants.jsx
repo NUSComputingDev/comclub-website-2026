@@ -251,7 +251,7 @@ export const wingsData = [
       { name: 'Vice President (Student Development)' },
       {
         name: 'Director of Academic Liaison',
-        subRoles: ['Deputy Director of Academic Liaison x 2'],
+        subRoles: ['Deputy Director of Academic Liaison x 1'],
       },
       { name: 'Director of Community Engagement' },
       {
