@@ -16,7 +16,7 @@ function ElectionsProcess() {
         <div className='ml-4'>
           <ol className='list-decimal space-y-4'>
             <li>
-              Nomination period: <b><u>17 August 2026, 0900H - 23 August 2026, 1200H</u></b>
+              Nomination period: <b><u>17 August 2026, 0900H - 24 August 2026, 1200H</u></b>
             </li>
             <li>
               Only a Club Member<strong className='text-red-600'>*</strong> shall be eligible to be nominated for an election.
@@ -58,7 +58,7 @@ function ElectionsProcess() {
         <div className='ml-4'>
           <ol className='list-decimal space-y-4'>
             <li>
-              Candidates are required to submit the following documents to <a href='mailto:elections@nuscomputing.com' className='text-[#e58e26]'><strong>elections@nuscomputing.com</strong></a> by <b><u>23 August 2026, 1200H</u></b>:
+              Candidates are required to submit the following documents to <a href='mailto:elections@nuscomputing.com' className='text-[#e58e26]'><strong>elections@nuscomputing.com</strong></a> by <b><u>24 August 2026, 1200H</u></b>:
               <ol type='a' className='list-inside ml-8 mt-2 space-y-2' style={{ listStyle: 'lower-alpha' }}>
                 <li><a href='/elections/29th Management Committee Nominee Application FormA.docx' target='_blank' className='text-red-600'><strong>Nominee Agreement Form (Form A)</strong></a></li>
                 <li><a href='/elections/29th Management Committee Nominee Application FormB.docx' target='_blank' className='text-red-600'><strong>Nominee Agreement Form (Form B)</strong></a></li>
@@ -79,7 +79,7 @@ function ElectionsProcess() {
         <div className='ml-4'>
           <ol className='list-decimal space-y-3'>
             <li>
-              Candidates are required to submit the following documents to <a href='mailto:elections@nuscomputing.com' className='text-[#e58e26]'><strong>elections@nuscomputing.com</strong></a> by <b><u>23 August 2026, 1200H</u></b>:
+              Candidates are required to submit the following documents to <a href='mailto:elections@nuscomputing.com' className='text-[#e58e26]'><strong>elections@nuscomputing.com</strong></a> by <b><u>24 August 2026, 1200H</u></b>:
               <ol type='a' className='list-inside ml-8 mt-2 space-y-1' style={{ listStyle: 'lower-alpha' }}>
                 <li><a href='/elections/48th NUSSU EXCO Representative Nomination Form.pdf' target='_blank' className='text-red-600'><strong>48th NUSSU EXCO Representative Nomination Form</strong></a></li>
               </ol>
@@ -102,7 +102,7 @@ function ElectionsProcess() {
         <p className='text-2xl font-bold mb-4 text-primary'>Campaign Process</p>
         <div className='ml-4'>
           <ol className='list-decimal space-y-4'>
-            <li>Campaign period: <b><u>25 August 2026, 1200H - 30 August 2026, 2359H</u></b></li>
+            <li>Campaign period: <b><u>25 August 2026, 1200H - 29 August 2026, 2359H</u></b></li>
             <li>Nominees are to abide by the rules and regulations laid out in the <a href='#documents-section' className='text-blue-600 underline'>Computing Club Election Standing Orders.</a></li>
             <li>The External General Meeting, including candidate speeches and Q&amp;A, will be held on <b><u>27 - 29 August 2026</u></b>.</li>
             <li>All Nominees are required to prepare a set of slides based on the following statements:

@@ -7,7 +7,7 @@ export const TimelineEvents = [
   },
   {
     title: 'Nomination Period Ends',
-    date: '23 Aug 2026, Sunday 1200hr',
+    date: '24 Aug 2026, Monday 1200hr',
     description:
       'The final day for submitting nominations for the election of the new committee members. No further submissions after 1200hr.',
   },
@@ -19,24 +19,24 @@ export const TimelineEvents = [
   },
   {
     title: 'Campaigning Period and EGM',
-    date: '25 Aug 2026, Tuesday 1200hr - 30 Aug 2026, Sunday 2359hr',
+    date: '25 Aug 2026, Tuesday 1200hr - 29 Aug 2026, Saturday 2359hr',
     description: 'Candidates campaign to gather support from voters and attend the EGM (External General Meeting) on 27 and 28 August, 1830hr to 2200hr, and 29 August, 1000hr onwards.',
   },
   {
     title: 'Cooling Off Day (Computing Club MC External Elections)',
-    date: '31 Aug 2026, Monday',
+    date: '30 Aug 2026, Sunday',
     description:
       'A day for voters to reflect on their choices before voting, with no campaigning allowed.',
   },
   {
     title: 'MC and Exco Rep External Elections',
-    date: '1 Sep 2026, Tuesday 0900hr - 3 Sep 2026, Thursday 2359hr',
+    date: '31 Aug 2026, Monday 0900hr - 2 Sep 2026, Wednesday 2359hr',
     description:
       'MC and External Rep External Elections are held to elect representatives.',
   },
   {
     title: 'Counting of Votes',
-    date: '4 Sep 2026, Friday',
+    date: '3 Sep 2026, Thursday',
     description:
       'Votes are counted online and the external election results are compiled.',
   },
