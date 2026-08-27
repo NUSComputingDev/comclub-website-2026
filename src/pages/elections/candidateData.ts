@@ -150,12 +150,7 @@ I believe External Relations is ultimately about people: building strong externa
 
 At the same time, I want to be a hands-on VP who stays close to Publicity, Sponsorships and Merchandise, keeps track of timelines, and steps in where I can add value. I would bring initiative, communication, creativity and a willingness to learn, while helping the three cells work more closely together.
 
-Most importantly, I want to build a team culture where people feel comfortable contributing ideas, taking ownership and enjoying the work we do together.
-
-Thank you.
-
-Best regards,
-Amy Yin`,
+Most importantly, I want to build a team culture where people feel comfortable contributing ideas, taking ownership and enjoying the work we do together.`,
   },
   {
     id: 12,
