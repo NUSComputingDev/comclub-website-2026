@@ -1,13 +1,13 @@
+/* eslint-disable @stylistic/max-len */
 'use client';
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useOutsideClick } from '../../../hooks/use-outside-click';
 import WindowCard from '../../layout/WindowCard';
-import { cards } from './constants';
-import Results from './Results';
+import { candidates } from './candidateData';
 
 export function Candidates() {
-  const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
+  const [active, setActive] = useState<(typeof candidates)[number] | null>(
     null,
   );
   const ref = useRef<HTMLDivElement>(null);
@@ -16,7 +16,7 @@ export function Candidates() {
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        setActive(false);
+        setActive(null);
       }
     }
 
@@ -32,7 +32,7 @@ export function Candidates() {
 
   useOutsideClick(ref, () => setActive(null));
 
-  const data = cards.sort((a, b) => ('' + a.title).localeCompare(b.title)).map((card, index) => {
+  const data = [...candidates].sort((a, b) => a.title.localeCompare(b.title)).map((card, index) => {
     const content = (
       <>
         <div className='w-48 p-4 flex flex-col items-stretch gap-1 flex-1'>
@@ -56,7 +56,7 @@ export function Candidates() {
               </motion.h3>
               <motion.p
                 layoutId={`description-${card.description}-${index}-${card.id}`}
-                className='text-neutral-600 text-center md:text-left'
+                className='text-sm leading-tight text-neutral-600 text-center md:text-left'
               >
                 {card.description}
               </motion.p>
@@ -87,11 +87,10 @@ export function Candidates() {
 
   return (
     <section className='elections h-full gap-4'>
-      <Results />
       <h1 className='title'>Candidates</h1>
       <p className='text-neutral-500 text-xl text-center'>
-        See the candidates running for the NUS Students&apos; Computing Club
-        Elections today!
+        Meet the candidates running in the 29th NUS Students&apos; Computing Club
+        Management Committee Elections.
       </p>
       <AnimatePresence>
         {active && typeof active === 'object' && (
@@ -131,19 +130,18 @@ export function Candidates() {
               ref={ref}
               className='w-full max-w-[800px] h-full sm:h-fit md:max-h-[93%] px-2 flex flex-col sm:flex-row bg-white sm:rounded-3xl overflow-auto self-center sm:overflow-hidden'
             >
-            <motion.div
-              className="w-full my-16 sm:my-auto"
-              layoutId={`image-${active.title}-${id}-${active.id}`}
-            >
-              <img
-                src={active.src}
-                alt={active.title}
-                className="w-full h-auto sm:rounded-tr-lg sm:rounded-tl-lg rounded-lg object-cover object-center"
-              />
-            </motion.div>
+              <motion.div
+                className='w-full sm:w-2/5 my-16 sm:my-auto p-4'
+                layoutId={`image-${active.title}-${id}-${active.id}`}
+              >
+                <img
+                  src={active.src}
+                  alt={active.title}
+                  className='w-full max-h-[70vh] rounded-lg object-contain object-center'
+                />
+              </motion.div>
 
-
-              <div className='w-full pt-8'>
+              <div className='w-full sm:w-3/5 pt-8'>
                 <div className='flex justify-between items-start p-4'>
                   <div className=''>
                     <motion.h3
@@ -176,9 +174,7 @@ export function Candidates() {
                     exit={{ opacity: 0 }}
                     className='text-neutral-600 text-sm h-fit sm:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto'
                   >
-                    {typeof active.content === 'function'
-                      ? active.content()
-                      : active.content}
+                    <p className='whitespace-pre-line'>{active.manifesto}</p>
                   </motion.div>
                 </div>
               </div>

@@ -280,7 +280,9 @@ export const wingsData = [
 ];
 
 
-export const cards = [
+// 28th MC candidate records retained for historical reference.
+// The live 29th MC candidate page uses candidateData.ts.
+export const legacyCandidates = [
   {
     id: 1,
     description: 'Vice-President (Internal Relations) Candidate',
