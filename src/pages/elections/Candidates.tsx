@@ -156,14 +156,16 @@ export function Candidates() {
                     >
                       {active.description}
                     </motion.p>
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className='text-neutral-600 overflow-auto'
-                    >
-                      {active.year} / {active.major}
-                    </motion.p>
+                    {(active.year || active.major) && (
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className='text-neutral-600 overflow-auto'
+                      >
+                        {[active.year, active.major].filter(Boolean).join(' / ')}
+                      </motion.p>
+                    )}
                   </div>
                 </div>
                 <div className='relative px-4'>

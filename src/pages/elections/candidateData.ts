@@ -216,4 +216,14 @@ I have done this before. I built my previous school's open-source conference sit
 
 New guy, decent track record, truly excited. I'd appreciate your vote!`,
   },
+  {
+    id: 17,
+    title: 'Mongkolworaphol Adhipat',
+    description: 'Tech Lead Candidate; Second Choice: Director of Academic Liaison',
+    src: '/elections/candidates/mongkolworaphol_adhipat.jpg',
+    ctaText: 'View Manifesto',
+    year: '',
+    major: '',
+    manifesto: `Hi, I'm Adhipat (Kai), and I'm running for Tech Lead. I believe Tech Lead is ultimately about usefulness: making the Club run more smoothly so everyone else can focus on the events themselves. So much of our work is repetitive — registrations, attendance, feedback, coordinating across teams — and I'd like to find where we're losing time and build lightweight tools that quietly take those hours back. The best technology isn't the flashiest; it's the thing that still works a year later. At the same time, I want Tech to be a place where Computing students can actually build. Instead of a team that only maintains systems in the background, I hope to run small project sprints where students ship something real and leave it behind for the next batch. Most importantly, I want a Tech team where people feel comfortable trying things, taking ownership, and learning as they go — including me.`,
+  },
 ] as const;
