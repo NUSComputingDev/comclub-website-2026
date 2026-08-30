@@ -219,7 +219,7 @@ New guy, decent track record, truly excited. I'd appreciate your vote!`,
   {
     id: 17,
     title: 'Mongkolworaphol Adhipat',
-    description: 'Tech Lead Candidate; Second Choice: Director of Academic Liaison',
+    description: 'Tech Lead Candidate',
     src: '/elections/candidates/mongkolworaphol_adhipat.jpg',
     ctaText: 'View Manifesto',
     year: '',
