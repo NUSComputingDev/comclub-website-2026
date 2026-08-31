@@ -210,7 +210,7 @@ Thank you.`,
     major: 'Computer Science',
     manifesto: `Four weeks into SoC and I am already having a good time, so here I am asking for a year of it.
 
-I spoke to Junrong, the outgoing Tech Lead, about what the role involves, and there are four things I would build on: Reliability — the Club's sites should be things nobody has to think about. Continuity — whoever holds this seat next should inherit a documented codebase, not a folder. Ownership — every project should have a name on it. Reach — I would love more of what our Tech Team builds to be things you actually use.
+I spoke to Junrong, the outgoing Tech Lead, about what the role involves, and there are four things I would build on: Reliability: the Club's sites should be things nobody has to think about. Continuity: whoever holds this seat next should inherit a documented codebase, not a folder. Ownership: every project should have a name on it. Reach: I would love more of what our Tech Team builds to be things you actually use.
 
 I have done this before. I built my previous school's open-source conference site in Rust and kept it running through the event, I help maintain a MediaWiki deployment, and I have shipped a Gmail extension, a clinical timeline tool, and a compute mesh with an SDK.
 
