@@ -6,6 +6,7 @@ import Footer from './Footer';
 import Officer from './Officer';
 import Roles from './Roles';
 import ElectionProcess from './Process';
+import Results from './Results';
 
 function Elections() {
   return (
@@ -16,6 +17,7 @@ function Elections() {
         can play a part in the NUS Students&apos; Computing Club Elections
         today!
       </p>
+      <Results />
       <Timeline />
       <Roles />
       <ElectionProcess />
