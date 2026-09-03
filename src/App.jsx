@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation, Routes, Route } from 'react-router-dom';
+import { Navigate, useLocation, Routes, Route } from 'react-router-dom';
 import { About, Article, Events, Home, Privacy, Resources, Elections } from './pages';
 import { Toaster } from 'react-hot-toast';
 import NavigationBar from './layout/NavigationBar';
@@ -25,9 +25,10 @@ function App() {
             <Route path=':articleLink' element={<Article />} />
           </Route>
           <Route path='/resources' element={<Resources />} />
+          <Route path='/candidates' element={<Candidates />} />
           <Route path='/elections'>
             <Route path='' element={<Elections />} />
-            <Route path='candidates' element={<Candidates />} />
+            <Route path='candidates' element={<Navigate to='/candidates' replace />} />
           </Route>
         </Routes>
       </main>

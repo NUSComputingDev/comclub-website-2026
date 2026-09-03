@@ -1,68 +1,74 @@
 export const TimelineEvents = [
   {
     title: 'Nomination Period Starts',
-    date: '18 Aug 2025, Monday 0900hr',
+    date: '17 Aug 2026, Monday 0900hr',
     description:
       'Nomination period starts for the election of the new committee members.',
   },
   {
     title: 'Nomination Period Ends',
-    date: '24 Aug 2025, Sunday 1200hr',
+    date: '24 Aug 2026, Monday 1200hr',
     description:
       'The final day for submitting nominations for the election of the new committee members. No further submissions after 1200hr.',
   },
   {
     title: 'Interview',
-    date: '25 Aug 2025, Monday 1200hr',
+    date: '24 Aug 2026, Monday 1000hr - 1900hr (extends to 25 Aug if necessary)',
     description:
       'Candidates will be invited to an interview with the Elections Committee and Advisors.',
   },
   {
     title: 'Campaigning Period and EGM',
-    date: '26 Aug 2025, Tuesday 0000hr - 1 Sept 2025, Monday 2359hr',
-    description: 'Candidates campaign to gather support from the voters and be invited to the EGM (External General Meeting) on the 28th and 29th of August, 1830hr to 2200hr, and 30th of August, 1000hr onwards.',
+    date: '25 Aug 2026, Tuesday 1200hr - 29 Aug 2026, Saturday 2359hr',
+    description: 'Candidates campaign to gather support from voters and attend the EGM (External General Meeting) on 27 and 28 August, 1830hr to 2200hr, and 29 August, 1000hr onwards.',
   },
   {
     title: 'Cooling Off Day (Computing Club MC External Elections)',
-    date: '2 Sept 2025, Tuesday',
+    date: '30 Aug 2026, Sunday',
     description:
       'A day for voters to reflect on their choices before voting, with no campaigning allowed.',
   },
   {
     title: 'MC and Exco Rep External Elections',
-    date: '3 Sep 2025, Wednesday 0900hr - 5 Sep 2025, Friday 2359hr',
+    date: '31 Aug 2026, Monday 0900hr - 2 Sep 2026, Wednesday 2359hr',
     description:
       'MC and External Rep External Elections are held to elect representatives.',
   },
   {
+    title: 'Counting of Votes',
+    date: '3 Sep 2026, Thursday',
+    description:
+      'Votes are counted online and the external election results are compiled.',
+  },
+  {
     title: 'Results Release of MC and Exco Rep External Elections',
-    date: '7 Sep 2025, Sunday',
+    date: '3 Sep 2026, Thursday - 4 Sep 2026, Friday',
     description:
       'The results of the MC and Exco Rep External Elections are announced.',
   },
   {
     title: 'MC Internal Elections Period',
-    date: '8 Sep 2025, Monday - 9 Sep 2025, Tuesday, 1830hr to 2200hr, and 10 Sep 2025, Wednesday 1000hr onwards',
+    date: '7 Sep 2026, Monday - 9 Sep 2026, Wednesday, 1830hr to 2200hr',
     description:
       'Internal Elections are held to elect representatives.',
   },
   {
     title: 'Results Release of MC Internal Elections',
-    date: '12 Sep 2025, Friday',
+    date: '10 Sep 2026, Thursday',
     description:
       'The results of the MC Internal Elections are announced.',
   },
   {
     title: 'Club Annual General Meeting',
-    date: '18 Sep 2025, Thursday 1830hr to 2030hr (tentative)',
+    date: '16 Sep 2026, Wednesday 1830hr to 2030hr (tentative)',
     description:
       'The annual general meeting of the club to discuss the past year and future plans.',
   },
   {
-    title: '47th NUSSU Council First Council Meeting',
-    date: '20 Sep 2025, Sunday - 21 Sep 2025, Monday',
+    title: '48th NUSSU Council First Council Meeting',
+    date: '19 Sep 2026, Saturday - 20 Sep 2026, Sunday',
     description:
-      'The first council meeting of the 47th NUSSU Council to outline the agenda for the new term.',
+      'The first council meeting of the 48th NUSSU Council to outline the agenda for the new term.',
   },
   // {
   //   title: 'Club Annual General Meeting',
@@ -116,18 +122,18 @@ export const FAQ = [
 
 export const nominationsFormsData = [
   {
-    title: '28th Management Committee Application FormA',
-    link: '/elections/28th Management Committee Nominee Application FormA.docx',
+    title: '29th Management Committee Nominee Application Form A',
+    link: '/elections/29th Management Committee Nominee Application FormA.docx',
     color: '#778beb',
   },
   {
-    title: '28th Management Committee Application FormB',
-    link: '/elections/28th Management Committee Nominee Application FormB.docx',
+    title: '29th Management Committee Nominee Application Form B',
+    link: '/elections/29th Management Committee Nominee Application FormB.docx',
     color: '#f19066',
   },
   {
-    title: '47th Exco Representative Nomination Form',
-    link: '/elections/47th EXCO REPRESENTATIVE NOMINATION FORM.pdf',
+    title: '48th NUSSU EXCO Representative Nomination Form',
+    link: '/elections/48th NUSSU EXCO Representative Nomination Form.pdf',
     color: '#395B9B',
   },
 ];
@@ -135,14 +141,19 @@ export const nominationsFormsData = [
 export const informationalData = [
   {
     title:
-      'AY 2025/2026 NUSSU Students\' Computing Club Election Standing Orders',
-    link: '/elections/AY2025_26_NUS_Students\'_Computing_Club_Election_Standing_Orders.pdf',
+      'AY 2026/2027 NUS Students\' Computing Club Election Standing Orders',
+    link: '/elections/AY2026_27_Computing_Club_Election_Standing_Orders.pdf',
     color: '#78e08f',
   },
   {
-    title: 'Computing Club 28th MC Elections Information Pamphlet',
-    link: '/elections/28th Computing Club Elections Info Pamphlet.pdf',
+    title: '29th Management Committee Roles & Responsibilities',
+    link: '/elections/29th_MC_Roles_and_Responsibilities.pdf',
     color: '#93c6c3',
+  },
+  {
+    title: 'Introduction to the NUS Students\' Computing Club',
+    link: '/elections/29th_Elections_Introduction_to_Computing_Club.pdf',
+    color: '#778beb',
   },
 ];
 
@@ -153,8 +164,8 @@ export const regulationsData = [
   //   color: '#78e08f',
   // },
   {
-    title: 'Union Election Standing Orders',
-    link: '/elections/Union Election Standing Orders AY25-26.pdf',
+    title: 'Standing Orders of the 48th Union Election Committee AY26/27',
+    link: '/elections/48th_Union_Election_Committee_Standing_Orders_AY26_27.pdf',
     color: '#778beb',
   },
   {
@@ -177,16 +188,19 @@ export const regulationsData = [
 
 export const officers = [
   {
-    name: 'Jolyn Leow',
+    name: 'Chen Dong Jun',
     role: 'Returning Officer',
+    imageName: 'ChenDongJun',
   },
   {
-    name: 'Chin Cherng Yuen',
+    name: 'Satwik Jha',
     role: 'Election Officer',
+    imageName: 'JhaSatwik',
   },
   {
-    name: 'Ryan Neo',
+    name: 'Mu Junrong',
     role: 'Election Officer',
+    imageName: 'JunrongMu',
   },
 ];
 
@@ -206,11 +220,14 @@ export const wingsData = [
     roles: [
       { name: 'Vice President (External Relations)' },
       {
-        name: 'Director of Marketing',
+        name: 'Director of Sponsorship',
         subRoles: [
-          'Deputy Director of Marketing (Sponsorships)',
-          'Deputy Director of Marketing (Merchandise)',
+          'Deputy Director of Sponsorship',
         ],
+      },
+      {
+        name: 'Director of Merchandise',
+        subRoles: ['Deputy Director of Merchandise'],
       },
       {
         name: 'Director of Publicity',
@@ -234,7 +251,7 @@ export const wingsData = [
       { name: 'Vice President (Student Development)' },
       {
         name: 'Director of Academic Liaison',
-        subRoles: ['Deputy Director of Academic Liaison x 2'],
+        subRoles: ['Deputy Director of Academic Liaison x 1'],
       },
       { name: 'Director of Community Engagement' },
       {
@@ -251,7 +268,7 @@ export const wingsData = [
     roles: [
       { name: 'Vice President (Student Life)' },
       {
-        name: 'Director of Freshmen Orientation Projects x 3',
+        name: 'Director of Freshman Orientation Programmes x 3',
       },
       {
         name: 'Director of Student Engagement',
@@ -263,7 +280,9 @@ export const wingsData = [
 ];
 
 
-export const cards = [
+// 28th MC candidate records retained for historical reference.
+// The live 29th MC candidate page uses candidateData.ts.
+export const legacyCandidates = [
   {
     id: 1,
     description: 'Vice-President (Internal Relations) Candidate',
@@ -506,106 +525,138 @@ export const cards = [
 export const electionsResults = [
   {
     id: 1,
-    name: 'Adhiraj Gupta',
-    abstain: 139,
-    for: 64,
-    against: 44,
-    final: 59.3,
+    name: 'Adam Guo Yi',
+    for: 110,
+    against: 21,
+    validVotes: 131,
+    final: 83.97,
   },
   {
     id: 2,
-    name: 'Atharva Shukla',
-    abstain: 144,
-    for: 62,
-    against: 41,
-    final: 60.2,
+    name: 'Amber Yeo En',
+    for: 80,
+    against: 8,
+    validVotes: 88,
+    final: 90.91,
   },
   {
     id: 3,
-    name: 'Chee Hann Yu',
-    abstain: 92,
-    for: 129,
-    against: 26,
-    final: 83.2,
+    name: 'Chan Jun Jie',
+    for: 54,
+    against: 22,
+    validVotes: 76,
+    final: 71.05,
   },
   {
     id: 4,
-    name: 'Chen Dong Jun',
-    abstain: 93,
-    for: 131,
-    against: 23,
-    final: 85.1,
+    name: 'Chan Shi Hui Mikki',
+    for: 74,
+    against: 8,
+    validVotes: 82,
+    final: 90.24,
   },
   {
     id: 5,
-    name: 'Eu Guang En Joshua',
-    abstain: 127,
-    for: 97,
-    against: 23,
-    final: 80.8,
+    name: 'Chua Lu Teng Lorraine',
+    for: 76,
+    against: 5,
+    validVotes: 81,
+    final: 93.83,
   },
   {
     id: 6,
     name: 'Gullapalli Chetan',
-    abstain: 152,
-    for: 60,
-    against: 35,
-    final: 63.2,
+    for: 84,
+    against: 14,
+    validVotes: 98,
+    final: 85.71,
   },
   {
     id: 7,
-    name: 'Jeyaraj Justin',
-    abstain: 144,
-    for: 74,
-    against: 29,
-    final: 71.8,
+    name: 'Hyunmin Lee',
+    for: 69,
+    against: 8,
+    validVotes: 77,
+    final: 89.61,
   },
   {
     id: 8,
-    name: 'Jha Satwik',
-    abstain: 109,
-    for: 144,
-    against: 24,
-    final: 82.6,
+    name: 'Joshua Jacob Thomas',
+    for: 72,
+    against: 11,
+    validVotes: 83,
+    final: 86.75,
   },
   {
     id: 9,
-    name: 'Jovi Chow Yi Kit',
-    abstain: 110,
-    for: 118,
-    against: 19,
-    final: 86.1,
+    name: 'Kang Joo Ann, Adrian',
+    for: 93,
+    against: 16,
+    validVotes: 109,
+    final: 85.32,
   },
   {
     id: 10,
-    name: 'Li Xueyi Joanne',
-    abstain: 140,
-    for: 85,
-    against: 22,
-    final: 79.4,
+    name: 'Kathiravan Nedunchezhian',
+    for: 93,
+    against: 7,
+    validVotes: 100,
+    final: 93.00,
   },
   {
     id: 11,
-    name: 'Ma Mingyang',
-    abstain: 132,
-    for: 79,
-    against: 36,
-    final: 68.7,
+    name: 'Kopparthi Vamsi Krishna',
+    for: 85,
+    against: 7,
+    validVotes: 92,
+    final: 92.39,
   },
   {
     id: 12,
-    name: 'Niles Loh Xiang Xing',
-    abstain: 110,
-    for: 143,
-    against: 22,
-    final: 83.9,
+    name: 'Medhansh Khemka',
+    for: 58,
+    against: 11,
+    validVotes: 69,
+    final: 84.06,
   },
   {
     id: 13,
-    name: 'Shananth Sivakumar',
-    abstain: 82,
-    for: 143,
-    against: 22,
-    final: 86.7,
+    name: 'Mongkolworaphol Adhipat',
+    for: 43,
+    against: 21,
+    validVotes: 64,
+    final: 67.19,
+  },
+  {
+    id: 14,
+    name: 'Sasikumar Shravan Kaushik',
+    for: 44,
+    against: 18,
+    validVotes: 62,
+    final: 70.97,
+  },
+  {
+    id: 15,
+    name: 'Shreeya Unni',
+    for: 55,
+    against: 18,
+    validVotes: 73,
+    final: 75.34,
+  },
+  {
+    id: 16,
+    name: 'Vikrant Pethia',
+    for: 43,
+    against: 30,
+    validVotes: 73,
+    final: 58.90,
+  },
+  {
+    id: 17,
+    name: 'Yin Chengyan Amy',
+    for: 71,
+    against: 7,
+    validVotes: 78,
+    final: 91.03,
   },
 ];
