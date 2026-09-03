@@ -43,7 +43,7 @@ export default function Results() {
                   <UsersIcon className='w-4 h-4 text-gray-500 dark:text-gray-400' />
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>141</div>
+                  <div className='text-2xl font-bold'>131</div>
                 </CardContent>
               </Card>
               <Card>
