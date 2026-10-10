@@ -8,10 +8,7 @@ function Officer() {
       <h1 className='my-8'>Elections Committee</h1>
       <div className='flex flex-wrap justify-center items-center gap-12 scale-110 py-12'>
         {officers.map((member) => {
-          const imgSrc: string = `/members/${member.name.replace(
-            /\s/g,
-            '',
-          )}.jpg`;
+          const imgSrc: string = `/members/${member.imageName}.jpg`;
           return (
             <RoleCard
               name={member.name}

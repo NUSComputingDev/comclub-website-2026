@@ -25,7 +25,7 @@ export default function Results() {
             <div className='flex items-center space-x-2'>
               <div className='flex flex-col'>
                 <CardTitle className='text-base font-bold'>
-                  2025 Computing Club Election Results
+                  2026 Computing Club Election Results
                 </CardTitle>
                 <CardDescription className='text-sm'>
                   Results of the recent election
@@ -38,12 +38,12 @@ export default function Results() {
               <Card>
                 <CardHeader className='flex flex-row items-center justify-between pb-2 space-y-0'>
                   <CardTitle className='text-sm font-medium'>
-                    Total Votes
+                    Highest Valid-Vote Count
                   </CardTitle>
                   <UsersIcon className='w-4 h-4 text-gray-500 dark:text-gray-400' />
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>247</div>
+                  <div className='text-2xl font-bold'>131</div>
                 </CardContent>
               </Card>
               <Card>
@@ -54,7 +54,7 @@ export default function Results() {
                   <UsersIcon className='w-4 h-4 text-gray-500 dark:text-gray-400' />
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>13</div>
+                  <div className='text-2xl font-bold'>17</div>
                 </CardContent>
               </Card>
             </div>
@@ -71,9 +71,9 @@ export default function Results() {
                   <TableHead>No.</TableHead>
                   <TableHead>Candidate</TableHead>
                   <TableHead>For</TableHead>
-                  <TableHead>Abstain</TableHead>
                   <TableHead>Against</TableHead>
-                  <TableHead>Percentage</TableHead>
+                  <TableHead>Valid Votes</TableHead>
+                  <TableHead>Final Supporting Rate</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -84,9 +84,13 @@ export default function Results() {
                     </TableCell>
                     <TableCell>{result.name}</TableCell>
                     <TableCell>{result.for}</TableCell>
-                    <TableCell>{result.abstain}</TableCell>
                     <TableCell>{result.against}</TableCell>
-                    <TableCell className={`${result.final >= 50 ? 'text-green-500' : 'text-red-500'} font-semibold`}>{result.final}%</TableCell>
+                    <TableCell>{result.validVotes}</TableCell>
+                    <TableCell
+                      className={`${result.final >= 50 ? 'text-green-500' : 'text-red-500'} font-semibold`}
+                    >
+                      {result.final.toFixed(2)}%
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

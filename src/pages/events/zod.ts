@@ -4,8 +4,8 @@ export interface Article {
   body: string;
   link: string;
   imgSrc: string;
-  startDatetime: string;
-  endDatetime: string;
+  startDatetime?: string;
+  endDatetime?: string;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -21,16 +21,20 @@ function isArticle(value: unknown): value is Article {
     return false;
   }
 
+  const hasNoDates = value.startDatetime === undefined && value.endDatetime === undefined;
+  const hasValidDates =
+    typeof value.startDatetime === 'string' &&
+    typeof value.endDatetime === 'string' &&
+    isValidDateTime(value.startDatetime) &&
+    isValidDateTime(value.endDatetime);
+
   return (
     (value.department === 'IR' || value.department === 'SD/SL') &&
     typeof value.title === 'string' &&
     typeof value.body === 'string' &&
     typeof value.link === 'string' &&
     typeof value.imgSrc === 'string' &&
-    typeof value.startDatetime === 'string' &&
-    typeof value.endDatetime === 'string' &&
-    isValidDateTime(value.startDatetime) &&
-    isValidDateTime(value.endDatetime)
+    (hasNoDates || hasValidDates)
   );
 }
 

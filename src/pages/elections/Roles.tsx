@@ -21,7 +21,7 @@ function Roles() {
         <div className='mt-8 mb-4'>
           <WindowCard content={
             <div className='flex justify-center items-center'>
-              <img src='/elections/roles.jpg' className='object-cover min-w-40 max-h-[30rem] p-2'></img>
+              <img src='/elections/29th_MC_Roles_Chart.png' className='object-cover min-w-40 max-h-[30rem] p-2'></img>
             </div>
           }></WindowCard>
         </div>
@@ -78,7 +78,7 @@ function Roles() {
         ))}
       </div>
       <div className='flex flex-row justify-center items-center mt-4 text-[#e58e26]'>
-        <a href='/elections/28th Computing Club Elections Info Pamphlet.pdf' target='_blank' className=' font-semibold text-2xl underline'>Find out more</a>
+        <a href='/elections/29th_MC_Roles_and_Responsibilities.pdf' target='_blank' className='font-semibold text-lg underline'>View roles &amp; responsibilities</a>
         <FaArrowUpRightFromSquare className='ml-2'/>
       </div>
     </div>

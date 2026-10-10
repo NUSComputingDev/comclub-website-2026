@@ -8,7 +8,7 @@ function Documents() {
       <div className='flex flex-col items-center regulations'>
         <h1>Documents</h1>
         <p className='text-neutral-500 text-xl mt-3 text-center'>
-          Last updated as of 17 August, 2025.
+          Last updated as of 15 August 2026.
         </p>
       </div>
       <div className='grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8'>
