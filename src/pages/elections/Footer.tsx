@@ -16,7 +16,7 @@ function Footer() {
         <span className='text-yellow-500'>Enriching Lives.</span>
       </h1>
       <p className='text-lg font-bold text-yellow-500 text-center'>
-        Contact us @ elections@nuscomputing.com
+        Contact us @ <a className='text-primary underline' href="mailto:connect@nuscomputing.com">elections@nuscomputing.com</a>
       </p>
     </div>
   );
