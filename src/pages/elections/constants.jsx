@@ -88,12 +88,12 @@ export const FAQ = [
   {
     question: 'What are the items I need to prepare?',
     answer:
-      'Awesome that you\'re considering joining us! You\'ll have to submit the nomination forms to elections@nuscomputing.com together with their related material. If there are no issues with the nomination, candidates can start preparing the publicity materials for their campaign.',
+      <>Awesome that you're considering joining us! You'll have to submit the nomination forms to <a className="underline" href="mailto:elections@nuscomputing.com">elections@nuscomputing.com</a> together with their related material. If there are no issues with the nomination, candidates can start preparing the publicity materials for their campaign.</>,
   },
   {
     question: 'What\'s the commitment like?',
     answer:
-      'The amount of commitment varies between every role and also depends on the number of initiatives/events you wish to push out. Contact the respective MC members for a clearer understanding of the commitment level. You can reach us at elections@nuscomputing.com!',
+      <>The amount of commitment varies between every role and also depends on the number of initiatives/events you wish to push out. Contact the respective MC members for a clearer understanding of the commitment level. You can reach us at <a className="underline" href="mailto:elections@nuscomputing.com">elections@nuscomputing.com</a>!</>,
   },
   {
     question: 'What are all the roles in Computing Club?',
