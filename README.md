@@ -34,8 +34,10 @@ start wherever u like. a really good beginner submission can beat a messy advanc
 1. get the site running locally (step 0)
 2. click around everything. phone size too (devtools, toggle device toolbar). read some of the code
 3. find something that is wrong, broken, confusing, missing or just bad
-4. check the [real repo's issues](https://github.com/NUSComputingDev/comclub-website-2026/issues) to see if someone already reported it. if they did, add a comment with anything new u found instead of making a duplicate
-5. open **one** issue on the **real repo**, title starting with `[recruit]`
+4. check the [issues on this repo](https://github.com/Jay-Jay-Tee/comclub-website-recruit/issues) to see if someone already reported it. if they did, add a comment with anything new u found instead of making a duplicate
+5. open **one** issue **on this repo**
+
+if ur issue is genuinely good, we'll raise it on the real comp club website, so ur find could end up improving the actual site before u even join.
 
 a good issue says:
 
@@ -49,7 +51,7 @@ write it in ur own words. "improve ui" is not an issue, it's a horoscope.
 
 ### intermediate: fix something
 
-1. pick an issue. urs, someone else's `[recruit]` issue, or anything already open on the real repo
+1. pick an issue. urs, someone else's on this repo, or anything already open on the [real repo](https://github.com/NUSComputingDev/comclub-website-2026/issues)
 2. fork **this** repo, make a branch, fix it
 3. open a pr **to this repo** (not the real one, we don't want 40 recruitment prs landing on the live site)
 
@@ -77,7 +79,7 @@ a working small thing plus a clear note beats an ambitious thing that only runs 
 ## the rules
 
 - **ai is allowed**, but not 100% ai with u as the copy-paste button. at the end of ur pr or submission, add a few lines called **"how i used ai"**: which tools, for what, and one thing it got wrong that u fixed. "didn't use any" is also fine. in the chat we will ask u to explain ur code, so be honest
-- **be nice to the real repo.** one issue each, no spam, check for duplicates
+- **be nice to the repo.** one issue each, no spam, check for duplicates
 - **never push secrets.** no api keys, tokens or passwords. if u do it by accident, tell us
 - **solo**, but asking friends for help is fine, just mention it
 - **stuck?** dm josh on telegram, @jayjaytee_07. a good question counts in ur favour
