@@ -1,0 +1,102 @@
+# lets people claim issues by commenting /assign, and give them back with /unassign.
+# rules:
+#   - one claim at a time: u can't claim a new issue while u have a claim with no open pr
+#   - an issue someone else has claimed can't be taken
+#   - no pr within 48 hours of claiming = the claim gets released automatically
+# only works on issues, not on prs.
+
+name: claim issues
+
+on:
+  issue_comment:
+    types: [created]
+  schedule:
+    - cron: "0 */6 * * *"   # checks for stale claims every 6 hours
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: read
+
+jobs:
+  claim:
+    if: github.event_name == 'issue_comment' && !github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const body = (context.payload.comment.body || '').trim().toLowerCase();
+            const wantsAssign = /^\/assign\b/.test(body);
+            const wantsUnassign = /^\/unassign\b/.test(body);
+            if (!wantsAssign && !wantsUnassign) return;
+
+            const { owner, repo } = context.repo;
+            const issue = context.payload.issue;
+            const user = context.payload.comment.user.login;
+            const n = issue.number;
+            const reply = (text) => github.rest.issues.createComment({ owner, repo, issue_number: n, body: text });
+            const assignees = (issue.assignees || []).map(a => a.login);
+
+            if (wantsUnassign) {
+              if (!assignees.includes(user)) return reply(`@${user} u're not assigned to this one, so nothing to undo 👍`);
+              await github.rest.issues.removeAssignees({ owner, repo, issue_number: n, assignees: [user] });
+              return reply(`@${user} unassigned. this one's up for grabs again, comment \`/assign\` to claim it.`);
+            }
+
+            if (issue.state !== 'open') return reply(`@${user} this issue is closed, so it can't be claimed.`);
+            if (assignees.includes(user)) return reply(`@${user} u already have this one 😄`);
+            if (assignees.length > 0) return reply(`@${user} sorry, @${assignees[0]} has already claimed this one. have a look for another issue!`);
+
+            // one claim at a time: find their other claims that don't have an open pr yet
+            const theirIssues = await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', assignee: user, per_page: 100 });
+            const claimed = theirIssues.filter(i => !i.pull_request && i.number !== n).map(i => i.number);
+            if (claimed.length) {
+              const prs = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
+              const covered = new Set();
+              for (const pr of prs.filter(p => p.user.login === user)) {
+                for (const m of (pr.body || '').matchAll(/#(\d+)/g)) covered.add(Number(m[1]));
+              }
+              const waiting = claimed.filter(c => !covered.has(c));
+              if (waiting.length) {
+                return reply(`@${user} u've still got #${waiting[0]} claimed with no pr yet. open a pr for it first (or comment \`/unassign\` there), then come back and claim this one. one claim at a time 🙏`);
+              }
+            }
+
+            const res = await github.rest.issues.addAssignees({ owner, repo, issue_number: n, assignees: [user] });
+            if (!(res.data.assignees || []).some(a => a.login === user)) {
+              return reply(`@${user} github wouldn't let me assign u. ping @${owner} and they'll sort it out.`);
+            }
+            const beginnerNote = (issue.labels || []).some(l => (l.name || l) === 'beginner')
+              ? `\n\nheads up: this is a \`beginner\` issue, so it's for people doing the beginner level only.` : '';
+            return reply(`@${user} it's yours! 🎉 open a pr that says \`closes #${n}\` within 48 hours, or it goes back up for grabs.${beginnerNote}`);
+
+  release-stale-claims:
+    if: github.event_name != 'issue_comment'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const LIMIT_MS = 48 * 60 * 60 * 1000;
+            const now = Date.now();
+            const issues = (await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', per_page: 100 }))
+              .filter(i => !i.pull_request && (i.assignees || []).length);
+            if (!issues.length) return;
+            const prs = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
+
+            for (const issue of issues) {
+              const events = await github.paginate(github.rest.issues.listEvents, { owner, repo, issue_number: issue.number, per_page: 100 });
+              for (const a of issue.assignees) {
+                if (a.login === owner) continue;  // never auto-release the repo owner
+                const when = events.filter(e => e.event === 'assigned' && e.assignee && e.assignee.login === a.login)
+                                   .map(e => Date.parse(e.created_at)).sort((x, y) => y - x)[0];
+                if (!when || now - when < LIMIT_MS) continue;
+                const hasPr = prs.some(p => p.user.login === a.login && new RegExp(`#${issue.number}\\b`).test(p.body || ''));
+                if (hasPr) continue;
+                await github.rest.issues.removeAssignees({ owner, repo, issue_number: issue.number, assignees: [a.login] });
+                await github.rest.issues.createComment({ owner, repo, issue_number: issue.number,
+                  body: `@${a.login} it's been 48 hours with no pr, so this one's been released. no stress, if u're still working on it just comment \`/assign\` again (as long as no one else has grabbed it). everyone else: it's up for grabs! comment \`/assign\` to claim it.` });
+              }
+            }
