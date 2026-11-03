@@ -36,8 +36,9 @@ start wherever u like. a really good beginner submission can beat a messy advanc
 3. find something that is wrong, broken, confusing, missing or just bad
 4. check the [issues on this repo](https://github.com/Jay-Jay-Tee/comclub-website-recruit/issues) to see if someone already reported it. if they did, add a comment with anything new u found instead of making a duplicate
 5. open **one** issue **on this repo**
+6. (bonus, totally optional) try fixing it urself: fork this repo, make the fix on a branch, and open a pr that links to ur issue
 
-if ur issue is genuinely good, we'll raise it on the real comp club website, so ur find could end up improving the actual site before u even join.
+if ur issue or fix is genuinely good, we'll add it to the real comp club website, so ur work could end up on the actual site before u even join.
 
 a good issue says:
 
@@ -49,15 +50,18 @@ a good issue says:
 
 write it in ur own words. "improve ui" is not an issue, it's a horoscope.
 
-### intermediate: fix something
+### intermediate: build something small
 
-1. pick an issue. urs, someone else's on this repo, or anything already open on the [real repo](https://github.com/NUSComputingDev/comclub-website-2026/issues)
-2. fork **this** repo, make a branch, fix it
+beginners can already fix bugs, so here u add something new to the site.
+
+1. pick one small feature or improvement the site doesn't have yet. some ideas: search or filters on the articles page, a proper 404 page, loading states, an accessibility pass (keyboard navigation, alt text, colour contrast), or ur own idea. if it's ur own idea, open an issue for it first so we can see what u're planning
+2. fork **this** repo, make a branch, build it
 3. open a pr **to this repo** (not the real one, we don't want 40 recruitment prs landing on the live site)
+4. leave one helpful review on someone else's recruitment pr. what's good, what's confusing, what u'd change. reading other people's code is half of club tech
 
-a good pr says what u changed, why, how u tested it, and has a before/after screenshot if anything looks different. small and finished beats big and half-done.
+a good pr says what u built, why, how u tested it, and has before/after screenshots. small and finished beats big and half-done.
 
-if ur fix is genuinely good, we might bring it into the real site later. that means ur code is live before u even join.
+if ur pr is genuinely good, we'll add it to the real site, so ur code is live before u even join.
 
 ### advanced (optional): pick one lane
 
