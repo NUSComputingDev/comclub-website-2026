@@ -4,7 +4,7 @@
 #   - max 2 open prs per person: the 3rd gets closed with a comment
 #   - a pr on an issue someone else claimed gets closed with a comment
 #   - a pr without `closes #n`, or on an issue nobody claimed, gets a comment + a `needs fixing` label
-#   - one claim at a time: u can't claim a new issue while u have a claim with no open pr
+#   - max 2 claimed issues per person, and only one of them can be without an open pr
 #   - an issue someone else has claimed can't be taken
 #   - no pr within 48 hours of claiming = the claim gets released automatically
 # only works on issues, not on prs.
@@ -56,10 +56,16 @@ jobs:
             if (assignees.includes(user)) return reply(`@${user} u already have this one 😄`);
             if (assignees.length > 0) return reply(`@${user} sorry, @${assignees[0]} has already claimed this one. have a look for another issue!`);
 
-            // one claim at a time: find their other claims that don't have an open pr yet
             const theirIssues = await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', assignee: user, per_page: 100 });
             const claimed = theirIssues.filter(i => !i.pull_request && i.number !== n).map(i => i.number);
-            if (claimed.length) {
+
+            // max 2 claimed issues at a time (matches the max of 2 open prs)
+            if (user !== owner && claimed.length >= 2) {
+              return reply(`@${user} u've already got 2 issues claimed (${claimed.map(c => '#' + c).join(', ')}), and that's the max. once one of them is closed, or u \`/unassign\` one, u can claim this 🙏`);
+            }
+
+            // one claim at a time without a pr: find their other claims that don't have an open pr yet
+            if (user !== owner && claimed.length) {
               const prs = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
               const covered = new Set();
               for (const pr of prs.filter(p => p.user.login === user)) {
