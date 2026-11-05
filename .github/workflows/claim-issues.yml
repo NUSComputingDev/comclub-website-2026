@@ -184,11 +184,16 @@ jobs:
             }
 
             if (problems.length) {
+              const msg = `@${user} nearly there! a couple of things first:\n\n${problems.map(p => '- ' + p).join('\n')}\n\nonce it's fixed, just edit the pr description and i'll check again.`;
               if (!hasLabel) {
                 try { await github.rest.issues.createLabel({ owner, repo, name: LABEL, color: 'e11d21', description: 'the bot found something to fix in this pr' }); } catch (e) {}
                 await github.rest.issues.addLabels({ owner, repo, issue_number: n, labels: [LABEL] });
-                await comment(`@${user} nearly there! a couple of things first:\n\n${problems.map(p => '- ' + p).join('\n')}\n\nonce it's fixed, just edit the pr description and i'll check again.`);
+                return comment(msg);
               }
+              // already labelled: only speak up again if the problem changed, so edits don't spam the pr
+              const past = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: n, per_page: 100 });
+              const last = past.filter(c => c.user && c.user.type === 'Bot' && (c.body || '').includes('nearly there!')).pop();
+              if (!last || last.body !== msg) return comment(msg);
               return;
             }
             if (hasLabel) {
