@@ -35,9 +35,18 @@ jobs:
         with:
           script: |
             const body = (context.payload.comment.body || '').trim().toLowerCase();
-            const wantsAssign = /^\/assign\b/.test(body);
-            const wantsUnassign = /^\/unassign\b/.test(body);
-            if (!wantsAssign && !wantsUnassign) return;
+            // forgiving: /assign, \assign, / assign, any capitalisation, on any line of the comment
+            const wantsUnassign = /^\s*[\/\\]\s*unassign\b/m.test(body);
+            const wantsAssign = !wantsUnassign && /^\s*[\/\\]\s*assign\b/m.test(body);
+            if (!wantsAssign && !wantsUnassign) {
+              // looks like they tried to claim but got the command wrong? nudge them (short comments only, so normal chat is left alone)
+              const tried = body.length <= 40 && /(^|[^a-z])(un)?(assign|asign|assing|asssign)(\b|me)/.test(body) && !/assigned/.test(body);
+              if (tried) {
+                await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number,
+                  body: `@${context.payload.comment.user.login} to claim this, comment exactly \`/assign\` (forward slash, nothing else) and i'll sort it out 🙏` });
+              }
+              return;
+            }
 
             const { owner, repo } = context.repo;
             const issue = context.payload.issue;
@@ -83,6 +92,20 @@ jobs:
             }
             const beginnerNote = (issue.labels || []).some(l => (l.name || l) === 'beginner')
               ? `\n\nheads up: this is a \`beginner\` issue, so it's for people doing the beginner level only.` : '';
+
+            // already opened a pr for this issue before claiming? clear its flag now instead of making them edit it
+            const linkRe = new RegExp(`\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\\s*:?\\s+#${n}\\b`, 'i');
+            const openPrs = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
+            const linked = openPrs.filter(p => p.user.login === user && linkRe.test(p.body || ''));
+            for (const p of linked) {
+              if ((p.labels || []).some(l => l.name === 'needs fixing')) {
+                try { await github.rest.issues.removeLabel({ owner, repo, issue_number: p.number, name: 'needs fixing' }); } catch (e) {}
+                await github.rest.issues.createComment({ owner, repo, issue_number: p.number, body: `@${user} u've claimed #${n} now, so all good ✅` });
+              }
+            }
+            if (linked.length) {
+              return reply(`@${user} it's yours! 🎉 ur pr ${linked.map(p => '#' + p.number).join(', ')} is already linked to this, so u're all set.${beginnerNote}`);
+            }
             return reply(`@${user} it's yours! 🎉 open a pr that says \`closes #${n}\` within 48 hours, or it goes back up for grabs.${beginnerNote}`);
 
   release-stale-claims:
