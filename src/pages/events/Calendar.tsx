@@ -125,9 +125,9 @@ export default function Calendar() {
   };
 
   const departmentOptions: { label: string; value: DepartmentFilter }[] = [
-    { label: 'All Depts', value: 'ALL' },
-    { label: 'SD/SL', value: 'SD/SL' },
-    { label: 'IR', value: 'IR' },
+    { label: 'All Wings', value: 'ALL' },
+    { label: 'Student Dev / Life', value: 'SD/SL' },
+    { label: 'Internal Relations', value: 'IR' },
   ];
 
   const timeOptions: { label: string; value: TimeFilter }[] = [
