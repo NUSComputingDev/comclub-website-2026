@@ -1,40 +1,56 @@
 .role-card {
   @apply
-    w-48
-    p-4
     flex
     flex-col
-    items-start
     gap-1
+    min-w-0
   ;
 }
 
 .role-card>img {
   @apply
-    rounded-md
-    w-32
-    h-32
+    w-full
+    h-auto
+    aspect-[4/5]
+    mb-2
     object-cover
     object-top
-    self-center
+    rounded-lg
+    border-2
+    border-outline
+    bg-slate-100
   ;
 }
 
-.role-label {
-  @apply
-    h-20
-    m-2
-  ;
-}
-
-.role-label>h4 {
-  @apply
-    font-bold
-  ;
-}
-
-.role-label>p {
+.role-card>h3 {
   @apply
     text-sm
+    xl:text-base
+    font-bold
+    leading-snug
+    break-words
+  ;
+}
+
+.role-card>p {
+  @apply
+    text-xs
+    md:text-sm
+    text-slate-600
+    leading-snug
+    break-words
+  ;
+}
+
+.role-card.lead>img {
+  @apply
+    shadow-[4px_4px_0_#365486]
+  ;
+}
+
+.role-card.lead>p {
+  @apply
+    text-primary
+    font-semibold
   ;
 }

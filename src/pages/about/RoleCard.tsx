@@ -1,26 +1,27 @@
 import React from 'react';
-import WindowCard from '../../layout/WindowCard';
 import './RoleCard.css';
 
 interface RoleCardProps {
   name: string;
   role: string;
   imgSrc: string;
+  isLead?: boolean;
 }
 
 function RoleCard(props: RoleCardProps) {
-  const content = (
-    <div className='role-card'>
-      <img src={props.imgSrc}></img>
-      <div className='role-label'>
-        <h4>{props.name}</h4>
-        <p>{props.role}</p>
-      </div>
-    </div>
-  );
-
   return (
-    <WindowCard content={content}></WindowCard>
+    <li className={`role-card ${props.isLead ? 'lead' : ''}`}>
+      <img
+        src={props.imgSrc}
+        alt={props.name}
+        width={480}
+        height={640}
+        loading='lazy'
+        decoding='async'
+      ></img>
+      <h3>{props.name}</h3>
+      <p>{props.role}</p>
+    </li>
   );
 }
 

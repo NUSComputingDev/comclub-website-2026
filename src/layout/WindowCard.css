@@ -11,8 +11,10 @@
 
 .action-bar {
   @apply
+    relative
     flex
     flex-row
+    items-center
     p-2
     bg-[#f2f2f2]
     border-outline
@@ -26,6 +28,18 @@
     w-4
     h-4
     mx-1
+  ;
+}
+
+.window-title {
+  @apply
+    ml-2
+    min-w-0
+    sm:absolute
+    sm:left-1/2
+    sm:-translate-x-1/2
+    sm:ml-0
+    sm:whitespace-nowrap
   ;
 }
 
