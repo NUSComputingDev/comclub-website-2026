@@ -37,7 +37,7 @@ Generated from the request and current code. This repository has no `.specify` f
 
 ## Phase 5: Polish and cross-cutting concerns
 
-- [ ] T014 Confirm `git status --short` contains only intended changes and that each implementation commit follows the Conventional Commits specification.
+- [X] T014 Confirm `git status --short` contains only intended changes and that each implementation commit follows the Conventional Commits specification.
 
 ## Dependencies and execution
 
