@@ -78,7 +78,8 @@ function Privacy() {
         <p>
           <span>C.</span> If you have any queries on this policy or have any
           other queries in relation to how we process your personal data,
-          please email us at <a className='underline' href="mailto:privacy@nuscomputing.com">privacy@nuscomputing.com</a>.
+          please email us at{' '}
+          <a className='underline' href='mailto:privacy@nuscomputing.com'>privacy@nuscomputing.com</a>.
         </p>
       </section>
 
