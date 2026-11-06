@@ -76,6 +76,11 @@
   padding-bottom: 8px;
 }
 
+/* On mobile, wrap long labels (e.g., the date) instead of scrolling. */
+.events .events-left [data-slot='tabs-list'] [data-slot='tabs-trigger'] {
+  white-space: normal;
+}
+
 /* Masonry flow: cards stack column by column so a card always sits directly
    above the next. Column count follows the pane width. The 5px padding keeps
    the outer cards 5px away from the pane edges (top/left/right); the bottom
