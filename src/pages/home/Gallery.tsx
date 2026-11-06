@@ -142,6 +142,10 @@ export default function Gallery() {
     rail.scrollTo({ left: button.offsetLeft - rail.offsetLeft - (rail.clientWidth - button.clientWidth) / 2 });
   }, [selected]);
 
+  // the + albums.lenght ensures negatives are not staying negative.
+  // the % ensures its between 0 and the max index
+  const step = (delta: number) => setSelected((selected + delta + albums.length) % albums.length);
+
   return (
     <section ref={root} className='comclub-gallery' aria-labelledby='gallery-title'>
       <div className='gallery-inner'>
@@ -152,13 +156,12 @@ export default function Gallery() {
           </div>
           <div className='gallery-controls' aria-label='Event navigation'>
             <span>{String(selected + 1).padStart(2, '0')} / {albums.length}</span>
-            <button aria-label='Previous event' disabled={selected === 0} onClick={() => setSelected(selected - 1)}>
+            <button aria-label='Previous event' onClick={() => step(-1)}>
               <GoChevronLeft />
             </button>
             <button
               aria-label='Next event'
-              disabled={selected === albums.length - 1}
-              onClick={() => setSelected(selected + 1)}>
+              onClick={() => step(+ 1)}>
               <GoChevronRight />
             </button>
           </div>
