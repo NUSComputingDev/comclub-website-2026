@@ -1,5 +1,5 @@
 export interface Article {
-  department: 'IR' | 'SD/SL';
+  department: 'IR' | 'SD' | 'SL';
   title: string;
   body: string;
   link: string;
@@ -29,7 +29,7 @@ function isArticle(value: unknown): value is Article {
     isValidDateTime(value.endDatetime);
 
   return (
-    (value.department === 'IR' || value.department === 'SD/SL') &&
+    (value.department === 'IR' || value.department === 'SD' || value.department === 'SL') &&
     typeof value.title === 'string' &&
     typeof value.body === 'string' &&
     typeof value.link === 'string' &&

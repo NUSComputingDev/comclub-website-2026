@@ -28,7 +28,7 @@ const articlesData: Article[] = Object.values(parsedArticles).sort((a, b) => {
   );
 });
 
-type DepartmentFilter = 'ALL' | 'SD/SL' | 'IR';
+type DepartmentFilter = 'ALL' | Article['department'];
 type TimeFilter = 'ALL' | 'UPCOMING' | 'PAST' | 'TBC';
 
 function classNames(...classes: (string | boolean | null)[]) {
@@ -126,7 +126,8 @@ export default function Calendar() {
 
   const departmentOptions: { label: string; value: DepartmentFilter }[] = [
     { label: 'All Wings', value: 'ALL' },
-    { label: 'Student Dev / Life', value: 'SD/SL' },
+    { label: 'Student Development', value: 'SD' },
+    { label: 'Student Life', value: 'SL' },
     { label: 'Internal Relations', value: 'IR' },
   ];
 
