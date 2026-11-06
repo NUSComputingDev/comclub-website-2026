@@ -114,7 +114,8 @@ export default function Calendar() {
               <button
                 type='button'
                 onClick={previousMonth}
-                className='-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500'
+                className='-my-1.5 flex flex-none items-center justify-center rounded-full border border-gray-300
+                  p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
               >
                 <span className='sr-only'>Previous month</span>
                 <ChevronLeftIcon className='w-5 h-5' aria-hidden='true' />
@@ -122,8 +123,8 @@ export default function Calendar() {
               <button
                 onClick={nextMonth}
                 type='button'
-                className='-my-1.5 -mr-1.5 ml-2 flex flex-none items-center
-                  justify-center p-1.5 text-gray-400 hover:text-gray-500'
+                className='-my-1.5 ml-2 flex flex-none items-center justify-center rounded-full
+                  border border-gray-300 p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
               >
                 <span className='sr-only'>Next month</span>
                 <ChevronRightIcon className='w-5 h-5' aria-hidden='true' />
