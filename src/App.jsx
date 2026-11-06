@@ -1,6 +1,14 @@
 import { useEffect } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
-import { About, Article, Events, Home, Privacy, Resources } from './pages';
+import {
+  About,
+  Article,
+  Events,
+  Home,
+  NotFound,
+  Privacy,
+  Resources,
+} from './pages';
 import { Toaster } from 'react-hot-toast';
 import NavigationBar from './layout/NavigationBar';
 import Footer from './layout/Footer';
@@ -24,6 +32,7 @@ function App() {
             <Route path=':articleLink' element={<Article />} />
           </Route>
           <Route path='/resources' element={<Resources />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </main>
 
