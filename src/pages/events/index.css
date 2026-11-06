@@ -22,16 +22,39 @@
   ;
 }
 
-.events-content {
+/* Full-width parent for the event panes. Two-class scope (instead of element
+   ancestry) so the home/about global `section` rule cannot restyle it. */
+.events .events-layout {
   @apply
     w-full
     h-fit
+    flex
+    flex-row
+    items-start
+    gap-8
+    px-8
+    md:px-16
   ;
 }
 
-/* The home/about pages leak a global `section` rule (inset padding, centered
-   children, fixed height); neutralize it for the stacked event pane. */
-.events>section>div>div>section {
+/* Left column: compact calendar and list. Sticks below the fixed site
+   header (7rem) and scrolls internally when it outgrows the viewport. */
+.events .events-left {
+  @apply
+    w-full
+    max-w-sm
+    flex
+    flex-col
+    sticky
+    top-28
+    max-h-[calc(100vh-7rem)]
+    overflow-y-auto
+  ;
+}
+
+/* Neutralize the leaked global `section` rule on the compact list pane,
+   scoped by class instead of element ancestry. */
+.events .events-results {
   @apply
     h-auto
     items-stretch

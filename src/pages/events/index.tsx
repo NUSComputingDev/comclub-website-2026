@@ -42,19 +42,20 @@ function Events() {
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  // Shared boundary for the outside-click check: spans the left column and
+  // the sibling card pane, so right-pane interactions keep the selection.
+  const layoutRef = useRef<HTMLElement>(null);
 
   const displayedEvents = selectedDay
     ? articlesData.filter((event) => eventCoversDay(event, selectedDay))
     : articlesData;
 
-  // Clear the selection when clicking anywhere outside the calendar and the results.
+  // Clear the selection when clicking anywhere outside the events layout.
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
-        calendarRef.current &&
-        !calendarRef.current.contains(event.target as Node) &&
-        resultsRef.current &&
-        !resultsRef.current.contains(event.target as Node)
+        layoutRef.current &&
+        !layoutRef.current.contains(event.target as Node)
       ) {
         setSelectedDay(null);
       }
@@ -78,54 +79,49 @@ function Events() {
         Events
       </h1>
 
-      <section className='md:items-start'>
-        <div className='pt-16 w-full max-w-sm px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
-          {/* Vertical stack: calendar first, event pane directly beneath it. */}
-          <div className='flex flex-col'>
-            {/* Keep the calendar at its familiar compact width instead of stretching full width. */}
-            <div className='max-w-sm'>
-              <Calendar
-                selectedDay={selectedDay}
-                onSelectDay={setSelectedDay}
-                events={articlesData}
-                containerRef={calendarRef}
-              />
-            </div>
-            {/* Event pane spans exactly the calendar's width, aligned beneath it. */}
-            <section
-              className='gap-0 mt-12 flex flex-col justify-start
-                min-h-[200px] max-w-sm pr-0'
-              onClick={handleResultsAreaClick}
+      {/* Full-width parent: sticky left column plus room for a sibling card pane. */}
+      <section className='events-layout' ref={layoutRef}>
+        <div className='events-left'>
+          <Calendar
+            selectedDay={selectedDay}
+            onSelectDay={setSelectedDay}
+            events={articlesData}
+            containerRef={calendarRef}
+          />
+          {/* Event pane spans the compact left column, aligned beneath the calendar. */}
+          <section
+            className='events-results gap-0 mt-12 flex flex-col justify-start
+              min-h-[200px] max-w-sm pr-0'
+            onClick={handleResultsAreaClick}
+          >
+            <h2 className='font-semibold text-gray-900 text-left w-full pl-4'>
+              {selectedDay
+                ? `Events on ${format(selectedDay, 'MMM dd, yyyy')}`
+                : 'All Events'}
+            </h2>
+            <div
+              className='mt-4 space-y-8 text-sm leading-6 text-gray-500 h-full overflow-auto'
+              ref={resultsRef}
             >
-              <h2 className='font-semibold text-gray-900 text-left w-full pl-4'>
-                {selectedDay
-                  ? `Events on ${format(selectedDay, 'MMM dd, yyyy')}`
-                  : 'All Events'}
-              </h2>
-              <div
-                className='mt-4 space-y-8 text-sm leading-6 text-gray-500 h-full overflow-auto'
-                ref={resultsRef}
-              >
-                {displayedEvents.length > 0 ? (
-                  displayedEvents.map((event) => (
-                    <CompactEventList
-                      key={event.link}
-                      name={event.title}
-                      description={event.body}
-                      link={`/events/${event.link}`}
-                      date={
-                        event.startDatetime
-                          ? { label: formatEventDate(event), value: event.startDatetime }
-                          : undefined
-                      }
-                    />
-                  ))
-                ) : (
-                  <p>No events found.</p>
-                )}
-              </div>
-            </section>
-          </div>
+              {displayedEvents.length > 0 ? (
+                displayedEvents.map((event) => (
+                  <CompactEventList
+                    key={event.link}
+                    name={event.title}
+                    description={event.body}
+                    link={`/events/${event.link}`}
+                    date={
+                      event.startDatetime
+                        ? { label: formatEventDate(event), value: event.startDatetime }
+                        : undefined
+                    }
+                  />
+                ))
+              ) : (
+                <p>No events found.</p>
+              )}
+            </div>
+          </section>
         </div>
       </section>
     </div>
