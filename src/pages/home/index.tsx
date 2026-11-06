@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 import Carousel from './Carousel';
+import Gallery from './Gallery';
 
 function Home() {
   return (
@@ -46,9 +47,11 @@ function Home() {
         </div>
       </section>
 
+      <Gallery />
+
       {/* study planner */}
       {/* flex-col-reverse is used to render the graphic on top */}
-      <section className='flex-col-reverse md:flex-row bg-slate-100'>
+      <section className='flex-col-reverse md:flex-row'>
         <div className='section-description'>
           <h2>Stressed about</h2>
           <h1>Study plans?</h1>
