@@ -156,6 +156,14 @@ Fix (this commit): removed `pb-4` from `.three-d-card-description` so the clip e
 
 `.three-d-card` width changed from `w-48` (192px) to `w-72` (288px), with `max-w-full` so a card shrinks instead of overflowing the pane in the narrow 768-831px range where the right pane is only ~224px wide; `.events .events-cards-grid > a` gets `min-w-0` so the anchor can shrink with the pane. Verified at a 1000px viewport: card content 288px (anchor 292px including the window border, vs 196px before), one card per row, no horizontal overflow, 3-line clamp unchanged. `npm run lint` and `npm run build` pass.
 
+### Follow-up: masonry card flow (no gaps)
+
+User request: remove the gaps between cards — a card should sit flush against the card above it, including filling space left by shorter cards at any window width (masonry).
+
+Change: `src/pages/events/index.css` replaces the `.events .events-cards-grid` flex-wrap layout (24px `gap-6`) with CSS multi-column masonry: `columns: 18rem; column-gap: 0`, and the card anchor rule changes from `min-w-0` (flex shrink) to `display: block; break-inside: avoid` so a card fills its column and stays intact within it. No JavaScript or new dependency; the column count follows the pane width.
+
+Verified at a 1000px viewport: the 441px pane holds one column, all 10 cards stack with 0px vertical gaps (sub-pixel rounding only), cards remain 288px wide, the 3-line clamp is unchanged, and there is no horizontal overflow. Trade-off accepted with the request: CSS multi-column renders column-first visually, while DOM and keyboard tab order are unchanged. `npm run lint` and `npm run build` pass.
+
 ### T002 findings
 
 - Header: `<header class='w-full h-20'>` is an in-flow 80px spacer; the inner `.navigation-bar` is `fixed` (`w-full px-8 md:px-20 py-4 bg-white z-50`). Its tallest child is the logo (`h-14 p-2` = 72px), so the fixed bar is about 104px tall. A sticky offset of `7rem` (112px) clears it with an 8px gap; internal scroll cap `max-height: calc(100vh - 7rem)`.

@@ -66,13 +66,17 @@
   ;
 }
 
-/* Cards wrap into rows and keep the shared compact 3D card design. */
+/* Masonry flow: cards stack column by column with no gaps, so a card always
+   sits flush against the card above it. Column count follows the pane width. */
 .events .events-cards-grid {
-  @apply
-    flex
-    flex-wrap
-    gap-6
-  ;
+  columns: 18rem;
+  column-gap: 0;
+}
+
+/* Keep a card intact within a column and let it fill the column width. */
+.events .events-cards-grid > a {
+  display: block;
+  break-inside: avoid;
 }
 
 /* Visible keyboard focus ring around a card link. */
