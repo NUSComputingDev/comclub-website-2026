@@ -130,14 +130,14 @@ export default function Calendar() {
                 <ChevronRightIcon className='w-6 h-6' aria-hidden='true' />
               </button>
             </div>
-            <div className='grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500'>
-              <div>S</div>
-              <div>M</div>
-              <div>T</div>
-              <div>W</div>
-              <div>T</div>
-              <div>F</div>
-              <div>S</div>
+            <div className='grid grid-cols-7 mt-10 text-xs leading-6 text-center font-semibold uppercase text-gray-500'>
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
             </div>
             <div className='grid grid-cols-7 mt-2 text-sm'>
               {days.map((day, dayIdx) => (
