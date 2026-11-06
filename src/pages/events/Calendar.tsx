@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import {
   add,
@@ -187,7 +187,9 @@ export default function Calendar() {
                     type='button'
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedDay(day);
+                      setSelectedDay((prev) =>
+                        prev && isEqual(day, prev) ? null : day,
+                      );
                     }}
                     className={classNames(
                       selectedDay && isEqual(day, selectedDay) && 'text-white',
@@ -307,7 +309,7 @@ export default function Calendar() {
                     aria-pressed={timeFilter === option.value}
                     onClick={() => {
                       setTimeFilter(option.value);
-                      if (option.value === 'TBC') {
+                      if (option.value === 'TBC' || option.value === 'ALL') {
                         setSelectedDay(null);
                       }
                     }}
