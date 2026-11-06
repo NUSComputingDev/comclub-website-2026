@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { format, isSameDay, parseISO } from 'date-fns';
 import articles from './articles.json';
 import { Article, parseArticles } from './zod';
-import { eventCoversDay } from './eventFilters';
+import { eventCoversDay, filterEventCards, type EventTab } from './eventFilters';
 import Calendar from './Calendar';
 import CompactEventList from '../../components/CompactEventList';
 import ThreeDCard from '../../components/3DCard';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/tabs';
 import './index.css';
 import 'react-calendar/dist/Calendar.css';
 
@@ -32,17 +33,61 @@ function formatEventDate(event: Article) {
   return startLabel;
 }
 
+// Shared card grid so every tab panel renders identical card markup.
+function EventCardGrid({ events }: { events: Article[] }) {
+  if (events.length === 0) return <p>No events found.</p>;
+
+  return (
+    <div className='events-cards-grid'>
+      {events.map((event) => (
+        <Link key={event.link} to={`/events/${event.link}`}>
+          <ThreeDCard
+            photo={event.imgSrc}
+            heading={event.title}
+            // Undated events get no date subheading at all.
+            subheading={event.startDatetime ? formatEventDate(event) : ''}
+            description={event.body}
+            displayLineCount={3}
+          />
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 function Events() {
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
+  const [activeTab, setActiveTab] = useState<EventTab>('all');
   const calendarRef = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
   // Shared boundary for the outside-click check: spans the left column and
   // the sibling card pane, so right-pane interactions keep the selection.
   const layoutRef = useRef<HTMLElement>(null);
 
-  const displayedEvents = selectedDay
+  // One handler for choosing and clearing the calendar day. Choosing a day
+  // activates the date tab; clearing only falls back to All when the date
+  // tab is the active one. Functional update keeps the document listener
+  // from reading a stale active tab.
+  const handleDayChange = useCallback((day: Date | null) => {
+    setSelectedDay(day);
+    setActiveTab((tab) => (day ? 'date' : tab === 'date' ? 'all' : tab));
+  }, []);
+
+  // Left pane follows the calendar selection only; today is evaluated per
+  // render so filters stay correct without a midnight timer.
+  const today = new Date();
+  const compactEvents = selectedDay
     ? articlesData.filter((event) => eventCoversDay(event, selectedDay))
     : articlesData;
+
+  // Right pane follows the active tab; the calendar selection matters only
+  // for the date tab, so other tabs never intersect it.
+  const cardsByTab: Record<EventTab, Article[]> = {
+    all: filterEventCards(articlesData, 'all', null, today),
+    past: filterEventCards(articlesData, 'past', null, today),
+    upcoming: filterEventCards(articlesData, 'upcoming', null, today),
+    date: filterEventCards(articlesData, 'date', selectedDay, today),
+  };
 
   // Clear the selection when clicking anywhere outside the events layout.
   useEffect(() => {
@@ -51,7 +96,7 @@ function Events() {
         layoutRef.current &&
         !layoutRef.current.contains(event.target as Node)
       ) {
-        setSelectedDay(null);
+        handleDayChange(null);
       }
     }
 
@@ -59,11 +104,11 @@ function Events() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [handleDayChange]);
 
   const handleResultsAreaClick = (event: React.MouseEvent) => {
     if (event.target === event.currentTarget) {
-      setSelectedDay(null);
+      handleDayChange(null);
     }
   };
 
@@ -78,7 +123,7 @@ function Events() {
         <div className='events-left'>
           <Calendar
             selectedDay={selectedDay}
-            onSelectDay={setSelectedDay}
+            onSelectDay={handleDayChange}
             events={articlesData}
             containerRef={calendarRef}
           />
@@ -97,8 +142,8 @@ function Events() {
               className='mt-4 space-y-8 text-sm leading-6 text-gray-500 h-full overflow-auto'
               ref={resultsRef}
             >
-              {displayedEvents.length > 0 ? (
-                displayedEvents.map((event) => (
+              {compactEvents.length > 0 ? (
+                compactEvents.map((event) => (
                   <CompactEventList
                     key={event.link}
                     name={event.title}
@@ -117,26 +162,35 @@ function Events() {
             </div>
           </section>
         </div>
-        {/* Right pane: event cards mirroring the compact list's displayed events. */}
+        {/* Right pane: event cards filtered by the line tab bar. */}
         <section className='events-cards' aria-label='Event cards'>
-          {displayedEvents.length > 0 ? (
-            <div className='events-cards-grid'>
-              {displayedEvents.map((event) => (
-                <Link key={event.link} to={`/events/${event.link}`}>
-                  <ThreeDCard
-                    photo={event.imgSrc}
-                    heading={event.title}
-                    // Undated events get no date subheading at all.
-                    subheading={event.startDatetime ? formatEventDate(event) : ''}
-                    description={event.body}
-                    displayLineCount={3}
-                  />
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <p>No events found.</p>
-          )}
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className='mb-4'
+          >
+            <TabsList aria-label='Filter event cards' variant='line'>
+              <TabsTrigger value='all'>All</TabsTrigger>
+              <TabsTrigger value='past'>Past</TabsTrigger>
+              <TabsTrigger value='upcoming'>Upcoming</TabsTrigger>
+              {/* Placeholder label until a calendar day is chosen. */}
+              <TabsTrigger value='date' disabled={!selectedDay}>
+                {selectedDay ? format(selectedDay, 'MMM dd, yyyy') : 'Selected Date'}
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value='all'>
+              <EventCardGrid events={cardsByTab.all} />
+            </TabsContent>
+            <TabsContent value='past'>
+              <EventCardGrid events={cardsByTab.past} />
+            </TabsContent>
+            <TabsContent value='upcoming'>
+              <EventCardGrid events={cardsByTab.upcoming} />
+            </TabsContent>
+            <TabsContent value='date'>
+              <EventCardGrid events={cardsByTab.date} />
+            </TabsContent>
+          </Tabs>
         </section>
       </section>
     </div>

@@ -66,6 +66,16 @@
   ;
 }
 
+/* Keep the tab row inside the pane: it scrolls horizontally instead of
+   widening the layout, and the extra padding leaves room for the active
+   underline, which sits 5px below each trigger. */
+.events .events-cards [data-slot='tabs-list'] {
+  max-width: 100%;
+  overflow-x: auto;
+  padding-top: 6px;
+  padding-bottom: 8px;
+}
+
 /* Masonry flow: cards stack column by column so a card always sits directly
    above the next. Column count follows the pane width. The 5px padding keeps
    the outer cards 5px away from the pane edges (top/left/right); the bottom
