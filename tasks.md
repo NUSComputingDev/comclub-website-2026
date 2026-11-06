@@ -20,7 +20,7 @@ No shared prerequisites are needed for this layout-only change.
 
 ## Phase 4: Polish and cross-cutting concerns
 
-- [ ] T005 Check the final diff for unintended changes in `src/pages/events/index.tsx` and `src/pages/events/index.css`.
+- [X] T005 Check the final diff for unintended changes in `src/pages/events/index.tsx` and `src/pages/events/index.css`.
 
 ## Dependencies and execution
 
