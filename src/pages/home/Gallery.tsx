@@ -1,14 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { GoArrowUpRight, GoChevronLeft, GoChevronRight } from 'react-icons/go';
 import albumsData from './flickrAlbums.json';
-import { arrangePhotos, GalleryPhoto, loadAlbum } from './flickr';
+import { arrangePhotos, GalleryPhoto, largeSrc, loadAlbum, peekAlbum, prefetchAlbum, warmed } from './flickr';
 import './Gallery.css';
 
 const albums = Object.values(albumsData);
 
+type View = { selected: number; leaving: number | null };
+
+// Pure state updater (module level, so effects can use it without extra dependencies).
+// Wraps the index around, and remembers the outgoing album so it can stay underneath while the new one fades in.
+const go = (to: (current: number) => number) => (view: View): View => {
+  const selected = (to(view.selected) + albums.length) % albums.length;
+  return selected === view.selected ? view : { selected, leaving: view.selected };
+};
+
 function Photo({ photo, index, title }: { photo: GalleryPhoto; index: number; title: string }) {
+  const large = largeSrc(photo, index);
+  // Already prefetched and decoded: show it straight away (no skeleton, no per-photo fade).
+  const [instant] = useState(() => warmed.has(large));
   const [quality, setQuality] = useState('large');
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(instant);
 
   useEffect(() => {
     if (loaded) return;
@@ -19,11 +31,12 @@ function Photo({ photo, index, title }: { photo: GalleryPhoto; index: number; ti
   }, [loaded]);
 
   const failed = quality === 'failed';
-  const src = quality === 'large' ? photo.src.replace('_m.jpg', index === 0 ? '_b.jpg' : '_z.jpg') : photo.src;
+  const src = quality === 'large' ? large : photo.src;
+  const state = loaded || failed ? 'is-ready' : 'gallery-skeleton';
 
   return (
     <a
-      className={`gallery-photo gallery-slot-${index} ${loaded || failed ? 'is-ready' : 'gallery-skeleton'}`}
+      className={`gallery-photo gallery-slot-${index} ${state}${instant ? ' is-instant' : ''}`}
       href={photo.link}
       target='_blank'
       rel='noopener noreferrer'
@@ -43,9 +56,13 @@ function Photo({ photo, index, title }: { photo: GalleryPhoto; index: number; ti
   );
 }
 
-function Album({ index, visible }: { index: number; visible: boolean }) {
+function Album({ index, visible, leaving = false }: { index: number; visible: boolean; leaving?: boolean }) {
   const album = albums[index];
-  const [photos, setPhotos] = useState<GalleryPhoto[] | null>(null);
+  // Start from the cache if we have it, so revisited / prefetched albums never flash the skeleton.
+  const [photos, setPhotos] = useState<GalleryPhoto[] | null>(() => {
+    const cached = peekAlbum(album.albumId, album.ownerId);
+    return cached && arrangePhotos(cached);
+  });
   const [error, setError] = useState(false);
   const [attempt, setAttempt] = useState(0);
 
@@ -68,7 +85,12 @@ function Album({ index, visible }: { index: number; visible: boolean }) {
 
   const loading = !photos && !error;
   return (
-    <div className='gallery-album' id='gallery-active-album' aria-busy={loading}>
+    // The outgoing album is purely decorative while it sits under the new one, so hide it from assistive tech.
+    <div
+      className={`gallery-album${leaving ? ' is-leaving' : ''}`}
+      id={leaving ? undefined : 'gallery-active-album'}
+      aria-hidden={leaving || undefined}
+      aria-busy={loading}>
       <div className='gallery-viewfinder'>
         {error || photos?.length === 0 ? (
           <div className='gallery-message'>
@@ -107,8 +129,30 @@ function Album({ index, visible }: { index: number; visible: boolean }) {
 export default function Gallery() {
   const root = useRef<HTMLElement>(null);
   const strip = useRef<HTMLDivElement>(null);
+  // the functions to check if the images should be pulled
   const [visible, setVisible] = useState(false);
-  const [selected, setSelected] = useState(0);
+  // selected = the album being shown; leaving = the previous one, kept mounted briefly for the crossfade.
+  const [{ selected, leaving }, setView] = useState<View>({ selected: 0, leaving: null });
+
+  // the functions to check if the images should carousel
+  const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
+  // NOTE THIS PAUSED IS FOR INTERACTION PAUSES
+
+  // Unmount the outgoing album once the new one has finished fading in over it (matches the 400ms CSS animation).
+  useEffect(() => {
+    if (leaving === null) return;
+    // WARNING: Make sure the 400 ms timeout matches in the GalleryAlbum Animation Delay
+    const id = window.setTimeout(() => setView((view) => ({ ...view, leaving: null })), 400);
+    return () => window.clearTimeout(id);
+  }, [leaving]);
+
+  // While looking at one album, quietly fetch the next one (data + images) so the switch is instant.
+  useEffect(() => {
+    if (!visible) return;
+    const next = albums[(selected + 1) % albums.length];
+    prefetchAlbum(next.albumId, next.ownerId);
+  }, [visible, selected]);
 
   useEffect(() => {
     // Fallback for very old browsers: they can't detect visibility, so the gallery just loads immediately.
@@ -142,12 +186,41 @@ export default function Gallery() {
     rail.scrollTo({ left: button.offsetLeft - rail.offsetLeft - (rail.clientWidth - button.clientWidth) / 2 });
   }, [selected]);
 
-  // the + albums.lenght ensures negatives are not staying negative.
-  // the % ensures its between 0 and the max index
-  const step = (delta: number) => setSelected((selected + delta + albums.length) % albums.length);
+  useEffect(() => {
+    // no fallback for old browser... since old browser
+    // we dont really want to auto scroll
+
+    if (!root.current) return;
+
+    // this time we are observing for when the images are in
+    // the 40% of the viewport of the screen
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.4 },
+    );
+    observer.observe(root.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    // see if the user has put the window setting of reduced motion
+    // if they have then dont do the animation otherwise do it!
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // if the user is not seeing it, or redced motion OR interacting with the box
+    // then dont do the scrolling behavior
+    if (!inView || paused || reduceMotion) return;
+
+    const id = window.setTimeout(() => setView(go((s) => s + 1)), 5000);
+    return () => window.clearTimeout(id);
+  }, [inView, paused, selected]);
 
   return (
-    <section ref={root} className='comclub-gallery' aria-labelledby='gallery-title'>
+    <section ref={root} className='comclub-gallery' aria-labelledby='gallery-title'
+      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
       <div className='gallery-inner'>
         <div className='gallery-heading'>
           <div>
@@ -156,24 +229,26 @@ export default function Gallery() {
           </div>
           <div className='gallery-controls' aria-label='Event navigation'>
             <span>{String(selected + 1).padStart(2, '0')} / {albums.length}</span>
-            <button aria-label='Previous event' onClick={() => step(-1)}>
+            <button aria-label='Previous event' onClick={() => setView(go((s) => s - 1))}>
               <GoChevronLeft />
             </button>
-            <button
-              aria-label='Next event'
-              onClick={() => step(+ 1)}>
+            <button aria-label='Next event' onClick={() => setView(go((s) => s + 1))}>
               <GoChevronRight />
             </button>
           </div>
         </div>
-        <Album key={albums[selected].albumId} index={selected} visible={visible} />
+        {/* Both albums share one grid cell: the old one stays put underneath, the new one fades in on top. */}
+        <div className='gallery-stage'>
+          {leaving !== null && <Album key={albums[leaving].albumId} index={leaving} visible leaving />}
+          <Album key={albums[selected].albumId} index={selected} visible={visible} />
+        </div>
         <div className='gallery-events' ref={strip} role='group' aria-label='Choose an event'>
           {albums.map((album, index) => (
             <button
               key={album.albumId}
               aria-pressed={selected === index}
               aria-controls='gallery-active-album'
-              onClick={() => setSelected(index)}>
+              onClick={() => setView(go(() => index))}>
               <span>{album.title.split(' ').slice(1).join(' ')}</span>
               <span className='gallery-event-year'>{album.title.split(' ')[0]}</span>
             </button>

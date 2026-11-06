@@ -41,7 +41,9 @@
 .gallery-photo, .gallery-skeleton { border-radius: 6px; }
 .gallery-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0; }
 .gallery-photo.gallery-slot-0 img { object-fit: contain; }
-.gallery-photo.is-ready img { animation: gallery-develop 450ms ease-out both; animation-delay: inherit; }
+/* Photo "develops": fades in while settling from a slight zoom. Only opacity + transform, so it stays on the GPU. */
+.gallery-photo.is-ready img { animation: gallery-photo-develop 600ms cubic-bezier(.2, .7, .2, 1) both; animation-delay: inherit; }
+.gallery-photo.is-instant img { animation: none; opacity: 1; } /* prefetched: the album-level crossfade is enough */
 .gallery-photo-hint {
   position: absolute; bottom: 12px; left: 12px; display: flex; align-items: center; gap: .5rem;
   padding: .5rem .75rem; background: rgba(255,255,255,.95); color: #365486; border-radius: 4px; font-size: .75rem;
@@ -62,7 +64,7 @@
 }
 .gallery-events button {
   flex: 0 0 auto; text-align: left; border-top: 2px solid #cbd5e1; padding: 1rem 1rem .6rem;
-  min-width: 165px; scroll-snap-align: start; font-family: 'Quicksand', sans-serif; font-weight: 600;
+  min-width: 165px; scroll-snap-align: center; /* matches the centring scrollTo, so snap doesn't nudge it after */ font-family: 'Quicksand', sans-serif; font-weight: 600;
 }
 .gallery-events button[aria-pressed='true'] { border-color: #365486; background: white; }
 .gallery-events button:hover { border-color: #365486; }
@@ -71,8 +73,15 @@
 .gallery-message h4 { font-size: 1.4rem; }
 .gallery-message p { color: #526176; }
 .gallery-message button { background: #365486; color: white; padding: .6rem 1rem; border-radius: 6px; margin-right: 1rem; }
-.gallery-album { animation: gallery-develop 220ms ease-out; }
+/* Crossfade: both albums sit in the same grid cell; the outgoing one stays opaque underneath (no dip to the
+   background) while the incoming one, later in the DOM so painted on top, fades in over it. */
+.gallery-stage { display: grid; }
+.gallery-stage > .gallery-album { grid-area: 1 / 1; min-width: 0; }
+.gallery-album { animation: gallery-develop 400ms ease-out; }
+.gallery-album.is-leaving { pointer-events: none; }
+.gallery-album.is-leaving .gallery-caption { visibility: hidden; } /* avoid two titles blending into each other */
 @keyframes gallery-develop { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gallery-photo-develop { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
 @keyframes gallery-shimmer { to { background-position: -200% 0; } }
 
 @media (max-width: 767px) {

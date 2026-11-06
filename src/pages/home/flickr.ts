@@ -140,3 +140,29 @@ export function loadAlbum(albumId: string, ownerId: string): Promise<GalleryPhot
 
   return request;
 }
+
+// Grid sizes: _b (1024px) for the big main slot, _z (640px) for the smaller ones.
+export const largeSrc = (photo: GalleryPhoto, slot: number) =>
+  photo.src.replace('_m.jpg', slot === 0 ? '_b.jpg' : '_z.jpg');
+
+// Synchronous cache read, so an album we've already fetched can render its photos on the very first frame.
+export function peekAlbum(albumId: string, ownerId: string): GalleryPhoto[] | null {
+  const cached = cache.get(`${ownerId}/${albumId}`);
+  return cached && cached.expires > Date.now() ? cached.photos : null;
+}
+
+// Image URLs already downloaded and decoded; <Photo> shows these instantly instead of fading each one in.
+export const warmed = new Set<string>();
+
+// Fetch the album data and download its grid images in the background, so switching to it is instant.
+export function prefetchAlbum(albumId: string, ownerId: string) {
+  loadAlbum(albumId, ownerId).then((photos) => {
+    arrangePhotos(photos).forEach((photo, slot) => {
+      const src = largeSrc(photo, slot);
+      if (warmed.has(src)) return;
+      const image = new Image();
+      image.src = src;
+      image.decode().then(() => warmed.add(src), () => undefined);
+    });
+  }, () => undefined); // ponytail: a failed prefetch is ignored; the real load shows the error UI if it fails again.
+}
