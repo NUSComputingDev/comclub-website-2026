@@ -1,0 +1,42 @@
+.three-d-card {
+  @apply
+    w-48
+    flex
+    flex-col
+    gap-1
+  ;
+}
+
+/* Photo spans the full width of the card, no padding. */
+.three-d-card-photo {
+  @apply
+    w-full
+    object-cover
+  ;
+}
+
+.three-d-card-heading {
+  @apply
+    p-4
+    pt-3
+    font-bold
+  ;
+}
+
+.three-d-card-subheading {
+  @apply
+    px-4
+    -mt-1
+    text-sm
+  ;
+}
+
+.three-d-card-description {
+  @apply
+    px-4
+    pb-4
+    -mt-1
+    text-sm
+    text-gray-600
+  ;
+}
