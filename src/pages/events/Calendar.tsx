@@ -96,9 +96,9 @@ export default function Calendar() {
 
   return (
     <div className='pt-16'>
-      <div className='max-w-sm px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
+      <div className='w-[calc(100vw-2rem)] max-w-md mx-auto md:max-w-[68rem] md:px-6'>
         <div className='md:grid md:grid-cols-2 md:divide-x md:divide-gray-200'>
-          <div className='md:pr-14 h-[350px]' ref={calendarRef}>
+          <div className='self-start p-6 border border-gray-200 rounded-2xl md:mr-14' ref={calendarRef}>
             <div className='flex items-center'>
               <h2 className='flex-auto text-xl font-semibold text-gray-900'>
                 {format(firstDayCurrentMonth, 'MMMM yyyy')}
@@ -130,7 +130,7 @@ export default function Calendar() {
                 <ChevronRightIcon className='w-6 h-6' aria-hidden='true' />
               </button>
             </div>
-            <div className='grid grid-cols-7 mt-10 text-xs leading-6 text-center font-semibold uppercase text-gray-500'>
+            <div className='grid grid-cols-7 mt-6 text-xs leading-6 text-center font-semibold uppercase text-gray-500'>
               <div>Sun</div>
               <div>Mon</div>
               <div>Tue</div>
@@ -190,6 +190,23 @@ export default function Calendar() {
                   </div>
                 </div>
               ))}
+            </div>
+            <div
+              className='flex flex-wrap items-center pt-4 mt-1 text-sm text-gray-500
+                border-t border-gray-200 gap-x-5 gap-y-2'
+            >
+              <div className='flex items-center gap-2'>
+                <span className='w-1.5 h-1.5 rounded-full bg-sky-500' aria-hidden='true' />
+                Has events
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className='w-4 h-4 bg-red-500 rounded-full' aria-hidden='true' />
+                Today
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className='w-4 h-4 bg-gray-900 rounded-full' aria-hidden='true' />
+                Selected
+              </div>
             </div>
           </div>
           <section
