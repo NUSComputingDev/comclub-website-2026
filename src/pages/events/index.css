@@ -72,17 +72,17 @@
    edge comes from each card's margin-bottom. */
 .events .events-cards-grid {
   columns: 18rem;
-  column-gap: 12px;
+  column-gap: 24px;
   padding: 5px 5px 0;
 }
 
 /* Keep a card intact within a column and let it fill the column width. The
-   12px gap between cards is wider than the card's 8px drop shadow, so white
+   24px gap between cards is wider than the card's 8px drop shadow, so white
    shows through instead of the shadow filling the gap. */
 .events .events-cards-grid > a {
   display: block;
   break-inside: avoid;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 /* Visible keyboard focus ring around a card link. */

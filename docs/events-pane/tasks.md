@@ -190,6 +190,10 @@ Resolution (user chose to keep the shadow): `src/pages/events/index.css` — the
 
 Verified: 12px between every adjacent card pair vertically and between columns (sub-pixel rounding only) in both the natural 1-column state and a forced 3-column state; 5px from the pane top/left edges; no horizontal overflow. `npm run lint` and `npm run build` pass.
 
+### Follow-up: between-card gap doubled to 24px
+
+User request: make the between-card gap twice as wide. `src/pages/events/index.css` — `column-gap` and the card `margin-bottom` go from 12px to 24px. Verified: 24px between every adjacent card pair vertically and between columns, in the natural 1-column state and a forced 3-column state (sub-pixel rounding only); no horizontal overflow. `npm run lint` and `npm run build` pass.
+
 ### T002 findings
 
 - Header: `<header class='w-full h-20'>` is an in-flow 80px spacer; the inner `.navigation-bar` is `fixed` (`w-full px-8 md:px-20 py-4 bg-white z-50`). Its tallest child is the logo (`h-14 p-2` = 72px), so the fixed bar is about 104px tall. A sticky offset of `7rem` (112px) clears it with an 8px gap; internal scroll cap `max-height: calc(100vh - 7rem)`.
