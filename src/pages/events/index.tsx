@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { format, isSameDay, parseISO } from 'date-fns';
 import articles from './articles.json';
 import { Article, parseArticles } from './zod';
-import { eventCoversDay, filterEventCards, type EventTab } from './eventFilters';
+import { filterEventCards, type EventTab } from './eventFilters';
 import Calendar from './Calendar';
 import CompactEventList from '../../components/CompactEventList';
 import ThreeDCard from '../../components/3DCard';
@@ -31,6 +31,18 @@ function formatEventDate(event: Article) {
   }
 
   return startLabel;
+}
+
+// Left-pane heading that mirrors the active tab. The date tab only activates
+// with a selected day, so a date heading always has a day to format.
+function formatCompactHeading(tab: EventTab, selectedDay: Date | null) {
+  if (tab === 'date' && selectedDay) {
+    return `Events on ${format(selectedDay, 'MMM dd, yyyy')}`;
+  }
+
+  if (tab === 'past') return 'Past Events';
+  if (tab === 'upcoming') return 'Upcoming Events';
+  return 'All Events';
 }
 
 // Shared card grid so every tab panel renders identical card markup.
@@ -73,21 +85,20 @@ function Events() {
     setActiveTab((tab) => (day ? 'date' : tab === 'date' ? 'all' : tab));
   }, []);
 
-  // Left pane follows the calendar selection only; today is evaluated per
-  // render so filters stay correct without a midnight timer.
+  // Today is evaluated per render so filters stay correct without a midnight
+  // timer; the calendar selection matters only for the date tab, so other
+  // tabs never intersect it.
   const today = new Date();
-  const compactEvents = selectedDay
-    ? articlesData.filter((event) => eventCoversDay(event, selectedDay))
-    : articlesData;
-
-  // Right pane follows the active tab; the calendar selection matters only
-  // for the date tab, so other tabs never intersect it.
   const cardsByTab: Record<EventTab, Article[]> = {
     all: filterEventCards(articlesData, 'all', null, today),
     past: filterEventCards(articlesData, 'past', null, today),
     upcoming: filterEventCards(articlesData, 'upcoming', null, today),
     date: filterEventCards(articlesData, 'date', selectedDay, today),
   };
+
+  // One derivation for both panes: the left list and right cards read the
+  // active tab's results and always agree.
+  const activeEvents = cardsByTab[activeTab];
 
   // Clear the selection when clicking anywhere outside the events layout.
   useEffect(() => {
@@ -134,16 +145,14 @@ function Events() {
             onClick={handleResultsAreaClick}
           >
             <h2 className='font-semibold text-gray-900 text-left w-full pl-4'>
-              {selectedDay
-                ? `Events on ${format(selectedDay, 'MMM dd, yyyy')}`
-                : 'All Events'}
+              {formatCompactHeading(activeTab, selectedDay)}
             </h2>
             <div
               className='mt-4 space-y-8 text-sm leading-6 text-gray-500 h-full overflow-auto'
               ref={resultsRef}
             >
-              {compactEvents.length > 0 ? (
-                compactEvents.map((event) => (
+              {activeEvents.length > 0 ? (
+                activeEvents.map((event) => (
                   <CompactEventList
                     key={event.link}
                     name={event.title}
