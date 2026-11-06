@@ -39,8 +39,8 @@ Goal: Add a separate event pane alongside the frozen column on wide screens.
 
 Independent acceptance: The new pane occupies all remaining available desktop width and is hidden below the existing `md` breakpoint, where only the calendar and compact list remain visible. It causes no horizontal overflow, overlap, or change to the left column.
 
-- [ ] T005 [US2] Add a labeled sibling pane in `src/pages/events/index.tsx` and scoped layout styles in `src/pages/events/index.css`. Let the right pane grow and shrink with `min-width: 0`; hide the right pane below the existing `md` breakpoint with display-based visibility so its links cannot receive keyboard focus, and avoid global section styles. Place it inside the interaction boundary prepared in US1. Do not modify the frozen left column.
-- [ ] T006 [US2] Check the US2 acceptance criteria at 375px, 768px, and 1440px and compare the left column against the US1 baseline for `src/pages/events/index.tsx` and `src/pages/events/index.css`. Run lint and build, then commit only this change as `feat(events): add right-side event pane`.
+- [X] T005 [US2] Add a labeled sibling pane in `src/pages/events/index.tsx` and scoped layout styles in `src/pages/events/index.css`. Let the right pane grow and shrink with `min-width: 0`; hide the right pane below the existing `md` breakpoint with display-based visibility so its links cannot receive keyboard focus, and avoid global section styles. Place it inside the interaction boundary prepared in US1. Do not modify the frozen left column.
+- [X] T006 [US2] Check the US2 acceptance criteria at 375px, 768px, and 1440px and compare the left column against the US1 baseline for `src/pages/events/index.tsx` and `src/pages/events/index.css`. Run lint and build, then commit only this change as `feat(events): add right-side event pane`.
 
 ## Phase 5: US3 (P3) — Render event cards
 
@@ -101,6 +101,19 @@ Browser acceptance (in-app Chromium, viewport 1000x892, dev server):
 - `npm run lint` and `npm run build` pass; no pre-existing failures.
 
 Commit: `fix(events): anchor calendar and event pane to the left` (hash recorded at T012). This is the frozen left-column baseline; US2/US3 do not change left-column markup, styles, handlers, or data behavior.
+
+### US2 (T005-T006) — right pane
+
+Changes: `src/pages/events/index.tsx` adds an empty labeled sibling pane (`<section class='events-cards' aria-label='Event cards'>`) after the left column, inside the `.events-layout` interaction boundary. `src/pages/events/index.css` adds `.events .events-cards` (`hidden md:block`, `flex-1`, `min-w-0`, `h-fit`, zero padding). Left column untouched.
+
+Browser acceptance (in-app Chromium, viewport 1000x892; 375/768/1440 checked against the generated CSS):
+- At >=768px the pane is `display: block` with `flex: 1 1 0%` and `min-width: 0`: at 1000px it measures 441px = all remaining width (985 - 2x64 padding - 384 left - 32 gap), no overlap, no horizontal overflow.
+- Generated CSS: base rule `.events .events-cards { display:none; ... }` and `@media (min-width:768px) { display:block }` — so at 375px the pane is display-none (hidden content cannot receive keyboard focus) and appears at 768px.
+- Left column compared against the US1 baseline: width 384px, `sticky` at `top: 112px`, `max-height: 780px`, `overflow-y: auto`, same x position — unchanged.
+- `mousedown` inside the right pane does not clear the selected date (boundary spans both panes); outside clicks still clear.
+- `npm run lint` and `npm run build` pass.
+
+Commit: `feat(events): add right-side event pane` (hash recorded at T012).
 
 ### T002 findings
 

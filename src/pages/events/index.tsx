@@ -123,6 +123,9 @@ function Events() {
             </div>
           </section>
         </div>
+        {/* Right pane: fills the remaining width; populated with cards in US3. */}
+        <section className='events-cards' aria-label='Event cards'>
+        </section>
       </section>
     </div>
   );

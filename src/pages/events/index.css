@@ -52,6 +52,20 @@
   ;
 }
 
+/* Right pane: grows to fill the remaining width. Display-none below md,
+   so its hidden content cannot receive keyboard focus. */
+.events .events-cards {
+  @apply
+    hidden
+    md:block
+    flex-1
+    min-w-0
+    h-fit
+    p-0
+    md:p-0
+  ;
+}
+
 /* Neutralize the leaked global `section` rule on the compact list pane,
    scoped by class instead of element ancestry. */
 .events .events-results {
