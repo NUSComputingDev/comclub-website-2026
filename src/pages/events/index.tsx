@@ -91,9 +91,10 @@ function Events() {
                 containerRef={calendarRef}
               />
             </div>
+            {/* Event pane spans exactly the calendar's width, aligned beneath it. */}
             <section
               className='gap-0 mt-12 flex flex-col justify-start
-                min-h-[200px] w-full pr-0'
+                min-h-[200px] max-w-sm pr-0'
               onClick={handleResultsAreaClick}
             >
               <h2 className='font-semibold text-gray-900 text-left w-full pl-4'>
