@@ -187,9 +187,7 @@ export default function Calendar() {
                     type='button'
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedDay((prev) =>
-                        prev && isEqual(day, prev) ? null : day,
-                      );
+                      setSelectedDay(day);
                     }}
                     className={classNames(
                       selectedDay && isEqual(day, selectedDay) && 'text-white',
@@ -309,7 +307,7 @@ export default function Calendar() {
                     aria-pressed={timeFilter === option.value}
                     onClick={() => {
                       setTimeFilter(option.value);
-                      if (option.value === 'TBC' || option.value === 'ALL') {
+                      if (option.value === 'TBC') {
                         setSelectedDay(null);
                       }
                     }}
