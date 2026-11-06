@@ -8,7 +8,7 @@
   ;
 }
 
-.compact-event-list>Link>h4 {
+.compact-event-list a h4 {
   @apply
     text-xl
     text-primary
@@ -25,7 +25,7 @@
   ;
 }
 
-/* Clamps the description to about 2.5 lines with an ellipsis. */
+/* Show two full lines and half the width of the third. */
 .compact-event-list-description {
   @apply
     text-sm
@@ -33,8 +33,17 @@
     font-body
     overflow-hidden
   ;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2.5;
-  line-clamp: 2.5;
+  position: relative;
+  line-height: 1.5rem;
+  max-height: 4.5rem;
+}
+
+.compact-event-list-description.is-truncated::after {
+  content: '...';
+  position: absolute;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  height: 1.5rem;
+  background: white;
 }
