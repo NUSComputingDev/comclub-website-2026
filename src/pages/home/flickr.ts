@@ -68,8 +68,8 @@ let sequence = 0;
  *
  * Why not fetch()? Browsers enforce the same-origin policy: a page on our domain can't read a response from
  * www.flickr.com via fetch/XHR unless Flickr opts in with CORS headers (Access-Control-Allow-Origin). Flickr's
- * public feeds are built for the older JSONP trick instead, and we have no backend to proxy the request.
- * (We haven't verified Flickr's CORS headers; check the Network tab if you want to try plain fetch().)
+ * public feeds don't send those headers (tested: fetch() to the feed fails with "Failed to fetch" while the same
+ * URL works via JSONP), and we have no backend to proxy the request.
  *
  * Why does JSONP work? <script src="..."> tags are NOT subject to that policy; a page can load and run a script
  * from any domain. So:
