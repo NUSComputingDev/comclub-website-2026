@@ -47,6 +47,7 @@ function Photo({ photo, index, title }: { photo: GalleryPhoto; index: number; ti
           src={src}
           alt={`${title} — event photo ${index + 1}`}
           decoding='async'
+          referrerPolicy='no-referrer'
           onLoad={() => setLoaded(true)}
           onError={() => setQuality(quality === 'large' ? 'original' : 'failed')}
         />
