@@ -31,7 +31,7 @@
     flex
     flex-row
     items-start
-    gap-8
+    gap-12
     px-8
     md:px-16
   ;
@@ -66,17 +66,20 @@
   ;
 }
 
-/* Masonry flow: cards stack column by column with no gaps, so a card always
-   sits flush against the card above it. Column count follows the pane width. */
+/* Masonry flow: cards stack column by column with a 5px gap between them,
+   so a card always sits directly above the next. Column count follows the
+   pane width. */
 .events .events-cards-grid {
   columns: 18rem;
-  column-gap: 0;
+  column-gap: 5px;
 }
 
-/* Keep a card intact within a column and let it fill the column width. */
+/* Keep a card intact within a column, let it fill the column width, and
+   leave a 5px gap below it. */
 .events .events-cards-grid > a {
   display: block;
   break-inside: avoid;
+  margin-bottom: 5px;
 }
 
 /* Visible keyboard focus ring around a card link. */

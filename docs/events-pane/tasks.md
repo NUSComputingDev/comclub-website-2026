@@ -164,6 +164,14 @@ Change: `src/pages/events/index.css` replaces the `.events .events-cards-grid` f
 
 Verified at a 1000px viewport: the 441px pane holds one column, all 10 cards stack with 0px vertical gaps (sub-pixel rounding only), cards remain 288px wide, the 3-line clamp is unchanged, and there is no horizontal overflow. Trade-off accepted with the request: CSS multi-column renders column-first visually, while DOM and keyboard tab order are unchanged. `npm run lint` and `npm run build` pass.
 
+### Follow-up: 5px card gaps, wider pane spacing, cards fill the pane
+
+User request (clarified): leave a 5px gap between each card; widen the gap between the left calendar pane and the right cards pane; remove the dead space to the right of the cards by letting them fill the pane width.
+
+Changes: `src/components/3DCard.css` — `.three-d-card` goes from `w-72 max-w-full` to `w-full`, so a card fills its masonry column instead of staying 288px. `src/pages/events/index.css` — `.events .events-cards-grid` gets `column-gap: 5px` (was 0) and each card anchor gets `margin-bottom: 5px` for the vertical gap; `.events .events-layout` pane gap goes from `gap-8` (32px) to `gap-12` (48px).
+
+Verified at a 1000px viewport: pane gap measures 48px; cards fill the 425px pane (card content 421px plus the 4px window border), eliminating the dead space on the right; every adjacent card pair is separated by 5px (sub-pixel rounding only); the 3-line description clamp is unchanged; no horizontal overflow. `npm run lint` and `npm run build` pass.
+
 ### T002 findings
 
 - Header: `<header class='w-full h-20'>` is an in-flow 80px spacer; the inner `.navigation-bar` is `fixed` (`w-full px-8 md:px-20 py-4 bg-white z-50`). Its tallest child is the logo (`h-14 p-2` = 72px), so the fixed bar is about 104px tall. A sticky offset of `7rem` (112px) clears it with an 8px gap; internal scroll cap `max-height: calc(100vh - 7rem)`.
