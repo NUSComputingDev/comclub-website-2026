@@ -80,8 +80,9 @@ function Events() {
 
       <section className='md:items-start'>
         <div className='pt-16 max-w-sm px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
-          <div className='md:grid md:grid-cols-2 md:divide-x md:divide-gray-200'>
-            <div className='md:pr-14 h-[350px]'>
+          {/* Vertical stack: calendar first, event pane directly beneath it. */}
+          <div className='flex flex-col'>
+            <div>
               <Calendar
                 selectedDay={selectedDay}
                 onSelectDay={setSelectedDay}
@@ -90,8 +91,8 @@ function Events() {
               />
             </div>
             <section
-              className='gap-0 mt-12 md:mt-0 pl-0 md:pl-14 flex flex-col justify-start
-                min-h-[200px] w-full md:min-w-[450px] pr-0'
+              className='gap-0 mt-12 flex flex-col justify-start
+                min-h-[200px] w-full pr-0'
               onClick={handleResultsAreaClick}
             >
               <h2 className='font-semibold text-gray-900 text-left w-full pl-4'>
