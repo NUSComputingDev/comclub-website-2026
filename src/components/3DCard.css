@@ -1,6 +1,7 @@
 .three-d-card {
   @apply
-    w-48
+    w-72
+    max-w-full
     flex
     flex-col
     gap-1

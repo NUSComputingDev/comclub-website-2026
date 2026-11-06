@@ -152,6 +152,10 @@ Root cause: the clamped element (`.three-d-card-description`) carried `padding-b
 
 Fix (this commit): removed `pb-4` from `.three-d-card-description` so the clip edge equals the clamped content height, and moved the 16px bottom padding to `.three-d-card` (the card container), keeping the bottom padding equal to the side padding (16px). Verified in the browser: every card's description box is 60px with the first overflowing line at 61.5px (fully clipped), exactly 3 visible lines per card, and a 16px gap from the description to the card bottom. `npm run lint` and `npm run build` pass.
 
+### Follow-up: card width increased 1.5x
+
+`.three-d-card` width changed from `w-48` (192px) to `w-72` (288px), with `max-w-full` so a card shrinks instead of overflowing the pane in the narrow 768-831px range where the right pane is only ~224px wide; `.events .events-cards-grid > a` gets `min-w-0` so the anchor can shrink with the pane. Verified at a 1000px viewport: card content 288px (anchor 292px including the window border, vs 196px before), one card per row, no horizontal overflow, 3-line clamp unchanged. `npm run lint` and `npm run build` pass.
+
 ### T002 findings
 
 - Header: `<header class='w-full h-20'>` is an in-flow 80px spacer; the inner `.navigation-bar` is `fixed` (`w-full px-8 md:px-20 py-4 bg-white z-50`). Its tallest child is the logo (`h-14 p-2` = 72px), so the fixed bar is about 104px tall. A sticky offset of `7rem` (112px) clears it with an 8px gap; internal scroll cap `max-height: calc(100vh - 7rem)`.
