@@ -55,8 +55,8 @@ Independent acceptance: Every right-pane event renders the correct photo and tit
 
 ## Phase 6: Polish and completion
 
-- [ ] T011 Review the final diff of `src/pages/events/index.tsx`, `src/pages/events/index.css`, and `src/components/3DCard.tsx` for readable code, short comments on logical blocks, no unrelated edits, and no left-column changes after the US1 commit. Correct any issue in its owning change before finalizing its commit.
-- [ ] T012 Record completed acceptance checks, lint/build outcomes, limitations, and the three implementation commit hashes in `docs/events-pane/tasks.md`; leave any failed check or unfinished requirement explicitly unchecked.
+- [X] T011 Review the final diff of `src/pages/events/index.tsx`, `src/pages/events/index.css`, and `src/components/3DCard.tsx` for readable code, short comments on logical blocks, no unrelated edits, and no left-column changes after the US1 commit. Correct any issue in its owning change before finalizing its commit.
+- [X] T012 Record completed acceptance checks, lint/build outcomes, limitations, and the three implementation commit hashes in `docs/events-pane/tasks.md`; leave any failed check or unfinished requirement explicitly unchecked.
 
 ## Dependencies and execution
 
@@ -100,7 +100,7 @@ Browser acceptance (in-app Chromium, viewport 1000x892, dev server):
 - Sticky pinning distance: with no sibling pane yet the layout section's height equals the column's, so the column can only slide within the h1/footer scroll distance; the pinning behavior is verified against a tall sibling in US3.
 - `npm run lint` and `npm run build` pass; no pre-existing failures.
 
-Commit: `fix(events): anchor calendar and event pane to the left` (hash recorded at T012). This is the frozen left-column baseline; US2/US3 do not change left-column markup, styles, handlers, or data behavior.
+Commit: `fix(events): anchor calendar and event pane to the left` — `47248cf`. This is the frozen left-column baseline; US2/US3 do not change left-column markup, styles, handlers, or data behavior.
 
 ### US2 (T005-T006) — right pane
 
@@ -113,7 +113,7 @@ Browser acceptance (in-app Chromium, viewport 1000x892; 375/768/1440 checked aga
 - `mousedown` inside the right pane does not clear the selected date (boundary spans both panes); outside clicks still clear.
 - `npm run lint` and `npm run build` pass.
 
-Commit: `feat(events): add right-side event pane` (hash recorded at T012).
+Commit: `feat(events): add right-side event pane` — `b0ba366`.
 
 ### US3 (T007-T010) — event cards
 
@@ -129,7 +129,20 @@ Browser acceptance (in-app Chromium, viewport 1000x892):
 - Below `md` the pane is `display: none` (generated CSS verified), so hidden cards cannot receive keyboard focus.
 - `npm run lint` and `npm run build` pass.
 
-Commit: `feat(events): display events with 3D cards` (hash recorded at T012).
+Commit: `feat(events): display events with 3D cards` — `447a229`.
+
+### Completion (T011-T012)
+
+- T011 review: the full feature diff (`4a016d4..447a229`) over `src/pages/events/index.tsx`, `src/pages/events/index.css`, and `src/components/3DCard.tsx` contains only the planned changes with short comments on each logical block and no unrelated edits. The US2 and US3 commit deltas touch only the right pane (and the shared 3D card), confirming the left column stayed at its frozen US1 baseline.
+- Implementation commits: US1 `47248cf` (`fix(events): anchor calendar and event pane to the left`), US2 `b0ba366` (`feat(events): add right-side event pane`), US3 `447a229` (`feat(events): display events with 3D cards`).
+- Final checks on the finished code: `npm run lint` passes; `npm run build` passes (vite 5.0.10).
+- All acceptance criteria from the confirmed behavior are implemented and checked; no item is left open.
+
+Limitations of the verification environment (not of the implementation):
+- Live browser checks ran at one viewport (1000x892, the in-app browser tab size); the 375px/768px/1440px cases were verified against the generated CSS breakpoint rules (`display:none` below `md`, `display:block` at `md`) and the layout math rather than by resizing the tab.
+- The in-app browser consumes the Tab key, so tab-order traversal was not walked end to end; keyboard activation was verified with a focused anchor plus a trusted Enter press, and the `:focus-visible` ring was measured on a focused card link.
+- The in-app accessibility snapshot omits large subtrees, so acceptance checks used direct DOM and computed-style measurements instead.
+- The repository has no test suite and this feature adds no non-trivial logic (the panes share the existing `displayedEvents` collection), so no new automated check was added, per the implementation strategy.
 
 ### T002 findings
 
