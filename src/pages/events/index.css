@@ -68,10 +68,13 @@
 
 /* Masonry flow: cards stack column by column with a 5px gap between them,
    so a card always sits directly above the next. Column count follows the
-   pane width. */
+   pane width. The 5px padding keeps the outer cards 5px away from the pane
+   edges (top/left/right); the bottom edge comes from each card's
+   margin-bottom. */
 .events .events-cards-grid {
   columns: 18rem;
   column-gap: 5px;
+  padding: 5px 5px 0;
 }
 
 /* Keep a card intact within a column, let it fill the column width, and

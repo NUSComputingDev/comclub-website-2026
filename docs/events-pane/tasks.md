@@ -172,6 +172,14 @@ Changes: `src/components/3DCard.css` — `.three-d-card` goes from `w-72 max-w-f
 
 Verified at a 1000px viewport: pane gap measures 48px; cards fill the 425px pane (card content 421px plus the 4px window border), eliminating the dead space on the right; every adjacent card pair is separated by 5px (sub-pixel rounding only); the 3-line description clamp is unchanged; no horizontal overflow. `npm run lint` and `npm run build` pass.
 
+### Follow-up: 5px gap around every card
+
+User request: each card must have a 5px gap around it, including against the pane edges (the between-card gaps were already 5px, but the outer cards sat flush on the pane's top/left/right edges).
+
+Change: `src/pages/events/index.css` — `.events .events-cards-grid` gets `padding: 5px 5px 0` (top/left/right); the bottom edge comes from the existing 5px `margin-bottom` on each card anchor, so the last card also ends 5px above the pane bottom without a doubled gap.
+
+Verified at a 1000px viewport, measuring the visible `.window` card boxes (each card includes the 36px title bar): 5px from the pane top, left, and right edges; 5px (sub-pixel) below the last card; 5px between every adjacent card; cards fill the remaining 415px of the 425px pane; no horizontal overflow. `npm run lint` and `npm run build` pass.
+
 ### T002 findings
 
 - Header: `<header class='w-full h-20'>` is an in-flow 80px spacer; the inner `.navigation-bar` is `fixed` (`w-full px-8 md:px-20 py-4 bg-white z-50`). Its tallest child is the logo (`h-14 p-2` = 72px), so the fixed bar is about 104px tall. A sticky offset of `7rem` (112px) clears it with an 8px gap; internal scroll cap `max-height: calc(100vh - 7rem)`.
