@@ -79,7 +79,7 @@ function Events() {
       </h1>
 
       <section className='md:items-start'>
-        <div className='pt-16 max-w-sm px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
+        <div className='pt-16 w-full max-w-sm px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
           {/* Vertical stack: calendar first, event pane directly beneath it. */}
           <div className='flex flex-col'>
             <div>
