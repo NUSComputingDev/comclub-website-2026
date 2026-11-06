@@ -224,7 +224,7 @@ export default function Gallery() {
       <div className='gallery-inner'>
         <div className='gallery-heading'>
           <div>
-            <h2 id='gallery-title'>ComClub in Focus</h2>
+            <h2 id='gallery-title'>CompClub in Focus</h2>
             <p>Our events, through the lens. Find your favourite moments.</p>
           </div>
           <div className='gallery-controls' aria-label='Event navigation'>
