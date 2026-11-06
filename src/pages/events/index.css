@@ -29,6 +29,17 @@
   ;
 }
 
+/* The home/about pages leak a global `section` rule (inset padding, centered
+   children, fixed height); neutralize it for the stacked event pane. */
+.events>section>div>div>section {
+  @apply
+    h-auto
+    items-stretch
+    pl-0
+    md:pl-0
+  ;
+}
+
 .searchbar {
   @apply
     w-[75vw]

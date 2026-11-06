@@ -82,7 +82,8 @@ function Events() {
         <div className='pt-16 w-full max-w-sm px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
           {/* Vertical stack: calendar first, event pane directly beneath it. */}
           <div className='flex flex-col'>
-            <div>
+            {/* Keep the calendar at its familiar compact width instead of stretching full width. */}
+            <div className='max-w-sm'>
               <Calendar
                 selectedDay={selectedDay}
                 onSelectDay={setSelectedDay}
