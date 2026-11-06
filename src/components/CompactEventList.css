@@ -1,0 +1,40 @@
+.compact-event-list {
+  @apply
+    px-4
+    my-2
+    flex
+    flex-col
+    gap-1
+  ;
+}
+
+.compact-event-list>Link>h4 {
+  @apply
+    text-xl
+    text-primary
+    font-bold
+  ;
+}
+
+/* Muted date line rendered beneath the event name. */
+.compact-event-list-date {
+  @apply
+    text-sm
+    text-slate-500
+    opacity-70
+  ;
+}
+
+/* Clamps the description to about 2.5 lines with an ellipsis. */
+.compact-event-list-description {
+  @apply
+    text-sm
+    text-slate-800
+    font-body
+    overflow-hidden
+  ;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2.5;
+  line-clamp: 2.5;
+}
