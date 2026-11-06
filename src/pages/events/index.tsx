@@ -67,6 +67,29 @@ function EventCardGrid({ events }: { events: Article[] }) {
   );
 }
 
+// Reusable filter tabs component for both desktop and mobile.
+function EventTabs({
+  selectedDay,
+  ariaLabel,
+  className,
+}: {
+  selectedDay: Date | null;
+  ariaLabel: string;
+  className?: string;
+}) {
+  return (
+    <TabsList aria-label={ariaLabel} variant='line' className={className}>
+      <TabsTrigger value='all'>All</TabsTrigger>
+      <TabsTrigger value='past'>Past</TabsTrigger>
+      <TabsTrigger value='upcoming'>Upcoming</TabsTrigger>
+      {/* Date tab is disabled until a calendar day is selected. */}
+      <TabsTrigger value='date' disabled={!selectedDay}>
+        {selectedDay ? format(selectedDay, 'MMM dd, yyyy') : 'Selected Date'}
+      </TabsTrigger>
+    </TabsList>
+  );
+}
+
 function Events() {
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
   const [activeTab, setActiveTab] = useState<EventTab>('all');
@@ -178,15 +201,7 @@ function Events() {
             onValueChange={setActiveTab}
             className='mb-4'
           >
-            <TabsList aria-label='Filter event cards' variant='line'>
-              <TabsTrigger value='all'>All</TabsTrigger>
-              <TabsTrigger value='past'>Past</TabsTrigger>
-              <TabsTrigger value='upcoming'>Upcoming</TabsTrigger>
-              {/* Placeholder label until a calendar day is chosen. */}
-              <TabsTrigger value='date' disabled={!selectedDay}>
-                {selectedDay ? format(selectedDay, 'MMM dd, yyyy') : 'Selected Date'}
-              </TabsTrigger>
-            </TabsList>
+            <EventTabs selectedDay={selectedDay} ariaLabel='Filter event cards' />
             <TabsContent value='all'>
               <EventCardGrid events={cardsByTab.all} />
             </TabsContent>
