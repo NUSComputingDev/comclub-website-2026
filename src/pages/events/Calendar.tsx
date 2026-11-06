@@ -100,34 +100,34 @@ export default function Calendar() {
         <div className='md:grid md:grid-cols-2 md:divide-x md:divide-gray-200'>
           <div className='md:pr-14 h-[350px]' ref={calendarRef}>
             <div className='flex items-center'>
-              <h2 className='flex-auto font-semibold text-gray-900'>
+              <h2 className='flex-auto text-xl font-semibold text-gray-900'>
                 {format(firstDayCurrentMonth, 'MMMM yyyy')}
               </h2>
               <button
                 onClick={goToToday}
                 type='button'
-                className='-my-1.5 mr-2 flex flex-none items-center justify-center rounded-md
-                  border border-gray-300 px-2.5 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100'
+                className='-my-2 mr-2 flex flex-none items-center justify-center rounded-full
+                  border border-gray-300 px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100'
               >
                 Today
               </button>
               <button
                 type='button'
                 onClick={previousMonth}
-                className='-my-1.5 flex flex-none items-center justify-center rounded-full border border-gray-300
-                  p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
+                className='-my-2 flex flex-none items-center justify-center rounded-full border border-gray-300
+                  p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
               >
                 <span className='sr-only'>Previous month</span>
-                <ChevronLeftIcon className='w-5 h-5' aria-hidden='true' />
+                <ChevronLeftIcon className='w-6 h-6' aria-hidden='true' />
               </button>
               <button
                 onClick={nextMonth}
                 type='button'
-                className='-my-1.5 ml-2 flex flex-none items-center justify-center rounded-full
-                  border border-gray-300 p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
+                className='-my-2 ml-2 flex flex-none items-center justify-center rounded-full
+                  border border-gray-300 p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
               >
                 <span className='sr-only'>Next month</span>
-                <ChevronRightIcon className='w-5 h-5' aria-hidden='true' />
+                <ChevronRightIcon className='w-6 h-6' aria-hidden='true' />
               </button>
             </div>
             <div className='grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500'>
