@@ -54,6 +54,11 @@ export default function Calendar() {
     setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
   }
 
+  function goToToday() {
+    setCurrentMonth(format(today, 'MMM-yyyy'));
+    setSelectedDay(today);
+  }
+
   const displayedArticles = selectedDay
     ? articlesData.filter((article) => {
       if (!article.startDatetime || !article.endDatetime) return false;
@@ -98,6 +103,14 @@ export default function Calendar() {
               <h2 className='flex-auto font-semibold text-gray-900'>
                 {format(firstDayCurrentMonth, 'MMMM yyyy')}
               </h2>
+              <button
+                onClick={goToToday}
+                type='button'
+                className='-my-1.5 mr-2 flex flex-none items-center justify-center rounded-md
+                  border border-gray-300 px-2.5 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100'
+              >
+                Today
+              </button>
               <button
                 type='button'
                 onClick={previousMonth}
