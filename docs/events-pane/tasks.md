@@ -180,6 +180,16 @@ Change: `src/pages/events/index.css` — `.events .events-cards-grid` gets `padd
 
 Verified at a 1000px viewport, measuring the visible `.window` card boxes (each card includes the 36px title bar): 5px from the pane top, left, and right edges; 5px (sub-pixel) below the last card; 5px between every adjacent card; cards fill the remaining 415px of the 425px pane; no horizontal overflow. `npm run lint` and `npm run build` pass.
 
+### Follow-up: 12px gap between cards (shadow was filling the 5px gap)
+
+User report (with screenshot of a 3-column window): the cards looked joined horizontally — no visible gap on all four sides between cards.
+
+Diagnosis: the 5px column gap existed (measured 5px between adjacent cards in a forced 3-column state), but each card's `drop-shadow-window` is a hard 8px offset shadow with no blur. Since 8px > 5px, the shadow of the left/top card filled the entire gap with solid #365486, so the gap was invisible.
+
+Resolution (user chose to keep the shadow): `src/pages/events/index.css` — the between-card gap goes from 5px to 12px in both directions (`column-gap: 12px` and card `margin-bottom: 12px`), wider than the 8px shadow so white shows through. The 5px pane-edge padding is unchanged.
+
+Verified: 12px between every adjacent card pair vertically and between columns (sub-pixel rounding only) in both the natural 1-column state and a forced 3-column state; 5px from the pane top/left edges; no horizontal overflow. `npm run lint` and `npm run build` pass.
+
 ### T002 findings
 
 - Header: `<header class='w-full h-20'>` is an in-flow 80px spacer; the inner `.navigation-bar` is `fixed` (`w-full px-8 md:px-20 py-4 bg-white z-50`). Its tallest child is the logo (`h-14 p-2` = 72px), so the fixed bar is about 104px tall. A sticky offset of `7rem` (112px) clears it with an 8px gap; internal scroll cap `max-height: calc(100vh - 7rem)`.
