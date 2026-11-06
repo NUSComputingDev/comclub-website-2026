@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { format, isSameDay, isWithinInterval, parseISO, startOfDay } from 'date-fns';
+import { format, isSameDay, parseISO } from 'date-fns';
 import articles from './articles.json';
 import { Article, parseArticles } from './zod';
+import { eventCoversDay } from './eventFilters';
 import Calendar from './Calendar';
 import CompactEventList from '../../components/CompactEventList';
 import ThreeDCard from '../../components/3DCard';
@@ -15,15 +16,6 @@ const articlesData: Article[] = Object.values(parseArticles(articles)).sort((a, 
   if (!b.startDatetime) return -1;
   return parseISO(b.startDatetime).getTime() - parseISO(a.startDatetime).getTime();
 });
-
-function eventCoversDay(event: Article, day: Date) {
-  if (!event.startDatetime || !event.endDatetime) return false;
-
-  return isWithinInterval(startOfDay(day), {
-    start: startOfDay(parseISO(event.startDatetime)),
-    end: startOfDay(parseISO(event.endDatetime)),
-  });
-}
 
 // Range label (start – end) only when the end falls on a different day.
 function formatEventDate(event: Article) {

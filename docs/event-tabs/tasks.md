@@ -4,12 +4,12 @@ Based on spec.md, plan.md, research.md, data-model.md, contracts/ui.md, and quic
 
 ## Phase 1: Setup
 
-- [ ] T001 Review the working tree and the existing Tabs installation in `src/components/ui/tabs.tsx`, `package.json`, and `package-lock.json`; preserve unrelated changes, including the root tasks.md deletion. Confirm required dependencies and reuse the existing cn helper. Verify the installation, then commit only its files/hunks as `feat(components): add line-style tabs`.
+- [X] T001 Review the working tree and the existing Tabs installation in `src/components/ui/tabs.tsx`, `package.json`, and `package-lock.json`; preserve unrelated changes, including the root tasks.md deletion. Confirm required dependencies and reuse the existing cn helper. Verify the installation, then commit only its files/hunks as `feat(components): add line-style tabs`.
 
 ## Phase 2: Foundation
 
-- [ ] T002 Create `src/pages/events/eventFilters.ts` with readable pure filtering and export its tab type. Enforce `EventTab is one of all, past, upcoming, date.` Accept the current date explicitly for deterministic checks. Preserve ordering and input data. All includes undated events; Past uses end day before local today; Upcoming uses end day today or later; date uses inclusive local start/end days. Reuse/move the existing eventCoversDay helper from `src/pages/events/index.tsx` without changing compact-list matching. Add short, direct comments for each logical block.
-- [ ] T003 Add and run `scripts/check-event-tabs.mjs` with node assertions and the existing esbuild loader: cover yesterday, today, future, ongoing multi-day events, both selected-date endpoints, empty dates, undated records, stable ordering, and unchanged input. Use a fixed local current date and offset-bearing timestamps; run in Asia/Singapore and America/Los_Angeles. Commit the helper and check as `feat(events): filter event cards by date`.
+- [X] T002 Create `src/pages/events/eventFilters.ts` with readable pure filtering and export its tab type. Enforce `EventTab is one of all, past, upcoming, date.` Accept the current date explicitly for deterministic checks. Preserve ordering and input data. All includes undated events; Past uses end day before local today; Upcoming uses end day today or later; date uses inclusive local start/end days. Reuse/move the existing eventCoversDay helper from `src/pages/events/index.tsx` without changing compact-list matching. Add short, direct comments for each logical block.
+- [X] T003 Add and run `scripts/check-event-tabs.mjs` with node assertions and the existing esbuild loader: cover yesterday, today, future, ongoing multi-day events, both selected-date endpoints, empty dates, undated records, stable ordering, and unchanged input. Use a fixed local current date and offset-bearing timestamps; run in Asia/Singapore and America/Los_Angeles. Commit the helper and check as `feat(events): filter event cards by date`.
 
 ## Phase 3: US1 (P1) — Accessible All tab
 
