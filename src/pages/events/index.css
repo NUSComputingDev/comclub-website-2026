@@ -66,6 +66,26 @@
   ;
 }
 
+/* Cards wrap into rows and keep the shared compact 3D card design. */
+.events .events-cards-grid {
+  @apply
+    flex
+    flex-wrap
+    gap-6
+  ;
+}
+
+/* Visible keyboard focus ring around a card link. */
+.events .events-cards a:focus-visible {
+  @apply
+    outline
+    outline-2
+    outline-offset-2
+    outline-highlight
+    rounded-2xl
+  ;
+}
+
 /* Neutralize the leaked global `section` rule on the compact list pane,
    scoped by class instead of element ancestry. */
 .events .events-results {

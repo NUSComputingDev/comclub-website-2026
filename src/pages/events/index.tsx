@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { format, isSameDay, isWithinInterval, parseISO, startOfDay } from 'date-fns';
 import articles from './articles.json';
 import { Article, parseArticles } from './zod';
 import Calendar from './Calendar';
 import CompactEventList from '../../components/CompactEventList';
+import ThreeDCard from '../../components/3DCard';
 import './index.css';
 import 'react-calendar/dist/Calendar.css';
 
@@ -123,8 +125,26 @@ function Events() {
             </div>
           </section>
         </div>
-        {/* Right pane: fills the remaining width; populated with cards in US3. */}
+        {/* Right pane: event cards mirroring the compact list's displayed events. */}
         <section className='events-cards' aria-label='Event cards'>
+          {displayedEvents.length > 0 ? (
+            <div className='events-cards-grid'>
+              {displayedEvents.map((event) => (
+                <Link key={event.link} to={`/events/${event.link}`}>
+                  <ThreeDCard
+                    photo={event.imgSrc}
+                    heading={event.title}
+                    // Undated events get no date subheading at all.
+                    subheading={event.startDatetime ? formatEventDate(event) : ''}
+                    description={event.body}
+                    displayLineCount={3}
+                  />
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p>No events found.</p>
+          )}
         </section>
       </section>
     </div>

@@ -48,10 +48,10 @@ Goal: Show each event's photo, name, date, and three-line description using Thre
 
 Independent acceptance: Every right-pane event renders the correct photo and title, the existing date/range format when available (no date row when undated), and at most three visible description lines. Both panes show all events without a selection and only events covering the selected day otherwise. Cards wrap without overflow and open article pages by mouse or keyboard. The right pane is hidden on mobile. Calendar/list behavior remains at its frozen baseline.
 
-- [ ] T007 [US3] Populate the right pane in `src/pages/events/index.tsx` with the existing `displayedEvents` collection shared by the compact list using `ThreeDCard` from `src/components/3DCard.tsx`: pass `photo={event.imgSrc}`, `heading={event.title}`, the existing `formatEventDate(event)` result when dated, `description={event.body}`, and `displayLineCount={3}`. Use `event.link` as the stable key; guard undated events before calling the existing date formatter, pass an empty subheading for undated events, and provide a right-pane empty state. Do not introduce separate filter state or modify the frozen selection logic.
-- [ ] T008 [US3] Add wrapping card layout scoped to the right pane in `src/pages/events/index.css`; preserve the shared card's compact design. Wrap cards using the existing router link convention to `/events/${event.link}` in `src/pages/events/index.tsx` and retain a visible keyboard focus indicator.
-- [ ] T009 [US3] Add appropriate image alternative text in `src/components/3DCard.tsx` using the available heading without adding unnecessary props. Render the subheading element only when its string is nonempty, omitting both the date text and row for undated cards. Keep its current API and three-line clamping behavior intact; review every caller for effects of any shared-component change.
-- [ ] T010 [US3] Check the US3 acceptance criteria for `src/pages/events/index.tsx` and `src/components/3DCard.tsx` with long descriptions/titles, dated and undated events, multi-day ranges, narrow viewports, and keyboard navigation. Verify both panes update together when selecting or clearing a date, empty selections show an empty state, and undated cards have no date row. Verify a filtered card opens the correct article without a mousedown selection reset, outside clicks still clear selection, and hidden mobile cards cannot receive keyboard focus; run lint and build and commit only this change as `feat(events): display events with 3D cards`.
+- [X] T007 [US3] Populate the right pane in `src/pages/events/index.tsx` with the existing `displayedEvents` collection shared by the compact list using `ThreeDCard` from `src/components/3DCard.tsx`: pass `photo={event.imgSrc}`, `heading={event.title}`, the existing `formatEventDate(event)` result when dated, `description={event.body}`, and `displayLineCount={3}`. Use `event.link` as the stable key; guard undated events before calling the existing date formatter, pass an empty subheading for undated events, and provide a right-pane empty state. Do not introduce separate filter state or modify the frozen selection logic.
+- [X] T008 [US3] Add wrapping card layout scoped to the right pane in `src/pages/events/index.css`; preserve the shared card's compact design. Wrap cards using the existing router link convention to `/events/${event.link}` in `src/pages/events/index.tsx` and retain a visible keyboard focus indicator.
+- [X] T009 [US3] Add appropriate image alternative text in `src/components/3DCard.tsx` using the available heading without adding unnecessary props. Render the subheading element only when its string is nonempty, omitting both the date text and row for undated cards. Keep its current API and three-line clamping behavior intact; review every caller for effects of any shared-component change.
+- [X] T010 [US3] Check the US3 acceptance criteria for `src/pages/events/index.tsx` and `src/components/3DCard.tsx` with long descriptions/titles, dated and undated events, multi-day ranges, narrow viewports, and keyboard navigation. Verify both panes update together when selecting or clearing a date, empty selections show an empty state, and undated cards have no date row. Verify a filtered card opens the correct article without a mousedown selection reset, outside clicks still clear selection, and hidden mobile cards cannot receive keyboard focus; run lint and build and commit only this change as `feat(events): display events with 3D cards`.
 
 ## Phase 6: Polish and completion
 
@@ -114,6 +114,22 @@ Browser acceptance (in-app Chromium, viewport 1000x892; 375/768/1440 checked aga
 - `npm run lint` and `npm run build` pass.
 
 Commit: `feat(events): add right-side event pane` (hash recorded at T012).
+
+### US3 (T007-T010) — event cards
+
+Changes: `src/pages/events/index.tsx` populates `.events-cards` from the shared `displayedEvents` collection: each `ThreeDCard` (photo=`imgSrc`, heading=`title`, subheading=`formatEventDate(event)` when dated else `''`, description=`body`, `displayLineCount={3}`) is wrapped in the existing router link `/events/${event.link}` keyed by `event.link`, with a "No events found." empty state. `src/pages/events/index.css` adds `.events .events-cards-grid` (flex wrap, `gap-6`) and a visible `:focus-visible` outline on card links. `src/components/3DCard.tsx` adds `alt={heading}` to the photo and renders the subheading row only when nonempty (no other callers exist; three-line clamping and API unchanged).
+
+Browser acceptance (in-app Chromium, viewport 1000x892):
+- No selection: both panes show all 10 events; cards carry the correct photo, alt text (= title), and heading; single-day events show "Aug 07, 2026", multi-day show "Feb 02, 2026 – Feb 06, 2026"; the undated LifeHack card has no subheading row; descriptions clamp at 3 lines (computed `-webkit-line-clamp: 3`, `overflow: hidden`), including the very long FSC/FFC bodies.
+- Selecting Feb 04, 2026 filters both panes to exactly COMaraderie; a day with no events (May 04, 2025 and Nov 04, 2026) shows the empty state in both panes.
+- Cards wrap in the pane (`flex-wrap`, 24px gap, ~196px cards, 2 per row at 1000px) with no horizontal overflow.
+- Mouse: clicking a filtered card opens `/events/comaraderie`; a `mousedown` on the filtered card does not reset the selection first.
+- Keyboard: a card link can hold focus and Enter opens the article (`/events/ffc`); while focused it matches `:focus-visible` with a 2px solid `#61afef` outline, 2px offset, 16px radius.
+- Left column remains at the frozen US1 baseline (384px, sticky at 112px, 780px cap, internal scroll) and is now pinned at `top: 112px` while the page (2576px tall) scrolls, releasing only at the end of the layout.
+- Below `md` the pane is `display: none` (generated CSS verified), so hidden cards cannot receive keyboard focus.
+- `npm run lint` and `npm run build` pass.
+
+Commit: `feat(events): display events with 3D cards` (hash recorded at T012).
 
 ### T002 findings
 
