@@ -4,6 +4,7 @@
     flex
     flex-col
     gap-1
+    pb-4
   ;
 }
 
@@ -31,10 +32,12 @@
   ;
 }
 
+/* No bottom padding here: with padding on the clamped element, the next line
+   paints through it (overflow clips at the padding box). The card container
+   supplies the 16px bottom padding, matching the side padding. */
 .three-d-card-description {
   @apply
     px-4
-    pb-4
     -mt-1
     text-sm
     text-gray-600
