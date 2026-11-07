@@ -50,6 +50,24 @@ export function escapeCalendarText(value: string): string {
     .replace(/,/g, '\\,');
 }
 
+export function buildGoogleCalendarUrl(article: Article, pageUrl: string): string | null {
+  const dates = getEventDates(article);
+
+  if (!dates) {
+    return null;
+  }
+
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: article.title,
+    dates: `${formatCalendarTimeStamp(dates.start)}/${formatCalendarTimeStamp(dates.end)}`,
+    details: pageUrl,
+    ctz: 'Asia/Singapore',
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
 export function buildCalendarFile(article: Article, pageUrl: string): string | null {
   const dates = getEventDates(article);
 
