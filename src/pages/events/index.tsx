@@ -46,8 +46,19 @@ function formatCompactHeading(tab: EventTab, selectedDay: Date | null) {
 }
 
 // Shared card grid so every tab panel renders identical card markup.
-function EventCardGrid({ events }: { events: Article[] }) {
-  if (events.length === 0) return <p>No events found.</p>;
+function EventCardGrid({ events, onBrowseAll }: { events: Article[]; onBrowseAll?: () => void }) {
+  if (events.length === 0) {
+    return (
+      <div className='events-empty-state'>
+        <p className='events-empty-text'>Sorry, no events found</p>
+        {onBrowseAll && (
+          <button onClick={onBrowseAll} className='events-browse-link'>
+            Browse all events.
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className='events-cards-grid'>
@@ -197,7 +208,15 @@ function Events() {
                   />
                 ))
               ) : (
-                <p>No events found.</p>
+                <div className='events-empty-state'>
+                  <p className='events-empty-text'>Sorry, no events found</p>
+                  <button
+                    onClick={() => setActiveTab('all')}
+                    className='events-browse-link'
+                  >
+                    Browse all events.
+                  </button>
+                </div>
               )}
             </div>
           </section>
@@ -211,16 +230,16 @@ function Events() {
           >
             <EventTabs selectedDay={selectedDay} ariaLabel='Filter event cards' />
             <TabsContent value='all'>
-              <EventCardGrid events={cardsByTab.all} />
+              <EventCardGrid events={cardsByTab.all} onBrowseAll={() => setActiveTab('all')} />
             </TabsContent>
             <TabsContent value='past'>
-              <EventCardGrid events={cardsByTab.past} />
+              <EventCardGrid events={cardsByTab.past} onBrowseAll={() => setActiveTab('all')} />
             </TabsContent>
             <TabsContent value='upcoming'>
-              <EventCardGrid events={cardsByTab.upcoming} />
+              <EventCardGrid events={cardsByTab.upcoming} onBrowseAll={() => setActiveTab('all')} />
             </TabsContent>
             <TabsContent value='date'>
-              <EventCardGrid events={cardsByTab.date} />
+              <EventCardGrid events={cardsByTab.date} onBrowseAll={() => setActiveTab('all')} />
             </TabsContent>
           </Tabs>
         </section>

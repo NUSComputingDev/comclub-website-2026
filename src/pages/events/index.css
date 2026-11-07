@@ -190,3 +190,37 @@
     lg:w-[24rem]
   ;
 }
+
+/* Empty state styling for when no events are found */
+.events .events-empty-state {
+  @apply
+    flex
+    flex-col
+    items-center
+    justify-center
+    text-center
+    gap-4
+    py-8
+  ;
+}
+
+.events .events-empty-text {
+  @apply
+    text-gray-500
+    text-sm
+    font-medium
+  ;
+}
+
+.events .events-browse-link {
+  @apply
+    text-primary
+    font-medium
+    hover:underline
+    focus-visible:outline
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    focus-visible:outline-primary
+    mt-2
+  ;
+}
