@@ -57,10 +57,19 @@ export function buildGoogleCalendarUrl(article: Article, pageUrl: string): strin
     return null;
   }
 
+  let calendarDates = `${formatCalendarTimeStamp(dates.start)}/${formatCalendarTimeStamp(dates.end)}`;
+
+  if (article.allDay) {
+    // Event data includes the last day; Google Calendar needs the following date as its end.
+    const exclusiveEnd = new Date(dates.end.getTime());
+    exclusiveEnd.setUTCDate(exclusiveEnd.getUTCDate() + 1);
+    calendarDates = `${formatCalendarDate(dates.start)}/${formatCalendarDate(exclusiveEnd)}`;
+  }
+
   const params = new URLSearchParams({
     action: 'TEMPLATE',
     text: article.title,
-    dates: `${formatCalendarTimeStamp(dates.start)}/${formatCalendarTimeStamp(dates.end)}`,
+    dates: calendarDates,
     details: pageUrl,
     ctz: 'Asia/Singapore',
   });
