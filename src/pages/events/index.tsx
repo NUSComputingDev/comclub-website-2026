@@ -50,12 +50,10 @@ function EventCardGrid({ events, onBrowseAll }: { events: Article[]; onBrowseAll
   if (events.length === 0) {
     return (
       <div className='events-empty-state'>
-        <p className='events-empty-text'>Sorry, no events found</p>
-        {onBrowseAll && (
-          <button onClick={onBrowseAll} className='events-browse-link'>
-            Browse all events.
-          </button>
-        )}
+        <p className='events-empty-text-bold'>Sorry, no events found</p>
+        <p className='events-empty-browse'>
+          Browse <span onClick={onBrowseAll} className='events-browse-link'>all events</span>.
+        </p>
       </div>
     );
   }
@@ -209,13 +207,10 @@ function Events() {
                 ))
               ) : (
                 <div className='events-empty-state'>
-                  <p className='events-empty-text'>Sorry, no events found</p>
-                  <button
-                    onClick={() => setActiveTab('all')}
-                    className='events-browse-link'
-                  >
-                    Browse all events.
-                  </button>
+                  <p className='events-empty-text-bold'>Sorry, no events found</p>
+                  <p className='events-empty-browse'>
+                    Browse <span onClick={() => setActiveTab('all')} className='events-browse-link'>all events</span>.
+                  </p>
                 </div>
               )}
             </div>

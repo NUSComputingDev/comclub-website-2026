@@ -199,16 +199,26 @@
     items-center
     justify-center
     text-center
-    gap-4
+    gap-2
     py-8
+    h-full
   ;
 }
 
-.events .events-empty-text {
+.events .events-empty-text-bold {
+  @apply
+    text-gray-900
+    font-bold
+    text-base
+    mb-1
+  ;
+}
+
+.events .events-empty-browse {
   @apply
     text-gray-500
     text-sm
-    font-medium
+    m-0
   ;
 }
 
@@ -216,11 +226,12 @@
   @apply
     text-primary
     font-medium
-    hover:underline
+    underline
+    cursor-pointer
+    hover:text-primary/80
     focus-visible:outline
     focus-visible:outline-2
     focus-visible:outline-offset-2
     focus-visible:outline-primary
-    mt-2
   ;
 }
