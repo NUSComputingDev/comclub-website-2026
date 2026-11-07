@@ -27,6 +27,20 @@ export function formatCalendarTimeStamp(date: Date): string {
     .replace(/[-:]/g, '')
     .replace(/\.\d{3}Z$/, 'Z');
 }
+//formats the date to be added to calendar without the time for all day events
+export function formatCalendarDate(date: Date): string {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Singapore',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date);
+
+  return ['year', 'month', 'day']
+    .map(type => parts.find(part => part.type === type)?.value)
+    .join('');
+}
+
 //safely inserts the title of the event to calender
 export function escapeCalendarText(value: string): string {
   //this as well...
@@ -42,6 +56,22 @@ export function buildCalendarFile(article: Article, pageUrl: string): string | n
   if (!dates) {
     return null;
   }
+  let dateLines: string[];
+  //if the event is all day, we add a day to the end date to make it exclusive
+  if (article.allDay) {
+    const exclusiveEnd = new Date(dates.end.getTime());
+    exclusiveEnd.setUTCDate(exclusiveEnd.getUTCDate() + 1);
+
+    dateLines = [
+      `DTSTART;VALUE=DATE:${formatCalendarDate(dates.start)}`,
+      `DTEND;VALUE=DATE:${formatCalendarDate(exclusiveEnd)}`,
+    ];
+  } else {
+    dateLines = [
+      `DTSTART:${formatCalendarTimeStamp(dates.start)}`,
+      `DTEND:${formatCalendarTimeStamp(dates.end)}`,
+    ];
+  }
   //got this from codex too
   const lines = [
     'BEGIN:VCALENDAR',
@@ -50,8 +80,7 @@ export function buildCalendarFile(article: Article, pageUrl: string): string | n
     'BEGIN:VEVENT',
     `UID:${encodeURIComponent(article.link)}@nuscomputing.com`,
     `DTSTAMP:${formatCalendarTimeStamp(new Date())}`,
-    `DTSTART:${formatCalendarTimeStamp(dates.start)}`,
-    `DTEND:${formatCalendarTimeStamp(dates.end)}`,
+    ...dateLines,
     `SUMMARY:${escapeCalendarText(article.title)}`,
     `URL:${pageUrl}`,
     'END:VEVENT',
