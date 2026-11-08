@@ -151,10 +151,10 @@ function ProfileBody({ member, profile }: ProfileBodyProps) {
         member.section && (
           <span className='role-section'>
             <span
-              className={`role-dot section-${member.sectionIndex % 6}`}
-              aria-hidden='true'
-            ></span>
-            {member.section}
+              className={`role-section-text section-color-${member.sectionIndex % 6}`}
+            >
+              {member.section}
+            </span>
           </span>
         )
       }

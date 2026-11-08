@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRightIcon,
   CalendarIcon,
   ChevronDownIcon,
   EyeIcon,
@@ -37,24 +36,28 @@ const DO_CARDS = [
     icon: CalendarIcon,
     copy: 'Hackathons, camps, welfare drives and the moments that make SoC feel like home.',
     to: '/events',
+    cta: 'See what\'s on',
   },
   {
     title: 'Welfare',
     icon: HeartIcon,
     copy: 'Support, resources and a louder voice for every undergraduate in Computing.',
     to: '/resources',
+    cta: 'Find support',
   },
   {
     title: 'Community',
     icon: UserGroupIcon,
     copy: 'Photos, memories and the people who make the club what it is.',
     to: '/photos',
+    cta: 'Meet the club',
   },
   {
     title: 'Resources',
     icon: FolderOpenIcon,
     copy: 'Guides, links and academic support collected in one place.',
     to: '/resources',
+    cta: 'Browse resources',
   },
 ];
 
@@ -107,7 +110,6 @@ function About() {
               onClick={scrollToId('what-we-do')}
             >
               What we do
-              <ArrowRightIcon aria-hidden='true' />
             </a>
           </div>
         </div>
@@ -142,11 +144,11 @@ function About() {
       <section className='about-section' id='what-we-do'>
         <div className='about-section-head'>
           <h2>What we do</h2>
-          <p>Four things we pour our time into, all year round.</p>
+          <p>Events, welfare, community and resources.</p>
         </div>
         <div className='about-card-grid'>
           {
-            DO_CARDS.map(({ title, icon: Icon, copy, to }) => (
+            DO_CARDS.map(({ title, icon: Icon, copy, to, cta }) => (
               <WindowCard
                 key={title}
                 title={title}
@@ -157,8 +159,7 @@ function About() {
                     </span>
                     <p>{copy}</p>
                     <Link to={to} className='about-card-link'>
-                      Explore
-                      <ArrowRightIcon aria-hidden='true'></ArrowRightIcon>
+                      {cta}
                     </Link>
                   </div>
                 }
@@ -171,7 +172,7 @@ function About() {
       <section className='about-section about-section--slate'>
         <div className='about-section-head'>
           <h2>What guides us</h2>
-          <p>The reason we show up, every single day.</p>
+          <p>Vision, mission and values.</p>
         </div>
         <div className='about-card-grid about-card-grid--3'>
           {

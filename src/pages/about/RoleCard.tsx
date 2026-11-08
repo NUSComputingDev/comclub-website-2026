@@ -104,13 +104,11 @@ function RoleCard(props: RoleCardProps) {
           <span className='role-section'>
             {
               member.section && (
-                <>
-                  <span
-                    className={`role-dot section-${member.sectionIndex % 6}`}
-                    aria-hidden='true'
-                  ></span>
-                  <span className='role-section-text'>{member.section}</span>
-                </>
+                <span
+                  className={`role-section-text section-color-${member.sectionIndex % 6}`}
+                >
+                  {member.section}
+                </span>
               )
             }
           </span>
