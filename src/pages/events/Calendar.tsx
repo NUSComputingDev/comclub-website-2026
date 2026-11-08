@@ -68,9 +68,6 @@ export default function Calendar() {
     setSelectedDay(today);
   }
 
-  const displayedArticles = selectedDay
-    ? articlesData.filter((article) => {
-      if (!article.startDatetime || !article.endDatetime) return false;
   const normalizedQuery = searchQuery.trim().toLowerCase();
 
   const displayedArticles = articlesData.filter((article) => {
@@ -148,9 +145,9 @@ export default function Calendar() {
 
   return (
     <div className='pt-16'>
-      <div className='w-[calc(100vw-2rem)] max-w-md mx-auto md:max-w-[68rem] md:px-6'>
-        <div className='md:grid md:grid-cols-2 md:divide-x md:divide-gray-200'>
-          <div className='self-start p-6 border border-gray-200 rounded-2xl md:mr-14' ref={calendarRef}>
+      <div className='w-[calc(100vw-2rem)] max-w-md mx-auto lg:max-w-[68rem] lg:px-6'>
+        <div className='lg:grid lg:grid-cols-2 lg:divide-x lg:divide-gray-200'>
+          <div className='self-start p-6 border border-gray-200 rounded-2xl lg:mr-14' ref={calendarRef}>
             <div className='flex items-center'>
               <h2 className='flex-auto text-xl font-semibold text-gray-900'>
                 {format(firstDayCurrentMonth, 'MMMM yyyy')}
@@ -284,9 +281,9 @@ export default function Calendar() {
               </div>
             </div>
           </div>
-          <section
-            className='gap-0 mt-12 md:mt-0 pl-0 md:pl-14 flex flex-col justify-start
-              min-h-[200px] w-full md:min-w-[450px] pr-0'
+          <div
+            className='gap-0 mt-12 lg:mt-0 pl-0 lg:pl-14 flex flex-col justify-start
+              min-h-[200px] w-full min-w-0 pr-0'
             onClick={handleResultsAreaClick}
           >
             <div
@@ -393,7 +390,7 @@ export default function Calendar() {
                 )}
               </div>
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>

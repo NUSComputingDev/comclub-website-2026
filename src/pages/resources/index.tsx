@@ -12,12 +12,12 @@ function Resources() {
         Resources
       </h1>
 
-      <section className='md:items-start'>
+      <div className='resources-content'>
         <div className='resource-window-container'>
 
           <br/>
 
-        <ResourceLink
+          <ResourceLink
             label='t.me/nuscomputingclub'
             link='https://t.me/nuscomputingclub'
             icon={FaTelegramPlane}
@@ -54,7 +54,7 @@ function Resources() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
