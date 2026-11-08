@@ -178,20 +178,65 @@
 /* Only the quote is terminal-styled. */
 .member-quote-terminal {
   @apply
-    flex
-    flex-col
-    gap-1
-    mt-2
-    px-3
-    py-2
+    mt-3
+    overflow-hidden
     rounded-lg
     font-mono
-    text-[13px]
-    leading-relaxed
-    text-emerald-300
   ;
   background-color: #0b1020;
   border: 1px solid #26324b;
+}
+
+/* Joshua's root shell reads as a warning variant. */
+.member-quote-terminal--danger {
+  border-color: rgba(244, 63, 94, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(244, 63, 94, 0.12),
+    0 0 24px rgba(244, 63, 94, 0.12);
+}
+
+.member-quote-terminal--danger .member-quote-path {
+  @apply
+    text-sky-300
+  ;
+}
+
+.member-quote-terminal--danger .member-quote-prompt {
+  @apply
+    text-amber-400
+  ;
+}
+
+.member-quote-bar {
+  @apply
+    flex
+    items-center
+    gap-1.5
+    px-3
+    py-2
+  ;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.member-quote-bar>span {
+  @apply
+    block
+    w-2.5
+    h-2.5
+    rounded-full
+  ;
+}
+
+.member-quote-screen {
+  @apply
+    flex
+    flex-col
+    gap-1
+    p-4
+    text-[12px]
+    leading-relaxed
+  ;
 }
 
 .member-quote-line {
@@ -200,16 +245,31 @@
   ;
 }
 
+.member-quote-path {
+  @apply
+    mr-1.5
+    text-sky-300
+  ;
+}
+
 .member-quote-prompt {
   @apply
-    mr-2
+    mr-1.5
     font-bold
     text-emerald-400
   ;
 }
 
-.member-quote-text {
+.member-quote-command {
   @apply
+    text-slate-100
+    break-words
+  ;
+}
+
+.member-quote-output {
+  @apply
+    text-slate-300
     break-words
   ;
 }
@@ -223,7 +283,6 @@
 
 .member-quote-comment {
   @apply
-    block
     text-[11px]
     text-rose-300
     break-words

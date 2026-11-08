@@ -67,26 +67,53 @@ function SocialIcon({ name }: { name: keyof MemberSocials }) {
 interface QuoteBlockProps {
   quote: string;
   note?: string;
-  style?: 'terminal' | 'note';
+  style?: 'terminal' | 'terminal-danger' | 'note';
 }
 
-function QuoteTerminal({ quote, note }: { quote: string; note?: string }) {
+interface QuoteTerminalProps {
+  quote: string;
+  note?: string;
+  danger?: boolean;
+}
+
+function QuoteTerminal({ quote, note, danger = false }: QuoteTerminalProps) {
+  const isCommand = quote.trim().startsWith('$');
+  const command = isCommand
+    ? quote.trim().replace(/^\$\s*/, '')
+    : `echo "${quote}"`;
+  const path = danger ? 'root@compclub' : '~/nus';
+  const prompt = danger ? '#' : '$';
+
   return (
-    <div className='member-quote-terminal'>
-      <span className='member-quote-line'>
+    <div
+      className={`member-quote-terminal${danger ? ' member-quote-terminal--danger' : ''}`}
+    >
+      <div className='member-quote-bar' aria-hidden='true'>
+        <span className='bg-[#ff605c]'></span>
+        <span className='bg-[#ffbd44]'></span>
+        <span className='bg-[#00ca4e]'></span>
+      </div>
+      <div className='member-quote-screen'>
+        <p className='member-quote-line'>
+          <span className='member-quote-path'>{path}</span>
+          <span className='member-quote-prompt'>{prompt}</span>
+          <span className='member-quote-command'>{command}</span>
+        </p>
         {
-          !quote.trim().startsWith('$') && (
-            <span className='member-quote-prompt' aria-hidden='true'>&gt;</span>
-          )
+          isCommand
+            ? note && (
+              <p className='member-quote-comment'># {note}</p>
+            )
+            : (
+              <p className='member-quote-output'>{quote}</p>
+            )
         }
-        <span className='member-quote-text'>{quote}</span>
-        <span className='member-quote-caret' aria-hidden='true'>█</span>
-      </span>
-      {
-        note && (
-          <span className='member-quote-comment'># {note}</span>
-        )
-      }
+        <p className='member-quote-line'>
+          <span className='member-quote-path'>{path}</span>
+          <span className='member-quote-prompt'>{prompt}</span>
+          <span className='member-quote-caret' aria-hidden='true'>█</span>
+        </p>
+      </div>
     </div>
   );
 }
@@ -100,7 +127,13 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
     );
   }
 
-  return <QuoteTerminal quote={quote} note={note}></QuoteTerminal>;
+  return (
+    <QuoteTerminal
+      quote={quote}
+      note={note}
+      danger={style === 'terminal-danger'}
+    ></QuoteTerminal>
+  );
 }
 
 interface ProfileBodyProps {
