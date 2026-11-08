@@ -11,6 +11,21 @@
   ;
 }
 
+.article-back {
+  @apply
+    self-start
+    ml-8
+    md:ml-16
+    inline-flex
+    items-center
+    gap-2
+    text-sm
+    font-semibold
+    text-primary
+    hover:underline
+  ;
+}
+
 .article>h1 {
   @apply
     mx-8

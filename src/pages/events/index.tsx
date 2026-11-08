@@ -5,7 +5,6 @@ import articles from './articles.json';
 import { Article, parseArticles } from './zod';
 import { filterEventCards, type EventTab } from './eventFilters';
 import Calendar from './Calendar';
-import CompactEventList from '../../components/CompactEventList';
 import ThreeDCard from '../../components/3DCard';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/tabs';
 import './index.css';
@@ -42,18 +41,6 @@ function formatEventDate(event: Article) {
   return startLabel;
 }
 
-// Left-pane heading that mirrors the active tab. The date tab only activates
-// with a selected day, so a date heading always has a day to format.
-function formatCompactHeading(tab: EventTab, selectedDay: Date | null) {
-  if (tab === 'date' && selectedDay) {
-    return `Events on ${format(selectedDay, 'MMM dd, yyyy')}`;
-  }
-
-  if (tab === 'past') return 'Past Events';
-  if (tab === 'upcoming') return 'Upcoming Events';
-  return 'All Events';
-}
-
 // Shared card grid so every tab panel renders identical card markup.
 function EventCardGrid({ events, onBrowseAll }: { events: Article[]; onBrowseAll?: () => void }) {
   if (events.length === 0) {
@@ -85,7 +72,7 @@ function EventCardGrid({ events, onBrowseAll }: { events: Article[]; onBrowseAll
   );
 }
 
-// Reusable filter tabs component for both desktop and mobile.
+// Reusable filter tabs component.
 function EventTabs({
   selectedDay,
   ariaLabel,
@@ -115,22 +102,19 @@ function Events() {
   const [departmentFilter, setDepartmentFilter] =
     useState<DepartmentFilter>('ALL');
   const calendarRef = useRef<HTMLDivElement>(null);
-  const resultsRef = useRef<HTMLDivElement>(null);
-  // Shared boundary for the outside-click check: spans the left column and
-  // the sibling card pane, so right-pane interactions keep the selection.
+  // Shared boundary for the outside-click check: spans the calendar and the
+  // event pane so pane interactions keep the selection.
   const layoutRef = useRef<HTMLElement>(null);
 
   // One handler for choosing and clearing the calendar day. Choosing a day
   // activates the date tab; clearing only falls back to All when the date
-  // tab is the active one. Functional update keeps the document listener
-  // from reading a stale active tab.
+  // tab is the active one.
   const handleDayChange = useCallback((day: Date | null) => {
     setSelectedDay(day);
     setActiveTab((tab) => (day ? 'date' : tab === 'date' ? 'all' : tab));
   }, []);
 
-  // Search and wing filters narrow the set before the tab split, so both
-  // panes and the date tab always agree on the same visible events.
+  // Search and wing filters narrow the set before the tab split.
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const filteredEvents = articlesData.filter((event) => {
     if (departmentFilter !== 'ALL' && event.department !== departmentFilter) {
@@ -148,8 +132,7 @@ function Events() {
   });
 
   // Today is evaluated per render so filters stay correct without a midnight
-  // timer; the calendar selection matters only for the date tab, so other
-  // tabs never intersect it.
+  // timer; the calendar selection matters only for the date tab.
   const today = new Date();
   const cardsByTab: Record<EventTab, Article[]> = {
     all: filterEventCards(filteredEvents, 'all', null, today),
@@ -157,10 +140,6 @@ function Events() {
     upcoming: filterEventCards(filteredEvents, 'upcoming', null, today),
     date: filterEventCards(filteredEvents, 'date', selectedDay, today),
   };
-
-  // One derivation for both panes: the left list and right cards read the
-  // active tab's results and always agree.
-  const activeEvents = cardsByTab[activeTab];
 
   // Reset every filter so the empty-state "all events" link always has
   // something to show.
@@ -187,19 +166,13 @@ function Events() {
     };
   }, [handleDayChange]);
 
-  const handleResultsAreaClick = (event: React.MouseEvent) => {
-    if (event.target === event.currentTarget) {
-      handleDayChange(null);
-    }
-  };
-
   return (
     <div className='events'>
       <h1>
         Events
       </h1>
 
-      {/* Full-width parent: sticky left column plus room for a sibling card pane. */}
+      {/* Calendar on the left, full event browser on the right. */}
       <section className='events-layout' ref={layoutRef}>
         <div className='events-left'>
           <Calendar
@@ -208,9 +181,10 @@ function Events() {
             events={articlesData}
             containerRef={calendarRef}
           />
-          {/* Search and wing filters carried over from the previous events
-              page; they narrow both the list and the card pane. */}
-          <div className='w-full px-4 mt-6 space-y-3'>
+        </div>
+
+        <section className='events-cards' aria-label='Event cards'>
+          <div className='events-filters'>
             <div
               className='flex items-center gap-2 px-3 py-2 bg-white border
                 border-gray-300 rounded-xl focus-within:border-primary'
@@ -252,54 +226,7 @@ function Events() {
               ))}
             </div>
           </div>
-          {/* Mobile filter tabs between calendar and compact list. Hidden on desktop. */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className='mb-4 lg:hidden'>
-            <EventTabs
-              selectedDay={selectedDay}
-              ariaLabel='Filter event cards (mobile)'
-              className='w-full max-w-full pt-1.5 pb-2'
-            />
-          </Tabs>
-          {/* Event pane spans the compact left column, aligned beneath the calendar. */}
-          <section
-            className='events-results gap-0 mt-12 flex flex-col justify-start
-              min-h-[200px] max-w-sm pr-0'
-            onClick={handleResultsAreaClick}
-          >
-            <h2 className='font-semibold text-gray-900 text-left w-full pl-4'>
-              {formatCompactHeading(activeTab, selectedDay)}
-            </h2>
-            <div
-              className='mt-4 space-y-8 text-sm leading-6 text-gray-500 h-full overflow-auto'
-              ref={resultsRef}
-            >
-              {activeEvents.length > 0 ? (
-                activeEvents.map((event) => (
-                  <CompactEventList
-                    key={event.link}
-                    name={event.title}
-                    description={event.body}
-                    link={`/events/${event.link}`}
-                    date={
-                      event.startDatetime
-                        ? { label: formatEventDate(event), value: event.startDatetime }
-                        : undefined
-                    }
-                  />
-                ))
-              ) : (
-                <div className='events-empty-state'>
-                  <p className='events-empty-text-bold'>Sorry, no events found</p>
-                  <p className='events-empty-browse'>
-                    Browse <span onClick={resetFilters} className='events-browse-link'>all events</span>.
-                  </p>
-                </div>
-              )}
-            </div>
-          </section>
-        </div>
-        {/* Right pane: event cards filtered by the line tab bar. */}
-        <section className='events-cards' aria-label='Event cards'>
+
           <Tabs
             value={activeTab}
             onValueChange={setActiveTab}
