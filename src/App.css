@@ -2,6 +2,31 @@
   flex-direction: column;
 }
 
+/* Soft enter animation whenever the route changes. No fill-mode, so the
+   transform is removed once the animation ends and fixed children keep
+   positioning against the viewport. */
+.page-transition {
+  animation: page-enter 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
