@@ -37,6 +37,10 @@ function ThreeDCard({
       >
         {description}
       </p>
+      <span className='three-d-card-more'>
+        See more
+        <span aria-hidden='true'>&#8594;</span>
+      </span>
     </div>
   );
 

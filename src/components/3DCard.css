@@ -45,3 +45,25 @@
     text-gray-600
   ;
 }
+
+.three-d-card-more {
+  @apply
+    inline-flex
+    items-center
+    gap-1
+    px-4
+    pt-1
+    text-sm
+    font-bold
+    text-primary
+  ;
+}
+
+.three-d-card-more>span {
+  @apply
+    inline-block
+    transition-transform
+    duration-150
+    ease-out
+  ;
+}

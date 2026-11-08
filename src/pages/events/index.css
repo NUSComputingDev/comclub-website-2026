@@ -115,6 +115,10 @@
   height: 100%;
 }
 
+.events .events-cards-grid a:hover .three-d-card-more>span {
+  transform: translateX(3px);
+}
+
 /* Visible keyboard focus ring around a card link. */
 .events .events-cards a:focus-visible {
   @apply
