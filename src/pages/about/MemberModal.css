@@ -337,37 +337,30 @@
   @apply
     relative
     mt-4
-    px-4
-    py-10
+    py-5
+    px-2
     text-center
     font-subheading
-    text-[18px]
-    font-light
-    leading-[1.9]
-    tracking-wide
+    text-[17px]
+    leading-relaxed
     text-slate-600
   ;
-  background: radial-gradient(circle at 50% 40%,
-      rgba(97, 175, 239, 0.1),
-      transparent 68%);
+  background: radial-gradient(circle at 50% 20%,
+      rgba(97, 175, 239, 0.14),
+      transparent 70%);
+  border-top: 1px solid rgba(54, 84, 134, 0.12);
+  border-bottom: 1px solid rgba(54, 84, 134, 0.12);
   white-space: pre-line;
-  isolation: isolate;
 }
 
-/* Faint enso behind the words. */
 .member-quote-zen::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 190px;
-  height: 190px;
-  border-radius: 50%;
-  border: 2px solid rgba(54, 84, 134, 0.1);
-  border-right-color: transparent;
-  border-top-color: rgba(54, 84, 134, 0.16);
-  transform: translate(-50%, -50%) rotate(-26deg);
-  z-index: -1;
+  content: '\201C';
+  @apply
+    block
+    text-3xl
+    leading-none
+    text-highlight/60
+  ;
 }
 
 .member-quote-zen-text {
