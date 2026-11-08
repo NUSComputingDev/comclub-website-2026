@@ -90,8 +90,29 @@
 }
 
 .events .events-cards-grid > a {
-  display: block;
+  display: flex;
   min-width: 0;
+}
+
+/* Let every card fill its grid cell so a shorter card does not leave a gap
+   before the next row. */
+.events .events-cards-grid .window {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.events .events-cards-grid .window-content {
+  flex: 1 1 auto;
+}
+
+.events .events-cards-grid .window-content>div {
+  height: 100%;
+}
+
+.events .events-cards-grid .three-d-card {
+  height: 100%;
 }
 
 /* Visible keyboard focus ring around a card link. */
