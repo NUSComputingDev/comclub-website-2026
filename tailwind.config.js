@@ -33,6 +33,7 @@ export default {
         subheading: ['Quicksand', 'sans-serif'],
         heading: ['"DM Sans"', 'sans-serif'],
         body: ['Lexend', 'sans-serif'],
+        handwriting: ['Caveat', 'cursive'],
       },
       boxShadow: {
         card: `

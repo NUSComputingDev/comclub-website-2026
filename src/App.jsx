@@ -12,28 +12,34 @@ import {
 import { Toaster } from 'react-hot-toast';
 import NavigationBar from './layout/NavigationBar';
 import Footer from './layout/Footer';
+import SplashScreen from './layout/SplashScreen';
 import './App.css';
 
 function App() {
+  const location = useLocation();
+
   return (
     <>
+      <SplashScreen />
       <NavigationBar />
 
       {/* Main content */}
       <ScrollToTop />
       <main className='w-full'>
         <div><Toaster/></div>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/privacy' element={<Privacy />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/events'>
-            <Route path='' element={<Events />} />
-            <Route path=':articleLink' element={<Article />} />
-          </Route>
-          <Route path='/resources' element={<Resources />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+        <div className='page-transition' key={location.pathname}>
+          <Routes location={location}>
+            <Route path='/' element={<Home />} />
+            <Route path='/privacy' element={<Privacy />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/events'>
+              <Route path='' element={<Events />} />
+              <Route path=':articleLink' element={<Article />} />
+            </Route>
+            <Route path='/resources' element={<Resources />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </div>
       </main>
 
       <Footer />
