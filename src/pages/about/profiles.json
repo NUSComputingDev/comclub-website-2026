@@ -1,0 +1,59 @@
+{
+  "Joshua Jacob Thomas": {
+    "displayName": "JayJayTee",
+    "major": "Computer Science + NUS College",
+    "gradYear": "2030",
+    "email": "josh@nuscomputing.com",
+    "quote": "$ sudo chmod -R 777",
+    "quoteNote": "if there is a vuln there is a way",
+    "socials": {
+      "instagram": "https://instagram.com/_.jay.jay.tee._",
+      "github": "https://github.com/Jay-Jay-Tee",
+      "linkedin": "https://www.linkedin.com/in/jayjaytee/",
+      "website": "https://jay-jay-tee.github.io/the-resume-portfolio/"
+    },
+    "quoteStyle": "terminal-danger"
+  },
+  "Gullapalli Chetan": {
+    "displayName": "Chetan the Coat",
+    "major": "Computer Science and Mathematics",
+    "gradYear": "2028",
+    "email": "chetan@nuscomputing.com",
+    "quote": "Came for the free food, stayed for the friends I made along the way. Somehow ended up President.",
+    "socials": {
+      "website": "https://chetangent.com"
+    },
+    "quoteStyle": "note"
+  },
+  "Chia Loke En Lu-anne": {
+    "displayName": "Lu-anne",
+    "major": "Business Analytics with a Double Degree in Economics",
+    "gradYear": "2029",
+    "email": "luanne@nuscomputing.com"
+  },
+  "Kaira Tan Yan Xin": {
+    "displayName": "Kaira",
+    "major": "Business Artificial Intelligence Systems",
+    "gradYear": "2030",
+    "email": "kaira@nuscomputing.com",
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/kaira-tan/"
+    }
+  },
+  "Jeyaraj Justin": {
+    "displayName": "Justin",
+    "major": "Business AI Systems",
+    "gradYear": "2029",
+    "email": "jjustin@nuscomputing.com",
+    "quote": "When all else fails, there's always delusion",
+    "quoteStyle": "terminal"
+  },
+  "Chao Hao Wong": {
+    "displayName": "Chao Hao",
+    "major": "Computer Science",
+    "gradYear": "2030",
+    "email": "wchaohao@nuscomputing.com",
+    "quote": "What a privilege to feel drained from the work you once wished for.\n\nIt shall all come to pass.",
+    "quoteStyle": "zen"
+  }
+}

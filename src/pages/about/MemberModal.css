@@ -1,0 +1,485 @@
+.member-modal-backdrop {
+  @apply
+    fixed
+    inset-0
+    z-50
+    flex
+    items-center
+    justify-center
+    p-4
+    bg-outline/50
+    backdrop-blur-sm
+  ;
+  animation: member-fade-in 150ms ease-out;
+}
+
+.member-modal {
+  @apply
+    relative
+    flex
+    flex-col
+    w-full
+    max-w-sm
+    max-h-[90vh]
+    overflow-y-auto
+    rounded-2xl
+    border-2
+    border-outline
+    bg-white
+    shadow-[8px_8px_0_#365486]
+  ;
+  animation: member-pop-in 180ms ease-out;
+}
+
+@screen sm {
+  .member-modal {
+    flex-direction: row;
+    max-width: 42rem;
+    overflow: hidden;
+  }
+}
+
+.member-modal-close {
+  @apply
+    absolute
+    top-2
+    right-2
+    z-10
+    flex
+    items-center
+    justify-center
+    w-8
+    h-8
+    rounded-full
+    bg-white/90
+    border-2
+    border-outline
+    text-xl
+    leading-none
+    cursor-pointer
+    transition-colors
+    hover:bg-slate-100
+  ;
+}
+
+.member-modal-close:focus-visible {
+  @apply
+    outline-none
+    ring-2
+    ring-highlight
+  ;
+}
+
+.member-modal-photo {
+  @apply
+    flex-none
+    bg-slate-100
+  ;
+}
+
+.member-modal-photo>img {
+  @apply
+    w-full
+    h-full
+    aspect-[4/5]
+    object-cover
+    object-top
+  ;
+}
+
+.member-modal-photo>.member-photo-fallback {
+  @apply
+    aspect-[4/5]
+    text-sm
+  ;
+}
+
+.member-modal-photo>.member-photo-fallback>.member-photo-fallback-icon {
+  @apply
+    w-10
+    h-10
+  ;
+}
+
+@screen sm {
+  .member-modal-photo {
+    width: 16rem;
+  }
+
+  .member-modal-photo>img {
+    aspect-ratio: auto;
+  }
+}
+
+.member-modal-body {
+  @apply
+    flex
+    flex-col
+    flex-1
+    gap-1
+    min-w-0
+    p-6
+    pr-10
+    overflow-y-auto
+  ;
+}
+
+.member-modal-wing {
+  @apply
+    text-xs
+    font-bold
+    uppercase
+    tracking-wider
+    text-primary
+  ;
+}
+
+.member-modal-body>h3 {
+  @apply
+    text-2xl
+    font-bold
+    leading-tight
+    break-words
+  ;
+}
+
+.member-modal-body>p {
+  @apply
+    text-sm
+    text-slate-600
+    leading-snug
+    break-words
+  ;
+}
+
+.member-modal-aka {
+  @apply
+    text-sm
+    font-semibold
+    text-primary
+  ;
+}
+
+.member-modal-major {
+  @apply
+    text-sm
+    text-slate-600
+  ;
+}
+
+.member-modal-class {
+  @apply
+    text-xs
+    font-semibold
+    text-slate-500
+  ;
+}
+
+/* Only the quote is terminal-styled. */
+.member-quote-terminal {
+  @apply
+    mt-3
+    overflow-hidden
+    rounded-lg
+    font-mono
+  ;
+  background-color: #0b1020;
+  border: 1px solid #26324b;
+}
+
+/* Joshua's root shell reads as a warning variant. */
+.member-quote-terminal--danger {
+  border-color: rgba(244, 63, 94, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(244, 63, 94, 0.12),
+    0 0 24px rgba(244, 63, 94, 0.12);
+}
+
+.member-quote-terminal--danger .member-quote-path {
+  @apply
+    text-sky-300
+  ;
+}
+
+.member-quote-terminal--danger .member-quote-prompt {
+  @apply
+    text-amber-400
+  ;
+}
+
+.member-quote-bar {
+  @apply
+    flex
+    items-center
+    gap-1.5
+    px-3
+    py-2
+  ;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.member-quote-bar>span {
+  @apply
+    block
+    w-2.5
+    h-2.5
+    rounded-full
+  ;
+}
+
+.member-quote-screen {
+  @apply
+    flex
+    flex-col
+    gap-1
+    p-4
+    text-[12px]
+    leading-relaxed
+  ;
+}
+
+.member-quote-line {
+  @apply
+    block
+  ;
+}
+
+.member-quote-path {
+  @apply
+    mr-1.5
+    text-sky-300
+  ;
+}
+
+.member-quote-prompt {
+  @apply
+    mr-1.5
+    font-bold
+    text-emerald-400
+  ;
+}
+
+.member-quote-command {
+  @apply
+    text-slate-100
+    break-words
+  ;
+}
+
+.member-quote-output {
+  @apply
+    text-slate-300
+    break-words
+  ;
+}
+
+.member-quote-caret {
+  @apply
+    text-emerald-400
+  ;
+  animation: terminal-blink 1s steps(1) infinite;
+}
+
+.member-quote-comment {
+  @apply
+    text-[11px]
+    text-rose-300
+    break-words
+  ;
+}
+
+/* Sticky-note quote for the President. */
+.member-quote-note {
+  @apply
+    relative
+    mt-4
+    rounded-md
+    text-amber-900
+  ;
+  padding: 1.25rem 1.5rem 1.5rem;
+  font-family: 'Caveat', cursive;
+  font-size: 21px;
+  line-height: 28px;
+  background:
+    repeating-linear-gradient(0deg,
+      transparent 0 27px,
+      rgba(180, 83, 9, 0.13) 27px 28px),
+    linear-gradient(180deg, #fef3c7, #fde68a);
+  border: 1px solid #fcd34d;
+  box-shadow: 2px 7px 16px rgba(120, 53, 15, 0.18);
+  transform: rotate(-1.4deg);
+}
+
+.member-quote-note::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 74px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 1px dashed rgba(255, 255, 255, 0.65);
+  border-right: 1px dashed rgba(255, 255, 255, 0.65);
+  transform: translateX(-50%) rotate(1.5deg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.member-quote-note-text {
+  @apply
+    block
+    break-words
+  ;
+}
+
+/* Zen quote: airy, centred, two lines with breathing room. */
+.member-quote-zen {
+  @apply
+    relative
+    mt-4
+    py-5
+    px-2
+    text-center
+    font-subheading
+    text-[17px]
+    leading-relaxed
+    text-slate-600
+  ;
+  background: radial-gradient(circle at 50% 20%,
+      rgba(97, 175, 239, 0.14),
+      transparent 70%);
+  border-top: 1px solid rgba(54, 84, 134, 0.12);
+  border-bottom: 1px solid rgba(54, 84, 134, 0.12);
+  white-space: pre-line;
+}
+
+.member-quote-zen::before {
+  content: '\201C';
+  @apply
+    block
+    text-3xl
+    leading-none
+    text-highlight/60
+  ;
+}
+
+.member-quote-zen-text {
+  @apply
+    inline-block
+  ;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .member-quote-zen-text {
+    animation: zen-drift 10s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes zen-drift {
+  from {
+    transform: translateX(-1.5px);
+  }
+
+  to {
+    transform: translateX(1.5px);
+  }
+}
+
+.member-modal-actions {
+  @apply
+    flex
+    flex-wrap
+    gap-2
+    mt-3
+  ;
+}
+
+.member-modal-action {
+  @apply
+    inline-flex
+    items-center
+    gap-1.5
+    px-3
+    py-1.5
+    rounded-full
+    border-2
+    border-outline
+    bg-white
+    text-xs
+    font-bold
+    text-primary
+    transition-colors
+    hover:bg-primary
+    hover:text-white
+    break-all
+  ;
+}
+
+.member-modal-action:focus-visible {
+  @apply
+    outline-none
+    ring-2
+    ring-highlight
+    ring-offset-2
+  ;
+}
+
+.member-modal-action-icon {
+  @apply
+    w-3.5
+    h-3.5
+    flex-none
+  ;
+}
+
+.member-modal-badge {
+  @apply
+    self-start
+    mt-2
+    px-2
+    py-0.5
+    rounded-full
+    bg-primary
+    text-white
+    text-[10px]
+    font-bold
+    uppercase
+    tracking-wide
+  ;
+}
+
+@keyframes terminal-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes member-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes member-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .member-modal-backdrop,
+  .member-modal,
+  .member-quote-caret {
+    animation: none;
+  }
+}

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import WindowCard from '../../layout/WindowCard';
-import RoleCard, { MemberPhoto, RoleMember } from './RoleCard';
+import React, { useEffect, useMemo, useState } from 'react';
+import { MemberProfile, RoleMember } from './RoleCard';
+import CommitteeTree, { WingBranch } from './CommitteeTree';
+import MemberModal from './MemberModal';
 import roles from './roles.json' with {type: 'json'};
+import profiles from './profiles.json' with {type: 'json'};
 import './RolesSection.css';
 
 interface Member {
   name: string;
   role: string;
+  shortName?: string;
   img?: string;
 }
 
@@ -15,6 +17,8 @@ interface ParsedRole {
   title: string;
   section?: string;
 }
+
+const profilesByName = profiles as Record<string, MemberProfile>;
 
 /**
  * Roles are written as `Title, Section`. The section is everything after the
@@ -63,73 +67,76 @@ function orderMembers(members: Member[]): RoleMember[] {
     name: member.name,
     role: member.role,
     title,
+    shortName: member.shortName,
     wing: '',
     imgSrc: member.img ?? `/members/thumbs/${member.name.replace(/[^A-Za-z0-9]/g, '')}.webp`,
     section,
     sectionIndex: section ? sections.indexOf(section) : -1,
     isLead: false,
+    profile: profilesByName[member.name],
   }));
 }
 
-interface WingCardProps {
-  wing: string;
-  members: Member[];
-  defaultOpen: boolean;
-  onSelect: (member: RoleMember) => void;
-}
+/**
+ * The committee is a three-tier tree:
+ *   1. The President heads P-Wing.
+ *   2. The Vice Presidents and office bearers sit directly under the President.
+ *   3. Each Vice President's wing holds its directors, grouped by section.
+ */
+function buildBranches(): WingBranch[] {
+  const entries = Object.entries(roles) as [string, Member[]][];
+  const [pWingEntry, ...wingEntries] = entries;
 
-function WingCard({ wing, members, defaultOpen, onSelect }: WingCardProps) {
-  const [open, setOpen] = useState(
-    () => defaultOpen || window.matchMedia('(min-width: 768px)').matches,
-  );
+  if (!pWingEntry) {
+    return [];
+  }
 
-  const ordered = orderMembers(members).map((member, index) => ({
-    ...member,
+  const [pWingName, pWingRaw] = pWingEntry;
+
+  const wings = wingEntries.map(([wing, members]) => ({
     wing,
+    members: orderMembers(members).map((member, index) => ({
+      ...member,
+      wing,
+      isLead: index === 0,
+    })),
+  }));
+
+  const [president, ...officeBearers] = orderMembers(pWingRaw).map((member, index) => ({
+    ...member,
+    wing: pWingName,
     isLead: index === 0,
   }));
 
-  const contentId = `wing-${wing.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+  const vicePresidents = wings.map(({ wing, members: wingMembers }) => ({
+    ...wingMembers[0],
+    wing: pWingName,
+    isLead: true,
+    title: `${wingMembers[0].title} · ${wing}`,
+  }));
 
-  return (
-    <WindowCard
-      title={
-        <button
-          type='button'
-          className='wing-toggle'
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-controls={contentId}
-        >
-          <span className='wing-title'>{wing}</span>
-          <span className='wing-count'>{members.length}</span>
-          <ChevronDownIcon
-            className={`wing-chevron ${open ? 'open' : ''}`}
-            aria-hidden='true'
-          />
-        </button>
-      }
-      content={
-        <div id={contentId} hidden={!open}>
-          <ul className='member-grid'>
-            {
-              ordered.map((member) => (
-                <RoleCard
-                  member={member}
-                  onSelect={onSelect}
-                  key={member.name}
-                ></RoleCard>
-              ))
-            }
-          </ul>
-        </div>
-      }
-    ></WindowCard>
-  );
+  return [
+    {
+      wing: pWingName,
+      subtitle: 'Executive Committee',
+      featured: true,
+      head: president,
+      groups: [
+        { label: 'Vice Presidents', members: vicePresidents },
+        { label: 'Office Bearers', members: officeBearers },
+      ],
+    },
+    ...wings.map(({ wing, members: wingMembers }) => ({
+      wing,
+      leader: wingMembers[0],
+      groups: [{ members: wingMembers.slice(1) }],
+    })),
+  ];
 }
 
 function RolesSection() {
   const [selected, setSelected] = useState<RoleMember | null>(null);
+  const branches = useMemo(buildBranches, []);
 
   useEffect(() => {
     if (!selected) {
@@ -154,69 +161,14 @@ function RolesSection() {
 
   return (
     <div className='roles-section'>
-      {
-        Object.entries(roles).map(([wing, members], index) => (
-          <WingCard
-            key={wing}
-            wing={wing}
-            members={members}
-            defaultOpen={index === 0}
-            onSelect={setSelected}
-          ></WingCard>
-        ))
-      }
+      <CommitteeTree branches={branches} onSelect={setSelected}></CommitteeTree>
 
       {
         selected && (
-          <div
-            className='member-modal-backdrop'
-            role='presentation'
-            onClick={(event) => {
-              if (event.target === event.currentTarget) {
-                setSelected(null);
-              }
-            }}
-          >
-            <div
-              className='member-modal'
-              role='dialog'
-              aria-modal='true'
-              aria-labelledby='member-modal-name'
-            >
-              <button
-                type='button'
-                className='member-modal-close'
-                onClick={() => setSelected(null)}
-                aria-label='Close member details'
-              >
-                &times;
-              </button>
-              <div className='member-modal-photo'>
-                <MemberPhoto member={selected} />
-              </div>
-              <div className='member-modal-body'>
-                <span className='member-modal-wing'>{selected.wing}</span>
-                {
-                  selected.section && (
-                    <span className='role-section'>
-                      <span
-                        className={`role-dot section-${selected.sectionIndex % 6}`}
-                        aria-hidden='true'
-                      ></span>
-                      {selected.section}
-                    </span>
-                  )
-                }
-                <h3 id='member-modal-name'>{selected.name}</h3>
-                <p>{selected.role}</p>
-                {
-                  selected.isLead && selected.wing !== 'P-Wing' && (
-                    <span className='member-modal-badge'>Wing Head</span>
-                  )
-                }
-              </div>
-            </div>
-          </div>
+          <MemberModal
+            member={selected}
+            onClose={() => setSelected(null)}
+          ></MemberModal>
         )
       }
     </div>

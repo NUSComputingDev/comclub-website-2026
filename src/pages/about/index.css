@@ -1,142 +1,549 @@
-section {
+.about-page {
+  @apply
+    w-full
+  ;
+}
+
+/* Hero */
+.about-hero {
   @apply
     flex
     flex-col
-    md:flex-row
     items-center
     justify-center
-    md:justify-around
-    h-[80vh]
-    px-8
-    md:px-20
-    gap-8
+    gap-12
+    px-6
+    py-16
+    sm:px-8
+    lg:flex-row
+    lg:justify-between
     lg:gap-16
+    lg:px-20
+    lg:py-24
+  ;
+  height: auto;
+}
+
+.about-hero-copy {
+  @apply
+    w-full
+    max-w-xl
   ;
 }
 
-.section-description {
+.about-kicker {
   @apply
-    w-96
-    max-w-full
-    lg:w-[32rem]
-  ;
-}
-
-.section-description>h1 {
-  @apply
-    text-5xl
-    lg:text-6xl
-    text-primary
-    font-heading
-    pb-4
-  ;
-}
-
-.section-description>h2 {
-  @apply
-    text-3xl
-    md:text-4xl
-    text-primary
-    font-subheading
-  ;
-}
-
-.section-description>p {
-  @apply
-    font-body
-  ;
-}
-
-.section-description>p>span {
-  @apply
-    text-highlight
+    text-xs
     font-bold
+    uppercase
+    tracking-[0.2em]
+    text-highlight
   ;
 }
 
-.section-graphic {
+.about-hero h1 {
   @apply
-    w-80
-    lg:w-[24rem]
+    mt-3
+    font-heading
+    text-5xl
+    text-primary
+    lg:text-6xl
   ;
 }
 
-.banner {
+.about-hero p {
+  @apply
+    mt-4
+    text-base
+    leading-relaxed
+    text-slate-600
+  ;
+}
+
+.about-actions {
   @apply
     flex
-    flex-col
+    flex-wrap
+    gap-3
+    mt-8
+  ;
+}
+
+.about-cta {
+  @apply
+    inline-flex
     items-center
-    justify-center
-    px-8
-    md:px-20
-    py-20
+    gap-2
+    px-5
+    py-2.5
+    rounded-full
+    border-2
+    border-outline
+    text-sm
+    font-bold
+    text-primary
+    transition-colors
+    duration-150
+    hover:bg-primary
+    hover:text-white
+  ;
+}
+
+.about-cta--primary {
+  @apply
     bg-primary
     text-white
+    hover:bg-[#2b4470]
   ;
 }
 
-.banner>h1 {
+.about-cta>svg {
+  @apply
+    w-4
+    h-4
+    flex-none
+  ;
+}
+
+.about-hero-art {
+  @apply
+    relative
+    flex
+    items-center
+    justify-center
+    w-full
+    max-w-md
+    aspect-square
+  ;
+}
+
+.about-hero-blob {
+  @apply
+    absolute
+    inset-4
+    rounded-full
+  ;
+  background:
+    radial-gradient(circle at 32% 30%, rgba(54, 84, 134, 0.22), transparent 62%),
+    radial-gradient(circle at 70% 72%, rgba(97, 175, 239, 0.24), transparent 62%);
+  filter: blur(16px);
+}
+
+.about-hero-logo {
+  @apply
+    relative
+    z-10
+    w-1/2
+    max-w-[14rem]
+  ;
+  filter: drop-shadow(0 18px 24px rgba(54, 84, 134, 0.25));
+}
+
+/* Floating chips around the hero logo. */
+.about-float {
+  @apply
+    absolute
+    z-20
+    inline-flex
+    items-center
+    px-3.5
+    py-1.5
+    rounded-full
+    border-2
+    border-outline
+    bg-white
+    text-xs
+    font-bold
+    text-primary
+    shadow-[3px_3px_0_#365486]
+  ;
+}
+
+.about-float--1 {
+  top: 7%;
+  left: 0;
+}
+
+.about-float--2 {
+  top: 40%;
+  right: 0;
+}
+
+.about-float--3 {
+  bottom: 9%;
+  left: 8%;
+}
+
+/* Navy banners */
+.about-banner {
+  @apply
+    flex
+    flex-col
+    items-center
+    gap-5
+    px-6
+    py-16
+    text-center
+    text-white
+    sm:px-8
+    md:px-20
+  ;
+  background-color: #365486;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.about-banner h2 {
+  @apply
+    text-2xl
+    font-bold
+    md:text-3xl
+  ;
+}
+
+.about-banner h1 {
   @apply
     text-3xl
-    text-center
     font-bold
+    md:text-4xl
   ;
 }
 
-.banner>p {
+.about-banner p {
   @apply
-    w-4/5
-    md:w-3/5
-    text-center
+    max-w-3xl
+    text-sm
+    leading-relaxed
+    text-white/80
+    md:text-base
   ;
 }
 
-.icon-section {
+/* Plain stat line inside the who-are-we banner. */
+.about-stats {
   @apply
-    h-fit
-    p-20
+    flex
+    flex-wrap
+    items-center
     justify-center
-    md:items-start
-    gap-20
-    md:gap-40
+    gap-x-2
+    gap-y-1
+    text-xs
+    font-semibold
+    text-white/60
+  ;
+}
+
+.about-stats>span+span::before {
+  content: '\00b7';
+  @apply
+    mx-2
+    text-white/30
+  ;
+}
+
+/* Wing buttons in the committee banner. */
+.about-chips {
+  @apply
+    flex
+    flex-wrap
+    justify-center
+    gap-2
+  ;
+}
+
+.about-chips>a {
+  @apply
+    inline-flex
+    items-center
+    px-4
+    py-2
+    rounded-full
+    border-2
+    border-white/30
+    font-body
+    text-sm
+    font-bold
+    text-white
+    transition-colors
+    hover:bg-white
+    hover:text-primary
+  ;
+  text-decoration: none;
+}
+
+/* Content sections */
+.about-section {
+  @apply
+    block
+    px-6
+    py-16
+    sm:px-8
+    md:px-20
+    md:py-20
+  ;
+  height: auto;
+}
+
+.about-section--slate {
+  @apply
     bg-slate-100
   ;
 }
 
-.icon-container {
+.about-section-head {
   @apply
-    flex
-    flex-col
-    items-center
-    justify-center
-    w-64
-  ;
-}
-
-.icon-container>h3 {
-  @apply
-    my-4
-    text-2xl
-    text-primary
-    font-bold
-  ;
-}
-
-.icon-container>p {
-  @apply
+    mx-auto
+    max-w-2xl
     text-center
   ;
 }
 
-.icon-bubble {
+.about-section-head h2 {
+  @apply
+    text-3xl
+    font-bold
+    text-primary
+    md:text-4xl
+  ;
+}
+
+.about-section-head p {
+  @apply
+    mt-3
+    text-sm
+    text-slate-600
+    md:text-base
+  ;
+}
+
+.about-card-grid {
+  @apply
+    mx-auto
+    mt-10
+    grid
+    grid-cols-1
+    gap-6
+    max-w-7xl
+    sm:grid-cols-2
+    xl:grid-cols-4
+  ;
+}
+
+.about-card-grid--3 {
+  @apply
+    xl:grid-cols-3
+  ;
+}
+
+.about-card-grid .window {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.about-card-grid .window-content {
+  flex: 1 1 auto;
+}
+
+.about-card-grid .window-content>div {
+  height: 100%;
+}
+
+.about-card-body {
   @apply
     flex
     flex-col
+    gap-3
+    h-full
+    p-6
+  ;
+}
+
+.about-card-body--center {
+  @apply
+    items-center
+    text-center
+  ;
+}
+
+.about-card-icon {
+  @apply
+    flex
     items-center
     justify-center
-    w-40
-    h-40
-    rounded-full
-    bg-primary
+    w-11
+    h-11
+    rounded-xl
+    bg-primary/10
+    text-primary
   ;
+}
+
+.about-card-icon>svg {
+  @apply
+    w-6
+    h-6
+  ;
+}
+
+.about-card-body p {
+  @apply
+    text-sm
+    leading-relaxed
+    text-slate-600
+  ;
+}
+
+.about-card-link {
+  @apply
+    inline-flex
+    items-center
+    gap-1.5
+    mt-auto
+    pt-1
+    text-sm
+    font-bold
+    text-primary
+    hover:underline
+  ;
+}
+
+.about-arrow {
+  @apply
+    inline-block
+    transition-transform
+    duration-150
+    ease-out
+  ;
+}
+
+.about-card-link:hover .about-arrow,
+.about-cta:hover .about-arrow {
+  transform: translateX(3px);
+}
+
+.about-value-chips {
+  @apply
+    flex
+    flex-wrap
+    justify-center
+    gap-2
+  ;
+}
+
+.about-value-chips>span {
+  @apply
+    px-3
+    py-1
+    rounded-full
+    bg-primary/10
+    text-xs
+    font-bold
+    text-primary
+  ;
+}
+
+/* Committee banner */
+.about-committee-banner {
+  @apply
+    scroll-mt-24
+    pb-12
+  ;
+}
+
+.about-banner-kicker {
+  @apply
+    text-sm
+    font-semibold
+    uppercase
+    tracking-wider
+    text-white/70
+  ;
+}
+
+.about-scroll-cue {
+  @apply
+    inline-flex
+    items-center
+    justify-center
+    w-10
+    h-10
+    mt-1
+    rounded-full
+    border-2
+    border-white/30
+    text-white
+    transition-colors
+    hover:bg-white/10
+  ;
+}
+
+.about-scroll-cue>svg {
+  @apply
+    w-5
+    h-5
+  ;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .about-hero-copy,
+  .about-hero-art {
+    animation: about-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .about-hero-art {
+    animation-delay: 100ms;
+  }
+
+  .about-float {
+    animation: about-float 5s ease-in-out infinite alternate;
+  }
+
+  .about-float--2 {
+    animation-delay: 0.9s;
+  }
+
+  .about-float--3 {
+    animation-delay: 1.8s;
+  }
+
+  .about-scroll-cue {
+    animation: about-bounce 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes about-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-float {
+  from {
+    transform: translateY(-4px);
+  }
+
+  to {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes about-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
 }

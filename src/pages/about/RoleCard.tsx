@@ -1,16 +1,36 @@
 import React, { useState } from 'react';
-import { UserIcon } from '@heroicons/react/solid';
+import { EyeIcon, UserIcon } from '@heroicons/react/solid';
 import './RoleCard.css';
+
+export interface MemberSocials {
+  instagram?: string;
+  github?: string;
+  linkedin?: string;
+  website?: string;
+}
+
+export interface MemberProfile {
+  displayName?: string;
+  major?: string;
+  gradYear?: string;
+  email?: string;
+  quote?: string;
+  quoteNote?: string;
+  quoteStyle?: 'terminal' | 'terminal-danger' | 'note' | 'zen';
+  socials?: MemberSocials;
+}
 
 export interface RoleMember {
   name: string;
   role: string;
   title: string;
+  shortName?: string;
   imgSrc: string;
   wing: string;
   section?: string;
   sectionIndex: number;
   isLead: boolean;
+  profile?: MemberProfile;
 }
 
 interface MemberPhotoProps {
@@ -72,23 +92,29 @@ function RoleCard(props: RoleCardProps) {
               <span className='role-badge'>Wing Head</span>
             )
           }
+          <span
+            className={`role-photo-hint${member.profile ? ' is-profile' : ''}`}
+            aria-hidden='true'
+          >
+            <EyeIcon className='role-photo-hint-icon' />
+            <span className='role-photo-hint-text'>View profile</span>
+          </span>
         </span>
         <span className='role-info'>
           <span className='role-section'>
             {
               member.section && (
-                <>
-                  <span
-                    className={`role-dot section-${member.sectionIndex % 6}`}
-                    aria-hidden='true'
-                  ></span>
-                  <span className='role-section-text'>{member.section}</span>
-                </>
+                <span
+                  className={`role-section-text section-color-${member.sectionIndex % 6}`}
+                >
+                  {member.section}
+                </span>
               )
             }
           </span>
           <span className='role-name'>{member.name}</span>
           <span className='role-title'>{member.title}</span>
+
         </span>
       </button>
     </li>

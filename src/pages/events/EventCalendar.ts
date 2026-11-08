@@ -20,6 +20,21 @@ export function getEventDates(article: Article) {
 
   return { start, end };
 }
+
+// Calendar providers use an exclusive end date for all-day events.
+function getCalendarDates(article: Article) {
+  const dates = getEventDates(article);
+
+  if (!dates || !article.allDay) {
+    return dates;
+  }
+
+  const exclusiveEnd = new Date(dates.end.getTime());
+  exclusiveEnd.setUTCDate(exclusiveEnd.getUTCDate() + 1);
+
+  return { start: dates.start, end: exclusiveEnd };
+}
+
 //formats the generation time, start and end
 export function formatCalendarTimeStamp(date: Date): string {
   //ok i had to use codex for this cuz no way i knew this formatting for .ics files
@@ -28,7 +43,7 @@ export function formatCalendarTimeStamp(date: Date): string {
     .replace(/\.\d{3}Z$/, 'Z');
 }
 //formats the date to be added to calendar without the time for all day events
-export function formatCalendarDate(date: Date): string {
+export function formatCalendarDate(date: Date, separator = ''): string {
   const parts = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'Asia/Singapore',
     year: 'numeric',
@@ -38,7 +53,7 @@ export function formatCalendarDate(date: Date): string {
 
   return ['year', 'month', 'day']
     .map(type => parts.find(part => part.type === type)?.value)
-    .join('');
+    .join(separator);
 }
 
 //safely inserts the title of the event to calender
@@ -50,21 +65,59 @@ export function escapeCalendarText(value: string): string {
     .replace(/,/g, '\\,');
 }
 
+export function buildGoogleCalendarUrl(article: Article, pageUrl: string): string | null {
+  const dates = getCalendarDates(article);
+
+  if (!dates) {
+    return null;
+  }
+
+  const calendarDates = article.allDay
+    ? `${formatCalendarDate(dates.start)}/${formatCalendarDate(dates.end)}`
+    : `${formatCalendarTimeStamp(dates.start)}/${formatCalendarTimeStamp(dates.end)}`;
+
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: article.title,
+    dates: calendarDates,
+    details: pageUrl,
+    ctz: 'Asia/Singapore',
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+export function buildOutlookCalendarUrl(article: Article, pageUrl: string): string | null {
+  const dates = getCalendarDates(article);
+
+  if (!dates) {
+    return null;
+  }
+
+  const params = new URLSearchParams({
+    path: '/calendar/action/compose',
+    rru: 'addevent',
+    subject: article.title,
+    startdt: article.allDay ? formatCalendarDate(dates.start, '-') : dates.start.toISOString(),
+    enddt: article.allDay ? formatCalendarDate(dates.end, '-') : dates.end.toISOString(),
+    allday: String(Boolean(article.allDay)),
+    body: pageUrl,
+  });
+
+  return `https://outlook.live.com/calendar/0/deeplink/compose?${params.toString()}`;
+}
+
 export function buildCalendarFile(article: Article, pageUrl: string): string | null {
-  const dates = getEventDates(article);
+  const dates = getCalendarDates(article);
 
   if (!dates) {
     return null;
   }
   let dateLines: string[];
-  //if the event is all day, we add a day to the end date to make it exclusive
   if (article.allDay) {
-    const exclusiveEnd = new Date(dates.end.getTime());
-    exclusiveEnd.setUTCDate(exclusiveEnd.getUTCDate() + 1);
-
     dateLines = [
       `DTSTART;VALUE=DATE:${formatCalendarDate(dates.start)}`,
-      `DTEND;VALUE=DATE:${formatCalendarDate(exclusiveEnd)}`,
+      `DTEND;VALUE=DATE:${formatCalendarDate(dates.end)}`,
     ];
   } else {
     dateLines = [

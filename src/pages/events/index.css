@@ -22,10 +22,116 @@
   ;
 }
 
-.events-content {
+/* Full-width parent for the event panes. Two-class scope (instead of element
+   ancestry) so the home/about global `section` rule cannot restyle it. */
+.events .events-layout {
   @apply
     w-full
     h-fit
+    flex
+    flex-col
+    lg:flex-row
+    items-start
+    gap-12
+    px-4
+    md:px-16
+  ;
+}
+
+/* Left column: compact calendar and list. On desktop it sticks below the
+   fixed site header (7rem) and scrolls internally when it outgrows the
+   viewport; on mobile it flows normally so the page scrolls as one. */
+.events .events-left {
+  @apply
+    w-full
+    max-w-sm
+    mx-auto
+    flex
+    flex-col
+    lg:mx-0
+    lg:sticky
+    lg:top-28
+  ;
+}
+
+/* Right pane: the full event browser, visible on every breakpoint. */
+.events .events-cards {
+  @apply
+    block
+    flex-1
+    min-w-0
+    w-full
+    h-fit
+    p-0
+    md:p-0
+  ;
+}
+
+/* Keep the tab row inside the pane: it scrolls horizontally instead of
+   widening the layout, and the extra padding leaves room for the active
+   underline, which sits 5px below each trigger. */
+.events .events-cards [data-slot='tabs-list'] {
+  max-width: 100%;
+  overflow-x: auto;
+  justify-content: flex-start;
+  padding-top: 6px;
+  padding-bottom: 8px;
+}
+
+/* Row-wise grid: events fill left-to-right in chronological order instead of
+   stacking down one column at a time. The 5px padding keeps the outer cards
+   5px away from the pane edges. */
+.events .events-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 24px;
+  align-items: start;
+  padding: 5px;
+}
+
+.events .events-cards-grid > a {
+  display: flex;
+  min-width: 0;
+}
+
+/* Let every card fill its grid cell so a shorter card does not leave a gap
+   before the next row. */
+.events .events-cards-grid .window {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.events .events-cards-grid .window-content {
+  flex: 1 1 auto;
+}
+
+.events .events-cards-grid .window-content>div {
+  height: 100%;
+}
+
+.events .events-cards-grid .three-d-card {
+  height: 100%;
+}
+
+/* Visible keyboard focus ring around a card link. */
+.events .events-cards a:focus-visible {
+  @apply
+    outline
+    outline-2
+    outline-offset-2
+    outline-highlight
+    rounded-2xl
+  ;
+}
+
+/* Search + wing filters now sit above the event browser. */
+.events .events-filters {
+  @apply
+    w-full
+    mb-6
+    space-y-3
   ;
 }
 
@@ -95,5 +201,50 @@
     w-fit
     md:w-[20rem]
     lg:w-[24rem]
+  ;
+}
+
+/* Empty state styling for when no events are found */
+.events .events-empty-state {
+  @apply
+    flex
+    flex-col
+    items-center
+    justify-center
+    text-center
+    gap-2
+    py-8
+    h-full
+  ;
+}
+
+.events .events-empty-text-bold {
+  @apply
+    text-gray-900
+    font-bold
+    text-base
+    mb-1
+  ;
+}
+
+.events .events-empty-browse {
+  @apply
+    text-gray-500
+    text-sm
+    m-0
+  ;
+}
+
+.events .events-browse-link {
+  @apply
+    text-primary
+    font-medium
+    underline
+    cursor-pointer
+    hover:text-primary/80
+    focus-visible:outline
+    focus-visible:outline-2
+    focus-visible:outline-offset-2
+    focus-visible:outline-primary
   ;
 }
