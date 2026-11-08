@@ -66,13 +66,21 @@ function SocialIcon({ name }: { name: keyof MemberSocials }) {
 
 interface QuoteTerminalProps {
   quote: string;
+  note?: string;
 }
 
-function QuoteTerminal({ quote }: QuoteTerminalProps) {
+function QuoteTerminal({ quote, note }: QuoteTerminalProps) {
   return (
     <div className='member-quote-terminal'>
-      <span className='member-quote-text'>{quote}</span>
-      <span className='member-quote-caret' aria-hidden='true'>█</span>
+      <span className='member-quote-line'>
+        <span className='member-quote-text'>{quote}</span>
+        <span className='member-quote-caret' aria-hidden='true'>█</span>
+      </span>
+      {
+        note && (
+          <span className='member-quote-comment'># {note}</span>
+        )
+      }
     </div>
   );
 }
@@ -118,14 +126,10 @@ function ProfileBody({ member, profile }: ProfileBodyProps) {
       }
       {
         profile?.quote && (
-          <>
-            <QuoteTerminal quote={profile.quote}></QuoteTerminal>
-            {
-              profile.quoteNote && (
-                <p className='member-modal-quote-note'>{profile.quoteNote}</p>
-              )
-            }
-          </>
+          <QuoteTerminal
+            quote={profile.quote}
+            note={profile.quoteNote}
+          ></QuoteTerminal>
         )
       }
       {

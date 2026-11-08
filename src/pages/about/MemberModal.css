@@ -179,8 +179,8 @@
 .member-quote-terminal {
   @apply
     flex
-    items-center
-    gap-2
+    flex-col
+    gap-1
     mt-2
     px-3
     py-2
@@ -189,15 +189,23 @@
     text-[13px]
     leading-relaxed
     text-emerald-300
-    break-all
   ;
   background-color: #0b1020;
   border: 1px solid #26324b;
 }
 
+.member-quote-line {
+  @apply
+    flex
+    items-baseline
+    gap-2
+  ;
+}
+
 .member-quote-text {
   @apply
     min-w-0
+    break-all
   ;
 }
 
@@ -209,12 +217,12 @@
   animation: terminal-blink 1s steps(1) infinite;
 }
 
-.member-modal-quote-note {
+.member-quote-comment {
   @apply
-    mt-1
     text-[11px]
     leading-snug
-    text-slate-500
+    text-slate-400
+    break-words
   ;
 }
 
