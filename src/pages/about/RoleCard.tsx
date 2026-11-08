@@ -15,6 +15,7 @@ export interface MemberProfile {
   gradYear?: string;
   email?: string;
   quote?: string;
+  quoteNote?: string;
   socials?: MemberSocials;
 }
 

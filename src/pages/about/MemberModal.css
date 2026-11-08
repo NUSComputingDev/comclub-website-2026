@@ -167,6 +167,14 @@
   ;
 }
 
+.member-modal-class {
+  @apply
+    text-xs
+    font-semibold
+    text-slate-500
+  ;
+}
+
 /* Only the quote is terminal-styled. */
 .member-quote-terminal {
   @apply
@@ -199,6 +207,15 @@
     text-emerald-400
   ;
   animation: terminal-blink 1s steps(1) infinite;
+}
+
+.member-modal-quote-note {
+  @apply
+    mt-1
+    text-[11px]
+    leading-snug
+    text-slate-500
+  ;
 }
 
 .member-modal-actions {
