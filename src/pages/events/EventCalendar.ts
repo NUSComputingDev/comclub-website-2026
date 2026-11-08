@@ -43,7 +43,7 @@ export function formatCalendarTimeStamp(date: Date): string {
     .replace(/\.\d{3}Z$/, 'Z');
 }
 //formats the date to be added to calendar without the time for all day events
-export function formatCalendarDate(date: Date): string {
+export function formatCalendarDate(date: Date, separator = ''): string {
   const parts = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'Asia/Singapore',
     year: 'numeric',
@@ -53,7 +53,7 @@ export function formatCalendarDate(date: Date): string {
 
   return ['year', 'month', 'day']
     .map(type => parts.find(part => part.type === type)?.value)
-    .join('');
+    .join(separator);
 }
 
 //safely inserts the title of the event to calender
@@ -85,6 +85,26 @@ export function buildGoogleCalendarUrl(article: Article, pageUrl: string): strin
   });
 
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+export function buildOutlookCalendarUrl(article: Article, pageUrl: string): string | null {
+  const dates = getCalendarDates(article);
+
+  if (!dates) {
+    return null;
+  }
+
+  const params = new URLSearchParams({
+    path: '/calendar/action/compose',
+    rru: 'addevent',
+    subject: article.title,
+    startdt: article.allDay ? formatCalendarDate(dates.start, '-') : dates.start.toISOString(),
+    enddt: article.allDay ? formatCalendarDate(dates.end, '-') : dates.end.toISOString(),
+    allday: String(Boolean(article.allDay)),
+    body: pageUrl,
+  });
+
+  return `https://outlook.live.com/calendar/0/deeplink/compose?${params.toString()}`;
 }
 
 export function buildCalendarFile(article: Article, pageUrl: string): string | null {
