@@ -1,0 +1,301 @@
+.member-modal-backdrop {
+  @apply
+    fixed
+    inset-0
+    z-50
+    flex
+    items-center
+    justify-center
+    p-4
+    bg-outline/50
+    backdrop-blur-sm
+  ;
+  animation: member-fade-in 150ms ease-out;
+}
+
+.member-modal {
+  @apply
+    relative
+    flex
+    flex-col
+    w-full
+    max-w-sm
+    max-h-[90vh]
+    overflow-y-auto
+    rounded-2xl
+    border-2
+    border-outline
+    bg-white
+    shadow-[8px_8px_0_#365486]
+  ;
+  animation: member-pop-in 180ms ease-out;
+}
+
+@screen sm {
+  .member-modal {
+    flex-direction: row;
+    max-width: 42rem;
+    overflow: hidden;
+  }
+}
+
+.member-modal-close {
+  @apply
+    absolute
+    top-2
+    right-2
+    z-10
+    flex
+    items-center
+    justify-center
+    w-8
+    h-8
+    rounded-full
+    bg-white/90
+    border-2
+    border-outline
+    text-xl
+    leading-none
+    cursor-pointer
+    transition-colors
+    hover:bg-slate-100
+  ;
+}
+
+.member-modal-close:focus-visible {
+  @apply
+    outline-none
+    ring-2
+    ring-highlight
+  ;
+}
+
+.member-modal-photo {
+  @apply
+    flex-none
+    bg-slate-100
+  ;
+}
+
+.member-modal-photo>img {
+  @apply
+    w-full
+    h-full
+    aspect-[4/5]
+    object-cover
+    object-top
+  ;
+}
+
+.member-modal-photo>.member-photo-fallback {
+  @apply
+    aspect-[4/5]
+    text-sm
+  ;
+}
+
+.member-modal-photo>.member-photo-fallback>.member-photo-fallback-icon {
+  @apply
+    w-10
+    h-10
+  ;
+}
+
+@screen sm {
+  .member-modal-photo {
+    width: 16rem;
+  }
+
+  .member-modal-photo>img {
+    aspect-ratio: auto;
+  }
+}
+
+.member-modal-body {
+  @apply
+    flex
+    flex-col
+    flex-1
+    gap-1
+    min-w-0
+    p-6
+    pr-10
+    overflow-y-auto
+  ;
+}
+
+.member-modal-wing {
+  @apply
+    text-xs
+    font-bold
+    uppercase
+    tracking-wider
+    text-primary
+  ;
+}
+
+.member-modal-body>h3 {
+  @apply
+    text-2xl
+    font-bold
+    leading-tight
+    break-words
+  ;
+}
+
+.member-modal-body>p {
+  @apply
+    text-sm
+    text-slate-600
+    leading-snug
+    break-words
+  ;
+}
+
+.member-modal-aka {
+  @apply
+    text-sm
+    font-semibold
+    text-primary
+  ;
+}
+
+.member-modal-major {
+  @apply
+    text-sm
+    text-slate-600
+  ;
+}
+
+/* Only the quote is terminal-styled. */
+.member-quote-terminal {
+  @apply
+    flex
+    items-center
+    gap-2
+    mt-2
+    px-3
+    py-2
+    rounded-lg
+    font-mono
+    text-[13px]
+    leading-relaxed
+    text-emerald-300
+    break-all
+  ;
+  background-color: #0b1020;
+  border: 1px solid #26324b;
+}
+
+.member-quote-text {
+  @apply
+    min-w-0
+  ;
+}
+
+.member-quote-caret {
+  @apply
+    flex-none
+    text-emerald-400
+  ;
+  animation: terminal-blink 1s steps(1) infinite;
+}
+
+.member-modal-actions {
+  @apply
+    flex
+    flex-wrap
+    gap-2
+    mt-3
+  ;
+}
+
+.member-modal-action {
+  @apply
+    inline-flex
+    items-center
+    gap-1.5
+    px-3
+    py-1.5
+    rounded-full
+    border-2
+    border-outline
+    bg-white
+    text-xs
+    font-bold
+    text-primary
+    transition-colors
+    hover:bg-primary
+    hover:text-white
+    break-all
+  ;
+}
+
+.member-modal-action:focus-visible {
+  @apply
+    outline-none
+    ring-2
+    ring-highlight
+    ring-offset-2
+  ;
+}
+
+.member-modal-action-icon {
+  @apply
+    w-3.5
+    h-3.5
+    flex-none
+  ;
+}
+
+.member-modal-badge {
+  @apply
+    self-start
+    mt-2
+    px-2
+    py-0.5
+    rounded-full
+    bg-primary
+    text-white
+    text-[10px]
+    font-bold
+    uppercase
+    tracking-wide
+  ;
+}
+
+@keyframes terminal-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes member-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes member-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .member-modal-backdrop,
+  .member-modal,
+  .member-quote-caret {
+    animation: none;
+  }
+}

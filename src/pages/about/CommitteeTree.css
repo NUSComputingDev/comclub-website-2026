@@ -218,6 +218,10 @@
   ;
 }
 
+.tree-head + .tree-group {
+  margin-top: 2.75rem;
+}
+
 .tree-group + .tree-group {
   margin-top: 2.5rem;
 }

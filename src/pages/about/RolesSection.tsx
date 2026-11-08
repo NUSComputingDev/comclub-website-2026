@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { MemberPhoto, RoleMember } from './RoleCard';
+import { MemberProfile, RoleMember } from './RoleCard';
 import CommitteeTree, { WingBranch } from './CommitteeTree';
+import MemberModal from './MemberModal';
 import roles from './roles.json' with {type: 'json'};
+import profiles from './profiles.json' with {type: 'json'};
 import './RolesSection.css';
 
 interface Member {
@@ -15,6 +17,8 @@ interface ParsedRole {
   title: string;
   section?: string;
 }
+
+const profilesByName = profiles as Record<string, MemberProfile>;
 
 /**
  * Roles are written as `Title, Section`. The section is everything after the
@@ -69,13 +73,14 @@ function orderMembers(members: Member[]): RoleMember[] {
     section,
     sectionIndex: section ? sections.indexOf(section) : -1,
     isLead: false,
+    profile: profilesByName[member.name],
   }));
 }
 
 /**
  * The committee is a three-tier tree:
  *   1. The President heads P-Wing.
- *   2. P-Wing holds the office bearers and the four Vice Presidents.
+ *   2. The Vice Presidents and office bearers sit directly under the President.
  *   3. Each Vice President's wing holds its directors, grouped by section.
  */
 function buildBranches(): WingBranch[] {
@@ -117,8 +122,8 @@ function buildBranches(): WingBranch[] {
       featured: true,
       head: president,
       groups: [
-        { label: 'Office Bearers', members: officeBearers },
         { label: 'Vice Presidents', members: vicePresidents },
+        { label: 'Office Bearers', members: officeBearers },
       ],
     },
     ...wings.map(({ wing, members: wingMembers }) => ({
@@ -160,55 +165,10 @@ function RolesSection() {
 
       {
         selected && (
-          <div
-            className='member-modal-backdrop'
-            role='presentation'
-            onClick={(event) => {
-              if (event.target === event.currentTarget) {
-                setSelected(null);
-              }
-            }}
-          >
-            <div
-              className='member-modal'
-              role='dialog'
-              aria-modal='true'
-              aria-labelledby='member-modal-name'
-            >
-              <button
-                type='button'
-                className='member-modal-close'
-                onClick={() => setSelected(null)}
-                aria-label='Close member details'
-              >
-                &times;
-              </button>
-              <div className='member-modal-photo'>
-                <MemberPhoto member={selected} />
-              </div>
-              <div className='member-modal-body'>
-                <span className='member-modal-wing'>{selected.wing}</span>
-                {
-                  selected.section && (
-                    <span className='role-section'>
-                      <span
-                        className={`role-dot section-${selected.sectionIndex % 6}`}
-                        aria-hidden='true'
-                      ></span>
-                      {selected.section}
-                    </span>
-                  )
-                }
-                <h3 id='member-modal-name'>{selected.name}</h3>
-                <p>{selected.role}</p>
-                {
-                  selected.isLead && selected.wing !== 'P-Wing' && (
-                    <span className='member-modal-badge'>Wing Head</span>
-                  )
-                }
-              </div>
-            </div>
-          </div>
+          <MemberModal
+            member={selected}
+            onClose={() => setSelected(null)}
+          ></MemberModal>
         )
       }
     </div>

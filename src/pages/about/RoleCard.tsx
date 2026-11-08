@@ -2,6 +2,22 @@ import React, { useState } from 'react';
 import { EyeIcon, UserIcon } from '@heroicons/react/solid';
 import './RoleCard.css';
 
+export interface MemberSocials {
+  instagram?: string;
+  github?: string;
+  linkedin?: string;
+  website?: string;
+}
+
+export interface MemberProfile {
+  displayName?: string;
+  major?: string;
+  gradYear?: string;
+  email?: string;
+  quote?: string;
+  socials?: MemberSocials;
+}
+
 export interface RoleMember {
   name: string;
   role: string;
@@ -12,6 +28,7 @@ export interface RoleMember {
   section?: string;
   sectionIndex: number;
   isLead: boolean;
+  profile?: MemberProfile;
 }
 
 interface MemberPhotoProps {
