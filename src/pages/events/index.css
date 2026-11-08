@@ -83,10 +83,22 @@
    5px away from the pane edges. */
 .events .events-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
   padding: 5px;
+}
+
+@screen md {
+  .events .events-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@screen xl {
+  .events .events-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .events .events-cards-grid > a {
