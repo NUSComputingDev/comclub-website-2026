@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EyeIcon, UserIcon } from '@heroicons/react/solid';
+import { EyeIcon, SparklesIcon, UserIcon } from '@heroicons/react/solid';
 import './RoleCard.css';
 
 export interface MemberSocials {
@@ -89,6 +89,17 @@ function RoleCard(props: RoleCardProps) {
           {
             member.isLead && member.wing !== 'P-Wing' && (
               <span className='role-badge'>Wing Head</span>
+            )
+          }
+          {
+            member.profile && (
+              <span className='role-profile-badge' title='Has a full profile'>
+                <SparklesIcon
+                  className='role-profile-badge-icon'
+                  aria-hidden='true'
+                />
+                Profile
+              </span>
             )
           }
           <span className='role-photo-hint' aria-hidden='true'>
