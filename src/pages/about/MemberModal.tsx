@@ -67,7 +67,7 @@ function SocialIcon({ name }: { name: keyof MemberSocials }) {
 interface QuoteBlockProps {
   quote: string;
   note?: string;
-  style?: 'terminal' | 'terminal-danger' | 'note';
+  style?: 'terminal' | 'terminal-danger' | 'note' | 'zen';
 }
 
 interface QuoteTerminalProps {
@@ -127,6 +127,14 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
     );
   }
 
+  if (style === 'zen') {
+    return (
+      <blockquote className='member-quote-zen'>
+        <span className='member-quote-zen-text'>{quote}</span>
+      </blockquote>
+    );
+  }
+
   return (
     <QuoteTerminal
       quote={quote}
@@ -151,10 +159,10 @@ function ProfileBody({ member, profile }: ProfileBodyProps) {
         member.section && (
           <span className='role-section'>
             <span
-              className={`role-dot section-${member.sectionIndex % 6}`}
-              aria-hidden='true'
-            ></span>
-            {member.section}
+              className={`role-section-text section-color-${member.sectionIndex % 6}`}
+            >
+              {member.section}
+            </span>
           </span>
         )
       }

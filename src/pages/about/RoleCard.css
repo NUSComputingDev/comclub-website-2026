@@ -214,39 +214,28 @@
   ;
 }
 
-.role-dot {
-  @apply
-    mt-[3px]
-    w-1.5
-    h-1.5
-    flex-none
-    rounded-full
-    bg-slate-400
-  ;
+.role-section-text.section-color-0 {
+  color: #0284c7;
 }
 
-.role-dot.section-0 {
-  @apply bg-sky-500;
+.role-section-text.section-color-1 {
+  color: #059669;
 }
 
-.role-dot.section-1 {
-  @apply bg-emerald-500;
+.role-section-text.section-color-2 {
+  color: #d97706;
 }
 
-.role-dot.section-2 {
-  @apply bg-amber-500;
+.role-section-text.section-color-3 {
+  color: #7c3aed;
 }
 
-.role-dot.section-3 {
-  @apply bg-violet-500;
+.role-section-text.section-color-4 {
+  color: #e11d48;
 }
 
-.role-dot.section-4 {
-  @apply bg-rose-500;
-}
-
-.role-dot.section-5 {
-  @apply bg-teal-500;
+.role-section-text.section-color-5 {
+  color: #0d9488;
 }
 
 .role-name {

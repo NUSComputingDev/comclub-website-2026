@@ -47,5 +47,13 @@
     "email": "jjustin@nuscomputing.com",
     "quote": "When all else fails, there's always delusion",
     "quoteStyle": "terminal"
+  },
+  "Chao Hao Wong": {
+    "displayName": "Chao Hao",
+    "major": "Computer Science",
+    "gradYear": "2030",
+    "email": "wchaohao@nuscomputing.com",
+    "quote": "What a privilege to feel drained from the work you once wished for.\n\nIt shall all come to pass.",
+    "quoteStyle": "zen"
   }
 }

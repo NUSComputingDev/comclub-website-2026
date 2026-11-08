@@ -8,10 +8,12 @@
   ;
 }
 
-/* Photo spans the full width of the card, no padding. */
+/* Photo spans the full width of the card with a consistent crop so cards do
+   not change height based on the source image's aspect ratio. */
 .three-d-card-photo {
   @apply
     w-full
+    aspect-[16/9]
     object-cover
   ;
 }

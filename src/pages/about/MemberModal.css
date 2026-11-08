@@ -332,6 +332,59 @@
   ;
 }
 
+/* Zen quote: airy, centred, two lines with breathing room. */
+.member-quote-zen {
+  @apply
+    relative
+    mt-4
+    py-5
+    px-2
+    text-center
+    font-subheading
+    text-[17px]
+    leading-relaxed
+    text-slate-600
+  ;
+  background: radial-gradient(circle at 50% 20%,
+      rgba(97, 175, 239, 0.14),
+      transparent 70%);
+  border-top: 1px solid rgba(54, 84, 134, 0.12);
+  border-bottom: 1px solid rgba(54, 84, 134, 0.12);
+  white-space: pre-line;
+}
+
+.member-quote-zen::before {
+  content: '\201C';
+  @apply
+    block
+    text-3xl
+    leading-none
+    text-highlight/60
+  ;
+}
+
+.member-quote-zen-text {
+  @apply
+    inline-block
+  ;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .member-quote-zen-text {
+    animation: zen-drift 10s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes zen-drift {
+  from {
+    transform: translateX(-1.5px);
+  }
+
+  to {
+    transform: translateX(1.5px);
+  }
+}
+
 .member-modal-actions {
   @apply
     flex

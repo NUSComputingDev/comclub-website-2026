@@ -107,7 +107,8 @@ function TreeBranch({ branch, onSelect }: TreeBranchProps) {
   if (branch.featured) {
     return (
       <div
-        className='tree-branch featured'
+        className='tree-branch featured scroll-mt-24'
+        id='wing-presidential'
         role='group'
         aria-label={branch.wing}
       >
@@ -130,9 +131,12 @@ function TreeBranch({ branch, onSelect }: TreeBranchProps) {
     );
   }
 
+  const wingId = branch.wing.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
   return (
     <div
-      className='tree-branch'
+      className='tree-branch scroll-mt-24'
+      id={`wing-${wingId}`}
       role='group'
       aria-label={branch.wing}
     >
