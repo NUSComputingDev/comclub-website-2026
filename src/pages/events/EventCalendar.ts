@@ -20,6 +20,21 @@ export function getEventDates(article: Article) {
 
   return { start, end };
 }
+
+// Calendar providers use an exclusive end date for all-day events.
+function getCalendarDates(article: Article) {
+  const dates = getEventDates(article);
+
+  if (!dates || !article.allDay) {
+    return dates;
+  }
+
+  const exclusiveEnd = new Date(dates.end.getTime());
+  exclusiveEnd.setUTCDate(exclusiveEnd.getUTCDate() + 1);
+
+  return { start: dates.start, end: exclusiveEnd };
+}
+
 //formats the generation time, start and end
 export function formatCalendarTimeStamp(date: Date): string {
   //ok i had to use codex for this cuz no way i knew this formatting for .ics files
@@ -51,20 +66,15 @@ export function escapeCalendarText(value: string): string {
 }
 
 export function buildGoogleCalendarUrl(article: Article, pageUrl: string): string | null {
-  const dates = getEventDates(article);
+  const dates = getCalendarDates(article);
 
   if (!dates) {
     return null;
   }
 
-  let calendarDates = `${formatCalendarTimeStamp(dates.start)}/${formatCalendarTimeStamp(dates.end)}`;
-
-  if (article.allDay) {
-    // Event data includes the last day; Google Calendar needs the following date as its end.
-    const exclusiveEnd = new Date(dates.end.getTime());
-    exclusiveEnd.setUTCDate(exclusiveEnd.getUTCDate() + 1);
-    calendarDates = `${formatCalendarDate(dates.start)}/${formatCalendarDate(exclusiveEnd)}`;
-  }
+  const calendarDates = article.allDay
+    ? `${formatCalendarDate(dates.start)}/${formatCalendarDate(dates.end)}`
+    : `${formatCalendarTimeStamp(dates.start)}/${formatCalendarTimeStamp(dates.end)}`;
 
   const params = new URLSearchParams({
     action: 'TEMPLATE',
@@ -78,20 +88,16 @@ export function buildGoogleCalendarUrl(article: Article, pageUrl: string): strin
 }
 
 export function buildCalendarFile(article: Article, pageUrl: string): string | null {
-  const dates = getEventDates(article);
+  const dates = getCalendarDates(article);
 
   if (!dates) {
     return null;
   }
   let dateLines: string[];
-  //if the event is all day, we add a day to the end date to make it exclusive
   if (article.allDay) {
-    const exclusiveEnd = new Date(dates.end.getTime());
-    exclusiveEnd.setUTCDate(exclusiveEnd.getUTCDate() + 1);
-
     dateLines = [
       `DTSTART;VALUE=DATE:${formatCalendarDate(dates.start)}`,
-      `DTEND;VALUE=DATE:${formatCalendarDate(exclusiveEnd)}`,
+      `DTEND;VALUE=DATE:${formatCalendarDate(dates.end)}`,
     ];
   } else {
     dateLines = [

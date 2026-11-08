@@ -63,8 +63,11 @@ const invalidRanges = [
 
 for (const [name, dates] of invalidRanges) {
   for (const allDay of [false, true]) {
-    test(`${allDay ? 'all-day' : 'timed'} event link rejects ${name}`, () => {
-      assert.equal(buildGoogleCalendarUrl({ ...article, ...dates, allDay }, pageUrl), null);
+    test(`${allDay ? 'all-day' : 'timed'} calendar exports reject ${name}`, () => {
+      const event = { ...article, ...dates, allDay };
+
+      assert.equal(buildGoogleCalendarUrl(event, pageUrl), null);
+      assert.equal(buildCalendarFile(event, pageUrl), null);
     });
   }
 }
@@ -85,15 +88,50 @@ const allDayRanges = [
 
 for (const [name, start, end, expected] of allDayRanges) {
   test(`all-day event uses Singapore dates and an exclusive end: ${name}`, () => {
-    const url = new URL(buildGoogleCalendarUrl({
+    const event = {
       ...article,
       allDay: true,
       startDatetime: `${start}T00:00:00+08:00`,
       endDatetime: `${end}T23:59:59+08:00`,
-    }, pageUrl));
+    };
+    const url = new URL(buildGoogleCalendarUrl(event, pageUrl));
 
     assert.equal(url.searchParams.get('dates'), expected);
+    const [startDate, endDate] = expected.split('/');
+    assert.ok(buildCalendarFile(event, pageUrl).includes(
+      `DTSTART;VALUE=DATE:${startDate}\r\nDTEND;VALUE=DATE:${endDate}\r\n`,
+    ));
   });
+}
+
+const eventPeriods = [
+  ['past', '2020-06-16', '20200616T020000Z/20200616T070000Z', '20200616/20200617'],
+  ['current', '2026-11-08', '20261108T020000Z/20261108T070000Z', '20261108/20261109'],
+  ['future', '2030-06-16', '20300616T020000Z/20300616T070000Z', '20300616/20300617'],
+];
+
+for (const [period, day, timedRange, allDayRange] of eventPeriods) {
+  for (const allDay of [false, true]) {
+    test(`${period} ${allDay ? 'all-day' : 'timed'} events can be saved`, (t) => {
+      // At noon in Singapore, the current example is still in progress.
+      t.mock.timers.enable({ apis: ['Date'], now: new Date('2026-11-08T04:00:00Z') });
+      const event = {
+        ...article,
+        allDay,
+        startDatetime: `${day}T10:00:00+08:00`,
+        endDatetime: `${day}T15:00:00+08:00`,
+      };
+      const expected = allDay ? allDayRange : timedRange;
+      const url = new URL(buildGoogleCalendarUrl(event, pageUrl));
+      const [start, end] = expected.split('/');
+      const dateType = allDay ? ';VALUE=DATE' : '';
+
+      assert.equal(url.searchParams.get('dates'), expected);
+      assert.ok(buildCalendarFile(event, pageUrl).includes(
+        `DTSTART${dateType}:${start}\r\nDTEND${dateType}:${end}\r\n`,
+      ));
+    });
+  }
 }
 
 test('special characters in the title and page URL survive encoding without extra parameters', () => {
