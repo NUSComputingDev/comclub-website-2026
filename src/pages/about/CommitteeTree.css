@@ -219,7 +219,7 @@
 }
 
 .tree-head + .tree-group {
-  margin-top: 2.75rem;
+  margin-top: 1.25rem;
 }
 
 .tree-group + .tree-group {
@@ -395,24 +395,24 @@
 }
 
 .tree-branch.featured .tree-head>.role-card-item {
-  flex-basis: 62%;
+  flex-basis: calc((100% - 1rem) / 2);
 }
 
 @screen sm {
   .tree-branch.featured .tree-head>.role-card-item {
-    flex-basis: 40%;
+    flex-basis: calc((100% - 2rem) / 3);
   }
 }
 
 @screen lg {
   .tree-branch.featured .tree-head>.role-card-item {
-    flex-basis: 30%;
+    flex-basis: calc((100% - 3rem) / 4);
   }
 }
 
 @screen xl {
   .tree-branch.featured .tree-head>.role-card-item {
-    flex-basis: 20%;
+    flex-basis: calc((100% - 5rem) / 6);
   }
 }
 
