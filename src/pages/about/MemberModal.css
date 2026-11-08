@@ -342,12 +342,14 @@
 .member-quote-note-caret {
   @apply
     inline-block
+    w-[2.5px]
+    h-[1.05em]
     ml-1
-    align-middle
-    text-[13px]
-    text-amber-800
+    rounded-full
+    bg-amber-700/75
   ;
-  animation: terminal-blink 1s steps(1) infinite;
+  vertical-align: -0.12em;
+  animation: terminal-blink 1.2s steps(1) infinite;
 }
 
 /* Zen quote: airy, centred, two lines with breathing room. */
@@ -391,11 +393,10 @@
   @apply
     inline-block
     ml-1
-    align-middle
-    text-[13px]
-    text-highlight/70
+    text-[15px]
+    text-highlight/60
   ;
-  animation: terminal-blink 1s steps(1) infinite;
+  animation: terminal-blink 1.2s steps(1) infinite;
 }
 
 
