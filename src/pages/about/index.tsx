@@ -77,10 +77,11 @@ const VALUE_CARDS = [
 ];
 
 const WINGS = [
-  'Internal Relations',
-  'External Relations',
-  'Student Development',
-  'Student Life',
+  { label: 'Presidential Wing', id: 'wing-presidential' },
+  { label: 'Internal Relations', id: 'wing-internal-relations' },
+  { label: 'External Relations', id: 'wing-external-relations' },
+  { label: 'Student Development', id: 'wing-student-development' },
+  { label: 'Student Life', id: 'wing-student-life' },
 ];
 
 function About() {
@@ -120,6 +121,7 @@ function About() {
           <img className='about-hero-logo' src='/comclub_logo.png' alt=''></img>
           <span className='about-float about-float--1'>est. 1998</span>
           <span className='about-float about-float--2'>4 wings</span>
+          <span className='about-float about-float--3'>6,600+ members</span>
         </div>
       </section>
 
@@ -219,18 +221,11 @@ function About() {
         <h1>29th Management Committee</h1>
         <div className='about-chips about-chips--buttons'>
           {
-            WINGS.map((wing) => {
-              const slug = wing.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-              return (
-                <a
-                  key={wing}
-                  href={`#wing-${slug}`}
-                  onClick={scrollToId(`wing-${slug}`)}
-                >
-                  {wing}
-                </a>
-              );
-            })
+            WINGS.map(({ label, id }) => (
+              <a key={id} href={`#${id}`} onClick={scrollToId(id)}>
+                {label}
+              </a>
+            ))
           }
         </div>
         <a

@@ -107,7 +107,8 @@ function TreeBranch({ branch, onSelect }: TreeBranchProps) {
   if (branch.featured) {
     return (
       <div
-        className='tree-branch featured'
+        className='tree-branch featured scroll-mt-24'
+        id='wing-presidential'
         role='group'
         aria-label={branch.wing}
       >
