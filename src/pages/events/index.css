@@ -51,19 +51,16 @@
     lg:mx-0
     lg:sticky
     lg:top-28
-    lg:max-h-[calc(100vh-7rem)]
-    lg:overflow-y-auto
   ;
 }
 
-/* Right pane: grows to fill the remaining width. Display-none below md,
-   so its hidden content cannot receive keyboard focus. */
+/* Right pane: the full event browser, visible on every breakpoint. */
 .events .events-cards {
   @apply
-    hidden
-    lg:block
+    block
     flex-1
     min-w-0
+    w-full
     h-fit
     p-0
     md:p-0
@@ -79,11 +76,6 @@
   justify-content: flex-start;
   padding-top: 6px;
   padding-bottom: 8px;
-}
-
-/* On mobile, wrap long labels (e.g., the date) instead of scrolling. */
-.events .events-left [data-slot='tabs-list'] [data-slot='tabs-trigger'] {
-  white-space: normal;
 }
 
 /* Masonry flow: cards stack column by column so a card always sits directly
@@ -116,14 +108,12 @@
   ;
 }
 
-/* Neutralize the leaked global `section` rule on the compact list pane,
-   scoped by class instead of element ancestry. */
-.events .events-results {
+/* Search + wing filters now sit above the event browser. */
+.events .events-filters {
   @apply
-    h-auto
-    items-stretch
-    pl-0
-    md:pl-0
+    w-full
+    mb-6
+    space-y-3
   ;
 }
 
