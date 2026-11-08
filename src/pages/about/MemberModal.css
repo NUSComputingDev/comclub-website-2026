@@ -118,10 +118,17 @@
     flex-1
     gap-1
     min-w-0
+    min-h-0
     p-6
     pr-10
     overflow-y-auto
   ;
+}
+
+/* Keep blocks at their natural height; the body scrolls instead of squashing
+   the quote or button rows on short screens. */
+.member-modal-body>* {
+  flex-shrink: 0;
 }
 
 .member-modal-wing {
