@@ -22,8 +22,9 @@
   ;
 }
 
-.events>section {
+.events-content {
   @apply
+    w-full
     h-fit
   ;
 }

@@ -91,9 +91,9 @@ export default function Calendar() {
 
   return (
     <div className='pt-16'>
-      <div className='max-w-sm px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
-        <div className='md:grid md:grid-cols-2 md:divide-x md:divide-gray-200'>
-          <div className='md:pr-14 h-[350px]' ref={calendarRef}>
+      <div className='max-w-sm px-4 mx-auto sm:px-7 lg:max-w-4xl lg:px-6'>
+        <div className='lg:grid lg:grid-cols-2 lg:divide-x lg:divide-gray-200'>
+          <div className='lg:pr-14 min-h-[350px]' ref={calendarRef}>
             <div className='flex items-center'>
               <h2 className='flex-auto font-semibold text-gray-900'>
                 {format(firstDayCurrentMonth, 'MMMM yyyy')}
@@ -178,9 +178,9 @@ export default function Calendar() {
               ))}
             </div>
           </div>
-          <section
-            className='gap-0 mt-12 md:mt-0 pl-0 md:pl-14 flex flex-col justify-start
-              min-h-[200px] w-full md:min-w-[450px] pr-0'
+          <div
+            className='gap-0 mt-12 lg:mt-0 pl-0 lg:pl-14 flex flex-col justify-start
+              min-h-[200px] w-full min-w-0 pr-0'
             onClick={handleResultsAreaClick}
           >
             <h2 className='font-semibold text-gray-900 text-left w-full pl-4'>
@@ -189,7 +189,7 @@ export default function Calendar() {
                 : 'All Events'}
             </h2>
             <div
-              className='mt-4 space-y-8 text-sm leading-6 text-gray-500 h-full overflow-auto'
+              className='mt-4 space-y-8 text-sm leading-6 text-gray-500'
               ref={resultsRef}
             >
               {displayedArticles.length > 0 ? (
@@ -205,7 +205,7 @@ export default function Calendar() {
                 <p>No events found.</p>
               )}
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>
