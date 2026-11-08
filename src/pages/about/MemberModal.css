@@ -342,8 +342,10 @@
 .member-quote-note-caret {
   @apply
     inline-block
-    ml-0.5
-    text-amber-700
+    ml-1
+    align-middle
+    text-[13px]
+    text-amber-800
   ;
   animation: terminal-blink 1s steps(1) infinite;
 }
@@ -389,26 +391,14 @@
   @apply
     inline-block
     ml-1
-    text-highlight/60
+    align-middle
+    text-[13px]
+    text-highlight/70
   ;
   animation: terminal-blink 1s steps(1) infinite;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .member-quote-zen-text {
-    animation: zen-drift 10s ease-in-out infinite alternate;
-  }
-}
 
-@keyframes zen-drift {
-  from {
-    transform: translateX(-1.5px);
-  }
-
-  to {
-    transform: translateX(1.5px);
-  }
-}
 
 .member-modal-actions {
   @apply

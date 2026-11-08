@@ -135,7 +135,7 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
       <blockquote className='member-quote-zen'>
         <span className='member-quote-zen-text'>
           {quote}
-          <span className='member-quote-zen-caret' aria-hidden='true'>|</span>
+          <span className='member-quote-zen-caret' aria-hidden='true'>█</span>
         </span>
       </blockquote>
     );
