@@ -137,8 +137,8 @@ function About() {
           <span>Est. 1998</span>
           <span>Constituent club</span>
           <span>4 wings</span>
-          <span>30 members</span>
-          <span>1 voice</span>
+          <span>6,600+ members</span>
+          <span>30 executive committee members</span>
         </div>
       </div>
 
