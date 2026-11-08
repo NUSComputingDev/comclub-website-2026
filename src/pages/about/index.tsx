@@ -120,7 +120,6 @@ function About() {
           <img className='about-hero-logo' src='/comclub_logo.png' alt=''></img>
           <span className='about-float about-float--1'>est. 1998</span>
           <span className='about-float about-float--2'>4 wings</span>
-          <span className='about-float about-float--3'>1 voice</span>
         </div>
       </section>
 

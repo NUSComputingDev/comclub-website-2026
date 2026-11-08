@@ -169,11 +169,6 @@
   right: 0;
 }
 
-.about-float--3 {
-  bottom: 9%;
-  left: 8%;
-}
-
 /* Navy banners */
 .about-banner {
   @apply
@@ -503,10 +498,6 @@
 
   .about-float--2 {
     animation-delay: 0.9s;
-  }
-
-  .about-float--3 {
-    animation-delay: 1.8s;
   }
 
   .about-scroll-cue {
