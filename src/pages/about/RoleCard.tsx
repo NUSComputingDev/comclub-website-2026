@@ -98,7 +98,6 @@ function RoleCard(props: RoleCardProps) {
                   className='role-profile-badge-icon'
                   aria-hidden='true'
                 />
-                Profile
               </span>
             )
           }
