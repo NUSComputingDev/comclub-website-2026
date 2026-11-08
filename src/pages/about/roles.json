@@ -1,132 +1,161 @@
 {
-  "Presidency": [
+  "P-Wing": [
     {
-      "name": "Chen Dong Jun",
-      "role": "President"
+      "name": "Gullapalli Chetan",
+      "role": "President",
+      "img": "/members/thumbs/GullapalliChetan.webp"
     },
     {
-      "name": "Chee Hann Yu",
-      "role": "General Secretary"
+      "name": "Neo Ryan",
+      "role": "General Secretary",
+      "img": "/members/thumbs/NeoRyan.webp"
+    },
+    {
+      "name": "Choong Jing Xiang",
+      "role": "Deputy General Secretary",
+      "img": "/members/thumbs/ChoongJingXiang.webp"
+    },
+    {
+      "name": "Hyunmin Lee",
+      "role": "Finance Secretary",
+      "img": "/members/thumbs/HyunminLee.webp"
     },
     {
       "name": "Daryl Leong",
-      "role": "Deputy General Secretary"
+      "role": "Deputy Finance Secretary",
+      "img": "/members/thumbs/DarylLeong.webp"
     },
     {
-      "name": "Junrong Mu",
-      "role": "Tech Lead"
-    },
-    {
-      "name": "Jovi Chow Yi Kit",
-      "role": "Finance Secretary"
-    },
-    {
-      "name": "Jha Satwik",
-      "role": "Deputy Finance Secretary"
-    }
-  ],
-  "External Relations": [
-    {
-      "name": "Li Xueyi Joanne",
-      "role": "Vice President"
-    },
-    {
-      "name": "Shermaine Peh Cher Min",
-      "role": "Director, Publicity"
-    },
-    {
-      "name": "Yeo Xun Hui Shelby",
-      "role": "Deputy Director, Publicity"
-    },
-    {
-      "name": "Yang Siqian",
-      "role": "Director, Marketing"
-    },
-    {
-      "name": "Feliciano Margaret Elisha Fontanilla",
-      "role": "Deputy Director, Marketing (Merchandise)"
-    },
-    {
-      "name": "Ernest Tan Jer Jian",
-      "role": "Deputy Director, Marketing (Sponsorship)"
+      "name": "Joshua Jacob Thomas",
+      "role": "Tech Lead",
+      "img": "/members/thumbs/JoshuaJacobThomas.webp"
     }
   ],
   "Internal Relations": [
     {
-      "name": "Shananth Sivakumar",
-      "role": "Vice President"
-    },
-    {
-      "name": "Gullapalli Chetan",
-      "role": "Director, Welfare"
-    },
-    {
-      "name": "Chulpaibul Jirawan",
-      "role": "Deputy Director, Welfare"
-    },
-    {
       "name": "Jeyaraj Justin",
-      "role": "Director, Sports"
+      "role": "Vice President",
+      "img": "/members/thumbs/JeyarajJustin.webp"
     },
     {
-      "name": "Narayanamurthy Sriram",
-      "role": "Deputy Director, Sports"
+      "name": "Keith Voo Zheng Feng",
+      "role": "Director, Welfare",
+      "img": "/members/thumbs/KeithVooZhengFeng.webp"
+    },
+    {
+      "name": "Kopparthi Vamsi Krishna",
+      "role": "Deputy Director, Welfare",
+      "img": "/members/thumbs/KopparthiVamsiKrishna.webp"
+    },
+    {
+      "name": "Kaira Tan Yan Xin",
+      "role": "Director, Sports",
+      "img": "/members/thumbs/KairaTanYanXin.webp"
+    },
+    {
+      "name": "Kathiravan Nedunchezhian",
+      "role": "Deputy Director, Sports",
+      "img": "/members/thumbs/KathiravanNedunchezhian.webp"
+    }
+  ],
+  "External Relations": [
+    {
+      "name": "Yin Chengyan Amy",
+      "role": "Vice President",
+      "img": "/members/thumbs/YinChengyanAmy.webp"
+    },
+    {
+      "name": "Chua Lu Teng Lorraine",
+      "role": "Director, Publicity",
+      "img": "/members/thumbs/ChuaLuTengLorraine.webp"
+    },
+    {
+      "name": "Amber Yeo En",
+      "role": "Deputy Director, Publicity",
+      "img": "/members/thumbs/AmberYeoEn.webp"
+    },
+    {
+      "name": "Ang Le Xuan Jocelyn",
+      "role": "Director, Marketing (Merchandise)",
+      "img": "/members/thumbs/AngLeXuanJocelyn.webp"
+    },
+    {
+      "name": "Chia Loke En Lu-anne",
+      "role": "Deputy Director, Marketing (Merchandise)",
+      "img": "/members/thumbs/ChiaLokeEnLuanne.webp"
+    },
+    {
+      "name": "Low Serh Yew",
+      "role": "Director, Marketing (Sponsorship)"
+    },
+    {
+      "name": "Heng Kaiyi",
+      "role": "Deputy Director, Marketing (Sponsorship)",
+      "img": "/members/thumbs/HengKaiyi.webp"
     }
   ],
   "Student Development": [
     {
-      "name": "Choong Jing Xiang",
-      "role": "Vice President"
+      "name": "Chan Shi Hui Mikki",
+      "role": "Vice President",
+      "img": "/members/thumbs/ChanShiHuiMikki.webp"
     },
     {
-      "name": "Atharva Shukla",
-      "role": "Director, Academic Liaison"
+      "name": "Kang Joo Ann Adrian",
+      "role": "Director, Rag",
+      "img": "/members/thumbs/KangJooAnnAdrian.webp"
     },
     {
-      "name": "Ma Mingyang",
-      "role": "Deputy Director, Academic Liaison"
+      "name": "Chaudhuri Ayushman",
+      "role": "Director, Flag",
+      "img": "/members/thumbs/ChaudhuriAyushman.webp"
     },
     {
-      "name": "Adhiraj Gupta",
-      "role": "Deputy Director, Academic Liaison"
+      "name": "Mongkolworaphol Adhipat (Kai)",
+      "role": "Director, Academic Liaison",
+      "img": "/members/thumbs/MongkolworapholAdhipat.webp"
     },
     {
-      "name": "Lim Zi Shen",
-      "role": "Director, Community Engagement"
+      "name": "Yang Boxiang (Chuck)",
+      "role": "Deputy Director, Academic Liaison",
+      "img": "/members/thumbs/YangBoxiang.webp"
     },
     {
-      "name": "Niles Loh Xiang Xing",
-      "role": "Director, Rag"
-    },
-    {
-      "name": "Ng Ting Hui",
-      "role": "Director, Flag"
+      "name": "Shreeya Unni",
+      "role": "Director, Community Engagement",
+      "img": "/members/thumbs/ShreeyaUnni.webp"
     }
   ],
   "Student Life": [
     {
-      "name": "Neo Ryan",
-      "role": "Vice President"
-    },
-    {
       "name": "Eu Guang En Joshua",
-      "role": "Director, Freshman Social Camp"
+      "role": "Vice President",
+      "img": "/members/thumbs/EuGuangEnJoshua.webp"
     },
     {
-      "name": "Yao Wei Chua",
-      "role": "Director, Freshman Orientation Week"
+      "name": "Kaleb Nim",
+      "role": "Director, FOP (Freshmen Social Camp)",
+      "img": "/members/thumbs/KalebNim.webp"
     },
     {
-      "name": "Teo Kai Xin",
-      "role": "Director, Freshman Finale Camp"
+      "name": "Chao Hao Wong",
+      "role": "Director, FOP (Freshmen Orientation Week)",
+      "img": "/members/thumbs/ChaoHaoWong.webp"
+    },
+    {
+      "name": "Mridul Somani",
+      "role": "Director, FOP (Freshmen Finale Camp)",
+      "img": "/members/thumbs/MridulSomani.webp"
     },
     {
       "name": "Zhang Jiayi",
-      "role": "Director, Student Engagement"
+      "role": "Director, Student Engagement",
+      "img": "/members/thumbs/ZhangJiayi.webp"
     },
     {
-      "name": "Yang Boxiang",
-      "role": "Deputy Director, Student Engagement"
+      "name": "Hor Xiang Neng",
+      "role": "Deputy Director, Student Engagement",
+      "img": "/members/thumbs/HorXiangNeng.webp"
     }
   ]
 }

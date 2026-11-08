@@ -63,6 +63,11 @@ export default function Calendar() {
     setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
   }
 
+  function goToToday() {
+    setCurrentMonth(format(today, 'MMM-yyyy'));
+    setSelectedDay(today);
+  }
+
   const normalizedQuery = searchQuery.trim().toLowerCase();
 
   const displayedArticles = articlesData.filter((article) => {
@@ -140,39 +145,48 @@ export default function Calendar() {
 
   return (
     <div className='pt-16'>
-      <div className='max-w-sm px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6'>
-        <div className='md:grid md:grid-cols-2 md:divide-x md:divide-gray-200'>
-          <div className='md:pr-14 h-[350px]' ref={calendarRef}>
+      <div className='w-[calc(100vw-2rem)] max-w-md mx-auto lg:max-w-[68rem] lg:px-6'>
+        <div className='lg:grid lg:grid-cols-2 lg:divide-x lg:divide-gray-200'>
+          <div className='self-start p-6 border border-gray-200 rounded-2xl lg:mr-14' ref={calendarRef}>
             <div className='flex items-center'>
-              <h2 className='flex-auto font-semibold text-gray-900'>
+              <h2 className='flex-auto text-xl font-semibold text-gray-900'>
                 {format(firstDayCurrentMonth, 'MMMM yyyy')}
               </h2>
               <button
+                onClick={goToToday}
+                type='button'
+                className='-my-2 mr-2 flex flex-none items-center justify-center rounded-full
+                  border border-gray-300 px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100'
+              >
+                Today
+              </button>
+              <button
                 type='button'
                 onClick={previousMonth}
-                className='-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500'
+                className='-my-2 flex flex-none items-center justify-center rounded-full border border-gray-300
+                  p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
               >
                 <span className='sr-only'>Previous month</span>
-                <ChevronLeftIcon className='w-5 h-5' aria-hidden='true' />
+                <ChevronLeftIcon className='w-6 h-6' aria-hidden='true' />
               </button>
               <button
                 onClick={nextMonth}
                 type='button'
-                className='-my-1.5 -mr-1.5 ml-2 flex flex-none items-center
-                  justify-center p-1.5 text-gray-400 hover:text-gray-500'
+                className='-my-2 ml-2 flex flex-none items-center justify-center rounded-full
+                  border border-gray-300 p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
               >
                 <span className='sr-only'>Next month</span>
-                <ChevronRightIcon className='w-5 h-5' aria-hidden='true' />
+                <ChevronRightIcon className='w-6 h-6' aria-hidden='true' />
               </button>
             </div>
-            <div className='grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500'>
-              <div>S</div>
-              <div>M</div>
-              <div>T</div>
-              <div>W</div>
-              <div>T</div>
-              <div>F</div>
-              <div>S</div>
+            <div className='grid grid-cols-7 mt-6 text-xs leading-6 text-center font-semibold uppercase text-gray-500'>
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
             </div>
             <div className='grid grid-cols-7 mt-2 text-sm'>
               {days.map((day, dayIdx) => (
@@ -249,10 +263,27 @@ export default function Calendar() {
                 </div>
               ))}
             </div>
+            <div
+              className='flex flex-wrap items-center pt-4 mt-1 text-sm text-gray-500
+                border-t border-gray-200 gap-x-5 gap-y-2'
+            >
+              <div className='flex items-center gap-2'>
+                <span className='w-1.5 h-1.5 rounded-full bg-sky-500' aria-hidden='true' />
+                Has events
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className='w-4 h-4 bg-red-500 rounded-full' aria-hidden='true' />
+                Today
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className='w-4 h-4 bg-gray-900 rounded-full' aria-hidden='true' />
+                Selected
+              </div>
+            </div>
           </div>
-          <section
-            className='gap-0 mt-12 md:mt-0 pl-0 md:pl-14 flex flex-col justify-start
-              min-h-[200px] w-full md:min-w-[450px] pr-0'
+          <div
+            className='gap-0 mt-12 lg:mt-0 pl-0 lg:pl-14 flex flex-col justify-start
+              min-h-[200px] w-full min-w-0 pr-0'
             onClick={handleResultsAreaClick}
           >
             <div
@@ -359,7 +390,7 @@ export default function Calendar() {
                 )}
               </div>
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>

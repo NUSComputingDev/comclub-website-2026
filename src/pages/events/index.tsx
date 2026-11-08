@@ -10,9 +10,9 @@ function Events() {
         Events
       </h1>
 
-      <section className='md:items-start'>
+      <div className='events-content'>
         <Calendar />
-      </section>
+      </div>
     </div>
   );
 }
