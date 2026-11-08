@@ -51,6 +51,12 @@ function Calendar({ selectedDay, onSelectDay, events, containerRef }: CalendarPr
     setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
   }
 
+  // Jump back to the current month and select today.
+  function goToToday() {
+    setCurrentMonth(format(today, 'MMM-yyyy'));
+    onSelectDay(today);
+  }
+
   // A day gets a dot when any event's start/end range covers it.
   function hasEventOnDay(day: Date) {
     return events.some(
@@ -66,35 +72,44 @@ function Calendar({ selectedDay, onSelectDay, events, containerRef }: CalendarPr
   return (
     <div ref={containerRef}>
       <div className='flex items-center'>
-        <h2 className='flex-auto font-semibold text-gray-900'>
+        <h2 className='flex-auto text-xl font-semibold text-gray-900'>
           {format(firstDayCurrentMonth, 'MMMM yyyy')}
         </h2>
         <button
           type='button'
+          onClick={goToToday}
+          className='-my-2 mr-2 flex flex-none items-center justify-center rounded-full
+            border border-gray-300 px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100'
+        >
+          Today
+        </button>
+        <button
+          type='button'
           onClick={previousMonth}
-          className='-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500'
+          className='-my-2 flex flex-none items-center justify-center rounded-full border
+            border-gray-300 p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
         >
           <span className='sr-only'>Previous month</span>
-          <ChevronLeftIcon className='w-5 h-5' aria-hidden='true' />
+          <ChevronLeftIcon className='w-6 h-6' aria-hidden='true' />
         </button>
         <button
           onClick={nextMonth}
           type='button'
-          className='-my-1.5 -mr-1.5 ml-2 flex flex-none items-center
-            justify-center p-1.5 text-gray-400 hover:text-gray-500'
+          className='-my-2 ml-2 flex flex-none items-center justify-center rounded-full
+            border border-gray-300 p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500'
         >
           <span className='sr-only'>Next month</span>
-          <ChevronRightIcon className='w-5 h-5' aria-hidden='true' />
+          <ChevronRightIcon className='w-6 h-6' aria-hidden='true' />
         </button>
       </div>
-      <div className='grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500'>
-        <div>S</div>
-        <div>M</div>
-        <div>T</div>
-        <div>W</div>
-        <div>T</div>
-        <div>F</div>
-        <div>S</div>
+      <div className='grid grid-cols-7 mt-6 text-xs font-semibold uppercase leading-6 text-center text-gray-500'>
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
       </div>
       <div className='grid grid-cols-7 mt-2 text-sm'>
         {days.map((day, dayIdx) => (
@@ -140,6 +155,23 @@ function Calendar({ selectedDay, onSelectDay, events, containerRef }: CalendarPr
             </div>
           </div>
         ))}
+      </div>
+      <div
+        className='flex flex-wrap items-center pt-4 mt-1 text-sm text-gray-500
+          border-t border-gray-200 gap-x-5 gap-y-2'
+      >
+        <div className='flex items-center gap-2'>
+          <span className='w-1.5 h-1.5 rounded-full bg-sky-500' aria-hidden='true' />
+          Has events
+        </div>
+        <div className='flex items-center gap-2'>
+          <span className='w-4 h-4 bg-red-500 rounded-full' aria-hidden='true' />
+          Today
+        </div>
+        <div className='flex items-center gap-2'>
+          <span className='w-4 h-4 bg-gray-900 rounded-full' aria-hidden='true' />
+          Selected
+        </div>
       </div>
     </div>
   );
