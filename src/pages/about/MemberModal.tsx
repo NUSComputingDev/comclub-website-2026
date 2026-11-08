@@ -122,7 +122,10 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
   if (style === 'note') {
     return (
       <div className='member-quote-note'>
-        <span className='member-quote-note-text'>{quote}</span>
+        <span className='member-quote-note-text'>
+          {quote}
+          <span className='member-quote-note-caret' aria-hidden='true'>█</span>
+        </span>
       </div>
     );
   }
@@ -130,7 +133,10 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
   if (style === 'zen') {
     return (
       <blockquote className='member-quote-zen'>
-        <span className='member-quote-zen-text'>{quote}</span>
+        <span className='member-quote-zen-text'>
+          {quote}
+          <span className='member-quote-zen-caret' aria-hidden='true'>|</span>
+        </span>
       </blockquote>
     );
   }

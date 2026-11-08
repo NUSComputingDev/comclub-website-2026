@@ -339,6 +339,15 @@
   ;
 }
 
+.member-quote-note-caret {
+  @apply
+    inline-block
+    ml-0.5
+    text-amber-700
+  ;
+  animation: terminal-blink 1s steps(1) infinite;
+}
+
 /* Zen quote: airy, centred, two lines with breathing room. */
 .member-quote-zen {
   @apply
@@ -374,6 +383,15 @@
   @apply
     inline-block
   ;
+}
+
+.member-quote-zen-caret {
+  @apply
+    inline-block
+    ml-1
+    text-highlight/60
+  ;
+  animation: terminal-blink 1s steps(1) infinite;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -486,7 +504,9 @@
 @media (prefers-reduced-motion: reduce) {
   .member-modal-backdrop,
   .member-modal,
-  .member-quote-caret {
+  .member-quote-caret,
+  .member-quote-note-caret,
+  .member-quote-zen-caret {
     animation: none;
   }
 }
