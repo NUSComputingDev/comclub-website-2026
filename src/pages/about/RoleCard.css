@@ -127,6 +127,11 @@
   opacity: 1;
 }
 
+/* Completed profiles get a blue overlay instead of the neutral black one. */
+.role-photo-hint.is-profile {
+  background: linear-gradient(to top, rgba(54, 84, 134, 0.94), rgba(54, 84, 134, 0));
+}
+
 .role-photo-hint-icon {
   @apply
     w-4
@@ -153,6 +158,11 @@
   .role-photo-hint-text {
     display: none;
   }
+
+  .role-photo-hint.is-profile {
+    background: #365486;
+    color: #fff;
+  }
 }
 
 .role-badge {
@@ -173,14 +183,7 @@
   ;
 }
 
-.role-profile-link {
-  @apply
-    mt-0.5
-    text-[11px]
-    font-bold
-    text-highlight
-  ;
-}
+
 
 .role-info {
   @apply

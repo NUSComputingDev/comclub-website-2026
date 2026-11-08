@@ -64,15 +64,21 @@ function SocialIcon({ name }: { name: keyof MemberSocials }) {
   }
 }
 
-interface QuoteTerminalProps {
+interface QuoteBlockProps {
   quote: string;
   note?: string;
+  style?: 'terminal' | 'note';
 }
 
-function QuoteTerminal({ quote, note }: QuoteTerminalProps) {
+function QuoteTerminal({ quote, note }: { quote: string; note?: string }) {
   return (
     <div className='member-quote-terminal'>
       <span className='member-quote-line'>
+        {
+          !quote.trim().startsWith('$') && (
+            <span className='member-quote-prompt' aria-hidden='true'>&gt;</span>
+          )
+        }
         <span className='member-quote-text'>{quote}</span>
         <span className='member-quote-caret' aria-hidden='true'>█</span>
       </span>
@@ -83,6 +89,18 @@ function QuoteTerminal({ quote, note }: QuoteTerminalProps) {
       }
     </div>
   );
+}
+
+function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
+  if (style === 'note') {
+    return (
+      <div className='member-quote-note'>
+        <span className='member-quote-note-text'>{quote}</span>
+      </div>
+    );
+  }
+
+  return <QuoteTerminal quote={quote} note={note}></QuoteTerminal>;
 }
 
 interface ProfileBodyProps {
@@ -126,10 +144,11 @@ function ProfileBody({ member, profile }: ProfileBodyProps) {
       }
       {
         profile?.quote && (
-          <QuoteTerminal
+          <QuoteBlock
             quote={profile.quote}
             note={profile.quoteNote}
-          ></QuoteTerminal>
+            style={profile.quoteStyle}
+          ></QuoteBlock>
         )
       }
       {

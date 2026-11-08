@@ -196,22 +196,26 @@
 
 .member-quote-line {
   @apply
-    flex
-    items-baseline
-    gap-2
+    block
+  ;
+}
+
+.member-quote-prompt {
+  @apply
+    mr-2
+    font-bold
+    text-emerald-400
   ;
 }
 
 .member-quote-text {
   @apply
-    min-w-0
-    break-all
+    break-words
   ;
 }
 
 .member-quote-caret {
   @apply
-    flex-none
     text-emerald-400
   ;
   animation: terminal-blink 1s steps(1) infinite;
@@ -219,9 +223,52 @@
 
 .member-quote-comment {
   @apply
+    block
     text-[11px]
-    leading-snug
-    text-slate-400
+    text-rose-300
+    break-words
+  ;
+}
+
+/* Sticky-note quote for the President. */
+.member-quote-note {
+  @apply
+    relative
+    mt-4
+    rounded-md
+    text-amber-900
+  ;
+  padding: 1.25rem 1.5rem 1.5rem;
+  font-family: 'Caveat', cursive;
+  font-size: 21px;
+  line-height: 28px;
+  background:
+    repeating-linear-gradient(0deg,
+      transparent 0 27px,
+      rgba(180, 83, 9, 0.13) 27px 28px),
+    linear-gradient(180deg, #fef3c7, #fde68a);
+  border: 1px solid #fcd34d;
+  box-shadow: 2px 7px 16px rgba(120, 53, 15, 0.18);
+  transform: rotate(-1.4deg);
+}
+
+.member-quote-note::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 74px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 1px dashed rgba(255, 255, 255, 0.65);
+  border-right: 1px dashed rgba(255, 255, 255, 0.65);
+  transform: translateX(-50%) rotate(1.5deg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.member-quote-note-text {
+  @apply
+    block
     break-words
   ;
 }

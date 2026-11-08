@@ -16,6 +16,7 @@ export interface MemberProfile {
   email?: string;
   quote?: string;
   quoteNote?: string;
+  quoteStyle?: 'terminal' | 'note';
   socials?: MemberSocials;
 }
 
@@ -91,7 +92,10 @@ function RoleCard(props: RoleCardProps) {
               <span className='role-badge'>Wing Head</span>
             )
           }
-          <span className='role-photo-hint' aria-hidden='true'>
+          <span
+            className={`role-photo-hint${member.profile ? ' is-profile' : ''}`}
+            aria-hidden='true'
+          >
             <EyeIcon className='role-photo-hint-icon' />
             <span className='role-photo-hint-text'>View profile</span>
           </span>
@@ -112,13 +116,7 @@ function RoleCard(props: RoleCardProps) {
           </span>
           <span className='role-name'>{member.name}</span>
           <span className='role-title'>{member.title}</span>
-          {
-            member.profile && (
-              <span className='role-profile-link'>
-                View profile <span aria-hidden='true'>→</span>
-              </span>
-            )
-          }
+
         </span>
       </button>
     </li>
