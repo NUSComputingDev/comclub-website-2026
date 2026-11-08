@@ -1,0 +1,110 @@
+.comclub-gallery {
+  display: block;
+  height: auto;
+  padding: 5rem 2rem;
+  background: #f1f5f9;
+  color: #365486;
+}
+
+.gallery-inner { max-width: 1200px; margin: auto; }
+.gallery-heading, .gallery-caption { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.gallery-heading { margin-bottom: 2rem; }
+.gallery-heading h2 { font-family: 'DM Sans', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.15; }
+.gallery-heading p, .gallery-caption p { margin-top: .6rem; color: #526176; font-family: 'Lexend', sans-serif; }
+.gallery-heading p { font-size: .95rem; }
+.gallery-controls { display: flex; align-items: center; gap: .65rem; flex-shrink: 0; }
+.gallery-controls span { margin-right: .5rem; font-size: .85rem; font-variant-numeric: tabular-nums; }
+.gallery-controls button { width: 44px; height: 44px; border: 1px solid #365486; border-radius: 50%; }
+.gallery-controls svg { margin: auto; width: 22px; height: 22px; }
+.gallery-controls button:hover:not(:disabled) { background: #365486; color: white; }
+.gallery-controls button:disabled { opacity: .35; cursor: not-allowed; }
+.comclub-gallery :is(button, a):focus-visible { outline: 3px solid #365486; outline-offset: 4px; }
+.gallery-viewfinder { position: relative; padding: 12px; }
+.gallery-viewfinder::before, .gallery-viewfinder::after {
+  content: ''; position: absolute; width: 28px; height: 28px; pointer-events: none;
+  border-color: #365486; border-style: solid;
+}
+.gallery-viewfinder::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.gallery-viewfinder::after { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+.gallery-grid {
+  display: grid; grid-template-columns: 2.4fr 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 10px; aspect-ratio: 2.2;
+}
+.gallery-slot-0 { grid-column: 1; grid-row: 1 / 3; }
+.gallery-slot-1 { grid-column: 2; grid-row: 1 / 3; }
+.gallery-slot-2 { grid-column: 3; grid-row: 1; }
+.gallery-slot-3 { grid-column: 3; grid-row: 2; }
+.gallery-count-1 { grid-template-columns: 1fr; }
+.gallery-count-2 { grid-template-columns: 2fr 1fr; }
+.gallery-count-3 .gallery-slot-2 { grid-row: 1 / 3; }
+.gallery-photo { display: block; position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #e2e8f0; }
+.gallery-photo, .gallery-skeleton { border-radius: 6px; }
+.gallery-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.gallery-photo.gallery-slot-0 img { object-fit: contain; }
+/* Photo "develops": fades in while settling from a slight zoom. Only opacity + transform, so it stays on the GPU. */
+.gallery-photo.is-ready img { animation: gallery-photo-develop 600ms cubic-bezier(.2, .7, .2, 1) both; animation-delay: inherit; }
+.gallery-photo.is-instant img { animation: none; opacity: 1; } /* prefetched: the album-level crossfade is enough */
+.gallery-photo-hint {
+  position: absolute; bottom: 12px; left: 12px; display: flex; align-items: center; gap: .5rem;
+  padding: .5rem .75rem; background: rgba(255,255,255,.95); color: #365486; border-radius: 4px; font-size: .75rem;
+}
+.gallery-skeleton {
+  background: linear-gradient(100deg, #e2e8f0 25%, #f8fafc 45%, #e2e8f0 65%);
+  background-size: 200% 100%; animation: gallery-shimmer 1.8s linear infinite;
+}
+.gallery-photo-error { height: 100%; padding: 1rem; display: flex; align-items: center; justify-content: center; gap: .5rem; }
+.gallery-caption { padding: 1.5rem 12px 1.75rem; }
+.gallery-caption h3 { font-family: 'DM Sans', sans-serif; font-size: 1.4rem; font-weight: 600; }
+.gallery-caption p { font-size: .75rem; }
+.gallery-caption a { display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap; font-size: .9rem; }
+.gallery-caption a:hover, .gallery-message a:hover { text-decoration: underline; }
+.gallery-events {
+  display: flex; overflow-x: auto; gap: .75rem; padding: 6px 4px 16px; scroll-snap-type: x proximity;
+  scroll-behavior: smooth; /* animates rail.scrollTo(...) in Gallery.tsx; turned off for reduced motion below */
+}
+.gallery-events button {
+  flex: 0 0 auto; text-align: left; border-top: 2px solid #cbd5e1; padding: 1rem 1rem .6rem;
+  min-width: 165px; scroll-snap-align: center; /* matches the centring scrollTo, so snap doesn't nudge it after */ font-family: 'Quicksand', sans-serif; font-weight: 600;
+}
+.gallery-events button[aria-pressed='true'] { border-color: #365486; background: white; }
+.gallery-events button:hover { border-color: #365486; }
+.gallery-event-year { display: block; margin-top: .4rem; color: #526176; font-size: .75rem; font-weight: 400; }
+.gallery-message { aspect-ratio: 2.2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center; background: #e2e8f0; padding: 2rem; }
+.gallery-message h4 { font-size: 1.4rem; }
+.gallery-message p { color: #526176; }
+.gallery-message button { background: #365486; color: white; padding: .6rem 1rem; border-radius: 6px; margin-right: 1rem; }
+/* Crossfade: both albums sit in the same grid cell; the outgoing one stays opaque underneath (no dip to the
+   background) while the incoming one, later in the DOM so painted on top, fades in over it. */
+.gallery-stage { display: grid; }
+.gallery-stage > .gallery-album { grid-area: 1 / 1; min-width: 0; }
+.gallery-album { animation: gallery-develop 400ms ease-out; }
+.gallery-album.is-leaving { pointer-events: none; }
+.gallery-album.is-leaving .gallery-caption { visibility: hidden; } /* avoid two titles blending into each other */
+@keyframes gallery-develop { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gallery-photo-develop { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+@keyframes gallery-shimmer { to { background-position: -200% 0; } }
+
+@media (max-width: 767px) {
+  .comclub-gallery { padding: 3.5rem 1.25rem; }
+  .gallery-heading { align-items: flex-start; flex-direction: column; gap: 1rem; }
+  .gallery-heading p { max-width: 30ch; }
+  .gallery-controls { align-self: flex-end; }
+  .gallery-grid { aspect-ratio: 1; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: 2fr 1fr; gap: 6px; }
+  .gallery-slot-0 { grid-column: 1 / -1; grid-row: 1; }
+  .gallery-slot-1 { grid-column: 1; grid-row: 2; }
+  .gallery-slot-2, .gallery-count-3 .gallery-slot-2 { grid-column: 2; grid-row: 2; }
+  .gallery-slot-3 { grid-column: 3; grid-row: 2; }
+  .gallery-count-1 { grid-template-rows: 1fr; }
+  .gallery-count-2 .gallery-slot-1 { grid-column: 1 / -1; }
+  .gallery-count-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-caption { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .gallery-caption h3 { font-size: 1.2rem; }
+  .gallery-message { aspect-ratio: 1; padding: 1rem; }
+  .gallery-message a { display: inline-block; margin-top: 1rem; }
+  .gallery-photo-error { font-size: .7rem; padding: .3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comclub-gallery *, .comclub-gallery *::before, .comclub-gallery *::after { animation: none !important; scroll-behavior: auto; }
+  .gallery-photo.is-ready img { opacity: 1; }
+}

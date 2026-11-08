@@ -39,7 +39,7 @@ function Footer() {
     },
     {
       platform: 'Email',
-      url: 'connect@nuscomputing.com',
+      url: 'mailto:connect@nuscomputing.com',
       icon: IoMdMail,
     },
   ];

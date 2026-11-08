@@ -1,0 +1,225 @@
+# lets people claim issues by commenting /assign, and give them back with /unassign.
+# rules:
+#   - max 3 open issues per person: the 4th gets closed with a comment
+#   - max 2 open prs per person: the 3rd gets closed with a comment
+#   - a pr on an issue someone else claimed gets closed with a comment
+#   - a pr without `closes #n`, or on an issue nobody claimed, gets a comment + a `needs fixing` label
+#   - max 2 claimed issues per person, and only one of them can be without an open pr
+#   - an issue someone else has claimed can't be taken
+#   - no pr within 48 hours of claiming = the claim gets released automatically
+# only works on issues, not on prs.
+
+name: claim issues
+
+on:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened, reopened]
+  pull_request_target:          # runs from ur repo, never runs anyone's code, just reads the pr
+    types: [opened, reopened, edited]
+  schedule:
+    - cron: "0 */6 * * *"   # checks for stale claims every 6 hours
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  claim:
+    if: github.event_name == 'issue_comment' && !github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const body = (context.payload.comment.body || '').trim().toLowerCase();
+            // forgiving: /assign, \assign, / assign, any capitalisation, on any line of the comment
+            const wantsUnassign = /^\s*[\/\\]\s*unassign\b/m.test(body);
+            const wantsAssign = !wantsUnassign && /^\s*[\/\\]\s*assign\b/m.test(body);
+            if (!wantsAssign && !wantsUnassign) {
+              // looks like they tried to claim but got the command wrong? nudge them (short comments only, so normal chat is left alone)
+              const tried = body.length <= 40 && /(^|[^a-z])(un)?(assign|asign|assing|asssign)(\b|me)/.test(body) && !/assigned/.test(body);
+              if (tried) {
+                await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: context.payload.issue.number,
+                  body: `@${context.payload.comment.user.login} to claim this, comment exactly \`/assign\` (forward slash, nothing else) and i'll sort it out 🙏` });
+              }
+              return;
+            }
+
+            const { owner, repo } = context.repo;
+            const issue = context.payload.issue;
+            const user = context.payload.comment.user.login;
+            const n = issue.number;
+            const reply = (text) => github.rest.issues.createComment({ owner, repo, issue_number: n, body: text });
+            const assignees = (issue.assignees || []).map(a => a.login);
+
+            if (wantsUnassign) {
+              if (!assignees.includes(user)) return reply(`@${user} u're not assigned to this one, so nothing to undo 👍`);
+              await github.rest.issues.removeAssignees({ owner, repo, issue_number: n, assignees: [user] });
+              return reply(`@${user} unassigned. this one's up for grabs again, comment \`/assign\` to claim it.`);
+            }
+
+            if (issue.state !== 'open') return reply(`@${user} this issue is closed, so it can't be claimed.`);
+            if (assignees.includes(user)) return reply(`@${user} u already have this one 😄`);
+            if (assignees.length > 0) return reply(`@${user} sorry, @${assignees[0]} has already claimed this one. have a look for another issue!`);
+
+            const theirIssues = await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', assignee: user, per_page: 100 });
+            const claimed = theirIssues.filter(i => !i.pull_request && i.number !== n).map(i => i.number);
+
+            // max 2 claimed issues at a time (matches the max of 2 open prs)
+            if (user !== owner && claimed.length >= 2) {
+              return reply(`@${user} u've already got 2 issues claimed (${claimed.map(c => '#' + c).join(', ')}), and that's the max. once one of them is closed, or u \`/unassign\` one, u can claim this 🙏`);
+            }
+
+            // one claim at a time without a pr: find their other claims that don't have an open pr yet
+            if (user !== owner && claimed.length) {
+              const prs = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
+              const covered = new Set();
+              for (const pr of prs.filter(p => p.user.login === user)) {
+                for (const m of (pr.body || '').matchAll(/#(\d+)/g)) covered.add(Number(m[1]));
+              }
+              const waiting = claimed.filter(c => !covered.has(c));
+              if (waiting.length) {
+                return reply(`@${user} u've still got #${waiting[0]} claimed with no pr yet. open a pr for it first (or comment \`/unassign\` there), then come back and claim this one. one claim at a time 🙏`);
+              }
+            }
+
+            const res = await github.rest.issues.addAssignees({ owner, repo, issue_number: n, assignees: [user] });
+            if (!(res.data.assignees || []).some(a => a.login === user)) {
+              return reply(`@${user} github wouldn't let me assign u. ping @${owner} and they'll sort it out.`);
+            }
+            const beginnerNote = (issue.labels || []).some(l => (l.name || l) === 'beginner')
+              ? `\n\nheads up: this is a \`beginner\` issue, so it's for people doing the beginner level only.` : '';
+
+            // already opened a pr for this issue before claiming? clear its flag now instead of making them edit it
+            const linkRe = new RegExp(`\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\\s*:?\\s+#${n}\\b`, 'i');
+            const openPrs = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
+            const linked = openPrs.filter(p => p.user.login === user && linkRe.test(p.body || ''));
+            for (const p of linked) {
+              if ((p.labels || []).some(l => l.name === 'needs fixing')) {
+                try { await github.rest.issues.removeLabel({ owner, repo, issue_number: p.number, name: 'needs fixing' }); } catch (e) {}
+                await github.rest.issues.createComment({ owner, repo, issue_number: p.number, body: `@${user} u've claimed #${n} now, so all good ✅` });
+              }
+            }
+            if (linked.length) {
+              return reply(`@${user} it's yours! 🎉 ur pr ${linked.map(p => '#' + p.number).join(', ')} is already linked to this, so u're all set.${beginnerNote}`);
+            }
+            return reply(`@${user} it's yours! 🎉 open a pr that says \`closes #${n}\` within 48 hours, or it goes back up for grabs.${beginnerNote}`);
+
+  release-stale-claims:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const LIMIT_MS = 48 * 60 * 60 * 1000;
+            const now = Date.now();
+            const issues = (await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', per_page: 100 }))
+              .filter(i => !i.pull_request && (i.assignees || []).length);
+            if (!issues.length) return;
+            const prs = await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 });
+
+            for (const issue of issues) {
+              const events = await github.paginate(github.rest.issues.listEvents, { owner, repo, issue_number: issue.number, per_page: 100 });
+              for (const a of issue.assignees) {
+                if (a.login === owner) continue;  // never auto-release the repo owner
+                const when = events.filter(e => e.event === 'assigned' && e.assignee && e.assignee.login === a.login)
+                                   .map(e => Date.parse(e.created_at)).sort((x, y) => y - x)[0];
+                if (!when || now - when < LIMIT_MS) continue;
+                const hasPr = prs.some(p => p.user.login === a.login && new RegExp(`#${issue.number}\\b`).test(p.body || ''));
+                if (hasPr) continue;
+                await github.rest.issues.removeAssignees({ owner, repo, issue_number: issue.number, assignees: [a.login] });
+                await github.rest.issues.createComment({ owner, repo, issue_number: issue.number,
+                  body: `@${a.login} it's been 48 hours with no pr, so this one's been released. no stress, if u're still working on it just comment \`/assign\` again (as long as no one else has grabbed it). everyone else: it's up for grabs! comment \`/assign\` to claim it.` });
+              }
+            }
+
+  issue-limit:
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue = context.payload.issue;
+            const user = issue.user.login;
+            if (user === owner) return;
+            const open = (await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', creator: user, per_page: 100 }))
+              .filter(i => !i.pull_request && i.number !== issue.number);
+            if (open.length < 3) return;
+            await github.rest.issues.createComment({ owner, repo, issue_number: issue.number,
+              body: `@${user} u're at the max of 3 open issues (${open.map(i => '#' + i.number).join(', ')}), so i've closed this one for now. once one of those gets closed, u can reopen this or open a new one. quality over quantity 🙏` });
+            await github.rest.issues.update({ owner, repo, issue_number: issue.number, state: 'closed', state_reason: 'not_planned' });
+
+  pr-checks:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const pr = context.payload.pull_request;
+            const user = pr.user.login;
+            const n = pr.number;
+            const action = context.payload.action;
+            if (user === owner || pr.state !== 'open') return;
+            const comment = (body) => github.rest.issues.createComment({ owner, repo, issue_number: n, body });
+            const close = () => github.rest.pulls.update({ owner, repo, pull_number: n, state: 'closed' });
+            const LABEL = 'needs fixing';
+            const hasLabel = (pr.labels || []).some(l => l.name === LABEL);
+
+            // 1. max 2 open prs (only checked when the pr is opened or reopened)
+            if (action === 'opened' || action === 'reopened') {
+              const open = (await github.paginate(github.rest.pulls.list, { owner, repo, state: 'open', per_page: 100 }))
+                .filter(p => p.user.login === user && p.number !== n);
+              if (open.length >= 2) {
+                await comment(`@${user} u're at the max of 2 open prs (${open.map(p => '#' + p.number).join(', ')}), so i've closed this one for now. once one of those is closed or merged, u can reopen this 🙏`);
+                return close();
+              }
+            }
+
+            // 2. which issue is this for?
+            const m = (pr.body || '').match(/\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s*:?\s+#(\d+)/i);
+            const problems = [];
+            if (!m) {
+              problems.push(`link ur issue by writing \`closes #12\` (with ur issue number) in the pr description, so we know what this pr is for.`);
+            } else {
+              const num = Number(m[1]);
+              let issue = null;
+              try { issue = (await github.rest.issues.get({ owner, repo, issue_number: num })).data; } catch (e) {}
+              if (!issue || issue.pull_request) {
+                problems.push(`#${num} isn't an issue on this repo. link the issue this pr is for, like \`closes #12\`.`);
+              } else {
+                const who = (issue.assignees || []).map(a => a.login);
+                if (who.length && !who.includes(user)) {
+                  await comment(`@${user} #${num} is claimed by @${who[0]}, so i've closed this pr. find an issue nobody's claimed, comment \`/assign\` on it, and go for it 🙏`);
+                  return close();
+                }
+                if (!who.length) problems.push(`#${num} isn't claimed by u yet. comment \`/assign\` on #${num} first, then edit this pr (any small edit to the description works) so i can check again.`);
+                else if (issue.state !== 'open') problems.push(`#${num} is already closed. link an open issue that u've claimed.`);
+              }
+            }
+
+            if (problems.length) {
+              const msg = `@${user} nearly there! a couple of things first:\n\n${problems.map(p => '- ' + p).join('\n')}\n\nonce it's fixed, just edit the pr description and i'll check again.`;
+              if (!hasLabel) {
+                try { await github.rest.issues.createLabel({ owner, repo, name: LABEL, color: 'e11d21', description: 'the bot found something to fix in this pr' }); } catch (e) {}
+                await github.rest.issues.addLabels({ owner, repo, issue_number: n, labels: [LABEL] });
+                return comment(msg);
+              }
+              // already labelled: only speak up again if the problem changed, so edits don't spam the pr
+              const past = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: n, per_page: 100 });
+              const last = past.filter(c => c.user && c.user.type === 'Bot' && (c.body || '').includes('nearly there!')).pop();
+              if (!last || last.body !== msg) return comment(msg);
+              return;
+            }
+            if (hasLabel) {
+              await github.rest.issues.removeLabel({ owner, repo, issue_number: n, name: LABEL });
+              await comment(`@${user} all good now ✅`);
+            }

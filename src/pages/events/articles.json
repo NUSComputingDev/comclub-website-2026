@@ -1,6 +1,6 @@
 {
   "comaraderie": {
-    "department": "SD/SL",
+    "department": "SL",
     "title": "COMaraderie",
     "body": "Comaraderie is an annual event held by SoC to help students kickstart the new semester with new friendships and experiences after the long winter break. Participants form groups of 5 and complete various challenges to win attractive prizes, making new friends along the way.",
     "link": "comaraderie",
@@ -9,7 +9,7 @@
     "endDatetime": "2026-02-06T23:59:59+08:00"
   },
   "career_launchpad": {
-    "department": "SD/SL",
+    "department": "SD",
     "title": "Career Launchpad",
     "body": "Career Launchpad 2026 is an initiative by the NUS Computing Club's Academic Liaison Cell aimed at preparing students for successful careers. It includes skill-building workshops, company talks, and alumni sharing sessions, focusing on delivering insights and meaningful takeaways to empower attendees in their career journeys.",
     "link": "career-launchpad",
@@ -18,11 +18,12 @@
     "endDatetime": "2026-02-13T23:59:59+08:00"
   },
   "fsc": {
-    "department": "SD/SL",
+    "department": "SL",
     "title": "Freshmen Social Camp",
     "body": "\u26a1\ufe0f GLITCH IN THE MATRIX? SOCCAT NEEDS YOU! \ud83d\udc7e\n\nThe digital realm is breaking, and our beloved SoCCat is trapped in the code! \ud83d\ude40\nJoin us from 16-19 June 2026 at Freshman Social Camp (FSC) to defeat the hackers and bring SoCCat \ud83d\udc31\ud83d\udd0c home!\n\nExpect exciting games, great vibes, and unforgettable company: this is your spawn point to level up your summer! \ud83c\udfae\u2728\n\n\ud83c\udfc6 WHY JOIN FSC '26? \ud83c\udfc6\n\u2b50 Action-packed and wet games to keep you hyped \ud83d\udd25\n\u2b50 Fuel to power you through every challenge \ud83c\udf5c\n\u2b50 Meet new friends, freshmen and seniors alike \ud83d\udc97\n\nStep into the SoC world and create memories that last forever \ud83d\udcbe\n\nSign up now!\ud83c\udfc3\ud83c\udfc3\nhttps://au.cglink.me/2sg/r379733\n\n\ud83d\udcdd IMPORTANT DATES\nCamp: 16-19 June 2026\nEligibility: Incoming SoC Freshmen\nDeadline: 12 June, 23:59 \u23f0\nQuestions? DM us on Telegram:\n@rocksontheshore (Joshua)\n@xiang_neng (Xiang Neng)\n@hachiwarel (Lu-anne)\n\nDon't let corruption win-see you in the arena! \u2694\ufe0f\ud83c\udf1f",
     "link": "fsc",
     "imgSrc": "/announcements/fsc.JPG",
+    "allDay": true,
     "startDatetime": "2026-06-16T00:00:00+08:00",
     "endDatetime": "2026-06-19T23:59:59+08:00"
   },
@@ -45,7 +46,7 @@
     "endDatetime": "2026-07-20T23:59:59+08:00"
   },
   "fow": {
-    "department": "SD/SL",
+    "department": "SL",
     "title": "Freshmen Orientation Week 2026",
     "body": "\u26a1 Zeus' Master Bolt has been stolen, and Camp Half-Blood calls for its next generation of heroes \u26a1\nFreshmen Orientation Week (FOW) 2026 is your chance to kickstart university life through 4 days of games, bonding, challenges and unforgettable memories with your fellow SoC freshmen.\nJoin a domain, meet new people and embark on a myth-inspired adventure as you begin your SoC journey \ud83c\udf0a\ud83d\udd25\u26a1\nSign up now! \ud83c\udfc3\nhttps://au.cglink.me/2sg/r380187\n\ud83d\udcdd IMPORTANT DATES\nCamp: 21-24 July 2026\nEligibility: Incoming SoC Freshmen\nQuestions? DM us on Telegram:\n@dbs15329 (Dhanush)\n@deebett (Daniel)\n@crumblingaf (Yao Wei)\n\u26a1 The gods are waiting. Answer the call.\u26a1",
     "link": "fow",
@@ -54,7 +55,7 @@
     "endDatetime": "2026-07-24T23:59:59+08:00"
   },
   "flag_day": {
-    "department": "SD/SL",
+    "department": "SD",
     "title": "Flag Day 2026",
     "body": "Flag Day 2026 brings SoC together for a day of fundraising, outreach, and community spirit in support of meaningful causes.",
     "link": "flag-day-2026",
@@ -63,7 +64,7 @@
     "endDatetime": "2026-07-29T23:59:59+08:00"
   },
   "ffc": {
-    "department": "SD/SL",
+    "department": "SL",
     "title": "Freshmen Finale Camp 2026",
     "body": "\ud83c\udf7d\ufe0f HUNGRY FOR THE WIN? THE FEAST AWAITS! \ud83d\udd25\nThe Grand Feast has returned to SoC, and four clans are ready to battle for the top spot!\nJoin us for Freshman Finale Camp (FFC) 2026 as Iolite, Citrine, Peridot and Andesine enter The Hunger Trails - a camp-wide adventure filled with games, bonding, challenges and unforgettable memories. \ud83c\udfd5\ufe0f\u2728\nThis is not just about food.\nThis is about being hungry for fun, hungry for friends, and hungry for victory. \ud83c\udfc6\nThroughout the camp, you will compete for Feast Points, meet fellow SoC freshmen and seniors, explore the SoC spirit, and celebrate the start of your NUS journey through exciting activities and beach-day fun! \ud83c\udf0a\ud83c\udf5c\n\ud83c\udfc6 WHY JOIN FFC '26? \ud83c\udfc6\n\u2b50\ufe0f Compete in station games, mass games and beach challenges \ud83d\udd25\n\u2b50\ufe0f Join one of four clans and fight for the Champion of the Feast title \ud83c\udf7d\ufe0f\n\u2b50\ufe0f Meet new friends, seniors and future coursemates \ud83d\udc97\n\u2b50\ufe0f Experience SoC, NUS and Singapore culture through camp-wide activities \ud83c\uddf8\ud83c\uddec\n\u2b50\ufe0f End off with a Grand Feast celebration by the beach \ud83c\udf0a\u2728\nStep into the Hunger Trails and feed your hunger for victory.\n\ud83d\udcdd IMPORTANT DATES\nCamp: Aug 4th - 6th\nEligibility: Incoming SoC Freshmen\nQuestions? DM us on Telegram:\n@tkaixinn\n@nghnaomi\n@hminnn_1\n\ud83c\udf7d\ufe0f Sign up is coming soon! \ud83c\udf7d\ufe0f The Feast is calling. Will your clan claim the crown? \ud83d\udd25",
     "link": "ffc",
@@ -72,7 +73,7 @@
     "endDatetime": "2026-08-06T23:59:59+08:00"
   },
   "rag_and_flag_day": {
-    "department": "SD/SL",
+    "department": "SD",
     "title": "RAG & Flag Day 2026",
     "body": "Rag and Flag is an annual event at NUS that brings together students from various faculties to participate in community service and fundraising activities. The day begins with students engaging in volunteer work across different locations, followed by a vibrant parade featuring student performances and creatively decorated floats. This event not only fosters a sense of unity and social responsibility among students but also helps raise funds for various charitable causes. Rag and Flag embodies the spirit of giving back to the community while celebrating student creativity and teamwork.",
     "link": "rag-and-flag-day-2026",
@@ -81,7 +82,7 @@
     "endDatetime": "2026-08-07T23:59:59+08:00"
   },
   "lifehack": {
-    "department": "SD/SL",
+    "department": "SD",
     "title": "LifeHack 2026",
     "body": "Date: To be confirmed.\n\nLifeHack 2026 is a practical student prep series packed with useful tips, resources, and hacks to help you settle into SoC and university life.",
     "link": "lifehack-2026",
