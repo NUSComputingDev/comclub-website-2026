@@ -133,7 +133,7 @@ function About() {
           campus vibrant, safeguard your interests, provide welfare, and form
           the bridge between our students and the school.
         </p>
-        <div className='about-chips'>
+        <div className='about-stats'>
           <span>Est. 1998</span>
           <span>Constituent club</span>
           <span>4 wings</span>
@@ -218,7 +218,7 @@ function About() {
       >
         <span className='about-banner-kicker'>Introducing the</span>
         <h1>29th Management Committee</h1>
-        <div className='about-chips'>
+        <div className='about-chips about-chips--buttons'>
           {
             WINGS.map((wing) => {
               const slug = wing.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -229,7 +229,6 @@ function About() {
                   onClick={scrollToId(`wing-${slug}`)}
                 >
                   {wing}
-                  <span className='about-chip-arrow' aria-hidden='true'>↓</span>
                 </a>
               );
             })

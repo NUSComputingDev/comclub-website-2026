@@ -219,64 +219,57 @@
   ;
 }
 
+/* Plain stat line inside the who-are-we banner. */
+.about-stats {
+  @apply
+    flex
+    flex-wrap
+    items-center
+    justify-center
+    gap-x-2
+    gap-y-1
+    text-xs
+    font-semibold
+    text-white/60
+  ;
+}
+
+.about-stats>span+span::before {
+  content: '\00b7';
+  @apply
+    mx-2
+    text-white/30
+  ;
+}
+
+/* Wing buttons in the committee banner. */
 .about-chips {
   @apply
     flex
     flex-wrap
     justify-center
-    gap-x-4
-    gap-y-2
-    font-mono
-    text-xs
-    text-white/75
+    gap-2
   ;
 }
 
 .about-chips>a {
   @apply
-    transition-colors
-    hover:text-white
-  ;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-decoration-color: rgba(255, 255, 255, 0.35);
-  text-underline-offset: 4px;
-}
-
-.about-chips>a:hover {
-  text-decoration-color: #ffffff;
-}
-
-.about-chip-arrow {
-  @apply
-    ml-1
-    text-[10px]
-    text-white/60
-  ;
-}
-
-.about-chips>a:hover .about-chip-arrow {
-  @apply
+    inline-flex
+    items-center
+    px-4
+    py-2
+    rounded-full
+    border-2
+    border-white/30
+    font-body
+    text-sm
+    font-bold
     text-white
+    transition-colors
+    hover:bg-white
+    hover:text-primary
   ;
-}
-
-.about-chips>span::before,
-.about-chips>a::before {
-  content: '[';
-  @apply
-    mr-1.5
-    text-white/35
-  ;
-}
-
-.about-chips>span::after,
-.about-chips>a::after {
-  content: ']';
-  @apply
-    ml-1.5
-    text-white/35
-  ;
+  text-decoration: none;
 }
 
 /* Content sections */
