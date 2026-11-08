@@ -140,8 +140,9 @@
   ;
 }
 
-/* Touch devices can't hover, so keep a small badge visible instead. */
-@media (hover: none) {
+/* Touch devices and phone widths can't rely on hover, so keep a small badge
+   visible instead. */
+@media (hover: none), (max-width: 767px) {
   .role-photo-hint {
     @apply
       inset-x-auto
