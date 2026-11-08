@@ -6,6 +6,7 @@ export interface RoleMember {
   name: string;
   role: string;
   title: string;
+  shortName?: string;
   imgSrc: string;
   wing: string;
   section?: string;

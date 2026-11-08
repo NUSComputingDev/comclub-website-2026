@@ -35,7 +35,8 @@
     {
       "name": "Jeyaraj Justin",
       "role": "Vice President",
-      "img": "/members/thumbs/JeyarajJustin.webp"
+      "img": "/members/thumbs/JeyarajJustin.webp",
+      "shortName": "Jeyaraj"
     },
     {
       "name": "Keith Voo Zheng Feng",
@@ -62,7 +63,8 @@
     {
       "name": "Yin Chengyan Amy",
       "role": "Vice President",
-      "img": "/members/thumbs/YinChengyanAmy.webp"
+      "img": "/members/thumbs/YinChengyanAmy.webp",
+      "shortName": "Amy"
     },
     {
       "name": "Chua Lu Teng Lorraine",
@@ -98,7 +100,8 @@
     {
       "name": "Chan Shi Hui Mikki",
       "role": "Vice President",
-      "img": "/members/thumbs/ChanShiHuiMikki.webp"
+      "img": "/members/thumbs/ChanShiHuiMikki.webp",
+      "shortName": "Mikki"
     },
     {
       "name": "Kang Joo Ann Adrian",
@@ -130,7 +133,8 @@
     {
       "name": "Eu Guang En Joshua",
       "role": "Vice President",
-      "img": "/members/thumbs/EuGuangEnJoshua.webp"
+      "img": "/members/thumbs/EuGuangEnJoshua.webp",
+      "shortName": "Joshua"
     },
     {
       "name": "Kaleb Nim",

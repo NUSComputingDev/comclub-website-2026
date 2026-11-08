@@ -1,0 +1,350 @@
+.committee-tree {
+  @apply
+    flex
+    flex-col
+    w-full
+  ;
+}
+
+/* The trunk only exists below P-Wing: the four wings branch off it. */
+.tree-wings {
+  @apply
+    relative
+    flex
+    flex-col
+    w-full
+  ;
+  padding-left: 1.5rem;
+  margin-top: 3rem;
+}
+
+.tree-wings::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.125rem;
+  bottom: 0;
+  width: 2px;
+  background-color: #94a3b8;
+}
+
+.tree-branch {
+  @apply
+    flex
+    flex-col
+    w-full
+  ;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 450ms ease-out, transform 450ms ease-out;
+}
+
+.tree-branch + .tree-branch {
+  margin-top: 3.5rem;
+}
+
+.committee-tree.is-visible .tree-branch {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.committee-tree.is-visible .tree-wings>.tree-branch:nth-child(1) {
+  transition-delay: 90ms;
+}
+
+.committee-tree.is-visible .tree-wings>.tree-branch:nth-child(2) {
+  transition-delay: 170ms;
+}
+
+.committee-tree.is-visible .tree-wings>.tree-branch:nth-child(3) {
+  transition-delay: 250ms;
+}
+
+.committee-tree.is-visible .tree-wings>.tree-branch:nth-child(4) {
+  transition-delay: 330ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .committee-tree .tree-branch {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media print {
+  .committee-tree .tree-branch {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.tree-label {
+  @apply
+    relative
+    inline-flex
+    items-center
+    gap-2.5
+    px-4
+    py-1.5
+    rounded-full
+    border-2
+    border-outline
+    bg-white
+  ;
+  align-self: center;
+}
+
+.tree-leader-avatar {
+  @apply
+    w-9
+    h-9
+    flex-none
+    rounded-full
+    border-2
+    border-slate-100
+    bg-slate-100
+    object-cover
+    object-top
+  ;
+}
+
+.tree-label-text {
+  @apply
+    flex
+    flex-col
+    min-w-0
+  ;
+}
+
+.tree-label-top {
+  @apply
+    flex
+    items-center
+    gap-2
+  ;
+}
+
+.tree-leader-name {
+  @apply
+    text-[10px]
+    font-semibold
+    leading-tight
+    text-slate-400
+  ;
+}
+
+.tree-label-name {
+  @apply
+    text-sm
+    md:text-base
+    font-bold
+    text-primary
+  ;
+}
+
+.tree-label-count {
+  @apply
+    flex
+    items-center
+    justify-center
+    min-w-[1.25rem]
+    h-5
+    px-1.5
+    rounded-full
+    bg-slate-100
+    text-xs
+    font-semibold
+    text-slate-500
+  ;
+}
+
+/* "Executive Committee" / "VP · <name>" under a wing label. */
+.tree-label-subtitle {
+  @apply
+    mt-1.5
+    text-xs
+    font-semibold
+    text-slate-500
+  ;
+  align-self: center;
+}
+
+/* Branch line from the trunk into the centred wing label. */
+.tree-branch:not(.featured) {
+  position: relative;
+}
+
+.tree-branch:not(.featured)::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  right: 50%;
+  top: 1.5rem;
+  height: 2px;
+  background-color: #94a3b8;
+}
+
+.tree-head {
+  @apply
+    flex
+    justify-center
+    w-full
+    m-0
+    p-0
+    list-none
+  ;
+  margin-top: 0.75rem;
+}
+
+.tree-head>.role-card-item {
+  flex: 0 0 58%;
+  max-width: 18rem;
+}
+
+@screen sm {
+  .tree-head>.role-card-item {
+    flex-basis: 36%;
+  }
+}
+
+@screen lg {
+  .tree-head>.role-card-item {
+    flex-basis: 28%;
+  }
+}
+
+@screen xl {
+  .tree-head>.role-card-item {
+    flex-basis: 19%;
+  }
+}
+
+.tree-group {
+  @apply
+    flex
+    flex-col
+    w-full
+  ;
+}
+
+.tree-group + .tree-group {
+  margin-top: 2rem;
+}
+
+.tree-group-label {
+  @apply
+    mb-2
+    text-center
+    text-[11px]
+    font-bold
+    uppercase
+    tracking-wider
+    text-slate-400
+  ;
+}
+
+.tree-leaves {
+  @apply
+    flex
+    flex-wrap
+    justify-center
+    gap-x-4
+    gap-y-8
+    w-full
+    m-0
+    p-0
+    list-none
+  ;
+  margin-top: 0.25rem;
+}
+
+.tree-leaves>.role-card-item {
+  flex: 0 0 calc((100% - 1rem) / 2);
+}
+
+@screen sm {
+  .tree-leaves>.role-card-item {
+    flex-basis: calc((100% - 2rem) / 3);
+  }
+}
+
+@screen lg {
+  .tree-leaves>.role-card-item {
+    flex-basis: calc((100% - 3rem) / 4);
+  }
+}
+
+@screen xl {
+  .tree-leaves>.role-card-item {
+    flex-basis: calc((100% - 5rem) / 6);
+  }
+}
+
+/* P-Wing is the executive block: a soft panel holding the whole exco. */
+.tree-branch.featured {
+  @apply
+    rounded-3xl
+    border-2
+    border-slate-200
+    bg-primary/5
+    px-4
+    py-8
+    md:px-6
+    md:py-10
+  ;
+  box-shadow: 0 18px 40px -30px rgba(54, 84, 134, 0.55);
+}
+
+.tree-branch.featured .tree-label {
+  @apply
+    border-primary
+  ;
+}
+
+.tree-branch.featured .tree-label-name {
+  @apply
+    text-base
+    md:text-lg
+  ;
+}
+
+.tree-branch.featured .tree-label-count {
+  @apply
+    bg-primary/10
+    text-primary
+  ;
+}
+
+.tree-branch.featured .tree-head>.role-card-item {
+  flex-basis: 62%;
+}
+
+@screen sm {
+  .tree-branch.featured .tree-head>.role-card-item {
+    flex-basis: 40%;
+  }
+}
+
+@screen lg {
+  .tree-branch.featured .tree-head>.role-card-item {
+    flex-basis: 30%;
+  }
+}
+
+@screen xl {
+  .tree-branch.featured .tree-head>.role-card-item {
+    flex-basis: 20%;
+  }
+}
+
+@screen md {
+  .tree-wings {
+    padding-left: 2.5rem;
+  }
+
+  .tree-branch:not(.featured)::before {
+    left: -2.5rem;
+  }
+}

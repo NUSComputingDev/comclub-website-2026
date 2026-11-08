@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import WindowCard from '../../layout/WindowCard';
-import RoleCard, { MemberPhoto, RoleMember } from './RoleCard';
+import React, { useEffect, useMemo, useState } from 'react';
+import { MemberPhoto, RoleMember } from './RoleCard';
+import CommitteeTree, { WingBranch } from './CommitteeTree';
 import roles from './roles.json' with {type: 'json'};
 import './RolesSection.css';
 
 interface Member {
   name: string;
   role: string;
+  shortName?: string;
   img?: string;
 }
 
@@ -63,6 +63,7 @@ function orderMembers(members: Member[]): RoleMember[] {
     name: member.name,
     role: member.role,
     title,
+    shortName: member.shortName,
     wing: '',
     imgSrc: member.img ?? `/members/thumbs/${member.name.replace(/[^A-Za-z0-9]/g, '')}.webp`,
     section,
@@ -71,65 +72,66 @@ function orderMembers(members: Member[]): RoleMember[] {
   }));
 }
 
-interface WingCardProps {
-  wing: string;
-  members: Member[];
-  defaultOpen: boolean;
-  onSelect: (member: RoleMember) => void;
-}
+/**
+ * The committee is a three-tier tree:
+ *   1. The President heads P-Wing.
+ *   2. P-Wing holds the office bearers and the four Vice Presidents.
+ *   3. Each Vice President's wing holds its directors, grouped by section.
+ */
+function buildBranches(): WingBranch[] {
+  const entries = Object.entries(roles) as [string, Member[]][];
+  const [pWingEntry, ...wingEntries] = entries;
 
-function WingCard({ wing, members, defaultOpen, onSelect }: WingCardProps) {
-  const [open, setOpen] = useState(
-    () => defaultOpen || window.matchMedia('(min-width: 768px)').matches,
-  );
+  if (!pWingEntry) {
+    return [];
+  }
 
-  const ordered = orderMembers(members).map((member, index) => ({
-    ...member,
+  const [pWingName, pWingRaw] = pWingEntry;
+
+  const wings = wingEntries.map(([wing, members]) => ({
     wing,
+    members: orderMembers(members).map((member, index) => ({
+      ...member,
+      wing,
+      isLead: index === 0,
+    })),
+  }));
+
+  const [president, ...officeBearers] = orderMembers(pWingRaw).map((member, index) => ({
+    ...member,
+    wing: pWingName,
     isLead: index === 0,
   }));
 
-  const contentId = `wing-${wing.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+  const vicePresidents = wings.map(({ wing, members: wingMembers }) => ({
+    ...wingMembers[0],
+    wing: pWingName,
+    isLead: true,
+    title: `${wingMembers[0].title} · ${wing}`,
+  }));
 
-  return (
-    <WindowCard
-      title={
-        <button
-          type='button'
-          className='wing-toggle'
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-controls={contentId}
-        >
-          <span className='wing-title'>{wing}</span>
-          <span className='wing-count'>{members.length}</span>
-          <ChevronDownIcon
-            className={`wing-chevron ${open ? 'open' : ''}`}
-            aria-hidden='true'
-          />
-        </button>
-      }
-      content={
-        <div id={contentId} hidden={!open}>
-          <ul className='member-grid'>
-            {
-              ordered.map((member) => (
-                <RoleCard
-                  member={member}
-                  onSelect={onSelect}
-                  key={member.name}
-                ></RoleCard>
-              ))
-            }
-          </ul>
-        </div>
-      }
-    ></WindowCard>
-  );
+  return [
+    {
+      wing: pWingName,
+      subtitle: 'Executive Committee',
+      featured: true,
+      head: president,
+      groups: [
+        { label: 'Office Bearers', members: officeBearers },
+        { label: 'Vice Presidents', members: vicePresidents },
+      ],
+    },
+    ...wings.map(({ wing, members: wingMembers }) => ({
+      wing,
+      leader: wingMembers[0],
+      groups: [{ members: wingMembers.slice(1) }],
+    })),
+  ];
 }
 
 function RolesSection() {
   const [selected, setSelected] = useState<RoleMember | null>(null);
+  const branches = useMemo(buildBranches, []);
 
   useEffect(() => {
     if (!selected) {
@@ -154,17 +156,7 @@ function RolesSection() {
 
   return (
     <div className='roles-section'>
-      {
-        Object.entries(roles).map(([wing, members], index) => (
-          <WingCard
-            key={wing}
-            wing={wing}
-            members={members}
-            defaultOpen={index === 0}
-            onSelect={setSelected}
-          ></WingCard>
-        ))
-      }
+      <CommitteeTree branches={branches} onSelect={setSelected}></CommitteeTree>
 
       {
         selected && (
