@@ -229,6 +229,7 @@ function About() {
                   onClick={scrollToId(`wing-${slug}`)}
                 >
                   {wing}
+                  <span className='about-chip-arrow' aria-hidden='true'>↓</span>
                 </a>
               );
             })

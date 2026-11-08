@@ -237,6 +237,28 @@
     transition-colors
     hover:text-white
   ;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+  text-underline-offset: 4px;
+}
+
+.about-chips>a:hover {
+  text-decoration-color: #ffffff;
+}
+
+.about-chip-arrow {
+  @apply
+    ml-1
+    text-[10px]
+    text-white/60
+  ;
+}
+
+.about-chips>a:hover .about-chip-arrow {
+  @apply
+    text-white
+  ;
 }
 
 .about-chips>span::before,
