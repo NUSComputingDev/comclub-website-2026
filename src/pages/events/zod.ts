@@ -1,11 +1,13 @@
 export interface Article {
-  department: 'IR' | 'SD/SL';
+  department: 'IR' | 'SD' | 'SL';
   title: string;
   body: string;
   link: string;
   imgSrc: string;
   startDatetime?: string;
   endDatetime?: string;
+  // optional property to indicate if the event is an all-day event
+  allDay?: boolean;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -29,11 +31,12 @@ function isArticle(value: unknown): value is Article {
     isValidDateTime(value.endDatetime);
 
   return (
-    (value.department === 'IR' || value.department === 'SD/SL') &&
+    (value.department === 'IR' || value.department === 'SD' || value.department === 'SL') &&
     typeof value.title === 'string' &&
     typeof value.body === 'string' &&
     typeof value.link === 'string' &&
     typeof value.imgSrc === 'string' &&
+    (value.allDay === undefined || typeof value.allDay === 'boolean') &&
     (hasNoDates || hasValidDates)
   );
 }
