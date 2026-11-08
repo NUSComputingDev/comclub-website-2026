@@ -110,6 +110,7 @@ function About() {
               onClick={scrollToId('what-we-do')}
             >
               What we do
+              <span className='about-arrow' aria-hidden='true'>&#8594;</span>
             </a>
           </div>
         </div>
@@ -160,6 +161,7 @@ function About() {
                     <p>{copy}</p>
                     <Link to={to} className='about-card-link'>
                       {cta}
+                      <span className='about-arrow' aria-hidden='true'>&#8594;</span>
                     </Link>
                   </div>
                 }
@@ -218,9 +220,18 @@ function About() {
         <h1>29th Management Committee</h1>
         <div className='about-chips'>
           {
-            WINGS.map((wing) => (
-              <span key={wing}>{wing}</span>
-            ))
+            WINGS.map((wing) => {
+              const slug = wing.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+              return (
+                <a
+                  key={wing}
+                  href={`#wing-${slug}`}
+                  onClick={scrollToId(`wing-${slug}`)}
+                >
+                  {wing}
+                </a>
+              );
+            })
           }
         </div>
         <a

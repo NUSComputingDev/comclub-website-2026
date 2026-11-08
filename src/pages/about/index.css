@@ -232,7 +232,15 @@
   ;
 }
 
-.about-chips>span::before {
+.about-chips>a {
+  @apply
+    transition-colors
+    hover:text-white
+  ;
+}
+
+.about-chips>span::before,
+.about-chips>a::before {
   content: '[';
   @apply
     mr-1.5
@@ -240,7 +248,8 @@
   ;
 }
 
-.about-chips>span::after {
+.about-chips>span::after,
+.about-chips>a::after {
   content: ']';
   @apply
     ml-1.5
@@ -386,12 +395,18 @@
   ;
 }
 
-.about-card-link>svg {
+.about-arrow {
   @apply
-    w-4
-    h-4
-    flex-none
+    inline-block
+    transition-transform
+    duration-150
+    ease-out
   ;
+}
+
+.about-card-link:hover .about-arrow,
+.about-cta:hover .about-arrow {
+  transform: translateX(3px);
 }
 
 .about-value-chips {
