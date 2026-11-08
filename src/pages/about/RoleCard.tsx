@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserIcon } from '@heroicons/react/solid';
+import { EyeIcon, UserIcon } from '@heroicons/react/solid';
 import './RoleCard.css';
 
 export interface RoleMember {
@@ -73,6 +73,10 @@ function RoleCard(props: RoleCardProps) {
               <span className='role-badge'>Wing Head</span>
             )
           }
+          <span className='role-photo-hint' aria-hidden='true'>
+            <EyeIcon className='role-photo-hint-icon' />
+            <span className='role-photo-hint-text'>View profile</span>
+          </span>
         </span>
         <span className='role-info'>
           <span className='role-section'>

@@ -63,49 +63,13 @@ interface TreeBranchProps {
 }
 
 function TreeBranch({ branch, onSelect }: TreeBranchProps) {
-  return (
-    <div
-      className={`tree-branch${branch.featured ? ' featured' : ''}`}
-      role='group'
-      aria-label={branch.wing}
-    >
-      <div className='tree-label'>
-        {
-          branch.leader && (
-            <img
-              className='tree-leader-avatar'
-              src={branch.leader.imgSrc}
-              alt=''
-              aria-hidden='true'
-            />
-          )
-        }
-        <span className='tree-label-text'>
-          <span className='tree-label-top'>
-            <span className='tree-label-name'>{branch.wing}</span>
-            <span className='tree-label-count'>
-              {
-                branch.groups.reduce(
-                  (total, group) => total + group.members.length,
-                  branch.head ? 1 : 0,
-                )
-              }
-            </span>
-          </span>
-          {
-            branch.leader && (
-              <span className='tree-leader-name'>
-                led by {branch.leader.shortName ?? branch.leader.name}
-              </span>
-            )
-          }
-        </span>
-      </div>
-      {
-        branch.subtitle && (
-          <span className='tree-label-subtitle'>{branch.subtitle}</span>
-        )
-      }
+  const count = branch.groups.reduce(
+    (total, group) => total + group.members.length,
+    branch.head ? 1 : 0,
+  );
+
+  const content = (
+    <>
       {
         branch.head && (
           <ul className='tree-head'>
@@ -137,6 +101,67 @@ function TreeBranch({ branch, onSelect }: TreeBranchProps) {
           )
         ))
       }
+    </>
+  );
+
+  if (branch.featured) {
+    return (
+      <div
+        className='tree-branch featured'
+        role='group'
+        aria-label={branch.wing}
+      >
+        <div className='tree-window-bar'>
+          <span className='tree-window-dots' aria-hidden='true'>
+            <span className='bg-[#ff605c]'></span>
+            <span className='bg-[#ffbd44]'></span>
+            <span className='bg-[#00ca4e]'></span>
+          </span>
+          <span className='tree-window-title'>{branch.wing}</span>
+          {
+            branch.subtitle && (
+              <span className='tree-window-subtitle'>{branch.subtitle}</span>
+            )
+          }
+          <span className='tree-window-count'>{count}</span>
+        </div>
+        <div className='tree-window-body'>{content}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className='tree-branch'
+      role='group'
+      aria-label={branch.wing}
+    >
+      <div className='tree-label'>
+        {
+          branch.leader && (
+            <img
+              className='tree-leader-avatar'
+              src={branch.leader.imgSrc}
+              alt=''
+              aria-hidden='true'
+            />
+          )
+        }
+        <span className='tree-label-text'>
+          <span className='tree-label-top'>
+            <span className='tree-label-name'>{branch.wing}</span>
+            <span className='tree-label-count'>{count}</span>
+          </span>
+          {
+            branch.leader && (
+              <span className='tree-leader-name'>
+                led by {branch.leader.shortName ?? branch.leader.name}
+              </span>
+            )
+          }
+        </span>
+      </div>
+      {content}
     </div>
   );
 }

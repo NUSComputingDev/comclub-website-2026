@@ -17,6 +17,7 @@
     text-left
     bg-transparent
     rounded-xl
+    cursor-pointer
     transition-colors
     duration-150
     ease-out
@@ -102,6 +103,58 @@
   ;
 }
 
+.role-photo-hint {
+  @apply
+    absolute
+    inset-x-0
+    bottom-0
+    flex
+    items-center
+    justify-center
+    gap-1.5
+    py-2
+    text-[11px]
+    font-semibold
+    text-white
+  ;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.role-card:hover .role-photo-hint,
+.role-card:focus-visible .role-photo-hint {
+  opacity: 1;
+}
+
+.role-photo-hint-icon {
+  @apply
+    w-4
+    h-4
+    flex-none
+  ;
+}
+
+/* Touch devices can't hover, so keep a small badge visible instead. */
+@media (hover: none) {
+  .role-photo-hint {
+    @apply
+      inset-x-auto
+      right-2
+      bottom-2
+      p-1
+      rounded-full
+      text-primary
+    ;
+    background: rgba(255, 255, 255, 0.9);
+    opacity: 1;
+  }
+
+  .role-photo-hint-text {
+    display: none;
+  }
+}
+
 .role-badge {
   @apply
     absolute
@@ -150,7 +203,7 @@
 .role-section-text {
   @apply
     min-w-0
-    truncate
+    break-words
   ;
 }
 
