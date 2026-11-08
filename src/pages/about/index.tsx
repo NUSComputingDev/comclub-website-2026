@@ -14,7 +14,7 @@ function About() {
             Colloquially known as <span>Computing Club</span>,
             we are a constituent club of the NUS Students&#39; Union.
             Find out more about what we do and meet the
-            <span> 28th Management Committee</span> below!
+            <span> 29th Management Committee</span> below!
           </p>
         </div>
       </section>
@@ -64,7 +64,7 @@ function About() {
 
       <div className='banner'>
         <h2 className='text-xl'>Introducing the</h2>
-        <h1>28th Management Committee</h1>
+        <h1>29th Management Committee</h1>
       </div>
       <RolesSection></RolesSection>
     </div>

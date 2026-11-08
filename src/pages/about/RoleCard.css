@@ -1,20 +1,48 @@
+.role-card-item {
+  @apply
+    min-w-0
+    h-full
+  ;
+}
+
 .role-card {
   @apply
     flex
     flex-col
     gap-1
+    w-full
+    h-full
     min-w-0
+    p-1.5
+    -m-1.5
+    text-left
+    bg-transparent
+    rounded-xl
+    transition-colors
+    duration-150
+    ease-out
+    hover:bg-slate-50
   ;
 }
 
-.role-card>img {
+.role-card:focus-visible {
   @apply
+    outline-none
+    ring-2
+    ring-highlight
+    ring-offset-2
+  ;
+}
+
+.role-photo {
+  @apply
+    relative
+    block
+    flex-none
     w-full
-    h-auto
+    overflow-hidden
     aspect-[4/5]
     mb-2
-    object-cover
-    object-top
     rounded-lg
     border-2
     border-outline
@@ -22,7 +50,147 @@
   ;
 }
 
-.role-card>h3 {
+.role-photo>img {
+  @apply
+    w-full
+    h-full
+    object-cover
+    object-top
+    transition-transform
+    duration-300
+    ease-out
+  ;
+}
+
+.member-photo-fallback {
+  @apply
+    flex
+    flex-col
+    items-center
+    justify-center
+    gap-2
+    w-full
+    h-full
+    px-3
+    bg-primary/5
+    text-primary/70
+    text-center
+    select-none
+  ;
+}
+
+.member-photo-fallback-icon {
+  @apply
+    w-7
+    h-7
+    flex-none
+  ;
+}
+
+.member-photo-fallback-text {
+  @apply
+    text-[11px]
+    md:text-xs
+    font-semibold
+    leading-tight
+  ;
+}
+
+.role-card:hover .role-photo>img,
+.role-card:focus-visible .role-photo>img {
+  @apply
+    scale-[1.04]
+  ;
+}
+
+.role-badge {
+  @apply
+    absolute
+    top-2
+    left-2
+    px-2
+    py-0.5
+    rounded-full
+    bg-primary
+    text-white
+    text-[10px]
+    font-bold
+    uppercase
+    tracking-wide
+    shadow
+  ;
+}
+
+.role-info {
+  @apply
+    flex
+    flex-col
+    gap-0.5
+    min-w-0
+  ;
+}
+
+.role-section {
+  @apply
+    flex
+    items-start
+    gap-0.5
+    self-start
+    mb-0.5
+    min-h-[0.9375rem]
+    max-w-full
+    text-[9px]
+    md:text-[10px]
+    xl:text-[9px]
+    font-semibold
+    uppercase
+    text-slate-500
+  ;
+}
+
+.role-section-text {
+  @apply
+    min-w-0
+    truncate
+  ;
+}
+
+.role-dot {
+  @apply
+    mt-[3px]
+    w-1.5
+    h-1.5
+    flex-none
+    rounded-full
+    bg-slate-400
+  ;
+}
+
+.role-dot.section-0 {
+  @apply bg-sky-500;
+}
+
+.role-dot.section-1 {
+  @apply bg-emerald-500;
+}
+
+.role-dot.section-2 {
+  @apply bg-amber-500;
+}
+
+.role-dot.section-3 {
+  @apply bg-violet-500;
+}
+
+.role-dot.section-4 {
+  @apply bg-rose-500;
+}
+
+.role-dot.section-5 {
+  @apply bg-teal-500;
+}
+
+.role-name {
   @apply
     text-sm
     xl:text-base
@@ -32,7 +200,7 @@
   ;
 }
 
-.role-card>p {
+.role-title {
   @apply
     text-xs
     md:text-sm
@@ -42,13 +210,14 @@
   ;
 }
 
-.role-card.lead>img {
+.role-card-item.lead .role-photo {
   @apply
+    border-primary
     shadow-[4px_4px_0_#365486]
   ;
 }
 
-.role-card.lead>p {
+.role-card-item.lead .role-title {
   @apply
     text-primary
     font-semibold
