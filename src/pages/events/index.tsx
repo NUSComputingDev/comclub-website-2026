@@ -253,7 +253,7 @@ function Events() {
             </div>
           </div>
           {/* Mobile filter tabs between calendar and compact list. Hidden on desktop. */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className='mb-4 md:hidden'>
+          <Tabs value={activeTab} onValueChange={setActiveTab} className='mb-4 lg:hidden'>
             <EventTabs
               selectedDay={selectedDay}
               ariaLabel='Filter event cards (mobile)'

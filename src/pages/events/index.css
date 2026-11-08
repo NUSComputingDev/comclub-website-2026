@@ -29,26 +29,30 @@
     w-full
     h-fit
     flex
-    flex-row
+    flex-col
+    lg:flex-row
     items-start
     gap-12
-    px-8
+    px-4
     md:px-16
   ;
 }
 
-/* Left column: compact calendar and list. Sticks below the fixed site
-   header (7rem) and scrolls internally when it outgrows the viewport. */
+/* Left column: compact calendar and list. On desktop it sticks below the
+   fixed site header (7rem) and scrolls internally when it outgrows the
+   viewport; on mobile it flows normally so the page scrolls as one. */
 .events .events-left {
   @apply
     w-full
     max-w-sm
+    mx-auto
     flex
     flex-col
-    sticky
-    top-28
-    max-h-[calc(100vh-7rem)]
-    overflow-y-auto
+    lg:mx-0
+    lg:sticky
+    lg:top-28
+    lg:max-h-[calc(100vh-7rem)]
+    lg:overflow-y-auto
   ;
 }
 
@@ -57,7 +61,7 @@
 .events .events-cards {
   @apply
     hidden
-    md:block
+    lg:block
     flex-1
     min-w-0
     h-fit
@@ -72,6 +76,7 @@
 .events .events-cards [data-slot='tabs-list'] {
   max-width: 100%;
   overflow-x: auto;
+  justify-content: flex-start;
   padding-top: 6px;
   padding-bottom: 8px;
 }
