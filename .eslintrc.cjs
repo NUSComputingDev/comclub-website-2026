@@ -29,6 +29,7 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       parser: '@typescript-eslint/parser',
       extends: ['plugin:react/recommended'],
+      rules: { 'react/prop-types': 'off' },
     }
   ],
   rules: {

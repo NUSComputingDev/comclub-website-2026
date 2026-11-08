@@ -1,0 +1,49 @@
+.compact-event-list {
+  @apply
+    px-4
+    my-2
+    flex
+    flex-col
+    gap-1
+  ;
+}
+
+.compact-event-list a h4 {
+  @apply
+    text-xl
+    text-primary
+    font-bold
+  ;
+}
+
+/* Muted date line rendered beneath the event name. */
+.compact-event-list-date {
+  @apply
+    text-sm
+    text-slate-500
+    opacity-70
+  ;
+}
+
+/* Show two full lines and half the width of the third. */
+.compact-event-list-description {
+  @apply
+    text-sm
+    text-slate-800
+    font-body
+    overflow-hidden
+  ;
+  position: relative;
+  line-height: 1.5rem;
+  max-height: 4.5rem;
+}
+
+.compact-event-list-description.is-truncated::after {
+  content: '...';
+  position: absolute;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  height: 1.5rem;
+  background: white;
+}

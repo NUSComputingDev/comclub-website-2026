@@ -1,0 +1,45 @@
+.three-d-card {
+  @apply
+    w-full
+    flex
+    flex-col
+    gap-1
+    pb-4
+  ;
+}
+
+/* Photo spans the full width of the card, no padding. */
+.three-d-card-photo {
+  @apply
+    w-full
+    object-cover
+  ;
+}
+
+.three-d-card-heading {
+  @apply
+    p-4
+    pt-3
+    font-bold
+  ;
+}
+
+.three-d-card-subheading {
+  @apply
+    px-4
+    -mt-1
+    text-sm
+  ;
+}
+
+/* No bottom padding here: with padding on the clamped element, the next line
+   paints through it (overflow clips at the padding box). The card container
+   supplies the 16px bottom padding, matching the side padding. */
+.three-d-card-description {
+  @apply
+    px-4
+    -mt-1
+    text-sm
+    text-gray-600
+  ;
+}
