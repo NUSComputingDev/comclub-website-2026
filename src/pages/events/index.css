@@ -32,7 +32,7 @@
     flex-col
     lg:flex-row
     items-start
-    gap-12
+    gap-10
     px-4
     md:px-16
   ;
@@ -49,6 +49,7 @@
     flex
     flex-col
     lg:mx-0
+    lg:max-w-[27rem]
     lg:sticky
     lg:top-28
     lg:max-h-[calc(100vh-7rem)]
@@ -91,7 +92,7 @@
    the outer cards 5px away from the pane edges (top/left/right); the bottom
    edge comes from each card's margin-bottom. */
 .events .events-cards-grid {
-  columns: 18rem;
+  columns: 16rem;
   column-gap: 24px;
   padding: 5px 5px 0;
 }

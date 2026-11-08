@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import articles from './articles.json';
 import WindowCard from '../../layout/WindowCard';
@@ -20,6 +21,10 @@ function Article() {
   }, [articleLink]);
   return (
     <div className='article'>
+      <Link to='/events' className='article-back'>
+        <span aria-hidden='true'>&#8592;</span>
+        Back to events
+      </Link>
       {
         content && <>
           <h1>{content.title}</h1>
