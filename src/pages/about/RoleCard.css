@@ -243,9 +243,15 @@
   @apply
     text-sm
     xl:text-base
-    font-bold
+    font-medium
     leading-snug
     break-words
+  ;
+}
+
+.role-name-strong {
+  @apply
+    font-bold
   ;
 }
 

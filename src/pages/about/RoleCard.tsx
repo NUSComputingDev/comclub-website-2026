@@ -25,6 +25,7 @@ export interface RoleMember {
   role: string;
   title: string;
   shortName?: string;
+  callName?: string;
   imgSrc: string;
   wing: string;
   section?: string;
@@ -74,6 +75,25 @@ interface RoleCardProps {
   onSelect: (member: RoleMember) => void;
 }
 
+function NameText({ name, callName }: { name: string; callName?: string }) {
+  if (!callName) {
+    return <>{name}</>;
+  }
+
+  const index = name.indexOf(callName);
+  if (index === -1) {
+    return <>{name}</>;
+  }
+
+  return (
+    <>
+      {name.slice(0, index)}
+      <span className='role-name-strong'>{callName}</span>
+      {name.slice(index + callName.length)}
+    </>
+  );
+}
+
 function RoleCard(props: RoleCardProps) {
   const { member, onSelect } = props;
 
@@ -112,7 +132,9 @@ function RoleCard(props: RoleCardProps) {
               )
             }
           </span>
-          <span className='role-name'>{member.name}</span>
+          <span className='role-name'>
+            <NameText name={member.name} callName={member.callName}></NameText>
+          </span>
           <span className='role-title'>{member.title}</span>
 
         </span>

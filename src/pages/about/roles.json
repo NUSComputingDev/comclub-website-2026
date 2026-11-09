@@ -3,32 +3,38 @@
     {
       "name": "Gullapalli Chetan",
       "role": "President",
-      "img": "/members/thumbs/GullapalliChetan.webp"
+      "img": "/members/thumbs/GullapalliChetan.webp",
+      "callName": "Chetan"
     },
     {
       "name": "Neo Ryan",
       "role": "General Secretary",
-      "img": "/members/thumbs/NeoRyan.webp"
+      "img": "/members/thumbs/NeoRyan.webp",
+      "callName": "Ryan"
     },
     {
       "name": "Choong Jing Xiang",
       "role": "Deputy General Secretary",
-      "img": "/members/thumbs/ChoongJingXiang.webp"
+      "img": "/members/thumbs/ChoongJingXiang.webp",
+      "callName": "Jing Xiang"
     },
     {
       "name": "Hyunmin Lee",
       "role": "Finance Secretary",
-      "img": "/members/thumbs/HyunminLee.webp"
+      "img": "/members/thumbs/HyunminLee.webp",
+      "callName": "Hyunmin"
     },
     {
       "name": "Daryl Leong",
       "role": "Deputy Finance Secretary",
-      "img": "/members/thumbs/DarylLeong.webp"
+      "img": "/members/thumbs/DarylLeong.webp",
+      "callName": "Daryl"
     },
     {
       "name": "Joshua Jacob Thomas",
       "role": "Tech Lead",
-      "img": "/members/thumbs/JoshuaJacobThomas.webp"
+      "img": "/members/thumbs/JoshuaJacobThomas.webp",
+      "callName": "Joshua"
     }
   ],
   "Internal Relations": [
@@ -36,27 +42,32 @@
       "name": "Jeyaraj Justin",
       "role": "Vice President",
       "img": "/members/thumbs/JeyarajJustin.webp",
-      "shortName": "Justin"
+      "shortName": "Justin",
+      "callName": "Justin"
     },
     {
       "name": "Keith Voo Zheng Feng",
       "role": "Director, Welfare",
-      "img": "/members/thumbs/KeithVooZhengFeng.webp"
+      "img": "/members/thumbs/KeithVooZhengFeng.webp",
+      "callName": "Keith"
     },
     {
       "name": "Kopparthi Vamsi Krishna",
       "role": "Deputy Director, Welfare",
-      "img": "/members/thumbs/KopparthiVamsiKrishna.webp"
+      "img": "/members/thumbs/KopparthiVamsiKrishna.webp",
+      "callName": "Vamsi Krishna"
     },
     {
       "name": "Kaira Tan Yan Xin",
       "role": "Director, Sports",
-      "img": "/members/thumbs/KairaTanYanXin.webp"
+      "img": "/members/thumbs/KairaTanYanXin.webp",
+      "callName": "Kaira"
     },
     {
       "name": "Kathiravan Nedunchezhian",
       "role": "Deputy Director, Sports",
-      "img": "/members/thumbs/KathiravanNedunchezhian.webp"
+      "img": "/members/thumbs/KathiravanNedunchezhian.webp",
+      "callName": "Kathiravan"
     }
   ],
   "External Relations": [
@@ -64,36 +75,43 @@
       "name": "Yin Chengyan Amy",
       "role": "Vice President",
       "img": "/members/thumbs/YinChengyanAmy.webp",
-      "shortName": "Amy"
+      "shortName": "Amy",
+      "callName": "Amy"
     },
     {
       "name": "Chua Lu Teng Lorraine",
       "role": "Director, Publicity",
-      "img": "/members/thumbs/ChuaLuTengLorraine.webp"
+      "img": "/members/thumbs/ChuaLuTengLorraine.webp",
+      "callName": "Lorraine"
     },
     {
       "name": "Amber Yeo En",
       "role": "Deputy Director, Publicity",
-      "img": "/members/thumbs/AmberYeoEn.webp"
+      "img": "/members/thumbs/AmberYeoEn.webp",
+      "callName": "Amber"
     },
     {
       "name": "Ang Le Xuan Jocelyn",
       "role": "Director, Merchandise",
-      "img": "/members/thumbs/AngLeXuanJocelyn.webp"
+      "img": "/members/thumbs/AngLeXuanJocelyn.webp",
+      "callName": "Jocelyn"
     },
     {
       "name": "Chia Loke En Lu-anne",
       "role": "Deputy Director, Merchandise",
-      "img": "/members/thumbs/ChiaLokeEnLuanne.webp"
+      "img": "/members/thumbs/ChiaLokeEnLuanne.webp",
+      "callName": "Lu-anne"
     },
     {
       "name": "Low Serh Yew",
-      "role": "Director, Sponsorship"
+      "role": "Director, Sponsorship",
+      "callName": "Serh Yew"
     },
     {
       "name": "Heng Kaiyi",
       "role": "Deputy Director, Sponsorship",
-      "img": "/members/thumbs/HengKaiyi.webp"
+      "img": "/members/thumbs/HengKaiyi.webp",
+      "callName": "Kaiyi"
     }
   ],
   "Student Development": [
@@ -101,32 +119,38 @@
       "name": "Chan Shi Hui Mikki",
       "role": "Vice President",
       "img": "/members/thumbs/ChanShiHuiMikki.webp",
-      "shortName": "Mikki"
+      "shortName": "Mikki",
+      "callName": "Mikki"
     },
     {
       "name": "Kang Joo Ann Adrian",
       "role": "Director, Receiving and Giving",
-      "img": "/members/thumbs/KangJooAnnAdrian.webp"
+      "img": "/members/thumbs/KangJooAnnAdrian.webp",
+      "callName": "Adrian"
     },
     {
       "name": "Chaudhuri Ayushman",
       "role": "Director, Flag",
-      "img": "/members/thumbs/ChaudhuriAyushman.webp"
+      "img": "/members/thumbs/ChaudhuriAyushman.webp",
+      "callName": "Ayushman"
     },
     {
       "name": "Mongkolworaphol Adhipat (Kai)",
       "role": "Director, Academic Liaison",
-      "img": "/members/thumbs/MongkolworapholAdhipat.webp"
+      "img": "/members/thumbs/MongkolworapholAdhipat.webp",
+      "callName": "Adhipat"
     },
     {
       "name": "Yang Boxiang (Chuck)",
       "role": "Deputy Director, Academic Liaison",
-      "img": "/members/thumbs/YangBoxiang.webp"
+      "img": "/members/thumbs/YangBoxiang.webp",
+      "callName": "Boxiang"
     },
     {
       "name": "Shreeya Unni",
       "role": "Director, Community Engagement",
-      "img": "/members/thumbs/ShreeyaUnni.webp"
+      "img": "/members/thumbs/ShreeyaUnni.webp",
+      "callName": "Shreeya"
     }
   ],
   "Student Life": [
@@ -134,32 +158,38 @@
       "name": "Eu Guang En Joshua",
       "role": "Vice President",
       "img": "/members/thumbs/EuGuangEnJoshua.webp",
-      "shortName": "Joshua"
+      "shortName": "Joshua",
+      "callName": "Joshua"
     },
     {
       "name": "Kaleb Nim",
       "role": "Director, Freshmen Social Camp",
-      "img": "/members/thumbs/KalebNim.webp"
+      "img": "/members/thumbs/KalebNim.webp",
+      "callName": "Kaleb"
     },
     {
       "name": "Chao Hao Wong",
       "role": "Director, Freshmen Orientation Week",
-      "img": "/members/thumbs/ChaoHaoWong.webp"
+      "img": "/members/thumbs/ChaoHaoWong.webp",
+      "callName": "Chao Hao"
     },
     {
       "name": "Mridul Somani",
       "role": "Director, Freshmen Finale Camp",
-      "img": "/members/thumbs/MridulSomani.webp"
+      "img": "/members/thumbs/MridulSomani.webp",
+      "callName": "Mridul"
     },
     {
       "name": "Zhang Jiayi",
       "role": "Director, Student Engagement",
-      "img": "/members/thumbs/ZhangJiayi.webp"
+      "img": "/members/thumbs/ZhangJiayi.webp",
+      "callName": "Jiayi"
     },
     {
       "name": "Hor Xiang Neng",
       "role": "Deputy Director, Student Engagement",
-      "img": "/members/thumbs/HorXiangNeng.webp"
+      "img": "/members/thumbs/HorXiangNeng.webp",
+      "callName": "Xiang Neng"
     }
   ]
 }

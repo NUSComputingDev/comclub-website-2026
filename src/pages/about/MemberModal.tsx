@@ -80,7 +80,7 @@ function QuoteTerminal({ quote, note, danger = false }: QuoteTerminalProps) {
   const isCommand = quote.trim().startsWith('$');
   const command = isCommand
     ? quote.trim().replace(/^\$\s*/, '')
-    : `echo "${quote}"`;
+    : 'echo "life motto"';
   const path = danger ? 'root@compclub' : '~/nus';
   const prompt = danger ? '#' : '$';
 

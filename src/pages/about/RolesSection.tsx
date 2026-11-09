@@ -10,6 +10,7 @@ interface Member {
   name: string;
   role: string;
   shortName?: string;
+  callName?: string;
   img?: string;
 }
 
@@ -68,6 +69,7 @@ function orderMembers(members: Member[]): RoleMember[] {
     role: member.role,
     title,
     shortName: member.shortName,
+    callName: member.callName,
     wing: '',
     imgSrc: member.img ?? `/members/thumbs/${member.name.replace(/[^A-Za-z0-9]/g, '')}.webp`,
     section,
