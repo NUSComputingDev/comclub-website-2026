@@ -110,6 +110,7 @@
   border-width: 3px;
   border-color: #ffffff;
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+  object-position: 50% 18%;
 }
 
 .tree-leader-avatar {
