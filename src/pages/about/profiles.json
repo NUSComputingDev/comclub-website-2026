@@ -55,5 +55,16 @@
     "email": "wchaohao@nuscomputing.com",
     "quote": "What a privilege to feel drained from the work you once wished for.\n\nIt shall all come to pass.",
     "quoteStyle": "zen"
+  },
+  "Hor Xiang Neng": {
+    "displayName": "Xiang Neng",
+    "major": "Computer Science",
+    "gradYear": "2029",
+    "email": "xiangneng@nuscomputing.com",
+    "quote": "On my way to complete a main quest ;p",
+    "quoteStyle": "quest",
+    "socials": {
+      "instagram": "https://instagram.com/i_neng_do_it"
+    }
   }
 }

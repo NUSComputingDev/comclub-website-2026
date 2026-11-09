@@ -67,7 +67,7 @@ function SocialIcon({ name }: { name: keyof MemberSocials }) {
 interface QuoteBlockProps {
   quote: string;
   note?: string;
-  style?: 'terminal' | 'terminal-danger' | 'note' | 'zen';
+  style?: 'terminal' | 'terminal-danger' | 'note' | 'zen' | 'quest';
 }
 
 interface QuoteTerminalProps {
@@ -138,6 +138,19 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
           <span className='member-quote-zen-caret' aria-hidden='true'>|</span>
         </span>
       </blockquote>
+    );
+  }
+
+  if (style === 'quest') {
+    return (
+      <div className='member-quote-quest'>
+        <span className='member-quote-quest-title'>
+          Quest log
+          <span className='member-quote-quest-xp'>+50 XP</span>
+        </span>
+        <span className='member-quote-quest-text'>{quote}</span>
+        <span className='member-quote-quest-caret' aria-hidden='true'>▼</span>
+      </div>
     );
   }
 
