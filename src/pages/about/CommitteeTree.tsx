@@ -140,7 +140,7 @@ function TreeBranch({ branch, onSelect }: TreeBranchProps) {
       role='group'
       aria-label={branch.wing}
     >
-      <div className='tree-label'>
+      <div className={`tree-label${branch.leader ? ' has-leader' : ''}`}>
         {
           branch.leader && (
             <img

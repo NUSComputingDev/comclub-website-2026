@@ -96,10 +96,24 @@
   align-self: center;
 }
 
+.tree-label.has-leader {
+  padding-left: 3.25rem;
+}
+
+.tree-label.has-leader .tree-leader-avatar {
+  position: absolute;
+  left: -0.5rem;
+  top: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  transform: translateY(-50%);
+  border-width: 3px;
+  border-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+}
+
 .tree-leader-avatar {
   @apply
-    w-12
-    h-12
     flex-none
     rounded-full
     border-2
