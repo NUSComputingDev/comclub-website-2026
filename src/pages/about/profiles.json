@@ -66,5 +66,13 @@
     "socials": {
       "instagram": "https://instagram.com/i_neng_do_it"
     }
+  },
+  "Eu Guang En Joshua": {
+    "displayName": "Joshua",
+    "major": "Computer Science",
+    "gradYear": "2029",
+    "email": "joshuaeu@nuscomputing.com",
+    "quote": "한국어를 모르겠어요 ㅠㅠ",
+    "quoteStyle": "fire"
   }
 }

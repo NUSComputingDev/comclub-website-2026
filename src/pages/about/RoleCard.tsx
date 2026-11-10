@@ -16,7 +16,7 @@ export interface MemberProfile {
   email?: string;
   quote?: string;
   quoteNote?: string;
-  quoteStyle?: 'terminal' | 'terminal-danger' | 'note' | 'zen' | 'quest';
+  quoteStyle?: 'terminal' | 'terminal-danger' | 'note' | 'zen' | 'quest' | 'fire';
   socials?: MemberSocials;
 }
 

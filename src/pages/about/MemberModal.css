@@ -460,6 +460,113 @@
   animation: terminal-blink 1s steps(1) infinite;
 }
 
+
+/* Fire quote. */
+.member-quote-fire {
+  @apply
+    relative
+    mt-3
+    overflow-hidden
+    rounded-lg
+    px-4
+    py-5
+    text-center
+    font-subheading
+    text-[19px]
+    font-semibold
+    leading-relaxed
+    text-amber-100
+  ;
+  background:
+    radial-gradient(circle at 50% 120%, rgba(249, 115, 22, 0.35), transparent 60%),
+    #1a0b05;
+  border: 1px solid rgba(251, 146, 60, 0.45);
+  box-shadow:
+    inset 0 0 30px rgba(249, 115, 22, 0.12),
+    0 0 22px rgba(249, 115, 22, 0.1);
+}
+
+.member-quote-fire-text {
+  @apply
+    relative
+    z-10
+    block
+    break-words
+  ;
+}
+
+.member-quote-fire-word {
+  @apply
+    inline-block
+    font-bold
+  ;
+  background: linear-gradient(180deg, #fde047 0%, #fb923c 45%, #ef4444 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px rgba(251, 146, 60, 0.55));
+  animation: fire-flicker 1.6s ease-in-out infinite alternate;
+}
+
+.member-quote-fire-embers>span {
+  position: absolute;
+  bottom: -6px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fb923c;
+  opacity: 0;
+  animation: ember-rise 3.2s ease-in infinite;
+}
+
+.member-quote-fire-embers>span:nth-child(1) {
+  left: 18%;
+  animation-delay: 0s;
+}
+
+.member-quote-fire-embers>span:nth-child(2) {
+  left: 42%;
+  animation-delay: 0.9s;
+}
+
+.member-quote-fire-embers>span:nth-child(3) {
+  left: 68%;
+  animation-delay: 1.7s;
+}
+
+.member-quote-fire-embers>span:nth-child(4) {
+  left: 84%;
+  animation-delay: 2.4s;
+}
+
+@keyframes fire-flicker {
+  from {
+    filter: drop-shadow(0 0 6px rgba(251, 146, 60, 0.45));
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    filter: drop-shadow(0 0 16px rgba(249, 115, 22, 0.8));
+    transform: translateY(-1px) scale(1.02);
+  }
+}
+
+@keyframes ember-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateY(-70px) scale(0.3);
+    opacity: 0;
+  }
+}
+
 .member-modal-actions {
   @apply
     flex
@@ -557,7 +664,9 @@
   .member-quote-caret,
   .member-quote-note-caret,
   .member-quote-zen-caret,
-  .member-quote-quest-caret {
+  .member-quote-quest-caret,
+  .member-quote-fire-word,
+  .member-quote-fire-embers>span {
     animation: none;
   }
 }

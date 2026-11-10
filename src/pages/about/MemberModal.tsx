@@ -67,7 +67,7 @@ function SocialIcon({ name }: { name: keyof MemberSocials }) {
 interface QuoteBlockProps {
   quote: string;
   note?: string;
-  style?: 'terminal' | 'terminal-danger' | 'note' | 'zen' | 'quest';
+  style?: 'terminal' | 'terminal-danger' | 'note' | 'zen' | 'quest' | 'fire';
 }
 
 interface QuoteTerminalProps {
@@ -138,6 +138,32 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
           <span className='member-quote-zen-caret' aria-hidden='true'>|</span>
         </span>
       </blockquote>
+    );
+  }
+
+  if (style === 'fire') {
+    const word = '모르겠어요';
+    const index = quote.indexOf(word);
+    const content = index === -1
+      ? quote
+      : (
+        <>
+          {quote.slice(0, index)}
+          <span className='member-quote-fire-word'>{word}</span>
+          {quote.slice(index + word.length)}
+        </>
+      );
+
+    return (
+      <div className='member-quote-fire'>
+        <span className='member-quote-fire-text'>{content}</span>
+        <span className='member-quote-fire-embers' aria-hidden='true'>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
     );
   }
 
