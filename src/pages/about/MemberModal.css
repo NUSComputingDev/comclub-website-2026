@@ -505,7 +505,7 @@
     font-bold
   ;
   z-index: 1;
-  font-size: 1.18em;
+  font-size: 1.28em;
   background: linear-gradient(180deg, #fef08a 0%, #fbbf24 30%, #f97316 60%, #ef4444 100%);
   background-size: 100% 200%;
   -webkit-background-clip: text;
@@ -518,36 +518,27 @@
     fire-text 0.9s ease-in-out infinite alternate;
 }
 
-/* Two flame tongues rising out of the word. */
+/* Text-shaped glow copies make the word itself look like it is burning. */
 .member-quote-fire-word::before,
 .member-quote-fire-word::after {
-  content: '';
+  content: attr(data-word);
   position: absolute;
-  left: 50%;
-  bottom: -0.08em;
-  width: 0.85em;
-  height: 1.85em;
-  transform: translateX(-50%);
-  border-radius: 50% 50% 25% 25% / 62% 62% 38% 38%;
-  background: linear-gradient(0deg,
-      rgba(239, 68, 68, 0.95) 0%,
-      rgba(249, 115, 22, 0.95) 45%,
-      rgba(253, 224, 71, 0.95) 72%,
-      transparent 100%);
-  filter: blur(4px);
-  opacity: 0.85;
+  inset: 0;
   z-index: -1;
-  animation: flame-lick 0.7s ease-in-out infinite alternate;
+  pointer-events: none;
+  color: #fb923c;
+  -webkit-text-fill-color: currentColor;
+  filter: blur(10px);
+  opacity: 0.8;
+  animation: fire-glow 1.1s ease-in-out infinite alternate;
 }
 
 .member-quote-fire-word::after {
-  width: 1.15em;
-  height: 2.1em;
-  margin-left: 0.35em;
-  filter: blur(11px);
-  opacity: 0.5;
-  animation-delay: 0.22s;
-  animation-duration: 1s;
+  color: #ef4444;
+  filter: blur(24px);
+  opacity: 0.55;
+  animation-delay: 0.3s;
+  animation-duration: 1.4s;
 }
 
 .member-quote-fire-caret {
@@ -626,15 +617,15 @@
   }
 }
 
-@keyframes flame-lick {
+@keyframes fire-glow {
   from {
-    transform: translateX(-50%) scale(0.88, 0.9) translateY(3px) rotate(-4deg);
-    opacity: 0.55;
+    opacity: 0.5;
+    filter: blur(8px);
   }
 
   to {
-    transform: translateX(-50%) scale(1.05, 1.2) translateY(-6px) rotate(4deg);
-    opacity: 1;
+    opacity: 0.95;
+    filter: blur(16px);
   }
 }
 

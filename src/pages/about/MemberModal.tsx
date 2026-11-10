@@ -149,7 +149,7 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
       : (
         <>
           {quote.slice(0, index)}
-          <span className='member-quote-fire-word'>{word}</span>
+          <span className='member-quote-fire-word' data-word={word}>{word}</span>
           {quote.slice(index + word.length)}
         </>
       );
