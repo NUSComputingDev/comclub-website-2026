@@ -461,6 +461,7 @@
 }
 
 
+
 /* Fire quote. */
 .member-quote-fire {
   @apply
@@ -469,21 +470,23 @@
     overflow-hidden
     rounded-lg
     px-4
-    py-5
+    pt-6
+    pb-11
     text-center
-    font-subheading
-    text-[19px]
-    font-semibold
+    font-heading
+    text-[20px]
+    font-bold
     leading-relaxed
-    text-amber-100
+    text-rose-50
   ;
   background:
-    radial-gradient(circle at 50% 120%, rgba(249, 115, 22, 0.35), transparent 60%),
-    #1a0b05;
-  border: 1px solid rgba(251, 146, 60, 0.45);
+    radial-gradient(ellipse at 50% 115%, rgba(249, 115, 22, 0.5), transparent 62%),
+    radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.14), transparent 72%),
+    #12070a;
+  border: 1px solid rgba(251, 146, 60, 0.5);
   box-shadow:
-    inset 0 0 30px rgba(249, 115, 22, 0.12),
-    0 0 22px rgba(249, 115, 22, 0.1);
+    inset 0 0 40px rgba(249, 115, 22, 0.16),
+    0 0 26px rgba(249, 115, 22, 0.12);
 }
 
 .member-quote-fire-text {
@@ -500,12 +503,47 @@
     inline-block
     font-bold
   ;
-  background: linear-gradient(180deg, #fde047 0%, #fb923c 45%, #ef4444 100%);
+  font-size: 1.18em;
+  background: linear-gradient(180deg, #fef08a 0%, #fbbf24 35%, #f97316 70%, #ef4444 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 10px rgba(251, 146, 60, 0.55));
-  animation: fire-flicker 1.6s ease-in-out infinite alternate;
+  filter:
+    drop-shadow(0 0 6px rgba(253, 224, 71, 0.9)) drop-shadow(0 0 18px rgba(249, 115, 22, 0.8)) drop-shadow(0 0 40px rgba(239, 68, 68, 0.6));
+  animation: fire-flicker 1.2s ease-in-out infinite alternate;
+}
+
+.member-quote-fire-caret {
+  @apply
+    inline-block
+    ml-1
+    align-middle
+    text-[13px]
+    text-amber-300
+  ;
+  animation: terminal-blink 1s steps(1) infinite;
+}
+
+.member-quote-fire-tag {
+  @apply
+    absolute
+    left-3
+    bottom-3
+    inline-flex
+    items-center
+    gap-1
+    px-2.5
+    py-1
+    rounded-full
+    border
+    border-amber-400/30
+    bg-amber-500/10
+    text-[10px]
+    font-bold
+    uppercase
+    tracking-wider
+    text-amber-300
+  ;
 }
 
 .member-quote-fire-embers>span {
@@ -520,34 +558,46 @@
 }
 
 .member-quote-fire-embers>span:nth-child(1) {
-  left: 18%;
+  left: 12%;
   animation-delay: 0s;
 }
 
 .member-quote-fire-embers>span:nth-child(2) {
-  left: 42%;
-  animation-delay: 0.9s;
+  left: 28%;
+  animation-delay: 0.7s;
 }
 
 .member-quote-fire-embers>span:nth-child(3) {
-  left: 68%;
-  animation-delay: 1.7s;
+  left: 44%;
+  animation-delay: 1.4s;
 }
 
 .member-quote-fire-embers>span:nth-child(4) {
-  left: 84%;
-  animation-delay: 2.4s;
+  left: 60%;
+  animation-delay: 2.1s;
+}
+
+.member-quote-fire-embers>span:nth-child(5) {
+  left: 76%;
+  animation-delay: 2.8s;
+}
+
+.member-quote-fire-embers>span:nth-child(6) {
+  left: 88%;
+  animation-delay: 1.1s;
 }
 
 @keyframes fire-flicker {
   from {
-    filter: drop-shadow(0 0 6px rgba(251, 146, 60, 0.45));
-    transform: translateY(0) scale(1);
+    filter:
+      drop-shadow(0 0 4px rgba(253, 224, 71, 0.7)) drop-shadow(0 0 14px rgba(249, 115, 22, 0.6)) drop-shadow(0 0 28px rgba(239, 68, 68, 0.4));
+    transform: translateY(0) scale(1) rotate(-0.5deg);
   }
 
   to {
-    filter: drop-shadow(0 0 16px rgba(249, 115, 22, 0.8));
-    transform: translateY(-1px) scale(1.02);
+    filter:
+      drop-shadow(0 0 10px rgba(253, 224, 71, 1)) drop-shadow(0 0 26px rgba(249, 115, 22, 0.9)) drop-shadow(0 0 50px rgba(239, 68, 68, 0.7));
+    transform: translateY(-1px) scale(1.04) rotate(0.5deg);
   }
 }
 
@@ -562,7 +612,7 @@
   }
 
   100% {
-    transform: translateY(-70px) scale(0.3);
+    transform: translateY(-80px) scale(0.3);
     opacity: 0;
   }
 }
@@ -665,6 +715,7 @@
   .member-quote-note-caret,
   .member-quote-zen-caret,
   .member-quote-quest-caret,
+  .member-quote-fire-caret,
   .member-quote-fire-word,
   .member-quote-fire-embers>span {
     animation: none;

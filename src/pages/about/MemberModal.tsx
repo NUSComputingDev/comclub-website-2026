@@ -156,13 +156,19 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
 
     return (
       <div className='member-quote-fire'>
-        <span className='member-quote-fire-text'>{content}</span>
+        <span className='member-quote-fire-text'>
+          {content}
+          <span className='member-quote-fire-caret' aria-hidden='true'>█</span>
+        </span>
         <span className='member-quote-fire-embers' aria-hidden='true'>
           <span></span>
           <span></span>
           <span></span>
           <span></span>
+          <span></span>
+          <span></span>
         </span>
+        <span className='member-quote-fire-tag'>🔥 on fire</span>
       </div>
     );
   }
