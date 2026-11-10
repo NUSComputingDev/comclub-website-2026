@@ -168,7 +168,6 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
           <span></span>
           <span></span>
         </span>
-        <span className='member-quote-fire-tag'>🔥 on fire</span>
       </div>
     );
   }
