@@ -22,6 +22,11 @@ function EventsPreview() {
             There&#39;s always something <span>new</span> to look forward to.
             Keep an eye out for the latest Computing Club <span>events</span>!
           </p>
+          {/* Sits under the blurb, like the other homepage sections, so the
+              whole section fits on one desktop screen. */}
+          <Link to='./events'>
+            <button className='rounded-lg'>More events</button>
+          </Link>
         </div>
       </div>
 
@@ -37,12 +42,6 @@ function EventsPreview() {
             />
           </Link>
         ))}
-      </div>
-
-      <div className='section-description events-preview-more'>
-        <Link to='./events'>
-          <button className='rounded-lg'>More events</button>
-        </Link>
       </div>
     </div>
   );

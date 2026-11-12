@@ -3,11 +3,11 @@
     flex
     flex-col
     items-center
-    gap-10
+    gap-8
     bg-slate-100
     px-8
     md:px-20
-    py-16
+    py-12
   ;
 }
 
@@ -83,13 +83,5 @@
     outline-offset-2
     outline-highlight
     rounded-2xl
-  ;
-}
-
-/* Centre the button; it keeps the shared .section-description button style. */
-.events-preview-more {
-  @apply
-    flex
-    justify-center
   ;
 }
