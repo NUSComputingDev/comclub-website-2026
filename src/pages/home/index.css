@@ -26,59 +26,6 @@ section {
   @apply bg-slate-100;
 }
 
-.latest-announcements {
-  @apply
-    flex
-    flex-col
-    h-fit
-    md:min-h-[80vh]
-  ;
-}
-
-.section-header {
-  @apply
-    flex
-    flex-col
-    w-full
-    items-center
-    justify-center
-    h-[20vh]
-    px-8
-    md:px-20
-    py-20
-  ;
-}
-
-.section-header>h3 {
-  @apply
-    text-xl
-    font-heading
-    text-white
-  ;
-}
-
-.section-header>h1 {
-  @apply
-    text-3xl
-    text-white
-    font-bold
-    pb-4
-    text-center
-  ;
-}
-
-.carousel-container {
-  @apply
-    h-fit
-    md:px-8
-    xl:px-16
-    2xl:px-32
-    pb-16
-    2xl:pb-8
-  ;
-}
-
-
 .section-description {
   @apply
     w-96

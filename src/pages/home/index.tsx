@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
-import Carousel from './Carousel';
+import EventsPreview from './EventsPreview';
 import Gallery from './Gallery';
 import NusPosts from './NusPosts';
 
@@ -22,32 +22,7 @@ function Home() {
         <img src='/hero_graphic.svg' className='section-graphic'></img>
       </section>
 
-      {/* latest announcements */}
-      <div className='latest-announcements'>
-        <div className='section-header bg-primary'>
-          <h1>Latest Announcements</h1>
-        </div>
-        <div className='carousel-container'>
-          <Carousel></Carousel>
-        </div>
-      </div>
-
-
-      {/* events */}
-      <section>
-        <img src='/events_graphic.svg' className='section-graphic'></img>
-        <div className='section-description'>
-          <h2>Wondering</h2>
-          <h1>What&#39;s up?</h1>
-          <p>
-            There&#39;s always something <span>new</span> to look forward to.
-            Keep an eye out for the latest Computing Club <span>events</span>!
-          </p>
-          <Link to='./events'>
-            <button className='rounded-lg'>Events</button>
-          </Link>
-        </div>
-      </section>
+      <EventsPreview />
 
       <Gallery />
 

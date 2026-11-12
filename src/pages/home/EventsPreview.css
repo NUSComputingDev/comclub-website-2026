@@ -1,0 +1,95 @@
+.events-preview {
+  @apply
+    flex
+    flex-col
+    items-center
+    gap-10
+    bg-slate-100
+    px-8
+    md:px-20
+    py-16
+  ;
+}
+
+.events-preview-header {
+  @apply
+    flex
+    flex-col
+    md:flex-row
+    items-center
+    justify-center
+    gap-8
+    lg:gap-16
+    /* Fill the padded width so the fixed-width .section-description is capped
+       by max-w-full instead of overflowing the screen on narrow phones. */
+    w-full
+  ;
+}
+
+.events-preview-graphic {
+  @apply
+    w-64
+    lg:w-80
+  ;
+}
+
+/* Same columns and card sizing as the grid on the events page. */
+.events-preview-grid {
+  @apply
+    grid
+    grid-cols-1
+    md:grid-cols-2
+    xl:grid-cols-3
+    gap-6
+    w-full
+    max-w-6xl
+    items-stretch
+  ;
+}
+
+.events-preview-grid > a {
+  @apply
+    flex
+    min-w-0
+  ;
+}
+
+.events-preview-grid .window {
+  @apply
+    w-full
+    h-full
+    flex
+    flex-col
+  ;
+}
+
+.events-preview-grid .window-content {
+  flex: 1 1 auto;
+}
+
+.events-preview-grid .window-content > div,
+.events-preview-grid .three-d-card {
+  height: 100%;
+}
+
+.events-preview-grid a:hover .three-d-card-more > span {
+  transform: translateX(3px);
+}
+
+.events-preview-grid a:focus-visible {
+  @apply
+    outline
+    outline-2
+    outline-offset-2
+    outline-highlight
+    rounded-2xl
+  ;
+}
+
+/* Centre the button; it keeps the shared .section-description button style. */
+.events-preview-more {
+  @apply
+    flex
+    justify-center
+  ;
+}

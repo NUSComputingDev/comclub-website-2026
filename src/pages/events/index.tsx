@@ -1,21 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { format, isSameDay, parseISO } from 'date-fns';
-import articles from './articles.json';
-import { Article, parseArticles } from './zod';
+import { format } from 'date-fns';
+import { Article } from './zod';
+import { articlesData, formatEventDate } from './articlesData';
 import { filterEventCards, type EventTab } from './eventFilters';
 import Calendar from './Calendar';
 import ThreeDCard from '../../components/3DCard';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/tabs';
 import './index.css';
 import 'react-calendar/dist/Calendar.css';
-
-// Newest start first; undated events always sort to the end.
-const articlesData: Article[] = Object.values(parseArticles(articles)).sort((a, b) => {
-  if (!a.startDatetime) return 1;
-  if (!b.startDatetime) return -1;
-  return parseISO(b.startDatetime).getTime() - parseISO(a.startDatetime).getTime();
-});
 
 type DepartmentFilter = 'ALL' | Article['department'];
 
@@ -25,21 +18,6 @@ const departmentOptions: { label: string; value: DepartmentFilter }[] = [
   { label: 'Student Life', value: 'SL' },
   { label: 'Internal Relations', value: 'IR' },
 ];
-
-// Range label (start – end) only when the end falls on a different day.
-function formatEventDate(event: Article) {
-  const start = parseISO(event.startDatetime!);
-  const startLabel = format(start, 'MMM dd, yyyy');
-
-  if (event.endDatetime) {
-    const end = parseISO(event.endDatetime);
-    if (!isSameDay(start, end)) {
-      return `${startLabel} – ${format(end, 'MMM dd, yyyy')}`;
-    }
-  }
-
-  return startLabel;
-}
 
 // Shared card grid so every tab panel renders identical card markup.
 function EventCardGrid({ events, onBrowseAll }: { events: Article[]; onBrowseAll?: () => void }) {
