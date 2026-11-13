@@ -74,5 +74,15 @@
     "email": "joshuaeu@nuscomputing.com",
     "quote": "한국어를 모르겠어요 ㅠㅠ",
     "quoteStyle": "fire"
+  },
+  "Zhang Jiayi": {
+    "displayName": "Jan",
+    "major": "Computer Science",
+    "gradYear": "2028",
+    "quote": "Put my sneakers on",
+    "quoteStyle": "clean",
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/jiayi-zhang0616"
+    }
   }
 }

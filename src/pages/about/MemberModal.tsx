@@ -67,7 +67,7 @@ function SocialIcon({ name }: { name: keyof MemberSocials }) {
 interface QuoteBlockProps {
   quote: string;
   note?: string;
-  style?: 'terminal' | 'terminal-danger' | 'note' | 'zen' | 'quest' | 'fire';
+  style?: 'terminal' | 'terminal-danger' | 'note' | 'zen' | 'quest' | 'fire' | 'clean';
 }
 
 interface QuoteTerminalProps {
@@ -136,6 +136,17 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
         <span className='member-quote-zen-text'>
           {quote}
           <span className='member-quote-zen-caret' aria-hidden='true'>|</span>
+        </span>
+      </blockquote>
+    );
+  }
+
+  if (style === 'clean') {
+    return (
+      <blockquote className='member-quote-clean'>
+        <span className='member-quote-clean-text'>
+          {quote}
+          <span className='member-quote-clean-caret' aria-hidden='true'>|</span>
         </span>
       </blockquote>
     );

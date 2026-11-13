@@ -462,6 +462,49 @@
 
 
 
+/* Clean quote. */
+.member-quote-clean {
+  @apply
+    relative
+    mt-3
+    py-3
+    pl-4
+    pr-2
+    text-left
+    font-body
+    text-[17px]
+    leading-relaxed
+    text-slate-700
+  ;
+  border-left: 3px solid #365486;
+}
+
+.member-quote-clean::before {
+  content: '\201C';
+  @apply
+    block
+    text-2xl
+    leading-none
+    text-primary/30
+  ;
+}
+
+.member-quote-clean-text {
+  @apply
+    block
+    break-words
+  ;
+}
+
+.member-quote-clean-caret {
+  @apply
+    inline-block
+    ml-1
+    text-primary/50
+  ;
+  animation: terminal-blink 1.2s steps(1) infinite;
+}
+
 /* Fire quote. */
 .member-quote-fire {
   @apply
@@ -747,7 +790,8 @@
   .member-quote-fire-word,
   .member-quote-fire-word::before,
   .member-quote-fire-word::after,
-  .member-quote-fire-embers>span {
+  .member-quote-fire-embers>span,
+  .member-quote-clean-caret {
     animation: none;
   }
 }
