@@ -30,9 +30,11 @@ function PostCard({ post, index }: { post: Post; index: number }) {
   );
 }
 
+// Three cards is one full row on desktop and one screen of scrolling on a phone.
+// Any more just turns the home page into a news feed.
 export default function NusPosts(
-  { tabs, title, description, noOfPosts = 6 }:
-    { tabs: PostTab[]; title: string; description: string; noOfPosts?: number },
+  { tabs, title, description, noOfPosts = 3 }:
+  { tabs: PostTab[]; title: string; description: string; noOfPosts?: number },
 ) {
   const root = useRef<HTMLElement>(null);
   const pills = useRef<HTMLDivElement>(null);
