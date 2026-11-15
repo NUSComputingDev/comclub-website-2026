@@ -34,7 +34,7 @@ start wherever u like. a really good beginner submission can beat a messy advanc
 1. get the site running locally (step 0)
 2. click around everything. phone size too (devtools, toggle device toolbar). read some of the code
 3. find something that is wrong, broken, confusing, missing or just bad
-4. check the [issues on this repo](https://github.com/Jay-Jay-Tee/comclub-website-recruit/issues) to see if someone already reported it. if they did, add a comment with anything new u found instead of making a duplicate
+4. check the [issues on this repo](https://github.com/Jay-Jay-Tee/comclub-website-2026)to see if someone already reported it. if they did, add a comment with anything new u found instead of making a duplicate
 5. open **one** issue **on this repo**
 6. (bonus, totally optional) try fixing it urself: fork this repo, make the fix on a branch, and open a pr that links to ur issue
 
