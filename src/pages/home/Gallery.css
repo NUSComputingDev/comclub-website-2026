@@ -2,7 +2,6 @@
   display: block;
   height: auto;
   padding: 5rem 2rem;
-  background: #f1f5f9;
   color: #365486;
 }
 
@@ -66,7 +65,7 @@
   flex: 0 0 auto; text-align: left; border-top: 2px solid #cbd5e1; padding: 1rem 1rem .6rem;
   min-width: 165px; scroll-snap-align: center; /* matches the centring scrollTo, so snap doesn't nudge it after */ font-family: 'Quicksand', sans-serif; font-weight: 600;
 }
-.gallery-events button[aria-pressed='true'] { border-color: #365486; background: white; }
+.gallery-events button[aria-pressed='true'] { border-color: #365486; background: var(--surface, white); }
 .gallery-events button:hover { border-color: #365486; }
 .gallery-event-year { display: block; margin-top: .4rem; color: #526176; font-size: .75rem; font-weight: 400; }
 .gallery-message { aspect-ratio: 2.2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center; background: #e2e8f0; padding: 2rem; }

@@ -14,6 +14,18 @@ section {
   ;
 }
 
+/* Alternate white / grey by position, so reordering sections keeps the pattern. Scoped to .home because
+   this file stays loaded on every page. --surface is always the opposite colour, for inner elements that
+   must stand out from their section (e.g. the selected gallery tab), wherever the section ends up. */
+.home > :nth-child(odd) {
+  --surface: #f1f5f9;
+}
+
+.home > :nth-child(even) {
+  --surface: #ffffff;
+  @apply bg-slate-100;
+}
+
 .latest-announcements {
   @apply
     flex

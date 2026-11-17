@@ -1,0 +1,79 @@
+/* Undo the global `section` layout (flex, 80vh) from index.css, like .comclub-gallery does. */
+.nus-posts { display: block; height: auto; padding: 5rem 2rem; color: #365486; }
+.posts-inner { max-width: 1200px; margin: auto; }
+.posts-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2rem; }
+.posts-heading h2 { font-family: 'DM Sans', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.15; }
+.posts-heading p { margin-top: .6rem; color: #526176; font-family: 'Lexend', sans-serif; font-size: .95rem; }
+.posts-heading a { display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap; font-size: .9rem; }
+.posts-heading a:hover, .posts-message a:hover { text-decoration: underline; }
+.nus-posts :is(a, button):focus-visible { outline: 3px solid #365486; outline-offset: 4px; }
+
+/* Pills: one highlight sits behind the buttons and slides to the selected one (--pill-x / --pill-w are set
+   from NusPosts.tsx). The buttons only change text colour, so the motion all comes from the highlight. */
+.posts-pills {
+  position: relative; display: inline-flex; gap: .25rem; padding: .3rem; margin-bottom: 2rem;
+  border-radius: 999px; background: var(--surface, #f1f5f9); border: 1px solid #e2e8f0;
+}
+.posts-pills button {
+  position: relative; z-index: 1; padding: .55rem 1.25rem; border-radius: 999px; background: none;
+  color: #365486; font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: .9rem;
+  transition: color 250ms ease;
+}
+.posts-pills button[aria-pressed='true'] { color: white; }
+.posts-pills button:not([aria-pressed='true']):hover { color: #1e3a66; }
+.posts-pill-highlight {
+  position: absolute; top: .3rem; bottom: .3rem; left: 0; border-radius: 999px; background: #365486;
+  width: var(--pill-w, 0); transform: translateX(var(--pill-x, 0));
+  box-shadow: 0 4px 12px -4px rgba(54, 84, 134, .5);
+  transition: transform 350ms cubic-bezier(.2, .7, .2, 1), width 350ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.posts-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+/* New cards (first load or a tab switch) fade up, staggered by the inline animation-delay. */
+.posts-grid > li:not(.post-skeleton) { animation: posts-enter 450ms cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes posts-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.post-card {
+  display: flex; flex-direction: column; height: 100%; overflow: hidden; border-radius: 8px; background: white;
+  border: 1px solid #e2e8f0; transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.post-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(54, 84, 134, .25); }
+/* Uploads vary (768x540, x512, x432...): a fixed frame + cover keeps every card the same height. */
+.post-image { aspect-ratio: 768 / 540; background: #e2e8f0; overflow: hidden; }
+.post-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+.post-card:hover .post-image img { transform: scale(1.04); }
+.post-body { display: flex; flex-direction: column; gap: .6rem; flex: 1; padding: 1.25rem; }
+.post-body time { color: #526176; font-size: .75rem; font-family: 'Lexend', sans-serif; }
+.post-body h3 {
+  font-family: 'DM Sans', sans-serif; font-size: 1.15rem; font-weight: 600; line-height: 1.35;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
+}
+.post-body p {
+  color: #526176; font-size: .85rem; line-height: 1.5;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
+}
+/* margin-top: auto pins the link to the bottom, so it lines up across a row of cards. */
+.post-open { margin-top: auto; padding-top: .4rem; display: inline-flex; align-items: center; gap: .4rem; font-size: .85rem; font-weight: 600; }
+
+.post-skeleton {
+  min-height: 380px; border-radius: 8px;
+  background: linear-gradient(100deg, #e2e8f0 25%, #f8fafc 45%, #e2e8f0 65%);
+  background-size: 200% 100%; animation: posts-shimmer 1.8s linear infinite;
+}
+@keyframes posts-shimmer { to { background-position: -200% 0; } }
+
+.posts-message { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 3rem 1rem; text-align: center; background: var(--surface, #f1f5f9); border-radius: 8px; }
+.posts-message h4 { font-size: 1.3rem; }
+.posts-message button { background: #365486; color: white; padding: .6rem 1rem; border-radius: 6px; margin-right: 1rem; }
+
+@media (max-width: 1023px) { .posts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+@media (max-width: 767px) {
+  .nus-posts { padding: 3.5rem 1.25rem; }
+  .posts-heading { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .posts-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .post-skeleton { min-height: 320px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nus-posts *, .nus-posts *::before, .nus-posts *::after { animation: none !important; transition: none !important; }
+}
