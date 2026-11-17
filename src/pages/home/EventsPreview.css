@@ -3,7 +3,8 @@
     flex
     flex-col
     items-center
-    gap-8
+    gap-10
+    md:gap-14
     bg-slate-100
     px-8
     md:px-20

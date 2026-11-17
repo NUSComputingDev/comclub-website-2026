@@ -1,17 +1,167 @@
 .footer-banner {
   @apply
-    sticky
-    flex
-    flex-col
     w-full
     px-8
     md:px-20
-    pt-8
-    md:pt-10
-    pb-16
-    md:pb-20
-    gap-y-1
+    pt-12
+    pb-10
+    md:pb-14
     bg-primary
     text-white
+  ;
+}
+
+.footer-inner {
+  @apply
+    w-full
+    max-w-7xl
+    mx-auto
+    flex
+    flex-col
+    md:flex-row
+    gap-10
+    md:gap-16
+  ;
+}
+
+.footer-brand {
+  @apply
+    flex
+    flex-col
+    gap-y-1
+    md:max-w-md
+  ;
+}
+
+.footer-brand h4 {
+  @apply
+    font-heading
+    font-bold
+    text-xl
+  ;
+}
+
+.footer-brand p {
+  @apply
+    font-subheading
+    text-sm
+    text-white/80
+  ;
+}
+
+.footer-socials {
+  @apply
+    flex
+    flex-row
+    flex-wrap
+    mt-3
+    -ml-1
+  ;
+}
+
+.footer-socials a {
+  @apply
+    mr-4
+    my-1
+    text-xl
+    text-white
+    transition-colors
+    hover:text-highlight
+  ;
+}
+
+.footer-links {
+  @apply
+    flex
+    flex-wrap
+    gap-10
+    md:gap-14
+    md:ml-auto
+  ;
+}
+
+.footer-col {
+  @apply
+    flex
+    flex-col
+    gap-2
+  ;
+}
+
+.footer-col h5 {
+  @apply
+    text-[11px]
+    font-bold
+    uppercase
+    tracking-[0.18em]
+    text-white/50
+  ;
+}
+
+.footer-col a {
+  @apply
+    text-sm
+    text-white/85
+    transition-colors
+    hover:text-white
+    hover:underline
+  ;
+}
+
+.footer-map {
+  @apply
+    flex
+    items-start
+    gap-3
+    p-3
+    rounded-xl
+    border
+    border-white/20
+    bg-white/5
+    transition-colors
+    hover:bg-white/10
+    self-start
+    max-w-[15rem]
+  ;
+}
+
+.footer-map-icon {
+  @apply
+    w-5
+    h-5
+    flex-none
+    mt-0.5
+    text-highlight
+  ;
+}
+
+.footer-map strong {
+  @apply
+    block
+    text-sm
+    font-bold
+  ;
+}
+
+.footer-map span span {
+  @apply
+    block
+    text-xs
+    text-white/60
+  ;
+}
+
+.footer-copy {
+  @apply
+    w-full
+    max-w-7xl
+    mx-auto
+    mt-10
+    pt-6
+    border-t
+    border-white/15
+    text-xs
+    text-white/50
+    font-subheading
   ;
 }

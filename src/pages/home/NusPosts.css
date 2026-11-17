@@ -71,6 +71,7 @@
   .nus-posts { padding: 3.5rem 1.25rem; }
   .posts-heading { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .posts-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .posts-grid > li:nth-child(n + 3) { display: none; }
   .post-skeleton { min-height: 320px; }
 }
 

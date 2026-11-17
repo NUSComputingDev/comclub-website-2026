@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   FaFacebookF,
   FaInstagram,
+  FaMapMarkerAlt,
   FaTelegramPlane,
   FaYoutube,
   FaLinkedinIn,
@@ -44,50 +45,73 @@ function Footer() {
     },
   ];
 
+  const exploreLinks = [
+    { label: 'Home', to: '/' },
+    { label: 'About', to: '/about' },
+    { label: 'Events', to: '/events' },
+    { label: 'Resources', to: '/resources' },
+    { label: 'Feedback', to: '/feedback' },
+  ];
+
   return (
     <footer className='w-full'>
       <div className='footer-banner'>
-        <h4 className='font-heading font-bold text-xl'>
-          NUS Students&#39; Computing Club
-        </h4>
-        <p className='font-subheading text-sm'>
-          A constituent club of the NUS Students&#39; Union
-        </p>
+        <div className='footer-inner'>
+          <div className='footer-brand'>
+            <h4>NUS Students&#39; Computing Club</h4>
+            <p>A constituent club of the NUS Students&#39; Union</p>
 
-        <div className='flex flex-row flex-wrap'>
-          {
-            socialMediaLinks.map((data, key) => {
-              return (
-                <Link
-                  to={data.url}
-                  aria-label={data.platform}
-                  key={key}
-                  className='mr-4 my-1 text-xl'
-                >
-                  <data.icon />
-                </Link>
-              );
-            })
-          }
+            <div className='footer-socials'>
+              {
+                socialMediaLinks.map((data) => (
+                  <a
+                    key={data.platform}
+                    href={data.url}
+                    aria-label={data.platform}
+                    target={data.url.startsWith('mailto:') ? undefined : '_blank'}
+                    rel='noreferrer'
+                  >
+                    <data.icon />
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+
+          <div className='footer-links'>
+            <div className='footer-col'>
+              <h5>Explore</h5>
+              {
+                exploreLinks.map((link) => (
+                  <Link key={link.to} to={link.to}>{link.label}</Link>
+                ))
+              }
+            </div>
+
+            <div className='footer-col'>
+              <h5>Connect</h5>
+              <Link to='/feedback'>Feedback</Link>
+              <a href='mailto:connect@nuscomputing.com'>Email us</a>
+              <Link to='/privacy'>Privacy Policy</Link>
+            </div>
+
+            <a
+              className='footer-map'
+              href='https://www.comp.nus.edu.sg/maps/venues/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              <FaMapMarkerAlt className='footer-map-icon' aria-hidden='true' />
+              <span>
+                <strong>Campus map</strong>
+                <span>Find your way around SoC</span>
+              </span>
+            </a>
+          </div>
         </div>
 
-        <div className='flex flex-row flex-wrap gap-x-4 gap-y-1 my-1 font-subheading text-sm'>
-          <a
-            href='https://www.comp.nus.edu.sg/maps/venues/'
-            target='_blank'
-            rel='noreferrer'
-            className='underline'
-          >
-            Campus map
-          </a>
-          <Link to='/feedback' className='underline'>Feedback</Link>
-        </div>
-
-        <p className='font-subheading text-sm'>
-          Copyright © NUS Students&#39; Computing Club •&nbsp;
-          <span className='inline-block underline'>
-            <Link to='/privacy'>Privacy Policy</Link>
-          </span>
+        <p className='footer-copy'>
+          Copyright © NUS Students&#39; Computing Club
         </p>
       </div>
     </footer>
