@@ -1,63 +1,147 @@
-/* The global `section` rule (home/index.css) fixes sections at 80vh, which left the hero mostly empty space.
+/* The global `section` rule (home/index.css) fixes sections at 80vh and centres a small heading in it.
    The hero sizes to its content instead. */
 .home-hero {
   @apply
-    flex
-    flex-col
-    items-center
-    gap-12
-    px-8
-    pt-10
-    pb-16
-    md:px-20
-    lg:flex-row
-    lg:justify-between
-    lg:gap-12
-    lg:pt-16
-    lg:pb-24
+    block
+    px-4
+    pt-6
+    pb-14
+    sm:px-8
+    md:px-12
+    lg:px-20
+    lg:pt-10
+    lg:pb-20
   ;
   height: auto;
 }
 
-.home-hero-copy {
+/* One big window, same chrome as WindowCard. */
+.home-hero-window {
   @apply
-    w-full
-    max-w-xl
-    lg:max-w-[36rem]
+    mx-auto
+    max-w-7xl
+    rounded-2xl
+    border-2
+    border-outline
+    bg-white
+    overflow-hidden
+    drop-shadow-window
   ;
 }
 
-.home-hero-copy>h2 {
+.home-hero-bar {
+  @apply
+    relative
+    flex
+    items-center
+    p-2
+    bg-[#f2f2f2]
+    border-b-2
+    border-outline
+  ;
+}
+
+.home-hero-dots {
+  @apply
+    flex
+  ;
+}
+
+.home-hero-dots>span {
+  @apply
+    w-4
+    h-4
+    mx-1
+    rounded-full
+  ;
+}
+
+.home-hero-dots>span:nth-child(1) {
+  background: #ff605c;
+}
+
+.home-hero-dots>span:nth-child(2) {
+  background: #ffbd44;
+}
+
+.home-hero-dots>span:nth-child(3) {
+  background: #00ca4e;
+}
+
+.home-hero-bar-title {
+  @apply
+    hidden
+    absolute
+    left-1/2
+    -translate-x-1/2
+    text-sm
+    text-slate-500
+    sm:block
+  ;
+}
+
+.home-hero-body {
+  @apply
+    px-5
+    pt-8
+    pb-8
+    sm:px-10
+    sm:pt-12
+    lg:px-14
+    lg:pt-14
+    lg:pb-12
+  ;
+}
+
+.home-hero-body>h2 {
   @apply
     font-subheading
-    text-3xl
+    text-2xl
     text-primary
-    md:text-4xl
+    sm:text-3xl
+    lg:text-4xl
   ;
 }
 
-.home-hero-copy>h1 {
+.home-hero-body>h1 {
   @apply
     mt-1
     font-heading
-    text-6xl
-    leading-none
+    font-bold
     text-primary
-    sm:text-7xl
-    xl:text-8xl
+  ;
+  font-size: clamp(3.4rem, 10.5vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+.home-hero-foot {
+  @apply
+    flex
+    flex-col
+    gap-6
+    mt-8
+    pt-8
+    border-t-2
+    border-slate-200
+    lg:mt-12
+    lg:flex-row
+    lg:items-end
+    lg:justify-between
+    lg:gap-12
   ;
 }
 
-.home-hero-copy>p {
+.home-hero-foot>p {
   @apply
-    mt-6
+    max-w-xl
     font-body
     text-lg
     leading-relaxed
   ;
 }
 
-.home-hero-copy>p>span {
+.home-hero-foot>p>span {
   @apply
     font-bold
     text-highlight
@@ -67,62 +151,57 @@
 .home-hero-actions {
   @apply
     flex
+    flex-none
     flex-wrap
     gap-3
-    mt-8
   ;
 }
 
-/* Same look as the other homepage buttons, plus an outlined secondary. */
-.home-hero-button {
+/* Status bar along the bottom edge of the window. */
+.home-hero-status {
   @apply
-    px-6
+    flex
+    items-center
+    justify-between
+    gap-4
+    px-5
     py-3
-    rounded-lg
-    border-2
-    border-primary
-    font-subheading
-    font-bold
-    text-primary
-    transition-all
-    duration-100
-    ease-out
-    hover:scale-[1.05]
-    hover:shadow-lg
-  ;
-}
-
-.home-hero-button--primary {
-  @apply
-    bg-primary
-    text-white
-  ;
-}
-
-.home-hero-copy>.home-hero-latest {
-  @apply
-    mt-6
+    bg-[#f2f2f2]
+    border-t-2
+    border-outline
     text-sm
+    text-outline
+    transition-colors
+    duration-100
+    hover:bg-slate-200
+    sm:px-10
+    lg:px-14
+  ;
+}
+
+.home-hero-status b {
+  @apply
+    text-primary
+  ;
+}
+
+.home-hero-status-date {
+  @apply
     text-slate-500
   ;
 }
 
-.home-hero-latest>a {
+.home-hero-status>svg {
   @apply
-    font-bold
+    w-4
+    h-4
+    flex-none
     text-primary
-    underline
-    decoration-highlight
-    decoration-2
-    underline-offset-4
-    hover:text-highlight
+    transition-transform
+    duration-100
   ;
 }
 
-.home-hero-graphic {
-  @apply
-    w-full
-    max-w-md
-    lg:max-w-[36rem]
-  ;
+.home-hero-status:hover>svg {
+  transform: translateX(3px);
 }

@@ -1,0 +1,91 @@
+/* Sizes to its content rather than the global 80vh section height. */
+.home-feedback {
+  @apply
+    block
+    px-4
+    py-14
+    sm:px-8
+    md:px-12
+    lg:px-20
+    lg:py-20
+  ;
+  height: auto;
+}
+
+.home-feedback-body {
+  @apply
+    flex
+    flex-col
+    items-center
+    gap-10
+    px-5
+    py-8
+    sm:px-10
+    sm:py-12
+    md:flex-row
+    md:justify-between
+    lg:px-14
+  ;
+}
+
+.home-feedback-copy {
+  @apply
+    max-w-xl
+  ;
+}
+
+.home-feedback-copy>h2 {
+  @apply
+    font-subheading
+    text-2xl
+    text-primary
+    sm:text-3xl
+    lg:text-4xl
+  ;
+}
+
+.home-feedback-copy>h1 {
+  @apply
+    font-heading
+    font-bold
+    text-primary
+    text-6xl
+    leading-none
+    tracking-tight
+    lg:text-7xl
+  ;
+}
+
+.home-feedback-copy>p {
+  @apply
+    mt-6
+    font-body
+    text-lg
+    leading-relaxed
+  ;
+}
+
+.home-feedback-copy>p>span {
+  @apply
+    font-bold
+    text-highlight
+  ;
+}
+
+.home-feedback-actions {
+  @apply
+    flex
+    flex-wrap
+    gap-3
+    mt-8
+  ;
+}
+
+.home-feedback-graphic {
+  @apply
+    w-full
+    max-w-xs
+    md:max-w-sm
+    lg:max-w-md
+  ;
+}

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './index.css';
 import EventsPreview from './EventsPreview';
 import Gallery from './Gallery';
+import HomeFeedback from './HomeFeedback';
 import HomeHero from './HomeHero';
 import NusPosts from './NusPosts';
 
@@ -24,22 +24,7 @@ function Home() {
         ]}
       />
 
-      {/* study planner */}
-      {/* flex-col-reverse is used to render the graphic on top */}
-      <section className='flex-col-reverse md:flex-row'>
-        <div className='section-description'>
-          <h2>Stressed about</h2>
-          <h1>Study plans?</h1>
-          <p>
-            Set yourself up for <span>academic success</span> with our
-            <span> study planner</span>!
-          </p>
-          <Link to='./resources'>
-            <button className='rounded-lg'>Resources</button>
-          </Link>
-        </div>
-        <img src='/planner_graphic.svg' className='section-graphic'></img>
-      </section>
+      <HomeFeedback />
     </div>
   );
 }
