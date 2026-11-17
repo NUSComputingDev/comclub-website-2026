@@ -54,6 +54,13 @@
   ;
 }
 
+/* Phones only show two preview cards; three makes the section too tall. */
+@media (max-width: 767px) {
+  .events-preview-grid > a:nth-child(n + 3) {
+    display: none;
+  }
+}
+
 .events-preview-grid .window {
   @apply
     w-full
