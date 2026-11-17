@@ -114,3 +114,20 @@ section {
     text-white
   ;
 }
+
+/* For buttons on a navy background. */
+.home-button--light {
+  @apply
+    bg-white
+    border-white
+    text-primary
+  ;
+}
+
+.home-button--ghost {
+  @apply
+    border-white
+    text-white
+    hover:bg-white/10
+  ;
+}

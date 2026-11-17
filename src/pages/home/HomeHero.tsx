@@ -26,6 +26,7 @@ function HomeHero() {
         </div>
 
         <div className='home-hero-body'>
+          <img src='/comclub_logo.png' className='home-hero-mark' alt=''></img>
           <h2>NUS Students&#39;</h2>
           <h1>Computing Club</h1>
 
@@ -36,10 +37,10 @@ function HomeHero() {
               gaps between them and the school.
             </p>
             <div className='home-hero-actions'>
-              <Link to='/about' className='home-button home-button--primary'>
+              <Link to='/about' className='home-button home-button--light'>
                 About us
               </Link>
-              <Link to='/events' className='home-button'>
+              <Link to='/events' className='home-button home-button--ghost'>
                 Events
               </Link>
             </div>
