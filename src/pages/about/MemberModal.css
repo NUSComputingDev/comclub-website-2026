@@ -513,7 +513,7 @@
     overflow-hidden
     rounded-lg
     px-4
-    pt-6
+    pt-10
     pb-11
     text-center
     font-heading
@@ -549,19 +549,15 @@
   ;
   z-index: 1;
   font-size: 1.28em;
-  background: linear-gradient(180deg, #fef08a 0%, #fbbf24 30%, #f97316 60%, #ef4444 100%);
-  background-size: 100% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter:
-    drop-shadow(0 0 6px rgba(253, 224, 71, 0.9)) drop-shadow(0 0 18px rgba(249, 115, 22, 0.85)) drop-shadow(0 0 42px rgba(239, 68, 68, 0.65));
-  animation:
-    fire-flicker 1.1s ease-in-out infinite alternate,
-    fire-text 0.9s ease-in-out infinite alternate;
+  /* White-hot letters with a thin orange rim, like metal in a forge. */
+  color: #fff6d8;
+  text-shadow:
+    0 0 1px #ffe7a3,
+    0 0 4px rgba(255, 170, 60, 0.9),
+    0 1px 0 #ff9b2e;
 }
 
-/* Text-shaped glow copies make the word itself look like it is burning. */
+/* The flames: a copy of the word with heat stacked upwards, pushed through the turbulence filter. */
 .member-quote-fire-word::before,
 .member-quote-fire-word::after {
   content: attr(data-word);
@@ -569,19 +565,42 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  color: #fb923c;
-  -webkit-text-fill-color: currentColor;
-  filter: blur(10px);
-  opacity: 0.8;
-  animation: fire-glow 1.1s ease-in-out infinite alternate;
+  transform-origin: 50% 100%;
 }
 
+.member-quote-fire-word::before {
+  /* Extra room above the letters for the flames to rise into before they fade out. */
+  inset: -40px -6px 0;
+  padding: 40px 6px 0;
+  color: #ffd25e;
+  text-shadow:
+    0 -1px 2px #fff1a8,
+    0 -4px 3px #ffc93a,
+    0 -8px 4px #ff9a1a,
+    0 -13px 6px #ff6a0e,
+    0 -19px 8px #e2380a,
+    0 -26px 10px #a81c06,
+    0 -33px 13px rgba(90, 10, 2, 0.6);
+  -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+  filter: url(#member-quote-fire-flames);
+  animation: fire-lick 0.7s ease-in-out infinite alternate;
+}
+
+/* A faint red bed of heat around the base of the letters. */
 .member-quote-fire-word::after {
-  color: #ef4444;
-  filter: blur(24px);
-  opacity: 0.55;
-  animation-delay: 0.3s;
-  animation-duration: 1.4s;
+  z-index: -2;
+  color: transparent;
+  text-shadow:
+    0 2px 10px rgba(255, 90, 20, 0.55),
+    0 0 22px rgba(200, 40, 10, 0.35);
+}
+
+.member-quote-fire-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }
 
 .member-quote-fire-caret {
@@ -636,39 +655,15 @@
   animation-delay: 1.1s;
 }
 
-@keyframes fire-flicker {
+@keyframes fire-lick {
   from {
-    filter:
-      drop-shadow(0 0 4px rgba(253, 224, 71, 0.7)) drop-shadow(0 0 14px rgba(249, 115, 22, 0.6)) drop-shadow(0 0 28px rgba(239, 68, 68, 0.4));
-    transform: translateY(0) scale(1) rotate(-0.5deg);
+    transform: scaleY(1) skewX(-1deg);
+    opacity: 0.9;
   }
 
   to {
-    filter:
-      drop-shadow(0 0 10px rgba(253, 224, 71, 1)) drop-shadow(0 0 26px rgba(249, 115, 22, 0.9)) drop-shadow(0 0 50px rgba(239, 68, 68, 0.7));
-    transform: translateY(-1px) scale(1.04) rotate(0.5deg);
-  }
-}
-
-@keyframes fire-text {
-  from {
-    background-position: 0 0%;
-  }
-
-  to {
-    background-position: 0 100%;
-  }
-}
-
-@keyframes fire-glow {
-  from {
-    opacity: 0.5;
-    filter: blur(8px);
-  }
-
-  to {
-    opacity: 0.95;
-    filter: blur(16px);
+    transform: scaleY(1.12) skewX(1deg);
+    opacity: 1;
   }
 }
 
@@ -780,6 +775,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* The SVG noise animates on its own, so drop the filter and keep the static heat. */
+  .member-quote-fire-word::before {
+    filter: none;
+  }
+
   .member-modal-backdrop,
   .member-modal,
   .member-quote-caret,
@@ -787,9 +787,7 @@
   .member-quote-zen-caret,
   .member-quote-quest-caret,
   .member-quote-fire-caret,
-  .member-quote-fire-word,
   .member-quote-fire-word::before,
-  .member-quote-fire-word::after,
   .member-quote-fire-embers>span,
   .member-quote-clean-caret {
     animation: none;
