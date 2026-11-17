@@ -1,122 +1,54 @@
-.resources {
-  @apply
-    flex
-    flex-col
-    items-center
-    gap-8
-    mt-8
-    mb-16
-    md:mb-32
-    min-h-[90vh]
-  ;
+﻿.resources {
+  @apply flex flex-col items-center gap-10 mt-8 mb-16 md:mb-28 min-h-[90vh] px-4 sm:px-8 md:px-16 lg:px-24 max-w-6xl mx-auto w-full;
 }
-
-.resources>h1 {
-  @apply
-    mx-8
-    md:mx-64
-    text-3xl
-    font-bold
-    text-center
-    text-primary
-  ;
+.resources > h1 {
+  @apply text-3xl md:text-5xl font-bold text-center text-primary font-heading;
 }
-
+.resources-subtitle {
+  @apply text-center text-slate-600 max-w-2xl -mt-6 text-sm md:text-base font-body;
+}
+.resources-toolbar {
+  @apply w-full flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-slate-50 border-2 border-outline rounded-2xl p-4;
+}
+.resources-search {
+  @apply flex items-center gap-2 bg-white border-2 border-outline rounded-xl px-4 py-2.5 flex-1;
+}
+.resources-search > input {
+  @apply w-full text-sm md:text-base bg-transparent focus:outline-none;
+}
+.resources-pills {
+  @apply flex flex-wrap gap-2;
+}
+.resources-pill {
+  @apply px-3.5 py-1.5 rounded-full text-xs md:text-sm font-semibold border border-outline transition-all;
+}
+.resources-pill-active {
+  @apply bg-primary text-white border-primary;
+}
+.resources-pill-inactive {
+  @apply bg-white text-slate-700 hover:bg-slate-100;
+}
 .resources-content {
-  @apply
-    flex
-    flex-col
-    md:flex-row
-    items-center
-    md:items-start
-    justify-center
-    md:justify-around
-    gap-8
-    lg:gap-16
-    w-full
-    h-fit
-    px-8
-    md:px-12
-    lg:px-20
-  ;
+  @apply flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10 w-full;
 }
-
 .resource-window-container {
-  @apply
-    flex
-    flex-col
-    gap-8
-    w-full
-    min-w-0
-    md:w-auto
-  ;
+  @apply flex flex-col gap-4 w-full lg:w-1/2;
 }
-
-.resource-window-content {
-  @apply
-    w-[75vw]
-    md:w-[24rem]
-    lg:w-[32rem]
-    px-8
-    py-16
-    md:py-8
-    lg:py-2
-    flex
-    flex-col
-    md:flex-row
-    justify-start
-    items-center
-  ;
-}
-
-.resource-window-content>img {
-  @apply
-    h-36
-    lg:h-56
-    p-0
-    md:p-4
-    lg:p-12
-  ;
-}
-
-.resource-window-text>h4 {
-  @apply
-    text-xl
-    font-bold
-  ;
-}
-
-.resource-window-text>button {
-  @apply
-    mt-4
-    px-6
-    py-3
-    bg-primary
-    text-white
-    font-subheading
-    enabled:hover:scale-[1.1]
-    enabled:hover:shadow-lg
-    transition-all
-    duration-100
-    ease-out
-  ;
-}
-
-.resource-window-text>button:disabled {
-  @apply
-    bg-slate-500
-    opacity-80
-  ;
-}
-
 .resource-link-container {
-  @apply
-    flex
-    flex-col
-    gap-8
-    w-full
-    max-w-[75vw]
-    md:w-[16rem]
-    lg:w-[24rem]
-  ;
+  @apply flex flex-col gap-4 w-full lg:w-1/2 items-center;
+}
+.planner-section {
+  @apply w-full mt-4 flex flex-col gap-6;
+}
+.planner-tabs {
+  @apply flex flex-wrap gap-2 justify-center;
+}
+.planner-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-white;
+}
+.planner-sem-card {
+  @apply flex flex-col gap-3 p-4 rounded-xl bg-slate-50 border border-slate-200;
+}
+.planner-mod-row {
+  @apply flex items-center justify-between p-3 rounded-lg bg-white border border-slate-200 hover:border-primary transition-colors;
 }
