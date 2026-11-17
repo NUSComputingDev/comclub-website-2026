@@ -108,45 +108,10 @@
   ;
 }
 
-.footer-map {
+.footer-address {
   @apply
-    flex
-    items-start
-    gap-3
-    p-3
-    rounded-xl
-    border
-    border-white/20
-    bg-white/5
-    transition-colors
-    hover:bg-white/10
-    self-start
-    max-w-[15rem]
-  ;
-}
-
-.footer-map-icon {
-  @apply
-    w-5
-    h-5
-    flex-none
-    mt-0.5
-    text-highlight
-  ;
-}
-
-.footer-map strong {
-  @apply
-    block
     text-sm
-    font-bold
-  ;
-}
-
-.footer-map span span {
-  @apply
-    block
-    text-xs
+    leading-relaxed
     text-white/60
   ;
 }

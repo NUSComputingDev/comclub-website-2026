@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import {
   FaFacebookF,
   FaInstagram,
-  FaMapMarkerAlt,
   FaTelegramPlane,
   FaYoutube,
   FaLinkedinIn,
@@ -95,18 +94,21 @@ function Footer() {
               <Link to='/privacy'>Privacy Policy</Link>
             </div>
 
-            <a
-              className='footer-map'
-              href='https://www.comp.nus.edu.sg/maps/venues/'
-              target='_blank'
-              rel='noreferrer'
-            >
-              <FaMapMarkerAlt className='footer-map-icon' aria-hidden='true' />
-              <span>
-                <strong>Campus map</strong>
-                <span>Find your way around SoC</span>
+            <div className='footer-col'>
+              <h5>Visit</h5>
+              <span className='footer-address'>
+                NUS School of Computing<br />
+                13 Computing Drive<br />
+                Singapore 117417
               </span>
-            </a>
+              <a
+                href='https://www.comp.nus.edu.sg/maps/venues/'
+                target='_blank'
+                rel='noreferrer'
+              >
+                Campus map <span aria-hidden='true'>&#8599;</span>
+              </a>
+            </div>
           </div>
         </div>
 
