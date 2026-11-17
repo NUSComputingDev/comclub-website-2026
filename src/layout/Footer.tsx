@@ -71,6 +71,18 @@ function Footer() {
           }
         </div>
 
+        <div className='flex flex-row flex-wrap gap-x-4 gap-y-1 my-1 font-subheading text-sm'>
+          <a
+            href='https://www.comp.nus.edu.sg/maps/venues/'
+            target='_blank'
+            rel='noreferrer'
+            className='underline'
+          >
+            Campus map
+          </a>
+          <Link to='/feedback' className='underline'>Feedback</Link>
+        </div>
+
         <p className='font-subheading text-sm'>
           Copyright © NUS Students&#39; Computing Club •&nbsp;
           <span className='inline-block underline'>

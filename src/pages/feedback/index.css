@@ -1,0 +1,151 @@
+.feedback-page {
+  @apply
+    flex
+    justify-center
+    px-4
+    py-16
+    md:py-24
+  ;
+}
+
+.feedback-card {
+  @apply
+    w-full
+    max-w-2xl
+    rounded-2xl
+    border-2
+    border-outline
+    bg-white
+    p-6
+    md:p-10
+    shadow-[8px_8px_0_#365486]
+  ;
+}
+
+.feedback-kicker {
+  @apply
+    text-xs
+    font-bold
+    uppercase
+    tracking-[0.18em]
+    text-highlight
+  ;
+}
+
+.feedback-card h1 {
+  @apply
+    mt-2
+    text-4xl
+    font-heading
+    text-primary
+  ;
+}
+
+.feedback-lead {
+  @apply
+    mt-3
+    text-sm
+    leading-relaxed
+    text-slate-600
+    md:text-base
+  ;
+}
+
+.feedback-form {
+  @apply
+    flex
+    flex-col
+    gap-5
+    mt-8
+  ;
+}
+
+.feedback-row {
+  @apply
+    grid
+    gap-5
+    sm:grid-cols-2
+  ;
+}
+
+.feedback-form label {
+  @apply
+    flex
+    flex-col
+    gap-1.5
+    text-sm
+    font-semibold
+    text-slate-700
+  ;
+}
+
+.feedback-form label span {
+  @apply
+    text-xs
+    font-normal
+    text-slate-400
+  ;
+}
+
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea {
+  @apply
+    w-full
+    px-3
+    py-2
+    rounded-lg
+    border-2
+    border-slate-200
+    bg-white
+    text-sm
+    text-slate-800
+    transition-colors
+    outline-none
+    focus:border-primary
+  ;
+}
+
+.feedback-form textarea {
+  @apply
+    resize-y
+  ;
+}
+
+.feedback-submit {
+  @apply
+    self-start
+    inline-flex
+    items-center
+    justify-center
+    px-6
+    py-2.5
+    rounded-full
+    text-sm
+    font-bold
+    text-white
+    transition-colors
+  ;
+  background-color: #365486 !important;
+}
+
+.feedback-submit:hover {
+  background-color: #2b4470 !important;
+}
+
+.feedback-note {
+  @apply
+    mt-5
+    text-xs
+    leading-relaxed
+    text-slate-500
+  ;
+}
+
+.feedback-note a {
+  @apply
+    font-semibold
+    text-primary
+    hover:underline
+  ;
+}

@@ -10,7 +10,7 @@ import './index.css';
 import ResourceLink from './ResourceLink';
 import FolderLink from './FolderLink';
 
-type Category = 'ALL' | 'CLUB' | 'ACADEMIC' | 'CAMPUS';
+type Category = 'ALL' | 'CLUB' | 'ACADEMIC';
 
 const PORTALS = [
   {
@@ -52,19 +52,14 @@ const FOLDERS = [
     cat: 'CLUB' as const,
   },
   {
-    label: 'Maps',
-    link: 'https://www.comp.nus.edu.sg/maps/venues/',
-    cat: 'CAMPUS' as const,
-  },
-  {
     label: 'Merch',
     link: 'https://nusfastpay.nus.edu.sg/ccmerch/menu',
     cat: 'CLUB' as const,
   },
   {
     label: 'Feedback',
-    link: 'https://feedback.nuscomputing.com/',
-    cat: 'CAMPUS' as const,
+    link: '/feedback',
+    cat: 'CLUB' as const,
   },
 ];
 
@@ -98,15 +93,14 @@ function Resources() {
     { label: 'All Resources', value: 'ALL' },
     { label: 'Club & Socials', value: 'CLUB' },
     { label: 'Academics & Tools', value: 'ACADEMIC' },
-    { label: 'Campus & Venues', value: 'CAMPUS' },
   ];
 
   return (
     <div className='resources'>
       <h1>Resources</h1>
       <p className='resources-subtitle'>
-        Quick links to Computing Club channels, academic portals, campus venue
-        maps, merchandise, and student feedback.
+        Quick links to Computing Club channels, academic portals, merchandise,
+        and student feedback.
       </p>
 
       <div className='resources-toolbar'>
@@ -115,7 +109,7 @@ function Resources() {
             type='text'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder='Filter links (e.g. Telegram, Merch, Maps, NUSMods)...'
+            placeholder='Filter links (e.g. Telegram, Merch, NUSMods)...'
             aria-label='Filter resources'
           />
           {search && (

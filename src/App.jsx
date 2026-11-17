@@ -4,6 +4,7 @@ import {
   About,
   Article,
   Events,
+  Feedback,
   Home,
   NotFound,
   Privacy,
@@ -37,6 +38,7 @@ function App() {
               <Route path=':articleLink' element={<Article />} />
             </Route>
             <Route path='/resources' element={<Resources />} />
+            <Route path='/feedback' element={<Feedback />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
