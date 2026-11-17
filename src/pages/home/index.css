@@ -88,3 +88,46 @@ section {
     lg:w-[24rem]
   ;
 }
+
+/* Same look as the other homepage buttons, plus an outlined secondary. */
+.home-button {
+  @apply
+    px-6
+    py-3
+    rounded-lg
+    border-2
+    border-primary
+    font-subheading
+    font-bold
+    text-primary
+    transition-all
+    duration-100
+    ease-out
+    hover:scale-[1.05]
+    hover:shadow-lg
+  ;
+}
+
+.home-button--primary {
+  @apply
+    bg-primary
+    text-white
+  ;
+}
+
+/* For buttons on a navy background. */
+.home-button--light {
+  @apply
+    bg-white
+    border-white
+    text-primary
+  ;
+}
+
+.home-button--ghost {
+  @apply
+    border-white
+    text-white
+    hover:bg-white/10
+  ;
+}
