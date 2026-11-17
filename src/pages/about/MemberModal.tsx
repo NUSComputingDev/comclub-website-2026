@@ -167,6 +167,20 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
 
     return (
       <div className='member-quote-fire'>
+        {/* Animated noise that the flame layer is pushed through, so the flames lick and waver instead of glowing evenly. */}
+        <svg className='member-quote-fire-defs' aria-hidden='true' focusable='false'>
+          <filter id='member-quote-fire-flames' x='-20%' y='-80%' width='140%' height='200%'>
+            <feTurbulence type='fractalNoise' baseFrequency='0.09 0.045' numOctaves='2' seed='7' result='noise'>
+              <animate
+                attributeName='baseFrequency'
+                dur='2.4s'
+                values='0.09 0.045;0.1 0.06;0.085 0.05;0.09 0.045'
+                repeatCount='indefinite'
+              />
+            </feTurbulence>
+            <feDisplacementMap in='SourceGraphic' in2='noise' scale='22' xChannelSelector='R' yChannelSelector='G' />
+          </filter>
+        </svg>
         <span className='member-quote-fire-text'>
           {content}
           <span className='member-quote-fire-caret' aria-hidden='true'>█</span>
