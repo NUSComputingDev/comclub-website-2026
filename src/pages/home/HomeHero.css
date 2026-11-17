@@ -2,521 +2,127 @@
    The hero sizes to its content instead. */
 .home-hero {
   @apply
-    relative
-    overflow-hidden
     flex
     flex-col
     items-center
-    gap-14
-    px-6
-    pt-12
-    pb-20
-    sm:px-8
+    gap-12
+    px-8
+    pt-10
+    pb-16
+    md:px-20
     lg:flex-row
     lg:justify-between
     lg:gap-12
-    lg:px-20
     lg:pt-16
-    lg:pb-20
+    lg:pb-24
   ;
   height: auto;
-  min-height: min(44rem, calc(100vh - 6rem));
-}
-
-/* Faint dotted grid that fades out towards the copy, echoing the grid floor in the graphic. */
-.home-hero-grid {
-  @apply
-    absolute
-    inset-0
-    pointer-events-none
-  ;
-  background-image: radial-gradient(rgba(54, 84, 134, 0.18) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 78% 50%, #000 20%, transparent 75%);
-  mask-image: radial-gradient(ellipse 70% 80% at 78% 50%, #000 20%, transparent 75%);
 }
 
 .home-hero-copy {
   @apply
-    relative
-    z-10
     w-full
     max-w-xl
-    lg:max-w-[38rem]
+    lg:max-w-[36rem]
   ;
 }
 
-.home-hero-kicker {
+.home-hero-copy>h2 {
   @apply
-    inline-flex
-    items-center
-    gap-2
-    px-3
-    py-1
-    rounded-full
-    border-2
-    border-outline
-    bg-white
-    text-xs
-    font-bold
-    uppercase
-    tracking-[0.18em]
+    font-subheading
+    text-3xl
     text-primary
+    md:text-4xl
   ;
 }
 
-.home-hero-kicker-dot {
+.home-hero-copy>h1 {
   @apply
-    w-2
-    h-2
-    rounded-full
-    bg-[#00ca4e]
-  ;
-  box-shadow: 0 0 0 3px rgba(0, 202, 78, 0.2);
-}
-
-.home-hero h1 {
-  @apply
-    mt-6
+    mt-1
     font-heading
-    font-bold
-    text-[3.25rem]
-    leading-[0.95]
-    tracking-tight
+    text-6xl
+    leading-none
     text-primary
     sm:text-7xl
-    xl:text-[5.5rem]
-  ;
-}
-
-.home-hero-pre {
-  @apply
-    block
-    mb-2
-    font-subheading
-    font-medium
-    text-2xl
-    tracking-normal
-    text-slate-500
-    sm:text-3xl
+    xl:text-8xl
   ;
 }
 
 .home-hero-copy>p {
   @apply
     mt-6
-    max-w-lg
     font-body
     text-lg
     leading-relaxed
-    text-slate-700
   ;
 }
 
 .home-hero-copy>p>span {
   @apply
     font-bold
-    text-primary
+    text-highlight
   ;
-  background: linear-gradient(transparent 62%, rgba(97, 175, 239, 0.35) 62%);
 }
 
 .home-hero-actions {
   @apply
     flex
     flex-wrap
-    gap-2.5
-    mt-9
-    sm:gap-3
+    gap-3
+    mt-8
   ;
 }
 
-.home-hero-cta {
+/* Same look as the other homepage buttons, plus an outlined secondary. */
+.home-hero-button {
   @apply
-    inline-flex
-    items-center
-    gap-2
-    px-5
+    px-6
     py-3
-    sm:px-6
-    rounded-full
+    rounded-lg
     border-2
-    border-outline
-    bg-white
-    font-heading
+    border-primary
+    font-subheading
     font-bold
     text-primary
     transition-all
-    duration-150
+    duration-100
     ease-out
-    hover:-translate-x-0.5
-    hover:-translate-y-0.5
+    hover:scale-[1.05]
+    hover:shadow-lg
   ;
-  box-shadow: 3px 3px 0 #365486;
 }
 
-.home-hero-cta:hover {
-  box-shadow: 5px 5px 0 #365486;
-}
-
-.home-hero-cta--primary {
+.home-hero-button--primary {
   @apply
     bg-primary
     text-white
   ;
-  box-shadow: 3px 3px 0 #333333;
 }
 
-.home-hero-cta--primary:hover {
-  box-shadow: 5px 5px 0 #333333;
-}
-
-.home-hero-arrow {
+.home-hero-copy>.home-hero-latest {
   @apply
-    transition-transform
-    duration-150
-  ;
-}
-
-.home-hero-cta:hover .home-hero-arrow {
-  transform: translateX(3px);
-}
-
-.home-hero-stats {
-  @apply
-    flex
-    flex-wrap
-    gap-x-8
-    gap-y-4
-    mt-10
-    pt-6
-    border-t-2
-    border-dashed
-    border-slate-300
-  ;
-}
-
-.home-hero-stats>div {
-  @apply
-    flex
-    flex-col-reverse
-  ;
-}
-
-.home-hero-stats dd {
-  @apply
-    font-heading
-    font-bold
-    text-2xl
-    text-primary
-  ;
-}
-
-.home-hero-stats dt {
-  @apply
+    mt-6
     text-sm
     text-slate-500
   ;
 }
 
-/* Graphic side */
-.home-hero-art {
+.home-hero-latest>a {
   @apply
-    relative
-    z-10
-    flex
-    items-center
-    justify-center
-    w-full
-    max-w-xl
-    aspect-[5/4]
-    lg:max-w-[40rem]
+    font-bold
+    text-primary
+    underline
+    decoration-highlight
+    decoration-2
+    underline-offset-4
+    hover:text-highlight
   ;
-}
-
-.home-hero-blob {
-  @apply
-    absolute
-    rounded-full
-  ;
-  inset: 4% 6%;
-  background:
-    radial-gradient(circle at 35% 35%, rgba(97, 175, 239, 0.35), transparent 60%),
-    radial-gradient(circle at 68% 70%, rgba(54, 84, 134, 0.22), transparent 60%);
-  filter: blur(20px);
 }
 
 .home-hero-graphic {
   @apply
-    relative
-    w-[92%]
+    w-full
+    max-w-md
+    lg:max-w-[36rem]
   ;
-  filter: drop-shadow(0 24px 30px rgba(54, 84, 134, 0.18));
-}
-
-/* Little terminal window in the same style as WindowCard. */
-.home-hero-terminal {
-  @apply
-    absolute
-    left-0
-    bottom-[6%]
-    w-[min(15rem,50%)]
-    rounded-xl
-    border-2
-    border-outline
-    overflow-hidden
-    font-mono
-    text-[9px]
-    sm:text-xs
-  ;
-  box-shadow: 5px 5px 0 #365486;
-}
-
-.home-hero-terminal-bar {
-  @apply
-    flex
-    gap-1.5
-    px-2.5
-    py-2
-    bg-[#f2f2f2]
-    border-b-2
-    border-outline
-  ;
-}
-
-.home-hero-terminal-bar>span {
-  @apply
-    w-2.5
-    h-2.5
-    rounded-full
-  ;
-}
-
-.home-hero-terminal-bar>span:nth-child(1) {
-  background: #ff605c;
-}
-
-.home-hero-terminal-bar>span:nth-child(2) {
-  background: #ffbd44;
-}
-
-.home-hero-terminal-bar>span:nth-child(3) {
-  background: #00ca4e;
-}
-
-.home-hero-terminal-body {
-  @apply
-    px-2.5
-    py-2
-    space-y-0.5
-    bg-[#282c34]
-    sm:px-3
-    sm:py-2.5
-    sm:space-y-1
-    text-slate-200
-  ;
-}
-
-.home-hero-terminal-body b {
-  @apply
-    font-normal
-    text-highlight
-  ;
-}
-
-.home-hero-terminal-out {
-  @apply
-    text-slate-400
-  ;
-}
-
-.home-hero-terminal-ok {
-  @apply
-    text-[#98c379]
-  ;
-}
-
-.home-hero-caret {
-  @apply
-    ml-1
-    text-[10px]
-    text-slate-300
-  ;
-}
-
-/* Floating "next event" chip. */
-.home-hero-event {
-  @apply
-    absolute
-    right-0
-    top-[2%]
-    flex
-    flex-col
-    w-[min(15rem,48%)]
-    px-3
-    py-2
-    sm:px-4
-    sm:py-3
-    rounded-2xl
-    border-2
-    border-outline
-    bg-white
-    transition-transform
-    duration-150
-    hover:-translate-y-1
-  ;
-  box-shadow: 4px 4px 0 #365486;
-}
-
-.home-hero-event-label {
-  @apply
-    inline-flex
-    items-center
-    gap-1.5
-    text-[9px]
-    font-bold
-    uppercase
-    tracking-[0.16em]
-    sm:text-[11px]
-    text-highlight
-  ;
-}
-
-.home-hero-event-label::before {
-  content: '';
-  @apply
-    w-1.5
-    h-1.5
-    rounded-full
-    bg-highlight
-  ;
-}
-
-.home-hero-event-title {
-  @apply
-    mt-1
-    font-heading
-    font-bold
-    text-xs
-    leading-snug
-    text-primary
-    line-clamp-2
-    sm:text-sm
-  ;
-}
-
-.home-hero-event-date {
-  @apply
-    mt-1
-    text-[10px]
-    text-slate-500
-    sm:text-xs
-  ;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .home-hero-copy,
-  .home-hero-art {
-    animation: home-hero-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .home-hero-art {
-    animation-delay: 120ms;
-  }
-
-  .home-hero-graphic {
-    animation: home-hero-bob 6s ease-in-out infinite alternate;
-  }
-
-  .home-hero-event {
-    animation: home-hero-float 5s ease-in-out 0.8s infinite alternate;
-  }
-
-  /* Terminal lines appear one after another, then the caret blinks. */
-  .home-hero-terminal-body>p {
-    animation: home-hero-line 1ms linear both;
-  }
-
-  .home-hero-terminal-body>p:nth-child(1) {
-    animation-delay: 0.5s;
-  }
-
-  .home-hero-terminal-body>p:nth-child(2) {
-    animation-delay: 1.1s;
-  }
-
-  .home-hero-terminal-body>p:nth-child(3) {
-    animation-delay: 1.7s;
-  }
-
-  .home-hero-terminal-body>p:nth-child(4) {
-    animation-delay: 2.4s;
-  }
-
-  .home-hero-caret {
-    animation: home-hero-blink 1s steps(1) infinite;
-  }
-
-  .home-hero-kicker-dot {
-    animation: home-hero-pulse 2s ease-in-out infinite;
-  }
-}
-
-@keyframes home-hero-enter {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes home-hero-bob {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes home-hero-float {
-  from {
-    transform: translateY(0) rotate(1.5deg);
-  }
-
-  to {
-    transform: translateY(-8px) rotate(-0.5deg);
-  }
-}
-
-@keyframes home-hero-line {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes home-hero-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes home-hero-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 3px rgba(0, 202, 78, 0.2);
-  }
-
-  50% {
-    box-shadow: 0 0 0 6px rgba(0, 202, 78, 0);
-  }
 }
