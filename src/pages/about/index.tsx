@@ -13,6 +13,7 @@ import {
 import WindowCard from '../../layout/WindowCard';
 import RolesSection from './RolesSection';
 import './index.css';
+import { asset } from '../../lib/asset';
 
 const REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
 
@@ -118,7 +119,7 @@ function About() {
 
         <div className='about-hero-art' aria-hidden='true'>
           <span className='about-hero-blob'></span>
-          <img className='about-hero-logo' src='/comclub_logo.png' alt=''></img>
+          <img className='about-hero-logo' src={asset('/comclub_logo.png')} alt=''></img>
           <span className='about-float about-float--1'>est. 1998</span>
           <span className='about-float about-float--2'>4 wings</span>
           <span className='about-float about-float--3'>6,600+ members</span>

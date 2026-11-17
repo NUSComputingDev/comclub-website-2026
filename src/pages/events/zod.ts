@@ -1,3 +1,5 @@
+import { asset } from '../../lib/asset';
+
 export interface Article {
   department: 'IR' | 'SD' | 'SL';
   title: string;
@@ -53,7 +55,7 @@ export const parseArticles = (data: unknown): Record<string, Article> => {
       throw new Error(`Invalid article data for "${key}".`);
     }
 
-    parsedArticles[key] = value;
+    parsedArticles[key] = { ...value, imgSrc: asset(value.imgSrc) };
   }
 
   return parsedArticles;

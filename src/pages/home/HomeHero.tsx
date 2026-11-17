@@ -4,6 +4,7 @@ import { GoArrowRight } from 'react-icons/go';
 import { isBefore, parseISO, startOfDay } from 'date-fns';
 import { formatEventDate, latestEvents } from '../events/articlesData';
 import './HomeHero.css';
+import { asset } from '../../lib/asset';
 
 // Homepage hero: the club's name, big, in one large window (the site's window motif),
 // with the mission and links underneath and the newest event in the status bar.
@@ -26,7 +27,7 @@ function HomeHero() {
         </div>
 
         <div className='home-hero-body'>
-          <img src='/comclub_logo.png' className='home-hero-mark' alt=''></img>
+          <img src={asset('/comclub_logo.png')} className='home-hero-mark' alt=''></img>
           <h2>NUS Students&#39;</h2>
           <h1>Computing Club</h1>
 

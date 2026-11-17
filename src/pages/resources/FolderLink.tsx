@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './FolderLink.css';
+import { asset } from '../../lib/asset';
 
 interface FolderLinkProps {
   label: string;
@@ -10,7 +11,7 @@ interface FolderLinkProps {
 function FolderLink(props: FolderLinkProps) {
   const content = (
     <>
-      <img src='/folder_icon.svg' alt=''></img>
+      <img src={asset('/folder_icon.svg')} alt=''></img>
       <p>{props.label}</p>
     </>
   );

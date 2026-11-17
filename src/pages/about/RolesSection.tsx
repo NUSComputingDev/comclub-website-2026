@@ -5,6 +5,7 @@ import MemberModal from './MemberModal';
 import roles from './roles.json' with {type: 'json'};
 import profiles from './profiles.json' with {type: 'json'};
 import './RolesSection.css';
+import { asset } from '../../lib/asset';
 
 interface Member {
   name: string;
@@ -71,7 +72,7 @@ function orderMembers(members: Member[]): RoleMember[] {
     shortName: member.shortName,
     callName: member.callName,
     wing: '',
-    imgSrc: member.img ?? `/members/thumbs/${member.name.replace(/[^A-Za-z0-9]/g, '')}.webp`,
+    imgSrc: asset(member.img ?? `/members/thumbs/${member.name.replace(/[^A-Za-z0-9]/g, '')}.webp`),
     section,
     sectionIndex: section ? sections.indexOf(section) : -1,
     isLead: false,

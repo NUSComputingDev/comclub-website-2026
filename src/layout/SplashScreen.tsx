@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './SplashScreen.css';
+import { asset } from '../lib/asset';
 
 const SPLASH_DURATION = 1600;
 
@@ -22,7 +23,7 @@ function SplashScreen() {
 
   return (
     <div className='splash-screen' aria-hidden='true'>
-      <img className='splash-logo' src='/comclub_logo.png' alt=''></img>
+      <img className='splash-logo' src={asset('/comclub_logo.png')} alt=''></img>
     </div>
   );
 }

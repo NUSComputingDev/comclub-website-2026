@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ThreeDCard from '../../components/3DCard';
 import { formatEventDate, latestEvents } from '../events/articlesData';
 import './EventsPreview.css';
+import { asset } from '../../lib/asset';
 
 const PREVIEW_COUNT = 3;
 
@@ -14,7 +15,7 @@ function EventsPreview() {
   return (
     <div className='events-preview'>
       <div className='events-preview-header'>
-        <img src='/events_graphic.svg' className='events-preview-graphic' alt='' />
+        <img src={asset('/events_graphic.svg')} className='events-preview-graphic' alt='' />
         <div className='section-description'>
           <h2>Wondering</h2>
           <h1>What&#39;s up?</h1>

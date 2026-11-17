@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import WindowCard from '../../layout/WindowCard';
 import './HomeFeedback.css';
+import { asset } from '../../lib/asset';
 
 // Closing section: the club is the students' voice, so the page ends by asking for theirs.
 // Framed as a window like the hero, so the page opens and closes on the same motif.
@@ -35,7 +36,7 @@ function HomeFeedback() {
                 </a>
               </div>
             </div>
-            <img src='/hero_graphic.svg' className='home-feedback-graphic' alt=''></img>
+            <img src={asset('/hero_graphic.svg')} className='home-feedback-graphic' alt=''></img>
           </div>
         }
       ></WindowCard>
