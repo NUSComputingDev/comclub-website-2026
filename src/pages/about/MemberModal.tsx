@@ -167,18 +167,53 @@ function QuoteBlock({ quote, note, style = 'terminal' }: QuoteBlockProps) {
 
     return (
       <div className='member-quote-fire'>
-        {/* Animated noise that the flame layer is pushed through, so the flames lick and waver instead of glowing evenly. */}
+        {/*
+          Noise that the flame layer is pushed through. Each noise is a seamlessly stitched tile, repeated and
+          scrolled upwards by exactly one tile height per loop, so the flames only ever rise and never jump or
+          retract. Two layers moving at different speeds are blended so the flame shapes keep changing.
+        */}
         <svg className='member-quote-fire-defs' aria-hidden='true' focusable='false'>
-          <filter id='member-quote-fire-flames' x='-20%' y='-80%' width='140%' height='200%'>
-            <feTurbulence type='fractalNoise' baseFrequency='0.09 0.045' numOctaves='2' seed='7' result='noise'>
-              <animate
-                attributeName='baseFrequency'
-                dur='2.4s'
-                values='0.09 0.045;0.1 0.06;0.085 0.05;0.09 0.045'
-                repeatCount='indefinite'
-              />
-            </feTurbulence>
-            <feDisplacementMap in='SourceGraphic' in2='noise' scale='22' xChannelSelector='R' yChannelSelector='G' />
+          <filter
+            id='member-quote-fire-flames'
+            filterUnits='userSpaceOnUse'
+            primitiveUnits='userSpaceOnUse'
+            x='-40'
+            y='-40'
+            width='480'
+            height='320'
+          >
+            <feTurbulence
+              type='fractalNoise'
+              baseFrequency='0.08 0.05'
+              numOctaves='2'
+              seed='7'
+              stitchTiles='stitch'
+              x='-40'
+              y='-40'
+              width='480'
+              height='60'
+            />
+            <feTile />
+            <feOffset dy='0' result='fast'>
+              <animate attributeName='dy' from='0' to='-60' dur='0.9s' repeatCount='indefinite' />
+            </feOffset>
+            <feTurbulence
+              type='fractalNoise'
+              baseFrequency='0.06 0.035'
+              numOctaves='2'
+              seed='23'
+              stitchTiles='stitch'
+              x='-40'
+              y='-40'
+              width='480'
+              height='100'
+            />
+            <feTile />
+            <feOffset dy='0' result='slow'>
+              <animate attributeName='dy' from='0' to='-100' dur='2.3s' repeatCount='indefinite' />
+            </feOffset>
+            <feComposite in='fast' in2='slow' operator='arithmetic' k1='0' k2='0.5' k3='0.5' k4='0' result='noise' />
+            <feDisplacementMap in='SourceGraphic' in2='noise' scale='30' xChannelSelector='R' yChannelSelector='G' />
           </filter>
         </svg>
         <span className='member-quote-fire-text'>
