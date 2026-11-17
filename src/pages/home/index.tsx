@@ -3,24 +3,13 @@ import { Link } from 'react-router-dom';
 import './index.css';
 import EventsPreview from './EventsPreview';
 import Gallery from './Gallery';
+import HomeHero from './HomeHero';
 import NusPosts from './NusPosts';
 
 function Home() {
   return (
     <div className='home'>
-      {/* hero section */}
-      <section>
-        <div className='section-description'>
-          <h2>NUS Students&#39;</h2>
-          <h1>Computing Club</h1>
-          <p>
-            We aim to be the <span>voice</span> of the students, ensuring
-            their <span>holistic</span> well-being, and <span>bridging </span>
-            the gaps between them and the school.
-          </p>
-        </div>
-        <img src='/hero_graphic.svg' className='section-graphic'></img>
-      </section>
+      <HomeHero />
 
       <EventsPreview />
 
